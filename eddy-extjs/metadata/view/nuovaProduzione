@@ -1,0 +1,161 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|snapToGrid": 10,
+        "designer|userAlias": "nuovaProduzione",
+        "designer|userClassName": "nuovaProduzione",
+        "height": 174,
+        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABS0lEQVQ4T6WTQU7CQBSG35shMS6IHAGXxrTFhdplj8ANxAMg0xOoJ2goBxBPoN6g7oouwFbj0noDiCaayPSZqZR0CCE2neWb9775/39mECourDgPpQEt762xzT+sL1l/mri701IA23ttEvsZI2KDiKbE4LQcoB8NAfFkaZso0QBK3hb/vEKAhpTMfXT3J8WM7FUAwLsGOPafBQJ5i6H78MxwioBD76XFuAwQcOevTroFux9fAMJ5tkUwGfWMA01BlsFcEKOA5jxRCpcKMjpLO2nKhliTTdXAmRRhz+zkEGXhO60LlX5ew9wXEd2NemZbO9GPOkDgEKCVqWJ0+dA1b4s9aPsxbfLMeToupH5dVKTqeDSI2oxQSMnEauqLvZscsE7lxnewuNYAASwCmiFiO+wagWbhP3/BHsQOzGtJ6O4lq/2lXuK6wyoDfgE/B5Lv6ZyygwAAAABJRU5ErkJggg==",
+        "iconCls": "",
+        "layout": "absolute",
+        "modal": true,
+        "title": "Nuova produzione",
+        "titleAlign": "center",
+        "width": 432
+    },
+    "name": "MyWindow",
+    "designerId": "b3d9e2ea-dd17-45a4-9c3f-605152daf1d3",
+    "viewControllerInstanceId": "572650e5-857a-4f3b-91f0-e162ce766a0f",
+    "viewModelInstanceId": "1ffd3392-ec1c-4b2c-85d9-17de4dcb6517",
+    "cn": [
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAz0lEQVQ4T6WTYRWCQBCEv00gETCBNlAbUMEEQgONYAMj2EAjGMEINFjf8MAHxyEC9/duvp2d3TMWHovp3T0BEjN7j/F7gFr8AAoze04CtMRb4DAJEIhV+H9ARNw4fwFq4zqUh/0Qh+3fgaOZle0LAVRhNxZWfS+xWpOz6gigwARZzYFUY5wBkQM5Kb97EIEUQGN1D2TApuXyYmbnziIFkN4Y3T0FcuAEKI91bBObTLKhRXJ3OboBXQeNvdoJ7bTDgOs3efQz/TkNhZ8uAqjQBy4jVzUc52twAAAAAElFTkSuQmCC",
+                "layout|x": 260,
+                "layout|y": 100,
+                "text": "Annulla",
+                "width": 90
+            },
+            "name": "MyButton21",
+            "designerId": "7e307cb2-2769-426a-876b-1888af797046",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            "this.up('window').close();"
+                        ]
+                    },
+                    "name": "handler",
+                    "designerId": "62b6ff37-8ef1-4a77-9514-d249b2169f98"
+                }
+            ]
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAu0lEQVQ4T+2TyxHCMAxE31YAdEAHQCdQAaQykgqglJRACVDBMvY4GefjAHd8skfaN5JWFgvH9hOwpE0pTR8ADnFJxbw/AAYzsL0GtpLaMDzbgyHa3gMPScGdeMaAINwBlaQ6B9i+AFeglXQoAWrgnIJVEoRnfm8kBdi0glR2DhmvyUA8aaHLtj0HmYiLgJlKZsWLgAwSVrnvedxT70KyaLX0N7LYq7M6AjKLvtTHtGh1BzgCt1/UwEnS/Q3QE10RCutRsgAAAABJRU5ErkJggg==",
+                "layout|x": 80,
+                "layout|y": 100,
+                "text": "Salva",
+                "width": 170
+            },
+            "name": "MyButton25",
+            "designerId": "f52494e1-a243-4578-8177-c31f4654362a",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            "var win = this.up('window');",
+                            "var nome = Ext.getCmp('nomeProd').getValue();",
+                            "var matricola = Ext.getCmp('nomeMatricola').getValue();",
+                            "",
+                            "if (nome === undefined || nome == \"\" ){",
+                            "    Ext.Msg.show({",
+                            "        title:'Errore',",
+                            "        msg: \"Il nome della produzione non può essere vuoto!\",",
+                            "        buttons: Ext.Msg.Ok,",
+                            "    });",
+                            "    return;",
+                            "}",
+                            "",
+                            "var store = Ext.StoreManager.lookup('storeProduzioni');",
+                            "var emptyApp = new Rai.model.produzioni();",
+                            "emptyApp.set(\"descrizione\",nome);",
+                            "emptyApp.set(\"divisione\",USER.divisione);",
+                            "emptyApp.set('matricola',matricola);",
+                            "store.add(emptyApp);",
+                            "store.on('write', function() { store.load(); win.close();});",
+                            "",
+                            "",
+                            ""
+                        ]
+                    },
+                    "name": "handler",
+                    "designerId": "da108f5c-fef9-44a2-a940-fecfba8488b0"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.field.Text",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Matricola",
+                "id": "nomeMatricola",
+                "layout|x": 80,
+                "layout|y": 60,
+                "width": 270
+            },
+            "name": "MyTextField27",
+            "designerId": "8e1b4a1c-8454-46fa-bdd6-ab1e4d0171fc"
+        },
+        {
+            "type": "Ext.form.field.Text",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Produzione",
+                "id": "nomeProd",
+                "layout|x": 80,
+                "layout|y": 30,
+                "width": 270
+            },
+            "name": "MyTextField28",
+            "designerId": "98d0bab6-0a7a-4189-8a42-874a4868bc0f"
+        }
+    ]
+}

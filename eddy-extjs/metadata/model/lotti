@@ -1,0 +1,42 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "lotti",
+        "idProperty": "lottiId"
+    },
+    "name": "filiali1",
+    "designerId": "f640d803-b976-494b-9230-fba992a5c937",
+    "cn": [
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "lottiId"
+            },
+            "name": "MyField",
+            "designerId": "508d3299-0535-4e63-a8d1-d5016e71286a"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "descrizione"
+            },
+            "name": "MyField2",
+            "designerId": "3fa0586d-1a6f-4782-bd05-f63c45a92e96"
+        }
+    ]
+}

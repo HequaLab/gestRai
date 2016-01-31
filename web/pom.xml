@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+
+	<parent>
+		<groupId>com.hequalab.rai</groupId>
+		<artifactId>rai</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+
+    <artifactId>web</artifactId>
+    <packaging>jar</packaging>
+    <name>Web Interface</name>
+    
+    <properties>
+        <dest.dir>${project.build.outputDirectory}/META-INF/resources/static</dest.dir>
+    </properties>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<targetPath>${dest.dir}</targetPath>
+			</resource>
+		</resources>
+	</build>
+    
+</project>

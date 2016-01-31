@@ -1,0 +1,56 @@
+{
+    "type": "Ext.container.Viewport",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "frmMain",
+        "designer|userClassName": "frmMain",
+        "layout": "border"
+    },
+    "name": "MyViewport1",
+    "designerId": "28b18024-febc-4160-b7c1-dbef252298c9",
+    "viewControllerInstanceId": "0308ff42-5eee-460f-80f9-22569eaef16e",
+    "viewModelInstanceId": "ecd1e544-c3fe-4098-abf5-8f01e90f0c69",
+    "cn": [
+        {
+            "type": "Ext.container.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "pageContainer",
+                "layout": "fit",
+                "layout|region": "center"
+            },
+            "name": "MyContainer",
+            "designerId": "935d9953-a003-4e97-9c8d-39e907b8edbb"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onViewportAfterRender",
+                "implHandler": [
+                    "Ext.getCmp(\"pageContainer\").removeAll();",
+                    "var cmp = Ext.create(\"Rai.view.frmLogin\");",
+                    "Ext.getCmp(\"pageContainer\").add(cmp);",
+                    "cmp.show();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onViewportAfterRender",
+            "designerId": "4a976995-71fe-424d-a5bb-3ae249530657"
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "storeRichiesteServizi",
+        "groupField": "stato",
+        "model": "richiestaServizio",
+        "remoteFilter": true,
+        "remoteSort": true,
+        "storeId": "storeRichiesteServizi"
+    },
+    "name": "storeRichiesteTipologie1",
+    "designerId": "63c2127e-282c-4f59-b20f-bb2174d47f3d",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "idParam": "richiestaNuovoServizioId",
+                "url": "/richiestaNuovoServizio"
+            },
+            "name": "MyRestProxy",
+            "designerId": "f1ef93b1-6c63-4b33-ba8d-32180d56e498",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "items"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "1bbd32ac-f94d-4bec-8a9a-298f0ecfbc14"
+                },
+                {
+                    "type": "Ext.data.writer.Json",
+                    "reference": {
+                        "name": "writer",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "writeRecordId": false
+                    },
+                    "name": "MyJsonWriter",
+                    "designerId": "1dea72fe-6f3a-4e86-ba21-9fecbc5bc60c"
+                }
+            ]
+        }
+    ]
+}

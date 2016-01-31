@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportEconomico" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d71cb36-7eee-4982-aa51-2aff5697a265">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F3F6F8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="b9ceeb13-6d23-4ced-9d96-262f4448a629"/>
+	<parameter name="DATA_RIFERIMENTO" class="java.lang.String"/>
+	<field name="costoTotale" class="java.lang.Double"/>
+	<field name="tipologia" class="java.lang.String"/>
+	<field name="dataInizio" class="java.util.Date"/>
+	<field name="dataFine" class="java.util.Date"/>
+	<field name="divisione" class="java.lang.String"/>
+	<field name="importo" class="java.lang.Double"/>
+	<field name="lotto" class="java.lang.String"/>
+	<field name="matricola" class="java.lang.Integer"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="note" class="java.lang.String"/>
+	<field name="operatore" class="java.lang.String"/>
+	<field name="ora" class="java.lang.String"/>
+	<field name="produzione" class="java.lang.String"/>
+	<field name="ore" class="java.lang.Integer"/>
+	<field name="programmazione" class="java.lang.String"/>
+	<field name="stato" class="java.lang.String"/>
+	<field name="tiplogia" class="java.lang.String"/>
+	<field name="luogo" class="java.lang.String"/>
+	<field name="field4" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="17" width="277" height="40" uuid="a258425a-e46d-4ab5-8bde-13b672b5f19b"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Report economico]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="135" y="0" width="630" height="140" uuid="58883489-3eb5-49ee-85d0-14e3763944d9"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="39ce9d9e-41a0-4d31-926e-942f1f92a157">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="83f23f52-dc26-45c7-8322-46a091d68f46">
+						<jr:tableHeader style="table_TH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0626a79c-7619-4d1e-b8f6-2e14bad1a483"/>
+								<textFieldExpression><![CDATA[$F{dataInizio}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="5ad5a1a7-815c-47d4-b8de-27a2c3ac0081">
+						<jr:tableHeader style="table_TH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="14211bfc-2679-42ea-a527-913e93c09280"/>
+								<textFieldExpression><![CDATA[$F{dataFine}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="65be6f8c-e8ee-4f51-97fe-48e4a067ba61">
+						<jr:tableHeader style="table_TH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="a40ea707-1806-47c2-bd52-1b1e31e7d2cf"/>
+								<textFieldExpression><![CDATA[$F{luogo}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="0e5434ce-0a32-4012-80d9-6f20a12cdb74">
+						<jr:tableHeader style="table_TH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0b706755-1e0b-4ce3-b284-603328b0604e"/>
+								<textFieldExpression><![CDATA[$F{matricola}]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="caaf0506-6347-425f-a7ca-526fbda36451">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="8841d51f-d1ee-47af-b263-c2f5e9959263">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+					<jr:column width="90" uuid="bf5f59e4-b5b8-4679-b2b1-9aaeff2599f5">
+						<jr:tableHeader style="table_TH" height="30"/>
+						<jr:tableFooter style="table_TH" height="30"/>
+						<jr:columnHeader style="table_CH" height="30"/>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

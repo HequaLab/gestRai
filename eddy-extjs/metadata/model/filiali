@@ -1,0 +1,42 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "filiali",
+        "idProperty": "filialiId"
+    },
+    "name": "fornitori2",
+    "designerId": "90959f48-b79c-47e7-aedd-5749024ee3e3",
+    "cn": [
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "filialiId"
+            },
+            "name": "MyField",
+            "designerId": "01c1a85b-dc7c-44e8-b01a-01cf4704a719"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "nome"
+            },
+            "name": "MyField2",
+            "designerId": "d91df759-5599-4bf1-9907-a0866a750115"
+        }
+    ]
+}

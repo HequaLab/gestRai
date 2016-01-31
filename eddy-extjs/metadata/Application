@@ -1,0 +1,59 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "fornitori",
+            "servizi",
+            "filiali",
+            "richiestaServizio",
+            "reports",
+            "utenti",
+            "lotti",
+            "produzioni",
+            "luoghi"
+        ],
+        "name": "Rai",
+        "stores": [
+            "storeFornitori",
+            "storeServizi",
+            "storeFiliali",
+            "storeRichiesteServizi",
+            "storeReports",
+            "storeUtenti",
+            "storeProduzioni",
+            "storeLuoghi"
+        ],
+        "views": [
+            "frmRichiestaNuovoServizio",
+            "winNuovaTipologiaServizio",
+            "frmServiziGenerali",
+            "frmFornitori",
+            "frmProfili",
+            "frmFiliali",
+            "frmServizi",
+            "frmMain",
+            "frmLogin",
+            "frmAdmin",
+            "frmServiziAdmin",
+            "frmProfiliManager",
+            "frmOperatore",
+            "frmLotti",
+            "frmMatricole",
+            "frmProduzioni",
+            "frmLuoghi",
+            "frmRichiestaServizioAdmin",
+            "uploadWin",
+            "frmReportManager",
+            "frmServiziManager",
+            "nuovaProduzione",
+            "creaLuogo"
+        ]
+    },
+    "name": "Application",
+    "designerId": "application"
+}

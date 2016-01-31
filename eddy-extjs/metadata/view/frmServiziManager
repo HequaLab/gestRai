@@ -1,0 +1,260 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmServiziManager",
+        "designer|userClassName": "frmServiziManager",
+        "id": "frmServiziManager",
+        "layout": "border",
+        "title": ""
+    },
+    "name": "frmServizi1",
+    "designerId": "a1de1138-269f-4a79-a337-d86082ec3c5c",
+    "viewControllerInstanceId": "70adcb32-1d55-477c-863e-d2f28e690741",
+    "viewModelInstanceId": "13f3ccca-cef2-4b1b-a3c9-83290257e001",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "iconCls": "",
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "c9a9ec66-0251-4319-8c55-cea31d9d7181",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "glyph": "",
+                        "iconCls": "",
+                        "id": "serviziGrid2",
+                        "store": "storeServizi",
+                        "title": "Elenco Servizi"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "fddf15bd-65ec-4965-9ce3-ba89c4df889a",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "lotto",
+                                "flex": 1,
+                                "text": "Lotto",
+                                "width": 129
+                            },
+                            "name": "MyColumn",
+                            "designerId": "7a1b1539-59f9-4716-8a0c-5245271f6297",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField10",
+                                    "designerId": "59514520-5436-41f2-bcc4-e29f5db3b841"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "descrizione",
+                                "flex": 1,
+                                "text": "Descrizione",
+                                "width": 129
+                            },
+                            "name": "MyColumn44",
+                            "designerId": "8e14f206-1668-403c-96a4-c51d419ea84b",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField10",
+                                    "designerId": "b183cf8f-6fc6-4f97-93f5-2afed93dbd1b"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "codice",
+                                "flex": 1,
+                                "text": "Voce",
+                                "width": 129
+                            },
+                            "name": "MyColumn43",
+                            "designerId": "11a6371d-a58a-4d68-b92c-e5a75f309a77",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField10",
+                                    "designerId": "dfa10f6d-0959-48bf-8b32-dec5a7d54961"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "tipologia",
+                                "flex": 0.6,
+                                "text": "Tipologia"
+                            },
+                            "name": "MyColumn15",
+                            "designerId": "4e0aa8cb-73ad-49bd-812c-593c4cf1e205",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField14",
+                                    "designerId": "a3451b02-87cb-4f02-bc83-9ca646421cf9"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "importo",
+                                "text": "Importo"
+                            },
+                            "name": "MyColumn9",
+                            "designerId": "5d4d51d7-4474-4f8f-a70a-f4b3a6316e7b",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField12",
+                                    "designerId": "63743d93-4473-4ad4-9816-c9f5c2bdfb6f"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "note",
+                                "flex": 1.2,
+                                "text": "Note"
+                            },
+                            "name": "MyColumn10",
+                            "designerId": "76b3d5f1-f3d3-4129-8a8c-9c90006bfc86",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField13",
+                                    "designerId": "6ab975b7-4618-4dc8-ae16-f9ade8f65d71"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "1e8dd65f-f162-4a66-9322-cf1fe166bd84"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeServizi",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "9dc21eac-fd83-4f66-bbde-daf15b5e204d"
+                        },
+                        {
+                            "type": "Ext.grid.plugin.CellEditing",
+                            "reference": {
+                                "name": "plugins",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "MyCellEditingPlugin1",
+                            "designerId": "6691deaf-2056-4a76-ab15-af9c2c969358"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

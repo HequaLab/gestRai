@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "uploadwin",
+        "designer|userClassName": "uploadWinViewModel"
+    },
+    "designerId": "33205bde-de25-4d2a-83b7-3b3a66b50325"
+}

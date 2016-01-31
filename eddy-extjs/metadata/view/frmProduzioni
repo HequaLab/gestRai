@@ -1,0 +1,237 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmProduzioni",
+        "designer|userClassName": "frmProduzioni",
+        "height": 753,
+        "id": "frmProduzioni",
+        "layout": "border",
+        "padding": 0,
+        "title": "Area produzioni",
+        "titleAlign": "center",
+        "width": 1099
+    },
+    "name": "frmMatricole1",
+    "designerId": "3b68ab4e-6245-4899-b042-92d50806b1ca",
+    "viewControllerInstanceId": "42fffa46-19e1-4da0-bc5d-6b0b8585318e",
+    "viewModelInstanceId": "5c4f3cdb-ae0c-44bb-b91b-f291363d516a",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "d6780e46-1c20-4c7b-a769-db9b0ebeeab8",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "produzioneGrid",
+                        "store": "storeProduzioni",
+                        "title": "Elenco produzioni"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "b123679e-7061-4336-81e3-bb5cf1477158",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "descrizione",
+                                "flex": 1,
+                                "text": "Descrizione"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "1cff1c0f-93a2-4689-a4d3-9b208c6d02b9"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "matricola",
+                                "flex": 1,
+                                "text": "Matricola"
+                            },
+                            "name": "MyColumn46",
+                            "designerId": "e0756af8-5fc1-4cf6-8959-20a129fb5cb6"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "7b581955-0934-414b-b4c3-a8849aeee554"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeProduzioni",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "90a55572-6bf8-43ad-96c5-5ba0186e7836"
+                        },
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "name": "MyToolbar4",
+                            "designerId": "0d1a9d1a-37dd-49a7-8993-c96fd6c10fc2",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "cls": "",
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYUlEQVQ4T2NkwAHMJ136wMjAyA+S/v///4eT+XqC2JQy4jLAYtLl/8hyJ/J0saodNYCBgRE5tHEFKC5xUOwwooc2qYZQbgBFXmD4/3E0HTAw0C4MULIzw/+PJ/P0BLClEQCgqEhdko1z8AAAAABJRU5ErkJggg==",
+                                        "layout|flex": null,
+                                        "text": "Nuova produzione"
+                                    },
+                                    "name": "MyButton16",
+                                    "designerId": "f032f1b2-0e34-4f13-bf7b-a113d165fedf",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var panel = Ext.widget('nuovaProduzione');",
+                                                    "panel.show();",
+                                                    ""
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "5b2e059e-3c38-48cd-b750-abaa7446de9b"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA90lEQVQ4T2NkQAMWEy83MDAy1KOLg/n/GRpP5Os2IMsxYhgw6fL/H395BC8UKn5AljPovy/Awfzl/Yk8XRQ9YA5eW7E6BeEaiAE4bMWlF9k1cAMYGBlQ/IZLM1z8P0MDyDtgA8wmXwpg+s+4HhRIBDWCFDAy1P9j/B94KldvAzxAQN4AmWg+6UoBw////0/m607ExYaphZgFBTBBcIAyMDCAogsnG2rZqAGQFEn9QDSfeGkDyOST+XoBuNhYo9F80qUP//4yO5wu1L6ALzGZ9l81YGb+t+FEnq4CqhcmX3Zg+M+wgIGBQZ5AanzIwMiQcCJX9wBIHQCNDPARwsqYOgAAAABJRU5ErkJggg==",
+                                        "layout|flex": null,
+                                        "text": "Elimina"
+                                    },
+                                    "name": "MyButton20",
+                                    "designerId": "0d04c8a5-0835-43d5-9778-1c96ce3e3cdb",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var selection = Ext.getCmp('produzioneGrid').getSelectionModel().getSelection();",
+                                                    "if (selection === null || selection === undefined)return;",
+                                                    "var store = Ext.StoreManager.lookup('storeProduzioni');",
+                                                    "store.remove(selection);"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "b452ca2d-a665-4114-820e-c1433fddc929"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmProduzioniAfterRender",
+                "implHandler": [
+                    "",
+                    "var store = Ext.StoreManager.lookup('storeProduzioni');",
+                    "store.filter({",
+                    "    property: \"divisione\",",
+                    "    value: USER.divisione ,",
+                    "    operator: \"streq\"",
+                    "});",
+                    "store.load();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmProduzioniAfterRender",
+            "designerId": "1e45c793-14aa-48b8-9741-0ac8216f2b46"
+        }
+    ]
+}

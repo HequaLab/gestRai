@@ -1,0 +1,55 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "produzioni",
+        "idProperty": "produzioniId"
+    },
+    "name": "filiali2",
+    "designerId": "8814a080-8830-4b32-a82f-09a4b0f12983",
+    "cn": [
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "produzioniId"
+            },
+            "name": "MyField",
+            "designerId": "ac46eb5a-7ea9-4ef6-bdcd-1111cea7b2bb"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "descrizione"
+            },
+            "name": "MyField2",
+            "designerId": "5850ac33-4fcf-43d1-bb8a-fed1bb2f3873"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "matricola"
+            },
+            "name": "MyField35",
+            "designerId": "6e78c3d2-458a-4c21-86e9-96c464bbe42b"
+        }
+    ]
+}

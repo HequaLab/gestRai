@@ -1,0 +1,248 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmfiliali",
+        "designer|userClassName": "frmFiliali",
+        "height": 753,
+        "layout": "border",
+        "padding": 0,
+        "title": "Area divisioni",
+        "width": 1099
+    },
+    "name": "frmUtenti1",
+    "designerId": "baa8732a-f313-4b11-bb91-e91d47c60c31",
+    "viewControllerInstanceId": "fb8f99cc-fa88-4b28-a5a0-f771634c0f12",
+    "viewModelInstanceId": "2a68bcc5-6c9d-4df5-9742-a10f07d0d4cb",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "9ac8b869-0fce-4570-8f79-f475f7973a30",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "filialeGrid",
+                        "store": "storeFiliali",
+                        "title": "Elenco divisioni"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "7da9ac06-6c34-4373-8ba5-bdeeb84e2d51",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "nome",
+                                "flex": 1,
+                                "text": "Descrizione"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "d3d72056-7d14-49ba-b7bf-9d7b542c93fd"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "40255c68-5747-4752-a60e-a0c62a425355"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeFiliali",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "36441f1a-7acc-40af-9730-205855170437"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "layout|region": "west",
+                "padding": null,
+                "title": "",
+                "width": 330
+            },
+            "name": "MyPanel5",
+            "designerId": "83e6a7ae-53b8-4106-bd98-46753d8b642b",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Divisione :",
+                        "id": "nomeFilialeTxt"
+                    },
+                    "name": "MyTextField5",
+                    "designerId": "219f7ad1-ba06-4efb-b832-e7ee61b5944a"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Salva"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "a66c07ad-ad55-46ab-862e-33fc973383b0",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onSave",
+                                "implHandler": [
+                                    "var nome = Ext.getCmp('nomeFilialeTxt').getValue();",
+                                    "if (nome === undefined || nome == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"Il nome non puo' essere vuoto!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeFiliali');",
+                                    "var emptyApp = new Rai.model.servizi();",
+                                    "emptyApp.set(\"nome\",nome);",
+                                    "store.add(emptyApp);",
+                                    "store.on('write', function() { store.load();});"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onSave",
+                            "designerId": "50aef41b-2747-435b-b748-7f56e07c747a"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Elimina"
+                    },
+                    "name": "MyButton11",
+                    "designerId": "9fcc75a5-1599-4df7-9a41-0e7e5e236706",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDelete",
+                                "implHandler": [
+                                    "var selection = Ext.getCmp('filialeGrid').getSelectionModel().getSelection();",
+                                    "var store = Ext.StoreManager.lookup('storeFiliali');",
+                                    "store.remove(selection);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onDelete",
+                            "designerId": "d760efbb-eba3-4449-acd9-54732fbd05ff"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Annulla"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "02e6e0b9-857d-426f-a51b-48aa0cf860f4",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonOnClear",
+                                "implHandler": [
+                                    "Ext.getCmp('nomeFilialeTxt').setValue('');"
+                                ],
+                                "name": "onClear",
+                                "scope": "me"
+                            },
+                            "name": "onButtonOnClear",
+                            "designerId": "59f5f203-bfb8-4ce5-a8c3-3b90e251f353"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

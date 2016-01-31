@@ -1,0 +1,656 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmProfili",
+        "designer|userClassName": "frmProfili",
+        "height": 753,
+        "id": "frmProfili",
+        "layout": "border",
+        "title": "Area utenti",
+        "titleAlign": "center",
+        "width": 1099
+    },
+    "name": "frmFornitori1",
+    "designerId": "49749c2f-8336-4d37-bf77-42981ed026bc",
+    "viewControllerInstanceId": "6f190b6f-69a6-496f-909c-b3b2ac83c5a5",
+    "viewModelInstanceId": "6573bd26-1e12-4b2e-af8d-4284f336f9af",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "bc6052fc-36c1-4ff2-8335-23b5a8c35bf2",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "utentiGrid",
+                        "store": "storeUtenti",
+                        "title": "Elenco utenti"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "0d533a16-6efb-4ce2-b435-01d5b4d251ec",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "userId",
+                                "flex": 1,
+                                "text": "User ID"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "3e1deb2a-2b7c-43aa-9b7e-0ccd853608f1"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "userName",
+                                "flex": 1,
+                                "text": "Nome account"
+                            },
+                            "name": "MyColumn18",
+                            "designerId": "68c5e764-cb0a-45e2-8506-042f58e638c4",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField15",
+                                    "designerId": "20d8fa29-52fe-481f-a00c-3455ed6a56c0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "firstName",
+                                "flex": 1,
+                                "text": "Nome"
+                            },
+                            "name": "MyColumn19",
+                            "designerId": "04e93f52-1213-4ee8-a0f2-68ab09138cc2",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField16",
+                                    "designerId": "efb29dc8-553d-44e1-af4f-17db1d2c1a63"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "lastName",
+                                "flex": 1,
+                                "text": "Cognome"
+                            },
+                            "name": "MyColumn20",
+                            "designerId": "2ec8943c-4508-4520-97dd-b570f506270f",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField17",
+                                    "designerId": "e674d56e-1b4f-4825-af41-d8b7aa649021"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "email",
+                                "flex": 1.2,
+                                "text": "eMail"
+                            },
+                            "name": "MyColumn21",
+                            "designerId": "5afd1514-e90c-4e93-989b-f58330dc5778",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField18",
+                                    "designerId": "51fc358e-278e-469e-8b9f-53556d63d8c9"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "divisione",
+                                "flex": 1.2,
+                                "text": "Divisione"
+                            },
+                            "name": "MyColumn23",
+                            "designerId": "8a06f0d2-0796-42b5-9333-ffd776affd60",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "displayField": "nome",
+                                        "store": "storeFiliali",
+                                        "valueField": "nome"
+                                    },
+                                    "name": "MyComboBox7",
+                                    "designerId": "76247f6c-2331-40fa-ba27-14e9b4bd8aff"
+                                },
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter",
+                                    "designerId": "e670890c-5fdb-42da-8ef5-c36338bb4d30"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "superiore",
+                                "flex": 1.2,
+                                "text": "Superiore"
+                            },
+                            "name": "MyColumn32",
+                            "designerId": "70f45bc7-ed36-46eb-9407-77ece9c59e80",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyTextField23",
+                                    "designerId": "ebaad845-785f-47f8-b18c-3765e52e475f"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "roles",
+                                "flex": 1.2,
+                                "text": "Ruolo"
+                            },
+                            "name": "MyColumn24",
+                            "designerId": "bc93bf4d-857e-439f-bfb9-08c77c8793ac",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "queryMode": "local",
+                                        "store": [
+                                            "[\"Manager\",\"SOperatore\",\"Operatore\"]"
+                                        ]
+                                    },
+                                    "name": "MyComboBox13",
+                                    "configAlternates": {
+                                        "store": "array"
+                                    },
+                                    "designerId": "a6e98191-4fee-4374-b9e4-11f291024ee4"
+                                },
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter1",
+                                    "designerId": "f55a68f0-a88b-4570-af9f-2f2cbcab3b4d"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "28ea2a84-5ee9-4af3-9212-ab33016128b9"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeUtenti",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "98e8b2cb-dc1c-4a83-9745-aa33d258d749"
+                        },
+                        {
+                            "type": "Ext.grid.plugin.CellEditing",
+                            "reference": {
+                                "name": "plugins",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "MyCellEditingPlugin2",
+                            "designerId": "3e4e2ce1-9b64-4d8f-afd1-6be2d20b310b"
+                        },
+                        {
+                            "type": "Ext.grid.filters.Filters",
+                            "reference": {
+                                "name": "plugins",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "MyGridFiltersPlugin",
+                            "designerId": "6e6542b9-768b-4518-8b4b-1218eb2b924a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "animCollapse": true,
+                "bodyPadding": 10,
+                "collapseDirection": "bottom",
+                "collapsed": true,
+                "collapsible": true,
+                "layout|region": "west",
+                "padding": 1,
+                "placeholderCollapseHideMode": 2,
+                "title": "Gestisci Utenti",
+                "titleCollapse": true,
+                "width": 328
+            },
+            "name": "MyPanel5",
+            "designerId": "f95e61a2-4fd9-429f-8bf5-6e934f6479e9",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Nome",
+                        "id": "firstName"
+                    },
+                    "name": "MyTextField3",
+                    "designerId": "9c8dfed7-1368-4f52-849f-34cb446b0d5e"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Cognome",
+                        "id": "lastName"
+                    },
+                    "name": "MyTextField4",
+                    "designerId": "33fde271-ab6c-421f-92ba-8c7d322b3439"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Ruolo",
+                        "id": "role",
+                        "queryMode": "local",
+                        "store": [
+                            "['Manager','SOperatore','Operatore']"
+                        ]
+                    },
+                    "name": "MyComboBox8",
+                    "configAlternates": {
+                        "store": "array"
+                    },
+                    "designerId": "5e061633-3cbd-46cd-9b71-e8cbbd15e1ef"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "nome",
+                        "fieldLabel": "Filiale",
+                        "id": "divisione",
+                        "store": "storeFiliali",
+                        "valueField": "nome"
+                    },
+                    "name": "MyComboBox12",
+                    "designerId": "b3082b1f-f674-42a0-8788-e80d3aa124e7"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Utente",
+                        "id": "userName"
+                    },
+                    "name": "MyTextField7",
+                    "designerId": "a20b5c85-2f4a-45a0-8f06-3f24f53f4069"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Password",
+                        "id": "pwd",
+                        "inputType": "password"
+                    },
+                    "name": "MyTextField6",
+                    "designerId": "41943b47-a144-40d1-8ff4-6f622a14346c"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Ripeti password:",
+                        "id": "pwdRipetuta",
+                        "inputType": "password"
+                    },
+                    "name": "MyTextField20",
+                    "designerId": "49c08f72-1793-4a6d-9016-0129963f22e0"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "E-Mail",
+                        "id": "eMail"
+                    },
+                    "name": "MyTextField8",
+                    "designerId": "cc2d0ab2-eca9-4626-be84-01e7beecdb1f"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Superiore",
+                        "id": "superiore"
+                    },
+                    "name": "MyTextField24",
+                    "designerId": "c9c91502-d3c9-46c3-be18-a6e8572efa57"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Salva"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "f31fe897-3a30-42d3-8c85-4fb8ad08c581",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onAddProfile",
+                                "implHandler": [
+                                    "var firstName = Ext.getCmp('firstName').getValue(),",
+                                    "    lastName = Ext.getCmp('lastName').getValue(),",
+                                    "    role = Ext.getCmp('role').getValue(),",
+                                    "    divisione = Ext.getCmp('divisione').getValue(),",
+                                    "    userName = Ext.getCmp('userName').getValue(),",
+                                    "    pwd = Ext.getCmp('pwd').getValue(),",
+                                    "    pwdRipetuta = Ext.getCmp('pwdRipetuta').getValue(),",
+                                    "    email = Ext.getCmp('eMail').getValue(),",
+                                    "    superiore = Ext.getCmp('superiore').getValue();",
+                                    "",
+                                    "if (userName === undefined || userName == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"L'username non può essere vuoto!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "if (pwd === undefined || pwd == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"La password non può essere vuota!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "if (pwd !== pwdRipetuta){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"Le password non coincidono!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "",
+                                    "if (role === undefined || role == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"L'username non può essere vuoto!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeUtenti');",
+                                    "var emptyApp = new Rai.model.utenti();",
+                                    "emptyApp.set(\"userName\",userName);",
+                                    "emptyApp.set(\"password\",pwd);",
+                                    "emptyApp.set(\"firstName\",firstName);",
+                                    "emptyApp.set(\"lastName\",lastName);",
+                                    "emptyApp.set(\"email\",email);",
+                                    "emptyApp.set(\"divisione\",divisione);",
+                                    "emptyApp.set(\"roles\",role);",
+                                    "emptyApp.set(\"superiore\",superiore);",
+                                    "store.add(emptyApp);",
+                                    "store.on('write', function() { store.load();});",
+                                    "",
+                                    "Ext.getCmp('firstName').setValue(null);",
+                                    "Ext.getCmp('lastName').setValue(null);",
+                                    "Ext.getCmp('role').setValue(null);",
+                                    "Ext.getCmp('divisione').setValue(null);",
+                                    "Ext.getCmp('userName').setValue(null);",
+                                    "Ext.getCmp('pwd').setValue(null);",
+                                    "Ext.getCmp('pwdRipetuta').setValue(null);",
+                                    "Ext.getCmp('eMail').setValue(null);",
+                                    "Ext.getCmp('superiore').setValue(null);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onAddProfile",
+                            "designerId": "d7a38964-5af4-467a-8b99-27c2b79ac348"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Elimina"
+                    },
+                    "name": "MyButton11",
+                    "designerId": "4c1159ea-9ab4-498d-a466-bb1bacfff2e3",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "var selection = Ext.getCmp('utentiGrid').getSelectionModel().getSelection();",
+                                    "var store = Ext.StoreManager.lookup('storeUtenti');",
+                                    "store.remove(selection);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onButtonClick",
+                            "designerId": "b4df4c0e-0c3d-4bd6-b9da-395135883671"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Annulla"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "915bd6ae-14f0-4bf0-9f60-c32401c66dab"
+                }
+            ]
+        }
+    ]
+}

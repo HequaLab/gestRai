@@ -1,0 +1,14 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmproduzioni",
+        "designer|userClassName": "frmServiziViewController10"
+    },
+    "name": "frmServiziViewController10",
+    "designerId": "42fffa46-19e1-4da0-bc5d-6b0b8585318e"
+}

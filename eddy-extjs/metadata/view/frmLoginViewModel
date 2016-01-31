@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmlogin",
+        "designer|userClassName": "frmLoginViewModel"
+    },
+    "designerId": "c6b4262b-26e9-4a47-900c-9e352e4ed5ce"
+}

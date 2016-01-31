@@ -1,0 +1,14 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_x869mm27",
+        "url": "cssRai.css"
+    },
+    "name": "css",
+    "designerId": "641616e6-2df3-45df-863c-a8a912fadc2c"
+}

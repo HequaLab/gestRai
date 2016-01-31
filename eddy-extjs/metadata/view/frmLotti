@@ -1,0 +1,276 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmLotti",
+        "designer|userClassName": "frmLotti",
+        "height": 753,
+        "id": "frmLotti",
+        "layout": "border",
+        "padding": 0,
+        "title": "Area lotti",
+        "titleAlign": "center",
+        "width": 1099
+    },
+    "name": "frmFiliali1",
+    "designerId": "a308e5fa-4b30-4ff4-892a-572fa75a64b8",
+    "viewControllerInstanceId": "17ab2227-b8be-44c3-af4b-81775fced3ce",
+    "viewModelInstanceId": "feebb478-35b4-4507-9769-ff1a370a7112",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "d1f6f9d4-7e38-4894-919a-a32c5b45dbb6",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "lottoGrid",
+                        "store": null,
+                        "title": "Elenco lotti"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "fd523fc6-4570-4c7a-b1d7-063466251583",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "descrizione",
+                                "flex": 1,
+                                "text": "Descrizione"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "ffbfdb24-0649-49ef-a335-7d70e55d2935"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "68404e4c-4512-4027-abf6-80c7e393702f"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": null,
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "0faa5b3d-cf9e-4563-ad69-c4a4ae94b675"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "layout|region": "west",
+                "padding": null,
+                "title": "",
+                "width": 330
+            },
+            "name": "MyPanel5",
+            "designerId": "89b05ffb-bc00-464e-bee2-b56d83836d15",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Lotto",
+                        "id": "nomeLottoTxt"
+                    },
+                    "name": "MyTextField5",
+                    "designerId": "a6ee6f54-dcee-4960-877b-7bd63d42e3d3"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Salva"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "8ae59e4d-6543-4fb5-9f72-47e90a4f7264",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onSave",
+                                "implHandler": [
+                                    "var nome = Ext.getCmp('nomeLottoTxt').getValue();",
+                                    "if (nome === undefined || nome == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"Il nome non puo' essere vuoto!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeLotti');",
+                                    "var emptyApp = new Rai.model.lotti();",
+                                    "emptyApp.set(\"descrizione\",nome);",
+                                    "emptyApp.set(\"divisione\",USER.divisione);",
+                                    "store.add(emptyApp);",
+                                    "store.on('write', function() { store.load();});"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onSave",
+                            "designerId": "22bf9627-c3b8-46dc-92a5-fb0e3796c4ce"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Elimina"
+                    },
+                    "name": "MyButton11",
+                    "designerId": "6e40486d-f0ee-48ef-8e00-1c944aa8507d",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDelete",
+                                "implHandler": [
+                                    "var selection = Ext.getCmp('lottoGrid').getSelectionModel().getSelection();",
+                                    "var store = Ext.StoreManager.lookup('storeLotti');",
+                                    "store.remove(selection);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onDelete",
+                            "designerId": "61493ab9-e52a-48f3-af09-2fb846a498dc"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Annulla"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "dc6a27bd-8012-4e2a-a8db-7ca57e29cc4e",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonOnClear",
+                                "implHandler": [
+                                    "Ext.getCmp('nomeFilialeTxt').setValue('');"
+                                ],
+                                "name": "onClear",
+                                "scope": "me"
+                            },
+                            "name": "onButtonOnClear",
+                            "designerId": "9003da02-ddf3-47de-8ee9-eabb1959402a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmLottiAfterRender",
+                "implHandler": [
+                    "",
+                    "var store = Ext.StoreManager.lookup('storeLotti');",
+                    "store.filter({",
+                    "    property: \"divisione\",",
+                    "    value: USER.divisione ,",
+                    "    operator: \"streq\"",
+                    "});",
+                    "store.load();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmLottiAfterRender",
+            "designerId": "165e47c0-7afa-450e-9b07-8638647da485"
+        }
+    ]
+}

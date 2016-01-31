@@ -1,0 +1,335 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmAdmin",
+        "designer|userClassName": "frmAdmin",
+        "id": "frmAdmin",
+        "layout": "fit"
+    },
+    "name": "frmServiziGenerali1",
+    "designerId": "ef3397d7-36ec-4432-969b-1fa58672894b",
+    "viewControllerInstanceId": "766144cd-3595-4920-beab-6fb98481802a",
+    "viewModelInstanceId": "56308c2f-ba6a-4af0-89b9-61d76231ba62",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|padding": 1,
+                "designer|displayName": "frmFiliale",
+                "id": "frmFiliale_ex1",
+                "layout": "border",
+                "title": "Gestione Lavorazioni - Pannello amministrazione",
+                "titleAlign": "center"
+            },
+            "name": "MyPanel",
+            "designerId": "7b1b7c7e-72c0-46cb-a116-79280655d258",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "mainCont1",
+                        "layout": "fit",
+                        "layout|region": "center",
+                        "title": ""
+                    },
+                    "name": "MyPanel8",
+                    "designerId": "343bc5fb-1540-4433-8fd2-bdd9339ef177"
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyPadding": 10,
+                        "collapsible": true,
+                        "container|align": "stretch",
+                        "designer|displayName": "frmFiliale",
+                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADK0lEQVRYR81XXVIaQRjsJhiSkiXkBFlPIJ4g5ATiCWIeXR6EE4gnEB/Ax+AJxBuQE4gncHKCrCypFErxpWbGJcOPuBtJRZ6E+fn+untaIsXHP/vlY3J/BeKLCgpd96jfHlQg+Io7b0vVGSa9lkk3xvv8VtREJttUB2/VTAImuXFNVb1amjtTJ5Dm8iR7X14CfmtYAuUIIiHuvLo7TzNn8BBETx14xzMjaEUNEB8BOXXx4Z9IEa+jE5BFCI9VNd93zy10wG9FXRK7epOAdRXkm/GBrfYgBPjOrAl34st00qRc2d8lVNXCewczDRJHdg2XqupVVifQHnQIfl6aQGugQH5YlQBEvt9UC/40gfawRsiJvU/OVVDYX52Ablnup9nkVq+/m/FAKqD0l9OQJWSynQWGtIeWGaPNzjxFXx4Ik1BnnXsSd8CgOTc8gqAMQoHZetxqo5AyPoHA1wzBKH+cVA2pD7szm0oqEYIbn6ZBWlGTxGFcvQj6qurtGGy0oz6BbWftNFZES+vJBQTFeQnXsampJcLO9EA76hGaz4Y2x6rqNZYFMeujvKEbc8Mf7lgEuFaBV7LAjf7QEPimAq/88HsTkM80FXOj71TqHJC9GO2uPthgcnsTFIr6L1cf5vmu7yd4sVCQGdt9aSkGTNsyr8KZ0dg5d22r5VbIijrweqaas6hMka4WKV09mK3MnDX0BeZV0HQvLaI1GB8D2Kq1x+K8zASs4s22zJqR8QWJktZ7ZLg3HcGDGSFZ1OxAJruXeAR/C0L30XkWCP8nDUnZ5zxwLG3QgSCUzEb5USFyuf6EEBGTLoiiAPvzXiExCK2xGGrTUYZAIZOtzUjxZNwE4UPQw12+kViK09Jw3fsTd2DdgeP7Fi2ZbvWb4SEmDFU1f+oGtgopuxC5XmpIyG1MeDmveL42JALB3eb5k4bEX2XJknhCiFJBYStOXAdPZ8meaUrdR8q+ok4CiUyp9X0NUEKMvNoSW67b2Yuf6Wml1paXAWku2PJc1ISwCLDxpC3/V2Bb22O07gRT03DlP6cyPlSBV0+TZKoEjIeT+/68pFqwWQmXkecnVUF97jfBj0/qfJSTfwAAAABJRU5ErkJggg==",
+                        "id": "frmFiliale_button1",
+                        "layout": "vbox",
+                        "layout|region": "west",
+                        "title": "Menù",
+                        "width": 150
+                    },
+                    "name": "MyPanel2",
+                    "designerId": "49a288ce-d0c2-420f-8407-7f6a547d8355",
+                    "cn": [
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZElEQVQ4T32TYVEDUQyEdxVAHZwDqAKKAnBAqwBQQFFAq4CrAiqhKKA4wAFFQZjvJu/m3c1c359rX5LN7ibPGp2IWEi6k3Q9Ch0l7Wzz7Y/Lr4i4lPQuaSZpI+kkKTJOHvEnSb+SVraJqwYAmcIfSW8TDJ4lNQDZ7hh2ABGxzk4Uw+LcWSWIbK8LAIVo/0qqf5IuJlCgPpd0sN04IqDUciHpJYu2+X2cAHnNhksA6LxMWjdZcGv7EBH3GSMHj9ANs880eQMA3R+qTjjMXX+S5QnnI4JJYDJnC0AZFRezTNozDdskYzLTaWzDiP99zQDAdjEVSQDgCwVIAKDNfWEXugMA2q5q7edmmL58ZM43AGwY5kAPL1iSXXYeMMk7/GGUyDz2m5hB9gHajBbgwmzOG4gIGu2Zfy9h5HaXkGwAgwHuo72P1Q9qwKCijevoLONEHiu8mHyNIybQp3s3tmTVlhdY5/4DVEimyi/1uJ8AAAAASUVORK5CYII=",
+                                "text": "Richieste",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton",
+                            "designerId": "184f2017-7579-43f9-84a6-eb714b06f35d",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onRichiesteClick",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.getCmp(\"mainCont1\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmRichiestaServizioAdmin\");",
+                                            "Ext.getCmp(\"mainCont1\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onRichiesteClick",
+                                    "designerId": "7a97f505-f5a1-44d7-bb67-74acee9227b0"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABBklEQVQ4T+2TwU3DQBRE31QAHUAHhApwbtygA6ACoALogHQAdEAqIOkgdBA6yJXToLH+IjsSsrjzL2tb+9+fmV3L9iNwBbxKyvNkjXps74AD4FPS8WQ3YHsLHPU9thfANbD4o4K7vsd2pl6UhV29h/4BzICtpEz8KduHZXsZwFsBNpJOy98D8FLKlpIuW3c1vxe8B6yAs9qwAQL8As7r+1pSZzuSk1VgUZZaDwGRHEAsZc2mgBsgWfWWaj3ZB7SNCfR2MGVkIWMHqkcKGiABNYnZn2xy1MMQm+0eEG9PwI2kBDdZtqPyGbgPoAOS6lxSyJM16vkHzNu/kPBm+8f1W5p1nXPZum/qlbRhokYlqwAAAABJRU5ErkJggg==",
+                                "text": "Servizi",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton8",
+                            "designerId": "c8940d38-6178-4590-bf54-bfdb86ea159a",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onClickServizi",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.getCmp(\"mainCont1\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmServizi\");",
+                                            "Ext.getCmp(\"mainCont1\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onClickServizi",
+                                    "designerId": "26dacc52-c2cf-414b-a935-620b5ddeb4da"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAApklEQVQ4T9WSYQ3CQAyFvzpAwhwggTlAwxQACgAHQwHgABTAHDBFj1zCJbeDW/eDkNB/fW2+5rU1SS2wYhiNmZ0y7WNqku7AIqvuzWz3G8CUKWM9wULYwTxrOv/RDrwrSJoBW6CPtgbaGEBSDRyBCujMrH7TCoADIGCdLLcHbpnWlR5p6nVdwAZ4vCZHaKq5gGAhAMK7x0g1F+BZ+Q7gAiy9UYX69QmzDGhG6nj6JgAAAABJRU5ErkJggg==",
+                                "text": "Divisioni",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton13",
+                            "designerId": "8f0bf18e-841c-4006-9571-e4fd64e36db4",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onButtonClick11",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.getCmp(\"mainCont1\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmFiliali\");",
+                                            "Ext.getCmp(\"mainCont1\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onButtonClick11",
+                                    "designerId": "965fb1c7-8c8c-4d5d-a975-c5b657a80265"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABT0lEQVQ4T5WTsVEDQQxF368AEnJcAbgCcAWYCjARAQE4hQBTAZc7gBLMDDmmAhwRQwVcB2K+Wd3cnDGGjfZ2V09f+jrRWhExAi6AuaRx+27dXh1AtL4HkuabIF3AAtgrQT1J7/8FbAMuY/aXYMMbBRGRwUNgKKnelL0LuARugGvgrV1/ROwDWwmU9NLsvYkIZ/UjA86BHX9LOi73VtMAgL4k9+u7hIiYAU/AtCPbLtjO185545BK7Z/AGXDlGQAegMPSUO+tMN358F022QA/fAYss5J0m9kiwjAP1eTXQYqIdo0OOnWGBACeh/sfIHX2wDJPWg8M7JdSchrd4JWVAFt4BzwCu6XeAWDpBhjo+1VA8Ti77KwVcCDJ/Vn2oJzZ5u6q/SjnfyypiojlD1UAtvdoTQOtqpdZFpJcRs5ELWlULLaF/j+szEFWYucmHqYvzmeQL0fpN/gAAAAASUVORK5CYII=",
+                                "text": "Fornitori",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton18",
+                            "designerId": "65688c59-7d6e-4168-b21c-0530c484d435",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onFornitoriClick",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.getCmp(\"mainCont1\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmFornitori\");",
+                                            "Ext.getCmp(\"mainCont1\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onFornitoriClick",
+                                    "designerId": "0b3fadfc-36b6-480c-ac5e-1b8d24a906fc"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABB0lEQVQ4T72TUXXCQBBF71MADoqDFgXUQXFAq6DggCgoEqgCkBAcgAPqAAfDeTm7kBPSJF/M5+7MnZn3dkVPRMQc+AYmQAmsJF1ymbrqI2IJ/DRyzsA0Q/oA7jRqaeIpNj7vA8Q/ExaS1kMAHvelBfIlaTsEYAF3DcBJ0tsgEZ0UEe+AxRwnFzaDXEiFts9T1MNWlpKKaoWIsBhtYrlzjj/AY7/Wzo6SpgaYVk9+0Cw1cc6scVncABExkXROyR7TDly8bwfgUAd4FRe6k5+tYyup7ABUGlQrpKQ8YV5p/RTAHjim1vY6K31oCNYm4v0vJN8/gUUq/AUMt5h+SB+A7fQH85n12l8BmYmISPEQTG0AAAAASUVORK5CYII=",
+                                "text": "Profili",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton10",
+                            "designerId": "1d048493-9d8a-4deb-be43-900814d7e526",
+                            "cn": [
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onButtonClick2",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.getCmp(\"mainCont1\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmProfili\");",
+                                            "Ext.getCmp(\"mainCont1\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onButtonClick2",
+                                    "designerId": "73d0f147-413f-4803-96b5-942dd555563e"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAsklEQVQ4T7WT0Q2BMRSFv25gAzEBG2ADIxiBCdjECDzw7PfMAxuwgQ2O3CiRX1O3adykL83t13NuTwOVFSrPkwRIWgLDH/A7MP8CSJoCK6eyJgWw2xdOwNOCpA6wBi6ASfMD4uE90ANGwKQUcAb6wDWuHXBKWDCVZs963xUkvQC3CNgCxwxg0AYYuQG6wLjYwscQNxFkW/4htqXGEFUBSoJ0yEXZnjRXlpfZfz6TN8bW9wC4okCk0g7hvgAAAABJRU5ErkJggg==",
+                                "text": "Logout",
+                                "textAlign": "left"
+                            },
+                            "name": "MyButton2",
+                            "designerId": "49829bbf-dbfa-4568-9df3-44e2c726c43a",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onLogoutClick",
+                                        "implHandler": [
+                                            "Ext.getCmp(\"pageContainer\").removeAll();",
+                                            "var cmp = Ext.create(\"Rai.view.frmLogin\");",
+                                            "Ext.getCmp(\"pageContainer\").add(cmp);",
+                                            "cmp.show();"
+                                        ],
+                                        "name": "click",
+                                        "scope": "me"
+                                    },
+                                    "name": "onLogoutClick",
+                                    "designerId": "7584ffc2-97a1-4a78-894e-3d4c74e28432"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onPanelAfterRender",
+                "implHandler": [
+                    "",
+                    "Ext.getCmp(\"mainCont1\").removeAll();",
+                    "var cmp = Ext.create(\"Rai.view.frmRichiestaServizioAdmin\");",
+                    "Ext.getCmp(\"mainCont1\").add(cmp);",
+                    "cmp.show();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onPanelAfterRender",
+            "designerId": "93cb75e9-3b10-4bfa-8c2d-7ff966c88d77"
+        }
+    ]
+}

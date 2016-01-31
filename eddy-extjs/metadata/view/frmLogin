@@ -1,0 +1,317 @@
+{
+    "type": "Ext.container.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "middle",
+        "container|pack": "center",
+        "designer|userAlias": "frmLogin",
+        "designer|userClassName": "frmLogin",
+        "height": 666,
+        "id": "frmLogin",
+        "layout": "hbox",
+        "width": 1069
+    },
+    "designerId": "4e186c22-a418-4380-9e06-dbd96e9fa237",
+    "viewControllerInstanceId": "a71fe2bf-2f98-4d09-a11c-0fe2caa78817",
+    "viewModelInstanceId": "c6b4262b-26e9-4a47-900c-9e352e4ed5ce",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|snapToGrid": 10,
+                "height": 241,
+                "layout": "absolute",
+                "layout|flex": null,
+                "title": "Login",
+                "width": 495
+            },
+            "name": "MyPanel1",
+            "designerId": "39dbe26a-f2fd-410f-9f80-15802448b404",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "account",
+                        "fieldLabel": "User",
+                        "id": "userNameTxt",
+                        "layout|x": 110,
+                        "layout|y": 50,
+                        "tabIndex": 1,
+                        "width": 300
+                    },
+                    "name": "MyTextField2",
+                    "designerId": "d3d7e9c3-ee99-45af-9072-74e34114769d",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onUserNameTxtRender",
+                                "implHandler": [
+                                    "component.focus();"
+                                ],
+                                "name": "render",
+                                "scope": "me"
+                            },
+                            "name": "onUserNameTxtRender",
+                            "designerId": "2638895b-0229-4534-818b-34de40e6a72c"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Pwd",
+                        "id": "pwdTxt",
+                        "inputType": "password",
+                        "layout|x": 110,
+                        "layout|y": 80,
+                        "tabIndex": 2,
+                        "width": 300
+                    },
+                    "name": "MyTextField9",
+                    "designerId": "c6832420-02d3-4e95-b0f9-cfb5fe9ee4c6"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "loginButton",
+                        "layout|x": 110,
+                        "layout|y": 120,
+                        "tabIndex": 3,
+                        "text": "Login",
+                        "width": 300
+                    },
+                    "name": "MyButton7",
+                    "designerId": "1cb0332a-2731-42bd-b30f-489aa571fa35",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "element": "",
+                                "fn": "onLoginClick",
+                                "implHandler": [
+                                    "var usr = Ext.getCmp(\"userNameTxt\").getValue(),",
+                                    "    pwd = Ext.getCmp(\"pwdTxt\").getValue();",
+                                    "",
+                                    "var saveId = Ext.getCmp('cookieLogin').getValue();",
+                                    "",
+                                    "if (saveId){",
+                                    "    Ext.util.Cookies.set('cookieLogin',\"enabled\", new Date('5/22/2050 03:05:01 PM GMT-0600'));",
+                                    "}",
+                                    "else {",
+                                    "    Ext.util.Cookies.set('cookieLogin',\"disabled\", new Date('5/22/2050 03:05:01 PM GMT-0600'));",
+                                    "}",
+                                    "",
+                                    "if (saveId){",
+                                    "    Ext.util.Cookies.set(\"userNameLogin\",usr, new Date('5/22/2050 03:05:01 PM GMT-0600'));",
+                                    "}",
+                                    "",
+                                    "Ext.Ajax.request({",
+                                    "    url: \"../oauth2/token\",",
+                                    "    method : \"get\",",
+                                    "    headers: {",
+                                    "        'Content-Type': 'application/json'",
+                                    "    },",
+                                    "    params : {id:usr,pwd:pwd},",
+                                    "    success : function(response) {",
+                                    "",
+                                    "        var tokenAccesso = response.responseText,",
+                                    "            grado = null;",
+                                    "",
+                                    "        ACCESS_TOKEN = tokenAccesso;",
+                                    "",
+                                    "        // Prendo le informazioni sull'account",
+                                    "        Ext.Ajax.request({",
+                                    "            url: '../oauth2/account',",
+                                    "            headers: {",
+                                    "                'Authorization': 'Bearer ' + ACCESS_TOKEN,",
+                                    "            },",
+                                    "            success: function (response, options) {",
+                                    "                //alert('response: ' + response.responseText);",
+                                    "                USER = JSON.parse(response.responseText);",
+                                    "                USER.roles = JSON.stringify(USER.roles);",
+                                    "                grado = USER.roles;",
+                                    "",
+                                    "                var stores = Ext.data.StoreManager.map;",
+                                    "",
+                                    "                for (name in stores) {",
+                                    "                    if (name.indexOf('eports') >= 0)continue;",
+                                    "                    if (stores.hasOwnProperty(name)) {",
+                                    "                        store = stores[name];",
+                                    "                        store.clearFilter();",
+                                    "                        store.proxy.headers = {\"Authorization\":\"Bearer \" + tokenAccesso};",
+                                    "                        store.autoSync = true;",
+                                    "                        store.autoLoad = true;",
+                                    "                       // store.load();",
+                                    "                    }",
+                                    "                }",
+                                    "",
+                                    "                if (grado.toLowerCase().indexOf(\"consorzio\") >= 0){",
+                                    "                    Ext.getCmp(\"pageContainer\").removeAll();",
+                                    "                    var panel = Ext.create(\"Rai.view.frmAdmin\");",
+                                    "                    Ext.getCmp(\"pageContainer\").add(panel);",
+                                    "                    panel.show();",
+                                    "                }",
+                                    "                else if (grado.toLowerCase().indexOf(\"manager\") >= 0){",
+                                    "                    Ext.getCmp(\"pageContainer\").removeAll();",
+                                    "                    var panel = Ext.create(\"Rai.view.frmServiziGenerali\");",
+                                    "                    Ext.getCmp(\"pageContainer\").add(panel);",
+                                    "                    panel.show();",
+                                    "                }",
+                                    "                else if (grado.toLowerCase().indexOf(\"soperatore\") >= 0){",
+                                    "",
+                                    "                    Ext.getCmp(\"pageContainer\").removeAll();",
+                                    "                    var panel = Ext.create(\"Rai.view.frmOperatore\");",
+                                    "                    panel.filiale = \"Filiale\";",
+                                    "                    Ext.getCmp(\"pageContainer\").add(panel);",
+                                    "                    panel.show();",
+                                    "                }",
+                                    "                else if (grado.toLowerCase().indexOf(\"operatore\") >= 0){",
+                                    "                    Ext.getCmp(\"pageContainer\").removeAll();",
+                                    "                    var panel = Ext.create(\"Rai.view.frmOperatore\");",
+                                    "                    panel.filiale = \"Filiale\";",
+                                    "                    Ext.getCmp(\"pageContainer\").add(panel);",
+                                    "                    panel.show();",
+                                    "                }",
+                                    "",
+                                    "            },",
+                                    "            failure: function (response, options) {",
+                                    "                Ext.Msg.show({",
+                                    "                    title:'Errore autenticazione',",
+                                    "                    msg: \"Errore durante l'autenticazione: phase 2\",",
+                                    "                    buttons: Ext.Msg.Ok,",
+                                    "                });",
+                                    "                return;",
+                                    "            }",
+                                    "",
+                                    "",
+                                    "        });",
+                                    "    },",
+                                    "    failure : function(response) {",
+                                    "        Ext.Msg.alert(\"Errore\", \"Dati di autenticazioni errati.\");",
+                                    "    }",
+                                    "});",
+                                    "",
+                                    "",
+                                    ""
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onLoginClick",
+                            "designerId": "7e6466e2-9d41-4139-8fb2-6211e35e89ce"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.Checkbox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "boxLabel": "",
+                        "checked": true,
+                        "fieldLabel": "Ricordami",
+                        "id": "cookieLogin",
+                        "labelSeparator": "",
+                        "layout|x": 110,
+                        "layout|y": 160,
+                        "tabIndex": 4
+                    },
+                    "name": "MyCheckbox",
+                    "designerId": "062f6f70-f97e-4061-9361-6fc795570a23",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onCookieLoginChange",
+                                "implHandler": [
+                                    ""
+                                ],
+                                "name": "change",
+                                "scope": "me"
+                            },
+                            "name": "onCookieLoginChange",
+                            "designerId": "3740d96e-7495-4ab6-ab67-7c5e11ae2841"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmLoginAfterRender",
+                "implHandler": [
+                    "",
+                    "",
+                    "Ext.create('Ext.util.KeyMap',\"frmLogin\",",
+                    "           {",
+                    "               key: 13, // this works,",
+                    "               fn: this.onLoginClick",
+                    "           }",
+                    "          );",
+                    "",
+                    "",
+                    "if (Ext.util.Cookies.get('cookieLogin') === 'enabled'){",
+                    "    var username = Ext.util.Cookies.get('userNameLogin');",
+                    "    Ext.getCmp('userNameTxt').setValue(username);",
+                    "}",
+                    "",
+                    "",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmLoginAfterRender",
+            "designerId": "69b44dc0-baec-406c-8b8e-69dc87f1e21f"
+        }
+    ]
+}

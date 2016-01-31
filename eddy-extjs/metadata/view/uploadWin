@@ -1,0 +1,137 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "center",
+        "container|padding": 20,
+        "designer|uiInterfaceName": "default",
+        "designer|userAlias": "uploadWin",
+        "designer|userClassName": "uploadWin",
+        "height": 123,
+        "id": "uploadWin",
+        "layout": "vbox",
+        "title": "Upload file",
+        "titleAlign": "center",
+        "width": 400
+    },
+    "designerId": "3b2aa3b5-6269-4b62-a593-763c8439bbe6",
+    "viewControllerInstanceId": "cc1e728e-623f-4a8f-9a39-fdf29c59bd81",
+    "viewModelInstanceId": "33205bde-de25-4d2a-83b7-3b3a66b50325",
+    "cn": [
+        {
+            "type": "Ext.form.field.File",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "upload-icon"
+                ],
+                "fieldLabel": "Label",
+                "id": "inputField"
+            },
+            "name": "MyFileUpload",
+            "designerId": "f3323865-2972-4010-925f-8cfbe0dca5dc"
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "text": "MyButton",
+                "width": 275
+            },
+            "name": "MyButton19",
+            "designerId": "ecd42af3-0cdd-4b9c-819e-c07931f6118d",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|params": [
+                            "button",
+                            "e"
+                        ],
+                        "fn": "handler",
+                        "implHandler": [
+                            "",
+                            "",
+                            "var filefield = Ext.getCmp('inputField');",
+                            "var file = filefield.getEl().down('input[type=file]').dom.files[0];",
+                            "var reader = new FileReader();",
+                            "var idRichiesta = this.up('window').idRichiesta;",
+                            "reader.onload = (function(theFile) {",
+                            "    return function(e) {",
+                            "        var encodedFile = Ext.util.base64.encode(e.target.result);",
+                            "",
+                            "        Ext.Ajax.request({",
+                            "            method : 'POST',",
+                            "            url: '/richiestaNuovoServizio/report',",
+                            "            headers: {",
+                            "                'Authorization': 'Bearer ' + ACCESS_TOKEN,",
+                            "                'Content-Type': 'application/json'",
+                            "            },",
+                            "            jsonData: {",
+                            "                id : idRichiesta,",
+                            "                data : encodedFile",
+                            "            },",
+                            "            success: function (response, options) {",
+                            "                Ext.Msg.show({",
+                            "                    title:'Benvenuto',",
+                            "                    msg: \"Risultato: \" + response.responseText,",
+                            "                    buttons: Ext.Msg.Ok,",
+                            "                });},",
+                            "            failure: function (response, options) { Ext.Msg.show({",
+                            "                title:'Errore con il server',",
+                            "                msg: \"Risposta: \" + response,",
+                            "                buttons: Ext.Msg.Ok,",
+                            "            });",
+                            "                                                  }",
+                            "        });",
+                            "",
+                            "",
+                            "",
+                            "    };",
+                            "})(file);",
+                            "// start upload",
+                            "reader.readAsBinaryString(file);"
+                        ]
+                    },
+                    "name": "handler",
+                    "designerId": "8e61bcdd-a3bb-400c-a4b8-5c455678f47a"
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUploadWinShow",
+                "implHandler": [
+                    ""
+                ],
+                "name": "show",
+                "scope": "me"
+            },
+            "name": "onUploadWinShow",
+            "designerId": "3c42e001-9743-462c-bc91-5aa77dc07bc8"
+        }
+    ]
+}

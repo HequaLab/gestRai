@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "crealuogo",
+        "designer|userClassName": "creaLuogoViewModel"
+    },
+    "designerId": "1519744f-eeae-4a3f-b87b-79037ff5fcf7"
+}

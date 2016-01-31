@@ -1,0 +1,14 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "winnuovatipologiaservizio",
+        "designer|userClassName": "winNuovaTipologiaServizioViewController",
+        "id": "popWin"
+    },
+    "designerId": "cd182bf1-63fb-4ddf-9f2e-9986f3a53a15"
+}

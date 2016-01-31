@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "crealuogo",
+        "designer|userClassName": "creaLuogoViewController"
+    },
+    "designerId": "d6c1e791-348a-4eda-8375-b3e145118350"
+}

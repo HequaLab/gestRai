@@ -1,0 +1,14 @@
+{
+    "type": "Ext.app.ViewModel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmproduzioni",
+        "designer|userClassName": "frmServiziViewModel10"
+    },
+    "name": "frmServiziViewModel10",
+    "designerId": "5c4f3cdb-ae0c-44bb-b91b-f291363d516a"
+}

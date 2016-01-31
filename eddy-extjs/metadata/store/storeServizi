@@ -1,0 +1,61 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "storeServizi",
+        "model": "servizi",
+        "pageSize": 100,
+        "storeId": "storeServizi"
+    },
+    "name": "storeFornitori1",
+    "designerId": "277cc05d-635a-4371-a6ff-78a759d59116",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "idParam": "serviziId",
+                "url": "/servizi"
+            },
+            "name": "MyRestProxy",
+            "designerId": "45978502-bb9c-4f0b-a123-5d4757bfc908",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "items"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "d929b5f2-18ea-474b-ba02-14e21e89bdbc"
+                },
+                {
+                    "type": "Ext.data.writer.Json",
+                    "reference": {
+                        "name": "writer",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "writeRecordId": false
+                    },
+                    "name": "MyJsonWriter",
+                    "designerId": "3ea02add-7b25-4c40-895c-cec6a0755a93"
+                }
+            ]
+        }
+    ]
+}

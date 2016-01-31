@@ -1,0 +1,14 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmreportmanager",
+        "designer|userClassName": "frmServiziViewController6"
+    },
+    "name": "frmServiziViewController6",
+    "designerId": "b6446b94-571b-4f24-b6e2-8c85937d9bf8"
+}

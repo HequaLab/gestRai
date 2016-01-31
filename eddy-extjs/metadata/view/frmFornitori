@@ -1,0 +1,284 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "frmfornitori",
+        "designer|userClassName": "frmFornitori",
+        "height": 753,
+        "id": "frmfornitori",
+        "layout": "border",
+        "padding": 1,
+        "title": "Area fornitori",
+        "width": 1099
+    },
+    "name": "frmServizi1",
+    "designerId": "d25a3cc5-bee7-4846-aa1e-cd06e7294763",
+    "viewControllerInstanceId": "be7823ed-2f3d-42f7-8929-513b7068b7ac",
+    "viewModelInstanceId": "66b7c168-1437-4ff0-be61-c9dd2ecb9cac",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "border",
+                "layout|region": "center",
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "004a3f0a-fb5b-4b7f-9d6b-9fa816f8a09c",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "fornitoriGrid",
+                        "layout|region": "center",
+                        "padding": 1,
+                        "store": "storeFornitori",
+                        "title": "Elenco Fornitori"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "73bd45f0-b6ef-4c43-a0af-437dcd4b3188",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "ragioneSociale",
+                                "flex": 2,
+                                "text": "Ragione sociale",
+                                "width": 575
+                            },
+                            "name": "MyColumn",
+                            "designerId": "40d9904c-d93b-44d6-a9ce-b739d6fce195"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "note",
+                                "flex": 1,
+                                "text": "Note",
+                                "width": 203
+                            },
+                            "name": "MyColumn7",
+                            "designerId": "ecd3a46e-c8fb-403e-a126-ea95c4c7b28c"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "b420926c-7a4a-4771-a8c7-877376afe353"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeFornitori",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "dd486189-88ad-4866-b08c-505c7555de0c"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "layout|region": "west",
+                "padding": 1,
+                "title": "",
+                "width": 310
+            },
+            "name": "MyPanel5",
+            "designerId": "7e016542-8adc-4ce8-a65a-14da55b7d914",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Ragione Sociale",
+                        "id": "ragioneSocialeTxt"
+                    },
+                    "name": "MyTextField3",
+                    "designerId": "aaae872b-3b84-4583-b0c9-e09a957be069"
+                },
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Note",
+                        "id": "noteTxt"
+                    },
+                    "name": "MyTextArea1",
+                    "designerId": "73564399-00a2-43af-b474-5f8a25bee8c5"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Salva"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "52a5f69a-39a0-474d-8712-e1746bd0f346",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onSave",
+                                "implHandler": [
+                                    "var ragioneSociale = Ext.getCmp('ragioneSocialeTxt').getValue(),",
+                                    "    note = Ext.getCmp('noteTxt').getValue();",
+                                    "",
+                                    "if (ragioneSociale === undefined || ragioneSociale === null || ragioneSociale === \"\"){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"La ragione sociale non puo' essere vuota!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeFornitori');",
+                                    "var emptyApp = new Rai.model.fornitori();",
+                                    "emptyApp.set('ragioneSociale',ragioneSociale);",
+                                    "emptyApp.set('note',note);",
+                                    "store.add(emptyApp);",
+                                    "store.on('write', function() { store.load();});"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onSave",
+                            "designerId": "5b609207-6bbc-4a5c-94f5-3fcc3fc2b459"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Elimina"
+                    },
+                    "name": "MyButton11",
+                    "designerId": "03e87d4f-ece2-4fee-97b1-3a7c7486ab46",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDelete",
+                                "implHandler": [
+                                    "var selection = Ext.getCmp('fornitoriGrid').getSelectionModel().getSelection();",
+                                    "var store = Ext.StoreManager.lookup('storeFornitori');",
+                                    "store.remove(selection);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onDelete",
+                            "designerId": "b6a1e50e-533e-47cd-8d55-43c4bed85fee"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Annulla"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "6c606f88-2fd8-40e9-8103-6ab5d4fc8ec8",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "Ext.getCmp('ragioneSocialeTxt').setValue(\"\");",
+                                    "Ext.getCmp('noteTxt').setValue(\"\");"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onButtonClick",
+                            "designerId": "e509f447-0936-4c1f-be17-354ede6bc1e2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

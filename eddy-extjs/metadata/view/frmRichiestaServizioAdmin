@@ -1,0 +1,1258 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 2,
+        "designer|userAlias": "frmRichiestaServizioAdmin",
+        "designer|userClassName": "frmRichiestaServizioAdmin",
+        "height": 753,
+        "id": "frmRichiestaServizioAdmin",
+        "layout": "border",
+        "padding": 0,
+        "title": "Area servizi",
+        "width": 1278
+    },
+    "name": "frmRichiestaNuovoServizio1",
+    "designerId": "640025b7-c675-4b8c-8e61-3ff25c30a346",
+    "viewControllerInstanceId": "314e3775-9d5b-47d6-898e-59d034ee34d6",
+    "viewModelInstanceId": "f389ef58-ee50-4f74-b1e1-d60cf1c3ef55",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyBorder": true,
+                "bodyPadding": 2,
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 0,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "13208a3a-80af-438f-9e3c-0b7c69149a2b",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyBorder": true,
+                        "padding": 5,
+                        "store": "storeRichiesteServizi",
+                        "title": "Elenco servizi"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "72a6838a-1f50-4911-a65e-5e3238fa061f",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "nome",
+                                "flex": 0.8,
+                                "text": "Servizio"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "0e9c8f7f-be1b-4287-a24a-b9aea2fdf1f9"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "fornitore",
+                                "flex": 0.8,
+                                "text": "Fornitore"
+                            },
+                            "name": "MyColumn30",
+                            "designerId": "98d4fef3-6200-4a79-9981-e99f31ee9461",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.ComboBox",
+                                    "reference": {
+                                        "name": "editor",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "displayField": "ragioneSociale",
+                                        "store": "storeFornitori",
+                                        "valueField": "ragioneSociale"
+                                    },
+                                    "name": "MyComboBox15",
+                                    "designerId": "bb0d740c-a5fa-497f-a5de-c0e103d920cf"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "lotto",
+                                "flex": 0.8,
+                                "text": "Lotto"
+                            },
+                            "name": "MyColumn5",
+                            "designerId": "91d302ef-d9e8-4900-8998-e941dedad888"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "produzione",
+                                "flex": 0.8,
+                                "text": "Produzione"
+                            },
+                            "name": "MyColumn22",
+                            "designerId": "465a465d-a675-49c1-b510-42a9824bcb90"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "matricola",
+                                "flex": 0.8,
+                                "text": "Matricola"
+                            },
+                            "name": "MyColumn25",
+                            "designerId": "b0894846-a13c-498e-8c50-fce3af981957"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "luogo",
+                                "flex": 0.8,
+                                "text": "Luogo"
+                            },
+                            "name": "MyColumn26",
+                            "designerId": "b6fb35c3-0079-4992-a687-ad8f8c52bb03"
+                        },
+                        {
+                            "type": "Ext.grid.column.Number",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "ore",
+                                "flex": 0.4,
+                                "text": "Ore"
+                            },
+                            "name": "MyNumberColumn",
+                            "designerId": "3bd931a6-b821-411a-b235-f42d39f04d1e"
+                        },
+                        {
+                            "type": "Ext.grid.column.Date",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "dataFine",
+                                "flex": 0.7,
+                                "text": "Data"
+                            },
+                            "name": "MyDateColumn",
+                            "designerId": "01c673e3-e265-464e-af0e-d6b156bae44d"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "ora",
+                                "flex": 0.5,
+                                "text": "Ora"
+                            },
+                            "name": "MyColumn13",
+                            "designerId": "f00ebd53-fd3c-48d5-b117-9b6d1916e416"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "stato",
+                                "flex": 0.7,
+                                "text": "Stato"
+                            },
+                            "name": "MyColumn1",
+                            "designerId": "c7cda935-f6c4-4c41-b358-bc762ffe9db4",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "value",
+                                            "metaData",
+                                            "record",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "store",
+                                            "view"
+                                        ],
+                                        "fn": "renderer",
+                                        "implHandler": [
+                                            "",
+                                            "",
+                                            "if (value === \"Approvato\"){",
+                                            "    return '<span style=\"color:' + \"#73b51e\" + ';\">' + \"<b>\"  + value + \"</b>\"+ '</span>';",
+                                            "}",
+                                            "else if ( value === \"Non approvato\"){",
+                                            "    return '<span style=\"color:' + \"#cf4c35\" + ';\">' + value + '</span>';",
+                                            "}",
+                                            "else if ( value === \"Erogato\"){",
+                                            "    return '<span style=\"color:' + \"#0277BD\" + ';\"><b>' + value + '</b></span>';",
+                                            "}",
+                                            "else if ( value === \"In lavorazione\"){",
+                                            "    return '<span style=\"color:' + \"#AFB42B\" + ';\"><b>' + value + '</b></span>';",
+                                            "}",
+                                            "else if ( value === \"Nessuno\"){",
+                                            "    return '<span style=\"color:' + \"#795548\" + ';\"><b>' + value + '</b></span>';",
+                                            "}",
+                                            "",
+                                            "",
+                                            "else return value;"
+                                        ]
+                                    },
+                                    "name": "renderer",
+                                    "designerId": "2f51d93e-15b3-4157-87df-fa30ad7a182f"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Action",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "align": "center",
+                                "dataIndex": "stato",
+                                "flex": 0.5,
+                                "id": "inLavorazioneSubmit",
+                                "text": "Azioni"
+                            },
+                            "name": "MyActionColumn",
+                            "designerId": "553f0035-1603-40e7-8eda-655135e7d347",
+                            "cn": [
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAGP0lEQVR4Xu1bS3biVhC9JeOkPYozSBpGoTcQoxUEr8B4BW2voDvDNM4JfQLJ0HgFISsIXkG7VyA5G2h7BCcZND3COXwqp54+fgiBHiBA+DRD+0l67+pW1a2PCAa/bxpOKQf6A0DJYPlaljDQ6lZL52nfnExuWKi7H0E4NFm7zjUMftut2rU0n5EIQP5Xp0wWvZOHMvOfINyluYHEezHOiOi7YB2Dz7tVu5V4neGCxQAY83H3Z/vG8N6pLMs3nBsC/aDfjFPcx04CAEZvSHz8b9V2V0V5NwFQ9ohef8gvejW7twoIuwuAd2q3P+DjVUDYdQDAjJvuRel4WRasBYDDmnP4LGedwKK77pvv3y+7ObkuzglG77eKRkgdACWamN5puqHdqZZOlwXBBADPJSynEVIHIN9wPxBQFM1AohyJjlaJ3aYA+CAsrBFSB6DQcBnMt50Lu/Ttb05lj+kvAaN7YZ8tw4JFAFAgLKgRUgcgX3fuRLmxxS8e/kPvYJ8+Mvh9t2qXNwHAohohfQAaTo1AvwTeWRixUQAW1AipAyAR4CCHG8/20SLgbOMA+BqhUy3ZSaxLHQAVun53ihjDJdBXvnNa3gTqTouIXiYdJO7/Jv5gLQDIZiQc7gGSyAgIrsnbiDuE0hT7eG0MAKMYALZVAHwRo/yBx4L1FDSiwEyk7wYRYW0MkI0V6k4bRCcM/uQzod0f8Pkq2j2JCZkCIBBF/QF/HTjGNBKYeSBkBgBxhDSmD4Eo0qODgMAWn3Z/slOvLmUHgIZzRqqQyledqq2cmJckoamcVIpFDZ0R2QHAD18j4tN/3tjtiU1qoW2VPCHOFLIDgJ8Uif3HOb18yBCJEFTrVo/eJjk4k/9nAoCo/c/auCRLFotaVFohlQiRDQBi7H8WCF79AC1fOt+NwKerFDuzAcAc+5+l9g5yCoQTcY5johoRTVd8aXSfFDmyAcAc+1eR4Iu9I2YuWYwig1W7jQiLpsttHvNVtE+xdQDi7P95/e8TC1wGsRxyZn9RFKNoBFkTJlLM99FulN4oiZbCtg+Ab/9SD5CNE6Oi9xWVLGbcMMEdE1xrhF70LfqiyTMJlUdMRwndgUrxJTCN7QMQl74yXzOhPQLcRRxcoe68ZoIkVCqjHILP9esLDacJ0Cs969saAD71LwFU1Ftjvieg2R+itUry46fVzYD2woaHwfhKnvFsnxxVgN02A5SoYboMqe4XRU2Ei+maCBseL2O+7lzYCnSVguvd7E2kw88bt68scFM9nflW4rmu/00PaLJOVZpGqIFQJMahmNXDAE2dYRsFILRB8d5jVMgiMYHSEGwvYusmhzddszEAgnAnXn0ElIlQVD2AFUrgpofMRD3gEWm+GgKtoB1mUodL46Cz7rE5BgTOhtF7jPOPuf86D5kJBsgmQh/gh7zOhe05wy3+NsaALZ5x7qM/A7BpHZA1JqyXAUALoNQruemCyEXpRypdlrYSTHej67/bZwDWxQBRe/77i06NluE1J8PR1uA9B9eQNEWAx9k+RlFp+8g0qM4PrVAylzbLTJQu1BsMnt6pluZeJ9khAElhVXtcfknX+F3gChhSD5wA0FReq/Ec7bc2E0g6jOwh0h5PBCDY90T3yP9jpgEQNcgsKTAwtvhK7wIFSjHKAMUQ9oYeCOQyj6+jZbFC3XG91FqNwE0MWHgMs6bMjMATo/QbYUB0iktPhfWYrLMm788RRex84luAiXg+DcDUBHmcc9gKAGD+McgJFgEgLm6HE2e7BIBenwvmBGNMIJwcmWBBZJ4w7xdYY0wgOwxQPkDq+IweM5q6LQcHMAZg+k17I3cGRRadbWHoXZcOMI0COZATFwbjfMAMZ7d7AEgY+3LfemkxS/Ey/NAqyQkqoCIVXm3GaCIKqBBLe6HG8C7lUlicDcLnJhgwEZKYy96A9PQXZiYARIclwsHrXXKCs7RqIgDMt/0hykGJ2/9WUZlQpp2g6TT3PADkgA8DVCbq+3X3XdAxfnoASINjiKJiSw530Z6/dIFAqsfguYanZgKzzMRLiOgyKGg8KQBmdYuUR2frSGYHogfPLACz3mDW/p5KLiCHyjecnp7bZ+2gsYkQ+FO3aid+8J1YEJGb65Ncu3B46VIPCWcmDdr/AVTvipsjYS5YAAAAAElFTkSuQmCC",
+                                        "tooltip": "Visualizza report PDF"
+                                    },
+                                    "name": "MyActionColumnItem3",
+                                    "designerId": "a56e33cc-517e-4f60-9ca1-da6bc7d78173",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var s = record.get('stato');",
+                                                    "if ( s === 'Nessuno' || s === 'Non approvato'){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta non è stata approvata, non è presente nessuno report\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "var stato = 'approvato';",
+                                                    "if (record.get('stato') == 'Erogato')stato = 'erogato';",
+                                                    "var nomeReport = 'report_' + record.get('richiestaNuovoServizioId') + \"_\" + stato + '.pdf';",
+                                                    "",
+                                                    "",
+                                                    "var win = Ext.create('Ext.window.Window', {",
+                                                    "    height: 634,",
+                                                    "    width: 780,",
+                                                    "    layout: 'border',",
+                                                    "    title: 'Report servizio',",
+                                                    "    titleAlign: 'center',",
+                                                    "    maximizable: true,",
+                                                    "    closeAction: 'hide',",
+                                                    "    items: [{",
+                                                    "        xtype: 'component',",
+                                                    "        html : '<iframe src=\"../files/'+ nomeReport + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                                                    "    }]",
+                                                    "});",
+                                                    "win.show();"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "74e0e27d-4585-453a-a3e0-5acc0fb5e975"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADJUlEQVRYR+1XQVITURB9PZgqWREXWmElnIDMCSA7d8ABLOPCNbC0BopQGlkS1i6IR7A8gOEEE05gXGUsF8QVSGCe1TPzk5/JBCZqdEOqKKqSnv9fv379ukcwg0+x5hcfFuRIiA0IiiRaIA+CPbeVvk5mcD9Kdb8lkNWRs4ke5+gGr92O/X0mgMd1v6xB3z23/TsAF+ttZj1H8GXguc1bAZTe+k0ReaFBIWRbgCIYLge7bjUPGKV/viDnEwAcBJ5bmwig9MZfgwP9a+IGNQVC8PSyj41eze3lAaAxpbrfE8hCOp4hK2kdzEoDNYHsj2qAZ91dNyrtGANZtGnmgeeu5c06HadsEnwmjlwyxM9ve+5h1lkRAxosjny2A/4EQFxKORGiCPAUkFWKNAJv5SCTgWwA6AReeXlaBhbrfgOQLYI/hKhRFATWkrZsX/RZsfU0kQG9uOuVp9KI3UEkP0DQCgU9hygLnQVK6ILCYLdcMYn9NQAm8wFj5MeLa1RNtqbDVJy2H8QA6n5VICdpuvMyoMb1AOLr8wn1armt7q7bMGcmALQ7VolheQ2A8bZJleDJO3/j6gotu34KXJ2tVPcHzxNoqnkx5LHd81FMNBtkJQKaeMKtAGzjSC5Zp8NN4+dquXqhKj2LQZA7yoLJHkTHuCzA467nqtNGJchkIAPAPojetbCic2Lo+TyOqZatlPnEAOp+DUQVgqb+F5Gnps2nBxAXukfhzkjWlMb5xU3j0bxsQuQIQBvkVwraQpQhsk7wAMSSYUE1FgOwBtCIGVnePYml0YzR61/fPC8U5j6Z7yNNmL1AAShPiU3T4bJhYHx+xydokeMhJFgSYOkuYwpv+MqZk/dZcREDOuhCRGP+sh+dGWlgEoC77hv7XXWTtvUBGwmjOntMN/0XADbqmQNQtZv1bOI+MGmBmJr/xGDsEuQCMLLDkWckthPhac9G61neT1oDUwOw94BcrZdCdg9gagbsURq77HAX/CclKB36Swhh7/wd8/IwWNPzKlDjHDQllC9DK87RhtOcnyfW7qpcXZDn0Gli7gFYq7mOX30b1t2wnfWi8wvFRFU8abj8MgAAAABJRU5ErkJggg==",
+                                        "tooltip": "Imposta la richiesta in lavorazione"
+                                    },
+                                    "name": "MyActionColumnItem",
+                                    "designerId": "be90ab9d-59b1-4587-993b-a38a77178965",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "if (record.get('stato') === \"Non approvato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta non è stata approvata: non può essere erogata.\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "else if (record.get('stato') === \"Cancellato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta è stata cancellata: non può essere erogata.\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "else if (record.get('stato') === \"In lavorazione\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta è in lavorazione, non sono permesse modifiche\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "else if (record.get('stato') === \"Erogato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"Il servizio è stato erogato, non sono permesse modifiche\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "record.set('stato',\"In lavorazione\");"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "619b3206-4b4e-4e2e-b77f-0ab976befd72"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACeElEQVRYR91XQW7TQBR9z0kFrMgGlOxyg3hO0HCChhO0nIBkCQ4iEgksSU9AcoKUExBOYPcGsLIpG7OiUht/NE4muKmNJnKiqszKsv7Mf/P+/2/+JwA0hv4ZyCP9vY8lkBeRpyZ5Z7P+zm/T4Zd9OM6eGXou7wcAEZmC+LYDRtoED8051gxIIs+iN2peFkB95A8Ivr2/AOof/CYTfgTQsWJDEAOchP1WT9uXZqAx8scAX1o5zxiZEJYHMPS7YMrAVusaon56KigNYCVQXSFqtggSIrh4rc52EgJbp0V2pRmoDfzagwPnmCJWSUgiXlCmO2Ogcdc5cOdVoEPwqIrJNklIIAg91f0/klDf4snIdytwrPoEAWI6yefolUofstJVUB/5JwQ/bVWOglgqojSI0gD2mYQ6vx5WnaOo35re6oiMli/px5zgY2sWRM5/X6MdD1ScZUAgvyJPpYqqz60umXW1r0IA1k4LDA0AEfm+IDrp+6DbP3IGoiaQr5Gn2vsFIOgYRrLCphm5vEJTM1UKwCpPDiWR3mYXpanWt04rYuhPSB4bshaU50aydwEg7RkEmFxeSU/fyjhKxewg7bjdv5GSUyNW+l8pACu1nINspQ4EcUIOfnit02USc0aguXYuch72VQZMSQCZrPY3cjGAoKmTzfzXcYcD1wiV+Z83mASS9ncWizLVE8+m6OTtLJqOyk1GN5VPa8Z6DsiC0LNG1FcnecC4EoZNCi2uvzYJQs9VuotGguCWcGXEKRfA6uHQ6HIR2iBJiLEuq6fv/U5FOMvGfQG0TTkWArBxYmtzo+ZFemFfjf+1N3ditXWWZ2dKU4CgKO7ZfX8A9MAi6cIss+8AAAAASUVORK5CYII=",
+                                        "tooltip": "Imposta la richiesta come erogata"
+                                    },
+                                    "name": "MyActionColumnItem",
+                                    "designerId": "6717d065-5401-478c-87be-ee923d488260",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var uploadWidg = Ext.widget('uploadWin');",
+                                                    "uploadWidg.idRichiesta = record.get('richiestaNuovoServizioId');",
+                                                    "uploadWidg.show();",
+                                                    "",
+                                                    "if (record.get('stato') === \"Non approvato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta non è stata approvata: non può essere erogata.\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "else if (record.get('stato') === \"Cancellato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"La richiesta è stata cancellata: non può essere erogata.\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "else if (record.get('stato') === \"Erogato\"){",
+                                                    "    Ext.Msg.show({",
+                                                    "        title:'Operazione non permessa',",
+                                                    "        msg: \"Il servizio è stato erogato, non sono permesse modifiche\",",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "record.set('stato',\"Erogato\");"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "f4c6326e-af9b-475a-a88f-ca3a62592a80"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "71c33814-e1d4-4749-8dbc-510f43f514b0"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeRichiesteServizi",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "7b3aa20e-99e7-434f-8815-48bf026bd74b"
+                        },
+                        {
+                            "type": "Ext.grid.plugin.CellEditing",
+                            "reference": {
+                                "name": "plugins",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "MyCellEditingPlugin3",
+                            "designerId": "adb55d80-fc10-4eba-8bd6-6daa379a9290"
+                        },
+                        {
+                            "type": "Ext.grid.feature.Grouping",
+                            "reference": {
+                                "name": "features",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "showSummaryRow": true
+                            },
+                            "name": "MyGroupingFeature1",
+                            "designerId": "7df5eaab-7230-4a5f-a183-71d735e17971",
+                            "cn": [
+                                {
+                                    "type": "Ext.XTemplate",
+                                    "reference": {
+                                        "name": "groupHeaderTpl",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "groupHeaderTpl",
+                                        "implHandler": [
+                                            "",
+                                            "",
+                                            "<tpl if=\"name=='Erogato'\" ><span style=\"color:#0277BD;\"><b>Ci sono {rows.length} richieste erogate</b><br></span></tpl>   ",
+                                            "<tpl if=\"name=='Nessuno'\" ><span style=\"color:#795548;\"><b>Ci sono {rows.length} richieste in attesa di approvazione</b><br></span></tpl>",
+                                            "<tpl if=\"name=='Non approvato'\" ><span style=\"color:#cf4c35;\"><b>Ci sono {rows.length} richieste non approvate</b><br></span></tpl>",
+                                            "<tpl if=\"name=='Approvato'\" ><span style=\"color:#73b51e;\"><b>Ci sono {rows.length} richieste approvate</b><br></span></tpl>",
+                                            "<tpl if=\"name=='In lavorazione'\" ><span style=\"color:#AFB42B;\"><b>Ci sono {rows.length} richieste in lavorazione</b><br></span></tpl>",
+                                            "",
+                                            ""
+                                        ]
+                                    },
+                                    "name": "groupHeaderTpl",
+                                    "designerId": "7a5d6bfe-dddd-473f-9130-def92847a184"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyPadding": 10,
+                        "collapsible": true,
+                        "dock": "top",
+                        "height": 160,
+                        "padding": 1,
+                        "title": "Filtri"
+                    },
+                    "name": "MyPanel3",
+                    "designerId": "80299063-d9b6-4e4c-81b3-9a9984436611",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Date",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Label"
+                            },
+                            "name": "MyDateField1",
+                            "designerId": "b7d2ee2e-06cc-46f9-b38e-963be195b3a9"
+                        },
+                        {
+                            "type": "Ext.form.field.ComboBox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Servizio"
+                            },
+                            "name": "MyComboBox2",
+                            "designerId": "26cc75c9-f4ef-4fc7-b84e-6e9f21780d14"
+                        },
+                        {
+                            "type": "Ext.form.field.ComboBox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Stato"
+                            },
+                            "name": "MyComboBox3",
+                            "designerId": "3dfa24ec-522e-4989-b969-6467c696eb5e"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "collapsed": false,
+                "collapsible": true,
+                "layout|region": "west",
+                "padding": 1,
+                "title": "Richiesta nuovo servizio",
+                "width": 310
+            },
+            "name": "MyPanel5",
+            "designerId": "002b6f8d-a062-4824-899d-6c45cbbc9fe8",
+            "cn": [
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "nome",
+                        "fieldLabel": "Divisione",
+                        "forceSelection": true,
+                        "id": "filiale",
+                        "store": "storeFiliali",
+                        "valueField": "nome"
+                    },
+                    "name": "MyComboBox5",
+                    "designerId": "9d356b71-f67b-4274-8b73-16c4b793a095",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onFilialeSelect",
+                                "implHandler": [
+                                    "var divisione = record.get('nome');",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeLotti');",
+                                    "store.filter({",
+                                    "    property: \"divisione\",",
+                                    "    value: divisione,",
+                                    "    operator: \"streq\"",
+                                    "});",
+                                    "store.load();",
+                                    "",
+                                    "store = Ext.StoreManager.lookup('storeProduzioni');",
+                                    "store.filter({",
+                                    "    property: \"divisione\",",
+                                    "    value: divisione ,",
+                                    "    operator: \"streq\"",
+                                    "});",
+                                    "store.load();",
+                                    "",
+                                    "store = Ext.StoreManager.lookup('storeMatricole');",
+                                    "store.filter({",
+                                    "    property: \"divisione\",",
+                                    "    value: divisione ,",
+                                    "    operator: \"streq\"",
+                                    "});",
+                                    "store.load();",
+                                    "",
+                                    "store = Ext.StoreManager.lookup('storeLuoghi');",
+                                    "store.filter({",
+                                    "    property: \"divisione\",",
+                                    "    value: divisione ,",
+                                    "    operator: \"streq\"",
+                                    "});",
+                                    "store.load();",
+                                    ""
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onFilialeSelect",
+                            "designerId": "6d0f71c1-0fc5-4a67-9440-c4b7a0180639"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "descrizione",
+                        "fieldLabel": "Tipologia",
+                        "forceSelection": true,
+                        "id": "comboTipologia1",
+                        "queryMode": "local",
+                        "store": [
+                            "[\"Canone\",\"Modulo\",\"Richiesta\",\"Trasporto\",\"Extra Contratto\"]"
+                        ],
+                        "value": "Canone",
+                        "valueField": "descrizione"
+                    },
+                    "name": "MyComboBox4",
+                    "configAlternates": {
+                        "store": "array",
+                        "value": "string"
+                    },
+                    "designerId": "5dd00ec1-5c72-46c2-87a0-57b0e07da93b",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onServizioCombo1Select",
+                                "implHandler": [
+                                    "var store = Ext.StoreManager.lookup('storeServizi');",
+                                    "store.clearFilter();",
+                                    "var tipologia = Ext.getCmp('comboTipologia1').getValue();",
+                                    "store.filter({",
+                                    "    property: \"tipologia\",",
+                                    "    value: tipologia ,",
+                                    "    operator: \"streq\"",
+                                    "});",
+                                    "",
+                                    "",
+                                    "Ext.getCmp('oreRichiesta').enable();",
+                                    "",
+                                    "// Disabilitare numero ore per servizi canone e modulo",
+                                    "if (tipologia == 'Canone' || tipologia == \"Modulo\"){",
+                                    "    Ext.getCmp('oreRichiesta').disable();",
+                                    "}",
+                                    ""
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onServizioCombo1Select",
+                            "designerId": "6dff8295-6fdd-409b-931c-af09bb6447b0"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": null,
+                        "fieldLabel": "Lotto",
+                        "forceSelection": true,
+                        "id": "lotto1",
+                        "store": null,
+                        "valueField": null
+                    },
+                    "name": "MyComboBox14",
+                    "designerId": "c69b114d-e86b-4abb-9e3f-b09e25a53d3c"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "matricola",
+                        "fieldLabel": "Produzione",
+                        "forceSelection": true,
+                        "id": "produzione1",
+                        "store": "storeProduzioni",
+                        "valueField": "matricola"
+                    },
+                    "name": "MyComboBox10",
+                    "designerId": "dc1b98e5-9794-4243-b10e-77139a60f24b"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": null,
+                        "fieldLabel": "Matricola",
+                        "forceSelection": true,
+                        "id": "matricola1",
+                        "store": null,
+                        "valueField": null
+                    },
+                    "name": "MyComboBox8",
+                    "designerId": "ca85f1ae-faed-43da-862a-84554beb2b4a"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "UORG",
+                        "id": "matricola2"
+                    },
+                    "name": "MyTextField",
+                    "designerId": "1a27c928-8a1b-46e6-aba1-73b971fe9bcc"
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "descrizione",
+                        "fieldLabel": "Servizio",
+                        "forceSelection": true,
+                        "id": "servizioCombo1",
+                        "store": "storeServizi",
+                        "valueField": "descrizione"
+                    },
+                    "name": "MyComboBox",
+                    "designerId": "38c0f6c6-b2dd-442b-acd9-4d21ba2375dd",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onServizioComboSelect",
+                                "implHandler": [
+                                    "    Ext.getCmp('codiciCombo1').setValue(record);"
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onServizioComboSelect",
+                            "designerId": "f8efb7aa-80ee-4141-b435-2197d5c2c9b1"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "codice",
+                        "fieldLabel": "Voce",
+                        "forceSelection": true,
+                        "id": "codiciCombo1",
+                        "store": "storeServizi",
+                        "valueField": "descrizione"
+                    },
+                    "name": "MyComboBox9",
+                    "designerId": "0b57631a-116c-4927-9179-b395baf23c3b",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onCodiciComboSelect",
+                                "implHandler": [
+                                    "Ext.getCmp('servizioCombo1').setValue(record);"
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onCodiciComboSelect",
+                            "designerId": "3bc6cc07-ec26-46a8-a11f-5a97495e818b"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "descrizione",
+                        "fieldLabel": "Luogo",
+                        "forceSelection": true,
+                        "id": "luogo1",
+                        "store": "storeLuoghi",
+                        "valueField": "descrizione"
+                    },
+                    "name": "MyComboBox11",
+                    "designerId": "87f7e6a3-566f-4077-9369-34a2686d0a81"
+                },
+                {
+                    "type": "Ext.form.field.Date",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Data",
+                        "format": "d/m/Y",
+                        "id": "dataRichiesta1"
+                    },
+                    "name": "MyDateField",
+                    "designerId": "0c995fa7-d701-4491-a7fd-4bcd265bbafa"
+                },
+                {
+                    "type": "Ext.form.field.Time",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Ora",
+                        "format": "H:i",
+                        "id": "oraRichiesta1"
+                    },
+                    "name": "MyTimeField",
+                    "designerId": "5467ffcf-5b8b-4cd3-85c3-930981ee0475"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "disabled": true,
+                        "fieldLabel": "Ore",
+                        "id": "oreRichiesta1"
+                    },
+                    "name": "MyTextField1",
+                    "designerId": "4f43e4b8-d7a7-496c-aa56-0979f49190e3"
+                },
+                {
+                    "type": "Ext.form.field.Date",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Data fine",
+                        "format": "d/m/Y",
+                        "id": "dataFine1"
+                    },
+                    "name": "MyDateField2",
+                    "designerId": "ab9fe08a-2c81-4cdf-ae6f-9815443a7dda"
+                },
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Note",
+                        "id": "noteRichiesta1"
+                    },
+                    "name": "MyTextArea1",
+                    "designerId": "ce225b9f-ae28-4b22-a8c9-1c7c03a2a354"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Richiedi Servizio",
+                        "width": 279
+                    },
+                    "name": "MyButton3",
+                    "designerId": "244db7fc-8a3a-4069-9e55-85d95cd14003",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onRichiediServizio",
+                                "implHandler": [
+                                    "Ext.Msg.show({",
+                                    "    title:'Richiesta servizio',",
+                                    "    msg: 'Stai per richiedere un servizio, vuoi continuae?',",
+                                    "    buttons: Ext.Msg.YESNO,",
+                                    "    buttonText: {",
+                                    "        no:'No',",
+                                    "        yes:'Si'",
+                                    "    },",
+                                    "    fn: function(btn){",
+                                    "        if (btn=='yes'){",
+                                    "",
+                                    "            var servizio = Ext.getCmp('servizioCombo1').getValue(),",
+                                    "                programmazione = Ext.getCmp('programmazioneCombo1').getValue(),",
+                                    "                data = Ext.getCmp('dataRichiesta1').getValue(),",
+                                    "                ora = Ext.getCmp('oraRichiesta1').getRawValue(),",
+                                    "                ore = Ext.getCmp('oreRichiesta1').getValue(),",
+                                    "                dataFine = Ext.getCmp('dataFine1').getValue(),",
+                                    "                note = Ext.getCmp('noteRichiesta1').getValue(),",
+                                    "                filiale = USER.divisione,",
+                                    "                stato = \"Nessuno\",",
+                                    "                tipologia = Ext.getCmp('comboTipologia1').getValue(),",
+                                    "                lotto = Ext.getCmp('lotto1').getValue(),",
+                                    "                dataFine = Ext.getCmp('dataFine1').getValue(),",
+                                    "                matricola = Ext.getCmp('matricola1').getValue(),",
+                                    "                produzione = Ext.getCmp('produzione1').getValue(),",
+                                    "                luogo = Ext.getCmp('luogo1').getValue(),",
+                                    "                divisione = Ext.getCmp('filiale').getValue();",
+                                    "",
+                                    "            if (servizio === undefined || servizio === \"\")",
+                                    "            {    Ext.Msg.show({",
+                                    "                title:'Errore',",
+                                    "                msg: \"Non hai selezionato il servizio\",",
+                                    "                buttons: Ext.Msg.Ok,",
+                                    "            });",
+                                    "             return;",
+                                    "            }",
+                                    "",
+                                    "            if (programmazione === undefined || programmazione === \"\")",
+                                    "            {    Ext.Msg.show({",
+                                    "                title:'Errore',",
+                                    "                msg: \"Non hai selezionato la programmazione!\",",
+                                    "                buttons: Ext.Msg.Ok,",
+                                    "            });",
+                                    "             return;",
+                                    "            }",
+                                    "",
+                                    "            if ((data === undefined || data === null))",
+                                    "            {    Ext.Msg.show({",
+                                    "                title:'Errore',",
+                                    "                msg: \"Non hai selezionato una data!\",",
+                                    "                buttons: Ext.Msg.Ok,",
+                                    "            });",
+                                    "             return;",
+                                    "            }",
+                                    "",
+                                    "            var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                                    "            var emptyApp = new Rai.model.richiestaServizio();",
+                                    "            emptyApp.set('nome',servizio);",
+                                    "            emptyApp.set('divisione',filiale);",
+                                    "            emptyApp.set('ora',ora);",
+                                    "            emptyApp.set('data',data);",
+                                    "            emptyApp.set('programmazione',programmazione);",
+                                    "            emptyApp.set('ore',ore);",
+                                    "            emptyApp.set('note',note);",
+                                    "            emptyApp.set('stato',stato);",
+                                    "            emptyApp.set('dataFine',dataFine);",
+                                    "            emptyApp.set('tipologia',tipologia);",
+                                    "            emptyApp.set('lotto',lotto);",
+                                    "            emptyApp.set('matricola',matricola);",
+                                    "            emptyApp.set('produzione',produzione);",
+                                    "            emptyApp.set('luogo',luogo);",
+                                    "            emptyApp.set('divisione',divisione);",
+                                    "            emptyApp.set('operatore','admin');",
+                                    "            store.add(emptyApp);",
+                                    "            var self = this;",
+                                    "            store.on('write', function() {",
+                                    "                store.load();",
+                                    "            });",
+                                    "",
+                                    "",
+                                    "            Ext.getCmp('comboTipologia1').setValue('Canone');",
+                                    "            var store = Ext.StoreManager.lookup('storeServizi');",
+                                    "            store.clearFilter();",
+                                    "            store.filter({",
+                                    "                property: \"tipologia\",",
+                                    "                value: 'Canone' ,",
+                                    "                operator: \"streq\"",
+                                    "            });",
+                                    "",
+                                    "",
+                                    "            Ext.getCmp('oreRichiesta1').disable();",
+                                    "            Ext.getCmp('servizioCombo1').setValue(null);",
+                                    "            Ext.getCmp('programmazioneCombo1').setValue(null);",
+                                    "            Ext.getCmp('dataRichiesta1').setValue(null);",
+                                    "            Ext.getCmp('oraRichiesta1').setValue(null);",
+                                    "            Ext.getCmp('oreRichiesta1').setValue(null);",
+                                    "            Ext.getCmp('dataFine1').setValue(null);",
+                                    "            Ext.getCmp('noteRichiesta1').setValue(null);",
+                                    "            Ext.getCmp('comboTipologia1').setValue(null);",
+                                    "            Ext.getCmp('lotto1').setValue(null);",
+                                    "            Ext.getCmp('dataFine1').setValue(null);",
+                                    "            Ext.getCmp('codiciCombo1').setValue(null);",
+                                    "            Ext.getCmp('matricola1').setValue(null);",
+                                    "            Ext.getCmp('luogo1').setValue(null);",
+                                    "            Ext.getCmp('produzione1').setValue(null);",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "        }",
+                                    "    },",
+                                    "    animEl: 'elId'",
+                                    "});",
+                                    "",
+                                    "",
+                                    ""
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onRichiediServizio",
+                            "designerId": "adc59639-872c-483f-8fdb-2b1c715204f1"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 23,
+                        "padding": "",
+                        "text": "Annulla",
+                        "width": 279
+                    },
+                    "name": "MyButton17",
+                    "designerId": "155532db-4be4-4c2e-89d4-7573bbd2a9ec",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onClear",
+                                "implHandler": [
+                                    "Ext.getCmp('oreRichiesta1').disable();",
+                                    "Ext.getCmp('servizioCombo1').setValue(null);",
+                                    "Ext.getCmp('programmazioneCombo1').setValue(null);",
+                                    "Ext.getCmp('dataRichiesta1').setValue(null);",
+                                    "Ext.getCmp('oraRichiesta1').setValue(null);",
+                                    "Ext.getCmp('oreRichiesta1').setValue(null);",
+                                    "Ext.getCmp('dataFine1').setValue(null);",
+                                    "Ext.getCmp('noteRichiesta1').setValue(null);",
+                                    "Ext.getCmp('comboTipologia1').setValue(null);",
+                                    "Ext.getCmp('lotto1').setValue(null);",
+                                    "Ext.getCmp('dataFine1').setValue(null);",
+                                    "Ext.getCmp('codiciCombo1').setValue(null);",
+                                    "Ext.getCmp('matricola1').setValue(null);",
+                                    "Ext.getCmp('luogo1').setValue(null);",
+                                    "Ext.getCmp('produzione1').setValue(null);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onClear",
+                            "designerId": "825017ec-175a-4fa4-b151-3d8ad3d67a95"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmrichiestanuovoservizioAfterRender",
+                "implHandler": [
+                    "/*",
+                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                    "store.filter(",
+                    "    {",
+                    "        property: \"stato\",",
+                    "        value: \"Approvato\",",
+                    "        operator: \"streq\"",
+                    "    });",
+                    "store.load();",
+                    "*/"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmrichiestanuovoservizioAfterRender",
+            "designerId": "ae08a201-3a51-4cd7-ae82-4292be462f8d"
+        }
+    ]
+}

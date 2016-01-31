@@ -1,0 +1,13 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "uploadwin",
+        "designer|userClassName": "uploadWinViewController"
+    },
+    "designerId": "cc1e728e-623f-4a8f-9a39-fdf29c59bd81"
+}

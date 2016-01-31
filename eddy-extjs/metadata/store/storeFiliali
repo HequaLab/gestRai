@@ -1,0 +1,62 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "storeFiliali",
+        "model": "filiali",
+        "pageSize": 100,
+        "remoteFilter": true,
+        "storeId": "storeFiliali"
+    },
+    "name": "storeFornitori2",
+    "designerId": "4654298c-b9f0-4b55-96f1-afaafab3087d",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "idParam": "filialiId",
+                "url": "/filiali"
+            },
+            "name": "MyRestProxy",
+            "designerId": "f5ef47cf-9a3b-42dc-81eb-6f7065c89097",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "items"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "057da882-5265-4567-a868-5aeb793f3879"
+                },
+                {
+                    "type": "Ext.data.writer.Json",
+                    "reference": {
+                        "name": "writer",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "writeRecordId": false
+                    },
+                    "name": "MyJsonWriter",
+                    "designerId": "047608e9-0706-4f90-9262-1f510937a4c4"
+                }
+            ]
+        }
+    ]
+}

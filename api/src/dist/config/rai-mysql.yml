@@ -1,0 +1,43 @@
+logging:
+  level: INFO
+  loggers:
+    "org.hibernate.SQL": DEBUG
+    "org.hibernate.type": DEBUG
+
+assets:
+  overrides:
+    /files: static_assets/files
+
+server:
+  applicationConnectors:
+  - type: http
+    port: 9300
+  adminConnectors:
+  - type: http
+    port: 9301
+
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password: jerry93will
+  url: jdbc:mysql://localhost:3306/rai?createDatabaseIfNotExist=true&autoReconnect=true
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    hibernate.hbm2ddl.auto: update
+    hibernate.show_sql: false
+    hibernate.format_sql: false
+    hibernate.search.default.directory_provider: filesystem
+    hibernate.search.default.indexBase: indexes
+    hibernate.search.lucene_version: LUCENE_CURRENT
+  maxWaitForConnection: 1s
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+  minSize: 8
+  maxSize: 32
+  checkConnectionWhileIdle: false
+
+# CREATE DATABASE  IF NOT EXISTS eddy;
+# GRANT ALL ON eddy.* TO 'eddy'@'localhost.localdomain' IDENTIFIED BY 'eddy' WITH GRANT OPTION;
+# GRANT ALL ON eddy.* TO 'eddy'@'localhost' IDENTIFIED BY 'eddy' WITH GRANT OPTION;
+# FLUSH PRIVILEGES;
+

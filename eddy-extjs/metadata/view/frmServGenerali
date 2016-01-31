@@ -1,0 +1,1118 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmServGenerali",
+        "designer|userClassName": "frmServGenerali",
+        "height": 669,
+        "id": "frmServGenerali",
+        "layout": "border",
+        "padding": 0,
+        "title": "",
+        "width": 1138
+    },
+    "name": "MyPanel7",
+    "designerId": "b1a1fe7a-6337-4839-b087-574bebf1830a",
+    "viewControllerInstanceId": "47195d2e-c2b8-48c4-bb71-44b56db40181",
+    "viewModelInstanceId": "9ad476c4-ab98-49c6-b86e-619b6c4f5036",
+    "cn": [
+        {
+            "type": "Ext.grid.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dock": null,
+                "id": "elencoGrid",
+                "layout|region": "center",
+                "store": "storeRichiesteServizi",
+                "title": "Elenco richieste servizi"
+            },
+            "name": "MyGridPanel",
+            "configAlternates": {
+                "viewConfig": "object"
+            },
+            "designerId": "5a6b23ed-3884-40b1-bc65-97b69d03cb5e",
+            "cn": [
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "nome",
+                        "flex": 1,
+                        "text": "Servizio"
+                    },
+                    "name": "MyColumn2",
+                    "designerId": "42e03c03-dfed-4079-8639-1e958b8bf1d0",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "value",
+                                    "metaData",
+                                    "record",
+                                    "rowIndex",
+                                    "colIndex",
+                                    "store",
+                                    "view"
+                                ],
+                                "fn": "renderer",
+                                "implHandler": [
+                                    "/*",
+                                    "if (record.get('operatore') === 'admin') {",
+                                    "    // metaData.css = 'toolbarFilter';",
+                                    "}",
+                                    "*/",
+                                    "",
+                                    "return value;"
+                                ]
+                            },
+                            "name": "renderer",
+                            "designerId": "d7ff23f8-970d-41ef-8154-e15e29eef652"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter15",
+                            "designerId": "e603e52b-94cb-4a28-8741-a86142df6109"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "tipologia",
+                        "flex": 1,
+                        "text": "Tipologia"
+                    },
+                    "name": "MyColumn16",
+                    "designerId": "c6a0f428-ce7a-4bb8-b5d8-0fc4ce1c212e",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter16",
+                            "designerId": "3bd714cc-6eea-4815-9f4e-10b71a5db2e0"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "lotto",
+                        "flex": 1,
+                        "text": "Lotto"
+                    },
+                    "name": "MyColumn17",
+                    "designerId": "62bd62ac-75a8-4177-9fd9-798e5e4a2ab2",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter17",
+                            "designerId": "b8c4eecf-ec9d-46b6-8d7c-59b2e20d7122"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "produzione",
+                        "flex": 1,
+                        "text": "Produzione"
+                    },
+                    "name": "MyColumn27",
+                    "designerId": "6e6f01ff-293e-4776-a77c-afb7b0d9b90a",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter18",
+                            "designerId": "89d6ade6-e50f-41e3-91b5-41702e3f70c6"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "matricola",
+                        "flex": 1,
+                        "text": "Matricola"
+                    },
+                    "name": "MyColumn28",
+                    "designerId": "30b62f06-aa59-4bfc-bf1a-8885c0513855",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter19",
+                            "designerId": "f025845d-8359-40ff-b3d9-50ee91e088d9"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "luogo",
+                        "flex": 1,
+                        "text": "Luogo"
+                    },
+                    "name": "MyColumn29",
+                    "designerId": "cf8659d2-5c6d-45ca-9ba8-a98dcf03baba",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter20",
+                            "designerId": "918fab83-6ef0-4b16-bfbb-f6a26760df2a"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Date",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "data",
+                        "flex": 0.8,
+                        "text": "Data inizio"
+                    },
+                    "name": "MyDateColumn2",
+                    "designerId": "74a28208-c421-416e-a36d-aa8faeb17aed",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Date",
+                            "reference": {
+                                "name": "editor",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "name": "Data"
+                            },
+                            "name": "MyDateField3",
+                            "designerId": "8a49cf4d-c1d7-4575-9bc8-df7c85770f51"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.Date",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyDateFilter2",
+                            "designerId": "4318a414-d3bc-4518-a981-d4fd79c61a70"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Number",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "ore",
+                        "flex": 0.8,
+                        "text": "Ore/Q.ta"
+                    },
+                    "name": "MyNumberColumn",
+                    "designerId": "5ec91b1b-27c4-4bc6-9913-660833b81b47",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Number",
+                            "reference": {
+                                "name": "editor",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "name": "Ore"
+                            },
+                            "name": "MyNumberField",
+                            "designerId": "5dac7626-76bf-475c-8fb8-fb3ca492cf00"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.Number",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyNumberFilter2",
+                            "designerId": "4f1358fc-9c42-4884-8793-551b6fcec052"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "ora",
+                        "flex": 0.5,
+                        "text": "Ora"
+                    },
+                    "name": "MyColumn12",
+                    "designerId": "5f65c195-56ed-490f-afc6-5e1a15cb4ebf",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Time",
+                            "reference": {
+                                "name": "editor",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "name": "Ora"
+                            },
+                            "name": "MyTimeField1",
+                            "designerId": "75c185b7-2e72-475f-abb5-fe4935ec75b7"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter21",
+                            "designerId": "e7b469e5-e2e6-4fef-825d-01d3b7bb4701"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Date",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "dataFine",
+                        "flex": 0.8,
+                        "text": "Data fine"
+                    },
+                    "name": "MyDateColumn",
+                    "designerId": "a8855363-364e-48af-928e-2a395ca8ef10",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Date",
+                            "reference": {
+                                "name": "editor",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "name": "Data"
+                            },
+                            "name": "MyDateField3",
+                            "designerId": "bdf04064-5b0d-4404-8418-056ffbeb2427"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.Date",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyDateFilter3",
+                            "designerId": "164e9e53-e374-4b0d-892e-4b08dc920267"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "stato",
+                        "flex": 1,
+                        "text": "Stato"
+                    },
+                    "name": "MyColumn1",
+                    "designerId": "1677bf78-d823-4a14-9065-d370105c7471",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "value",
+                                    "metaData",
+                                    "record",
+                                    "rowIndex",
+                                    "colIndex",
+                                    "store",
+                                    "view"
+                                ],
+                                "fn": "renderer",
+                                "implHandler": [
+                                    "",
+                                    "",
+                                    "if (value === \"Approvato\"){",
+                                    "    return '<span style=\"color:' + \"#73b51e\" + ';\">' + \"<b>\"  + value + \"</b>\"+ '</span>';",
+                                    "}",
+                                    "else if ( value === \"Non approvato\"){",
+                                    "    return '<span style=\"color:' + \"#cf4c35\" + ';\">' + value + '</span>';",
+                                    "}",
+                                    "else if ( value === \"Erogato\"){",
+                                    "    return '<span style=\"color:' + \"#0277BD\" + ';\"><b>' + value + '</b></span>';",
+                                    "}",
+                                    "else if ( value === \"In lavorazione\"){",
+                                    "    return '<span style=\"color:' + \"#AFB42B\" + ';\"><b>' + value + '</b></span>';",
+                                    "}",
+                                    "else if ( value === \"Nessuno\"){",
+                                    "    return '<span style=\"color:' + \"#795548\" + ';\"><b>' + value + '</b></span>';",
+                                    "}",
+                                    "",
+                                    "",
+                                    "else return value;"
+                                ]
+                            },
+                            "name": "renderer",
+                            "designerId": "d47882d4-b8f8-47ad-a348-ff927d642470"
+                        },
+                        {
+                            "type": "Ext.grid.filters.filter.String",
+                            "reference": {
+                                "name": "filter",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyStringFilter22",
+                            "designerId": "67fe5e0f-7bd4-43d2-98cd-3553e9ef092d"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.view.Table",
+                    "reference": {
+                        "name": "viewConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyTable",
+                    "designerId": "e626d11e-a366-4186-a69c-b4c6a237bdca"
+                },
+                {
+                    "type": "Ext.toolbar.Paging",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayInfo": true,
+                        "dock": "bottom",
+                        "store": "storeRichiesteServizi",
+                        "width": 360
+                    },
+                    "name": "MyPagingToolbar",
+                    "designerId": "b517a484-4c8d-4293-b754-0fd770941c35"
+                },
+                {
+                    "type": "Ext.grid.plugin.CellEditing",
+                    "reference": {
+                        "name": "plugins",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MyCellEditingPlugin",
+                    "designerId": "a055eede-9553-4e48-913e-1fc0bdb59619"
+                },
+                {
+                    "type": "Ext.grid.column.Action",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "align": "center",
+                        "flex": 1,
+                        "text": "Azioni"
+                    },
+                    "name": "MyActionColumn5",
+                    "designerId": "fe069a8f-6c70-435f-a716-eb4e65b09223",
+                    "cn": [
+                        {
+                            "type": "actioncolumnitem",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAGP0lEQVR4Xu1bS3biVhC9JeOkPYozSBpGoTcQoxUEr8B4BW2voDvDNM4JfQLJ0HgFISsIXkG7VyA5G2h7BCcZND3COXwqp54+fgiBHiBA+DRD+0l67+pW1a2PCAa/bxpOKQf6A0DJYPlaljDQ6lZL52nfnExuWKi7H0E4NFm7zjUMftut2rU0n5EIQP5Xp0wWvZOHMvOfINyluYHEezHOiOi7YB2Dz7tVu5V4neGCxQAY83H3Z/vG8N6pLMs3nBsC/aDfjFPcx04CAEZvSHz8b9V2V0V5NwFQ9ohef8gvejW7twoIuwuAd2q3P+DjVUDYdQDAjJvuRel4WRasBYDDmnP4LGedwKK77pvv3y+7ObkuzglG77eKRkgdACWamN5puqHdqZZOlwXBBADPJSynEVIHIN9wPxBQFM1AohyJjlaJ3aYA+CAsrBFSB6DQcBnMt50Lu/Ttb05lj+kvAaN7YZ8tw4JFAFAgLKgRUgcgX3fuRLmxxS8e/kPvYJ8+Mvh9t2qXNwHAohohfQAaTo1AvwTeWRixUQAW1AipAyAR4CCHG8/20SLgbOMA+BqhUy3ZSaxLHQAVun53ihjDJdBXvnNa3gTqTouIXiYdJO7/Jv5gLQDIZiQc7gGSyAgIrsnbiDuE0hT7eG0MAKMYALZVAHwRo/yBx4L1FDSiwEyk7wYRYW0MkI0V6k4bRCcM/uQzod0f8Pkq2j2JCZkCIBBF/QF/HTjGNBKYeSBkBgBxhDSmD4Eo0qODgMAWn3Z/slOvLmUHgIZzRqqQyledqq2cmJckoamcVIpFDZ0R2QHAD18j4tN/3tjtiU1qoW2VPCHOFLIDgJ8Uif3HOb18yBCJEFTrVo/eJjk4k/9nAoCo/c/auCRLFotaVFohlQiRDQBi7H8WCF79AC1fOt+NwKerFDuzAcAc+5+l9g5yCoQTcY5johoRTVd8aXSfFDmyAcAc+1eR4Iu9I2YuWYwig1W7jQiLpsttHvNVtE+xdQDi7P95/e8TC1wGsRxyZn9RFKNoBFkTJlLM99FulN4oiZbCtg+Ab/9SD5CNE6Oi9xWVLGbcMMEdE1xrhF70LfqiyTMJlUdMRwndgUrxJTCN7QMQl74yXzOhPQLcRRxcoe68ZoIkVCqjHILP9esLDacJ0Cs969saAD71LwFU1Ftjvieg2R+itUry46fVzYD2woaHwfhKnvFsnxxVgN02A5SoYboMqe4XRU2Ei+maCBseL2O+7lzYCnSVguvd7E2kw88bt68scFM9nflW4rmu/00PaLJOVZpGqIFQJMahmNXDAE2dYRsFILRB8d5jVMgiMYHSEGwvYusmhzddszEAgnAnXn0ElIlQVD2AFUrgpofMRD3gEWm+GgKtoB1mUodL46Cz7rE5BgTOhtF7jPOPuf86D5kJBsgmQh/gh7zOhe05wy3+NsaALZ5x7qM/A7BpHZA1JqyXAUALoNQruemCyEXpRypdlrYSTHej67/bZwDWxQBRe/77i06NluE1J8PR1uA9B9eQNEWAx9k+RlFp+8g0qM4PrVAylzbLTJQu1BsMnt6pluZeJ9khAElhVXtcfknX+F3gChhSD5wA0FReq/Ec7bc2E0g6jOwh0h5PBCDY90T3yP9jpgEQNcgsKTAwtvhK7wIFSjHKAMUQ9oYeCOQyj6+jZbFC3XG91FqNwE0MWHgMs6bMjMATo/QbYUB0iktPhfWYrLMm788RRex84luAiXg+DcDUBHmcc9gKAGD+McgJFgEgLm6HE2e7BIBenwvmBGNMIJwcmWBBZJ4w7xdYY0wgOwxQPkDq+IweM5q6LQcHMAZg+k17I3cGRRadbWHoXZcOMI0COZATFwbjfMAMZ7d7AEgY+3LfemkxS/Ey/NAqyQkqoCIVXm3GaCIKqBBLe6HG8C7lUlicDcLnJhgwEZKYy96A9PQXZiYARIclwsHrXXKCs7RqIgDMt/0hykGJ2/9WUZlQpp2g6TT3PADkgA8DVCbq+3X3XdAxfnoASINjiKJiSw530Z6/dIFAqsfguYanZgKzzMRLiOgyKGg8KQBmdYuUR2frSGYHogfPLACz3mDW/p5KLiCHyjecnp7bZ+2gsYkQ+FO3aid+8J1YEJGb65Ncu3B46VIPCWcmDdr/AVTvipsjYS5YAAAAAElFTkSuQmCC",
+                                "tooltip": "Visualizza report PDF"
+                            },
+                            "name": "MyActionColumnItem1",
+                            "designerId": "8130c167-5f38-4a2a-9bda-5cc53d08e3ce",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "view",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "item",
+                                            "e",
+                                            "record",
+                                            "row"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "var s = record.get('stato');",
+                                            "if ( s === 'Nessuno' || s === 'Non approvato'){",
+                                            "    Ext.Msg.show({",
+                                            "        title:'Operazione non permessa',",
+                                            "        msg: \"La richiesta non è stata approvata, non è presente nessuno report\",",
+                                            "        buttons: Ext.Msg.Ok,",
+                                            "    });",
+                                            "    return;",
+                                            "}",
+                                            "",
+                                            "",
+                                            "var stato = 'approvato';",
+                                            "if (record.get('stato') == 'Erogato')stato = 'erogato';",
+                                            "var nomeReport = 'report_' + record.get('richiestaNuovoServizioId') + \"_\" + stato + '.pdf';",
+                                            "",
+                                            "",
+                                            "var win = Ext.create('Ext.window.Window', {",
+                                            "    height: 634,",
+                                            "    width: 780,",
+                                            "    layout: 'border',",
+                                            "    title: 'Report servizio',",
+                                            "    titleAlign: 'center',",
+                                            "    maximizable: true,",
+                                            "    closeAction: 'hide',",
+                                            "    items: [{",
+                                            "        xtype: 'component',",
+                                            "        html : '<iframe src=\"../files/'+ nomeReport + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                                            "    }]",
+                                            "});",
+                                            "win.show();"
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "d281ad01-4865-486c-96b4-fba70b55dae6"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "actioncolumnitem",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "https://cdn2.iconfinder.com/data/icons/free-funktional-icons/48/15_Tick_48x48.png",
+                                "tooltip": "Approva la richiesta"
+                            },
+                            "name": "MyActionColumnItem1",
+                            "designerId": "13df4cd0-8c92-49cc-a541-3c30c7d24c70",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "view",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "item",
+                                            "e",
+                                            "record",
+                                            "row"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "Ext.Msg.show({",
+                                            "    title:'Richiesta conferma',",
+                                            "    msg: 'Stai per approvare la richiesta, vuoi continuare??',",
+                                            "    buttons: Ext.Msg.YESNO,",
+                                            "    buttonText: {",
+                                            "        no:'No',",
+                                            "        yes:'Si'",
+                                            "    },",
+                                            "    fn: function(btn){",
+                                            "        if (btn=='yes'){",
+                                            "",
+                                            "            if (record.get('stato') === \"Approvato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è stata approvata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }else if (record.get('stato') === \"Non approvato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta non è stata approvata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"Cancellato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è stata cancellata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"In lavorazione\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è in lavorazione, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"Erogato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"Il servizio è stato erogato, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "",
+                                            "            record.set('stato',\"Approvato\");",
+                                            "",
+                                            "        }",
+                                            "    },",
+                                            "    animEl: 'elId'",
+                                            "});",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            ""
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "cd678a08-a654-432c-812a-dcd77067e51f"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "actioncolumnitem",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "http://findicons.com/files/icons/99/office/128/delete.png",
+                                "tooltip": "Non approvare la richiesta"
+                            },
+                            "name": "MyActionColumnItem2",
+                            "designerId": "747980b9-e357-476b-b60a-878662aaf767",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "view",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "item",
+                                            "e",
+                                            "record",
+                                            "row"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "",
+                                            "Ext.Msg.show({",
+                                            "    title:'Richiesta conferma',",
+                                            "    msg: 'Stai per rifiutare la richiesta, vuoi continuare??',",
+                                            "    buttons: Ext.Msg.YESNO,",
+                                            "    buttonText: {",
+                                            "        no:'No',",
+                                            "        yes:'Si'",
+                                            "    },",
+                                            "    fn: function(btn){",
+                                            "        if (btn=='yes'){",
+                                            "",
+                                            "            if (record.get('stato') === \"Approvato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è stata approvata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }else if (record.get('stato') === \"Non approvato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta non è stata approvata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"Cancellato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è stata cancellata, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"In lavorazione\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"La richiesta è in lavorazione, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "            else if (record.get('stato') === \"Erogato\"){",
+                                            "                Ext.Msg.show({",
+                                            "                    title:'Operazione non permessa',",
+                                            "                    msg: \"Il servizio è stato erogato, non sono permesse modifiche\",",
+                                            "                    buttons: Ext.Msg.Ok,",
+                                            "                });",
+                                            "                return;",
+                                            "            }",
+                                            "",
+                                            "            record.set('stato',\"Non approvato\");",
+                                            "        }",
+                                            "    },",
+                                            "    animEl: 'elId'",
+                                            "});",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            ""
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "ae5c701c-183b-42ae-a480-e4cd110a7578"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.feature.Grouping",
+                    "reference": {
+                        "name": "features",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "showSummaryRow": true
+                    },
+                    "name": "MyGroupingFeature",
+                    "designerId": "de82ee42-f889-4f69-a2b9-98d48384d72d",
+                    "cn": [
+                        {
+                            "type": "Ext.XTemplate",
+                            "reference": {
+                                "name": "groupHeaderTpl",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": "groupHeaderTpl",
+                                "implHandler": [
+                                    "",
+                                    "",
+                                    "<tpl if=\"name=='Erogato'\" ><span style=\"color:#0277BD;\"><b>Ci sono {rows.length} richieste erogate</b></span></tpl>   ",
+                                    "<tpl if=\"name=='Nessuno'\" ><span style=\"color:#795548;\"><b>Ci sono {rows.length} richieste in attesa di approvazione</b></span></tpl>",
+                                    "<tpl if=\"name=='Non approvato'\" ><span style=\"color:#cf4c35;\"><b>Ci sono {rows.length} richieste non approvate</b></span></tpl>",
+                                    "<tpl if=\"name=='Approvato'\" ><span style=\"color:#73b51e;\"><b>Ci sono {rows.length} richieste approvate</b></span></tpl>",
+                                    "<tpl if=\"name=='In lavorazione'\" ><span style=\"color:#AFB42B;\"><b>Ci sono {rows.length} richieste in lavorazione</b></span></tpl>",
+                                    "",
+                                    "",
+                                    ""
+                                ]
+                            },
+                            "name": "groupHeaderTpl",
+                            "designerId": "eae098e5-7537-43c0-94c1-0d1cd178f4aa"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.filters.Filters",
+                    "reference": {
+                        "name": "plugins",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MyGridFiltersPlugin3",
+                    "designerId": "d368b197-b5c3-4f6c-963a-9ac6560a96d5"
+                }
+            ]
+        },
+        {
+            "type": "Ext.grid.Panel",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "collapsed": true,
+                "collapsible": true,
+                "dock": "bottom",
+                "hidden": true,
+                "minHeight": 320,
+                "store": null,
+                "title": "Elenco richieste nuova tipologia di servizio"
+            },
+            "name": "MyGridPanel1",
+            "designerId": "7b470059-6ec4-4fb2-845d-440ae0e22d64",
+            "cn": [
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "nome",
+                        "text": "Nome"
+                    },
+                    "name": "MyColumn2",
+                    "designerId": "0bb7e64f-9371-4757-8393-d1662e32b517"
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "descrizione",
+                        "flex": 1.5,
+                        "text": "Descrizione"
+                    },
+                    "name": "MyColumn6",
+                    "designerId": "a567fff2-3dbf-417b-a31d-ffb23011b20f"
+                },
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "stato",
+                        "text": "Stato"
+                    },
+                    "name": "MyColumn1",
+                    "designerId": "f1060339-c384-49bc-8eb3-9411191e5803"
+                },
+                {
+                    "type": "Ext.view.Table",
+                    "reference": {
+                        "name": "viewConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyTable",
+                    "designerId": "57e090ec-1984-4988-9f3b-be5880f9e24f"
+                },
+                {
+                    "type": "Ext.toolbar.Paging",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayInfo": true,
+                        "dock": "bottom",
+                        "store": null,
+                        "width": 360
+                    },
+                    "name": "MyPagingToolbar",
+                    "designerId": "a376fcb1-d635-4a33-8f44-62ba35884eea"
+                },
+                {
+                    "type": "Ext.grid.plugin.CellEditing",
+                    "reference": {
+                        "name": "plugins",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MyCellEditingPlugin",
+                    "designerId": "d3ee71dc-fd50-4ee1-953f-187c8150fedf"
+                },
+                {
+                    "type": "Ext.grid.column.Action",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "align": "center",
+                        "text": "Approva"
+                    },
+                    "name": "MyActionColumn1",
+                    "designerId": "e93f5a05-7b3b-4aa4-a206-87ec00492f75",
+                    "cn": [
+                        {
+                            "type": "actioncolumnitem",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "https://cdn2.iconfinder.com/data/icons/free-funktional-icons/48/15_Tick_48x48.png"
+                            },
+                            "name": "MyActionColumnItem1",
+                            "designerId": "bea33f0d-9c47-4a61-b425-812712a16c6d",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "view",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "item",
+                                            "e",
+                                            "record",
+                                            "row"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "if (record.get('stato') === 'Nessuno' || record.get('stato') === 'nessuno')record.set('stato',\"Approvato\");"
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "6d4df9ec-830f-40ab-89bc-93ba96e31fc1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.grid.column.Action",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "align": "center",
+                        "icon": "http://files.softicons.com/download/web-icons/web-design-icon-set-by-sem-labs/png/16/sign_deny.png",
+                        "text": "Non approvare"
+                    },
+                    "name": "MyActionColumn2",
+                    "designerId": "4737a208-a9bd-4743-b31b-e37a6a1b54a9",
+                    "cn": [
+                        {
+                            "type": "actioncolumnitem",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "icon": "http://findicons.com/files/icons/99/office/128/delete.png"
+                            },
+                            "name": "MyActionColumnItem2",
+                            "designerId": "d7908fe2-6603-412f-8fae-a728abbbb43c",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "view",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "item",
+                                            "e",
+                                            "record",
+                                            "row"
+                                        ],
+                                        "fn": "handler",
+                                        "implHandler": [
+                                            "if (record.get('stato') === 'Nessuno' || record.get('stato') === 'nessuno')record.set('stato',\"Non Approvato\");"
+                                        ]
+                                    },
+                                    "name": "handler",
+                                    "designerId": "b5b5f154-0b7d-4f97-917d-7391fb6771d5"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmServGeneraliAfterRender",
+                "implHandler": [
+                    "this.interval = setInterval(function() {",
+                    "    var store = Ext.StoreMgr.lookup('storeRichiesteServizi');",
+                    "    store.reload();",
+                    "}, 1000 * 60 * /* minuti */ 5 /* minuti */);",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                    "store.filter({",
+                    "    property: \"divisione\",",
+                    "    value: USER.divisione ,",
+                    "    operator: \"streq\"",
+                    "});",
+                    "store.load();",
+                    "",
+                    "",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmServGeneraliAfterRender",
+            "designerId": "30eb7178-95b1-495b-a49c-3326068456fb"
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmServGeneraliDestroy",
+                "implHandler": [
+                    "clearInterval(this.interval);"
+                ],
+                "name": "destroy",
+                "scope": "me"
+            },
+            "name": "onFrmServGeneraliDestroy",
+            "designerId": "7f7391cd-6a0f-4d74-bc01-a80c40fa67d9"
+        }
+    ]
+}

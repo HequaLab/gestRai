@@ -1,0 +1,143 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "bodyPadding": 10,
+        "designer|userAlias": "winnuovatipologiaservizio",
+        "designer|userClassName": "winNuovaTipologiaServizio",
+        "height": 190,
+        "id": "winnuovatipologiaservizio",
+        "title": "Richiesta nuova tipologia di servizio",
+        "width": 388
+    },
+    "designerId": "05ca14bb-6b7c-430e-bee1-9b8a1cc0f087",
+    "viewControllerInstanceId": "cd182bf1-63fb-4ddf-9f2e-9986f3a53a15",
+    "viewModelInstanceId": "a1c00ff6-892d-4732-9dac-8249a18ba0e0",
+    "cn": [
+        {
+            "type": "Ext.form.field.Text",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Nome",
+                "id": "nomeTipologiaTxt"
+            },
+            "name": "MyTextField",
+            "designerId": "c5d71a69-e1ef-4222-8f17-77638332998d"
+        },
+        {
+            "type": "Ext.form.field.TextArea",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Descrizione ",
+                "id": "descrizioneTipologiaTxt"
+            },
+            "name": "MyTextArea",
+            "designerId": "bd55044b-a1f6-4a0b-bfed-5db47fe0182d"
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "flex": "1",
+                "text": "Richiedi",
+                "width": 360
+            },
+            "name": "MyButton5",
+            "designerId": "bc288384-e6c3-4ac5-bf8b-ff868a31a689",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "flex",
+                    "type": "string"
+                }
+            ],
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onAddRichiesta",
+                        "implHandler": [
+                            "var descrizione = Ext.getCmp('descrizioneTipologiaTxt').getValue(),",
+                            "    nome = Ext.getCmp('nomeTipologiaTxt').getValue(),",
+                            "    stato = \"Non Approvato\";",
+                            "",
+                            "if (nome === undefined || nome === \"\")",
+                            "{    Ext.Msg.show({",
+                            "    title:'Errore',",
+                            "    msg: \"Il nome non puo' essere vuota!\",",
+                            "    buttons: Ext.Msg.Ok,",
+                            "});",
+                            " return;",
+                            "}",
+                            "",
+                            "if (descrizione === undefined || descrizione === \"\")",
+                            "{    Ext.Msg.show({",
+                            "    title:'Errore',",
+                            "    msg: \"La descrizione non puo' essere vuota!\",",
+                            "    buttons: Ext.Msg.Ok,",
+                            "});",
+                            " return;",
+                            "}",
+                            "",
+                            "",
+                            "var store = Ext.StoreManager.lookup('storeRichiesteTipologie');",
+                            "var emptyApp = new Rai.model.richiestaTipologia();",
+                            "emptyApp.set('descrizione',descrizione);",
+                            "emptyApp.set('nome',nome);",
+                            "emptyApp.set('filiale',USER.divisione);",
+                            "emptyApp.set('stato',stato);",
+                            "store.add(emptyApp);",
+                            "var self = this;",
+                            "store.on('write', function() {",
+                            "    Ext.getCmp('winnuovatipologiaservizio').destroy();",
+                            "});"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "name": "onAddRichiesta",
+                    "designerId": "c18dd56a-f4c1-419b-8365-ad20c82e600a"
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWinnuovatipologiaservizioDestroy",
+                "implHandler": [
+                    "Ext.getCmp('popButton').enable();"
+                ],
+                "name": "destroy",
+                "scope": "me"
+            },
+            "name": "onWinnuovatipologiaservizioDestroy",
+            "designerId": "acd65f3e-4d98-44bf-8c7c-87d945559699"
+        }
+    ]
+}

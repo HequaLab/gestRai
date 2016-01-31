@@ -1,0 +1,10 @@
+*/target/**
+*/.project
+*/.classpath
+*/.settings/**
+.project
+.classpath
+.settings/**
+*.log
+*/nbactions.xml
+*/dependency-reduced-pom.xml

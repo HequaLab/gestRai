@@ -1,0 +1,276 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmMatricole",
+        "designer|userClassName": "frmMatricole",
+        "height": 753,
+        "id": "frmMatricole",
+        "layout": "border",
+        "padding": 0,
+        "title": "Area matricole",
+        "titleAlign": "center",
+        "width": 1099
+    },
+    "name": "frmLotti1",
+    "designerId": "9167f6c3-9cb5-470e-aa84-6093ec0f09a3",
+    "viewControllerInstanceId": "f7345c6d-7a0a-4e98-b653-bf91fb071195",
+    "viewModelInstanceId": "cb77b6d4-2cef-4d8a-b5a6-cff5c03f0911",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "ccf489c9-f6a5-4cd8-8772-b3531b75261f",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "matricolaGrid",
+                        "store": null,
+                        "title": "Elenco matricole"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "dae1f7d3-d9d9-496b-8f55-61a42801eb4a",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "descrizione",
+                                "flex": 1,
+                                "text": "Descrizione"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "bdca2474-005c-4173-9f44-66c9cba8001c"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "5f3ebe8e-82d3-41d9-9560-cf1ace89c6e0"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": null,
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "ff9dc440-a92c-43d2-9616-ce6747188a9d"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "bodyPadding": 10,
+                "layout|region": "west",
+                "padding": null,
+                "title": "",
+                "width": 330
+            },
+            "name": "MyPanel5",
+            "designerId": "2bd058a4-01fb-46fa-99c7-57f0dcfcb94e",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Matricola",
+                        "id": "nomeMatricolaTxt"
+                    },
+                    "name": "MyTextField5",
+                    "designerId": "f59e3a14-0c97-4ffa-a069-798be4858ee4"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Salva"
+                    },
+                    "name": "MyButton3",
+                    "designerId": "493ae768-acbd-48e7-9dae-da8d1ead4230",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onSave",
+                                "implHandler": [
+                                    "var nome = Ext.getCmp('nomeMatricolaTxt').getValue();",
+                                    "if (nome === undefined || nome == \"\" ){",
+                                    "    Ext.Msg.show({",
+                                    "        title:'Errore',",
+                                    "        msg: \"Il nome non puo' essere vuoto!\",",
+                                    "        buttons: Ext.Msg.Ok,",
+                                    "    });",
+                                    "    return;",
+                                    "}",
+                                    "",
+                                    "var store = Ext.StoreManager.lookup('storeMatricole');",
+                                    "var emptyApp = new Rai.model.matricole();",
+                                    "emptyApp.set(\"descrizione\",nome);",
+                                    "emptyApp.set(\"divisione\",USER.divisione);",
+                                    "store.add(emptyApp);",
+                                    "store.on('write', function() { store.load();});"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onSave",
+                            "designerId": "50062f2e-0031-4400-8bff-8ee98ca09cdc"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Elimina"
+                    },
+                    "name": "MyButton11",
+                    "designerId": "1e238be1-e043-455b-bb78-06506a0b52d2",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDelete",
+                                "implHandler": [
+                                    "var selection = Ext.getCmp('matricolaGrid').getSelectionModel().getSelection();",
+                                    "var store = Ext.StoreManager.lookup('storeMatricole');",
+                                    "store.remove(selection);"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onDelete",
+                            "designerId": "034edf5b-09b2-4913-b47e-e7bed5aaffcc"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "Annulla"
+                    },
+                    "name": "MyButton12",
+                    "designerId": "eb5b62cb-dfc1-4aa8-b14a-ab7f3025535e",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonOnClear",
+                                "implHandler": [
+                                    "Ext.getCmp('nomeFilialeTxt').setValue('');"
+                                ],
+                                "name": "onClear",
+                                "scope": "me"
+                            },
+                            "name": "onButtonOnClear",
+                            "designerId": "ea81a975-42cf-40df-886d-5fd99995c342"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmMatricoleAfterRender",
+                "implHandler": [
+                    "",
+                    "var store = Ext.StoreManager.lookup('storeMatricole');",
+                    "store.filter({",
+                    "    property: \"divisione\",",
+                    "    value: USER.divisione ,",
+                    "    operator: \"streq\"",
+                    "});",
+                    "store.load();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmMatricoleAfterRender",
+            "designerId": "b02afafd-02e1-4cd3-9499-5beccc32c3fc"
+        }
+    ]
+}

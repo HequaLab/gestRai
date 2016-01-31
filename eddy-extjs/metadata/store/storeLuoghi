@@ -1,0 +1,61 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": false,
+        "designer|userClassName": "storeLuoghi",
+        "model": "luoghi",
+        "remoteFilter": true,
+        "storeId": "storeLuoghi"
+    },
+    "name": "storeMatricole1",
+    "designerId": "617cdfed-3085-43c6-a46b-49af63251cf3",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Rest",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "idParam": "luoghiId",
+                "url": "/luoghi"
+            },
+            "name": "MyRestProxy",
+            "designerId": "483b753b-61c6-4b57-ae5b-55f31f1ae387",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "items"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "f39a14d5-88e8-4c9d-b819-ddb9b4f71133"
+                },
+                {
+                    "type": "Ext.data.writer.Json",
+                    "reference": {
+                        "name": "writer",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "writeRecordId": false
+                    },
+                    "name": "MyJsonWriter",
+                    "designerId": "5e5c1101-b5e4-44c0-a29d-80bd202bf172"
+                }
+            ]
+        }
+    ]
+}

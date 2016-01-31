@@ -1,0 +1,68 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "luoghi",
+        "idProperty": "luoghiId"
+    },
+    "name": "matricole1",
+    "designerId": "98ebedda-031c-42bd-a8b4-2735713cdf35",
+    "cn": [
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "luoghiId"
+            },
+            "name": "MyField",
+            "designerId": "5c74c290-d36c-4006-a29d-94b7866813ac"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "descrizione"
+            },
+            "name": "MyField2",
+            "designerId": "67cc1493-ab99-46b9-8a7b-661402edc02b"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "cap"
+            },
+            "name": "MyField29",
+            "designerId": "f7840d54-af89-45c0-b31c-fdde711b4e3e"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "indirizzo"
+            },
+            "name": "MyField30",
+            "designerId": "8f762cd8-9da9-48dd-a255-54338a4eb15a"
+        }
+    ]
+}

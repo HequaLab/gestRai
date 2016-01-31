@@ -1,0 +1,252 @@
+{
+    "type": "Ext.panel.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|padding": 1,
+        "designer|userAlias": "frmLuoghi",
+        "designer|userClassName": "frmLuoghi",
+        "height": 753,
+        "id": "frmLuoghi",
+        "layout": "border",
+        "padding": 0,
+        "title": "Area luoghi",
+        "titleAlign": "center",
+        "width": 1099
+    },
+    "name": "frmProduzioni1",
+    "designerId": "984aa3ea-509a-4c18-a9d6-c3d46c797905",
+    "viewControllerInstanceId": "87455f82-6e6d-4478-9dec-72a5ccc78dae",
+    "viewModelInstanceId": "67adf30a-3de1-4c2e-801e-a7ec82b9b3f4",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "fit",
+                "layout|region": "center",
+                "padding": 1,
+                "title": ""
+            },
+            "name": "MyPanel4",
+            "designerId": "fb109216-26f3-44c6-98c8-e91ea96e9f19",
+            "cn": [
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "luogoGrid",
+                        "store": "storeLuoghi",
+                        "title": "Elenco produzioni"
+                    },
+                    "name": "MyGridPanel",
+                    "designerId": "55875f8e-c46a-4785-8293-7962c8169704",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "descrizione",
+                                "flex": 1,
+                                "text": "Descrizione"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "ad7a2b1c-78dc-4171-8cd6-4647f96f14c2"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "indirizzo",
+                                "flex": 1,
+                                "text": "Indirizzo"
+                            },
+                            "name": "MyColumn3",
+                            "designerId": "06556877-faf4-4522-927e-02586491693d"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "cap",
+                                "flex": 1,
+                                "text": "Cap"
+                            },
+                            "name": "MyColumn4",
+                            "designerId": "6d7c2853-4089-43d7-bae7-02c8fc459a3f"
+                        },
+                        {
+                            "type": "Ext.view.Table",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "name": "MyTable",
+                            "designerId": "aa41a4c3-b56e-4b45-a563-3bdd2e845b26"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayInfo": true,
+                                "dock": "bottom",
+                                "store": "storeLuoghi",
+                                "width": 360
+                            },
+                            "name": "MyPagingToolbar",
+                            "designerId": "ae41c5b5-d0e9-41aa-8b34-9cf855d44b09"
+                        },
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "name": "MyToolbar5",
+                            "designerId": "1ff81cd7-7461-4ade-acb7-709fe8d9f7f6",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAYUlEQVQ4T2NkwAHMJ136wMjAyA+S/v///4eT+XqC2JQy4jLAYtLl/8hyJ/J0saodNYCBgRE5tHEFKC5xUOwwooc2qYZQbgBFXmD4/3E0HTAw0C4MULIzw/+PJ/P0BLClEQCgqEhdko1z8AAAAABJRU5ErkJggg==",
+                                        "layout|flex": null,
+                                        "text": "Nuovo luogo"
+                                    },
+                                    "name": "MyButton30",
+                                    "designerId": "bec4e4a6-a7c6-45e0-9ca5-781c9e1ef66d",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var panel = Ext.widget('creaLuogo');",
+                                                    "panel.show();",
+                                                    ""
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "7d77a47f-e449-476d-af6e-5287a4f1abaa"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA90lEQVQ4T2NkQAMWEy83MDAy1KOLg/n/GRpP5Os2IMsxYhgw6fL/H395BC8UKn5AljPovy/Awfzl/Yk8XRQ9YA5eW7E6BeEaiAE4bMWlF9k1cAMYGBlQ/IZLM1z8P0MDyDtgA8wmXwpg+s+4HhRIBDWCFDAy1P9j/B94KldvAzxAQN4AmWg+6UoBw////0/m607ExYaphZgFBTBBcIAyMDCAogsnG2rZqAGQFEn9QDSfeGkDyOST+XoBuNhYo9F80qUP//4yO5wu1L6ALzGZ9l81YGb+t+FEnq4CqhcmX3Zg+M+wgIGBQZ5AanzIwMiQcCJX9wBIHQCNDPARwsqYOgAAAABJRU5ErkJggg==",
+                                        "layout|flex": null,
+                                        "text": "Elimina"
+                                    },
+                                    "name": "MyButton31",
+                                    "designerId": "559ff486-d53c-4c05-bc74-c2bf67c83929",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "",
+                                                    "var selection = Ext.getCmp('luogoGrid').getSelectionModel().getSelection();",
+                                                    "if (selection === null || selection === undefined)return;",
+                                                    "var store = Ext.StoreManager.lookup('storeLuoghi');",
+                                                    "store.remove(selection);"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "bb26eed0-22c5-49e0-8c10-1c06c213aec8"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmLuoghiAfterRender",
+                "implHandler": [
+                    "",
+                    "var store = Ext.StoreManager.lookup('storeLuoghi');",
+                    "store.filter({",
+                    "    property: \"divisione\",",
+                    "    value: USER.divisione ,",
+                    "    operator: \"streq\"",
+                    "});",
+                    "store.load();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmLuoghiAfterRender",
+            "designerId": "a3ead8e5-241c-4057-9768-54a5ed65df4e"
+        }
+    ]
+}
