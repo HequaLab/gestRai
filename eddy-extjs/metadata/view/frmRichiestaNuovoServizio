@@ -14,6 +14,7 @@
         "layout": "border",
         "padding": 0,
         "title": "Area servizi",
+        "titleAlign": "center",
         "width": 1278
     },
     "name": "MyPanel3",
@@ -1144,7 +1145,7 @@
                         "id": "codiciCombo",
                         "queryMode": "local",
                         "store": "storeServizi",
-                        "valueField": "descrizione"
+                        "valueField": "codice"
                     },
                     "name": "MyComboBox9",
                     "designerId": "937502bc-d967-4130-9526-81116bfe7112",
@@ -1615,6 +1616,52 @@
             },
             "name": "onFrmrichiestanuovoservizioAfterRender",
             "designerId": "82ffd8d9-62e2-4b76-abdb-2bd92b2c899b"
+        },
+        {
+            "type": "Ext.panel.Tool",
+            "reference": {
+                "name": "tools",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "type": "help"
+            },
+            "name": "MyTool",
+            "designerId": "fc1da99b-34f7-41af-b6e1-3c0a1d18a50d",
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onToolClick",
+                        "implHandler": [
+                            "var win = Ext.create('Ext.window.Window', {",
+                            "    height: 634,",
+                            "    width: 780,",
+                            "    layout: 'border',",
+                            "    title: 'Report servizio',",
+                            "    titleAlign: 'center',",
+                            "    maximizable: true,",
+                            "    closeAction: 'hide',",
+                            "    items: [{",
+                            "        xtype: 'component',",
+                            "        html : '<iframe src=\"'+ \"http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1\" + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                            "    }]",
+                            "});",
+                            "win.show();"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "name": "onToolClick",
+                    "designerId": "d9411278-0905-4fdc-8e07-d9ebdc70c15f"
+                }
+            ]
         }
     ]
 }

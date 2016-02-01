@@ -14,7 +14,7 @@ import com.hequalab.rai.api.read.views.user.UserView;
 import com.google.common.base.Optional;
 
 public class SimpleAuthenticator implements Authenticator<String, UserView> {
-	public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 1;
+	public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 60;
 	private AccessTokenDAO accessTokenDAO;
 	
 	public SimpleAuthenticator(AccessTokenDAO accessTokenDao) {

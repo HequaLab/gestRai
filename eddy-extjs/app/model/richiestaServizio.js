@@ -81,16 +81,62 @@ Ext.define('Rai.model.richiestaServizio', {
                 var storeFilters = Ext.StoreManager.lookup('storeRichiesteServizi').getFilters();
                 for (var i = 0; i < storeFilters.items.length; i++){
                     if( storeFilters.items[i]._id === 'fineData'){
-                        fineData = storeFilters.items[i]._value;
+                        var t = storeFilters.items[i]._value.split("'").join("");
+                        //console.log("T = " + t);
+                        fineData = Date.parseExact(t,"yyyy-M-d");
+                        //fineData = storeFilters.items[i]._value;
                         break;
                     }
                 }
 
-                console.log('fineData: ' + fineData);
-
                 if (fineData === null)return v;
-                return v;
 
+                // Calcolo il costo totale di competenza del periodo preso in esame
+                var dataInizioServizio = rec.get('data'),
+                    dataFineServizio = rec.get('dataFine');
+
+                /*
+                Due casi:
+                1) La data di fine Servizio è minore di quella di fineReport: i giorni necessari al computo sono: {dataFineServizio -dataInizioServizio}
+                2) La data di fine serviizio è maggiore di quella di fineReport: i giorni necessari al computo sono: {dataFineReport - dataInizioServizio}
+                */
+
+                var giorniComputo = 0,
+                    mesiComputo = 0;
+
+                if (dataFineServizio <= fineData){
+                    // caso 1: data minore di quella di fine report
+                    // console.log( "data minore di quella di fine report!");
+                    giorniComputo = daysBetween(dataInizioServizio.getTime() / 1000, dataFineServizio.getTime() / 1000);
+                }
+                else {
+                    // caso 2
+                    // console.log( "data maggiore di quella di fine report!");
+                    giorniComputo = daysBetween(dataInizioServizio.getTime() / 1000, fineData.getTime() / 1000);
+                }
+
+
+                giorniComputo += 1; // Conta anche il giorno di inizio
+                mesiComputo = giorniComputo / 30; // TODO: Controllare bene questa parte
+
+                //console.log("Giorni computo: "  + giorniComputo);
+                // Calcolo il costo totale in base alla tipologia e alle ore richieste * giorniComputo
+                var ore = rec.get('ore'),
+                    importo = rec.get('importo'),
+                    tipologia = rec.get('tipologia');
+
+                if (tipologia === 'Canone'){
+                    return importo * parseInt(mesiComputo);
+                }else if ( tipologia === 'Modulo'){
+                    return importo * ore * giorniComputo;
+                }else if ( tipologia === 'Richiesta'){
+                    return importo * ore * giorniComputo;
+                }
+                else if (tipologia === 'Trasporto'){
+                    return importo * ore * giorniComputo;
+
+                }
+                else return 0;
             },
             name: 'costoTotale'
         },
@@ -108,6 +154,15 @@ Ext.define('Rai.model.richiestaServizio', {
         {
             type: 'string',
             name: 'stato'
+        },
+        {
+            name: 'voce'
+        },
+        {
+            name: 'operatore'
+        },
+        {
+            name: 'utenteApprovante'
         }
     ]
 });

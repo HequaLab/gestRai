@@ -1,6 +1,41 @@
 var ACCESS_TOKEN = null,
     USER = null;
 
+var daysBetween = function(timeStampA, timeStampB) {
+    var oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+    var firstDate = new Date(timeStampA * 1000);
+    var secondDate = new Date(timeStampB * 1000);
+    var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+    return diffDays;
+};
+
+function download(response){
+  //  this.getView().unmask("Loading...");
+    var disposition = response.getResponseHeader('Content-Disposition');
+    var filename = disposition.slice(disposition.indexOf("=")+1,disposition.length);
+    var type = response.getResponseHeader('Content-Type');
+    var blob = new Blob([response.responseText], { type: type });
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created These URLs will no longer resolve as the data backing the URL has been freed."
+        window.navigator.msSaveBlob(blob, filename);
+    } 
+    else {
+        var URL = window.URL || window.webkitURL;
+        var downloadUrl = URL.createObjectURL(blob);
+        if (filename) {
+            // use HTML5 a[download] attribute to specify filename
+            var a = document.createElement("a");
+            // safari doesn't support this yet
+            a.href = downloadUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+        } 
+        setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+    } 
+}
+
+
 Ext.util.base64 = {
 
     base64s : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",

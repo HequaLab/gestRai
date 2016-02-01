@@ -32,7 +32,8 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
         'Ext.grid.filters.Filters',
         'Ext.form.field.Date',
         'Ext.form.field.Time',
-        'Ext.form.field.TextArea'
+        'Ext.form.field.TextArea',
+        'Ext.panel.Tool'
     ],
 
     controller: 'frmrichiestanuovoservizio',
@@ -44,6 +45,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
     padding: 0,
     width: 1278,
     title: 'Area servizi',
+    titleAlign: 'center',
     defaultListenerScope: true,
 
     layout: {
@@ -549,7 +551,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
                     forceSelection: true,
                     queryMode: 'local',
                     store: 'storeServizi',
-                    valueField: 'descrizione',
+                    valueField: 'codice',
                     listeners: {
                         select: 'onCodiciComboSelect'
                     }
@@ -637,6 +639,18 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
             scope: 'controller'
         }
     },
+    tools: [
+        {
+            xtype: 'tool',
+            type: 'help',
+            listeners: {
+                click: {
+                    fn: 'onToolClick',
+                    scope: 'controller'
+                }
+            }
+        }
+    ],
 
     onCodiciComboSelect: function(combo, record, eOpts) {
         Ext.getCmp('servizioCombo').setValue(record);

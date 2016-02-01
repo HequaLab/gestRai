@@ -2,6 +2,7 @@ package com.hequalab.rai.api.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +20,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
 import org.hibernate.SessionFactory;
@@ -89,6 +93,72 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		.createQuery(filterParams.getSqlStatement()).list();
 
 	return page(dnv, page, size);
+    }
+
+    @SuppressWarnings("unchecked")
+    @GET
+    @Path("/reportPdf")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @UnitOfWork
+    @Timed
+    @CacheControl(noCache = true)
+    public Response reportPdf(@Auth UserView user,
+	    @DefaultValue("") @QueryParam("filter") String filter)
+		    throws Exception {
+
+	ExtJsParams filterParams = new ExtJsParams(
+		"select wv from RichiestaNuovoServizioView wv ", "wv");
+	filterParams.addFilters(filter);
+	@SuppressWarnings("unchecked")
+	List<RichiestaNuovoServizioView> dnv = hibSess()
+		.createQuery(filterParams.getSqlStatement()).list();
+
+	List<RichiestaNuovoServizioView> data1 = new ArrayList<RichiestaNuovoServizioView>();
+	data1 = dnv;
+	JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(
+		data1);
+
+	InputStream inputStream = this.getClass()
+		.getResourceAsStream("report_computo.jrxml");
+
+	@SuppressWarnings("rawtypes")
+	Map parameters = new HashMap();
+
+	parameters.put("logo",
+		ImageIO.read(getClass().getResource("RAI_logo.png")));
+	// parameters.put("profiloApprovante", );
+
+	JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+	JasperReport jasperReport = JasperCompileManager
+		.compileReport(jasperDesign);
+	
+
+	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+		parameters, beanColDataSource);
+
+	StreamingOutput stream = new StreamingOutput() {
+	    @Override
+	    public void write(OutputStream output) throws IOException {
+		try {
+		    
+		    JasperExportManager.exportReportToPdfStream(jasperPrint,
+			    output);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	    }
+	};
+
+	String nomeFile = "TEST.pdf";
+	new java.io.File("static_assets/files/").mkdirs();
+	JasperExportManager.exportReportToPdfFile(jasperPrint,
+		"static_assets/files/" + nomeFile);
+
+	return Response.ok(stream, "application/force-download")
+		.header("Content-Disposition",
+			"attachment; filename = reportEconomico.pdf")
+	
+		.build();
     }
 
     @GET
@@ -269,9 +339,9 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	String statoEsportazione = rep.getStatoEsportazione() != null
 		? rep.getStatoEsportazione() : recOld.getStatoEsportazione();
 	String voce = rep.getVoce() != null ? rep.getVoce() : recOld.getVoce();
-	String luogoId = rep.getLuogoId() != null ? rep.getLuogoId() : recOld.getLuogoId();
+	String luogoId = rep.getLuogoId() != null ? rep.getLuogoId()
+		: recOld.getLuogoId();
 
-	
 	RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();
 	uv.setRichiestaNuovoServizioId(id.get());
 	uv.setData(data);
@@ -335,7 +405,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		.update(data, dataFine, divisione, fornitore, nome, note, ora,
 			ore, uorg, stato, lotto, operatore, tipologia,
 			matricola, produzione, luogo, utenteApprovante, importo,
-			costoTotale, statoEsportazione,voce,luogoId));
+			costoTotale, statoEsportazione, voce, luogoId));
 
 	return uv;
     }

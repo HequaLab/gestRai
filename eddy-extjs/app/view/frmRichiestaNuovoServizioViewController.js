@@ -305,6 +305,23 @@ animEl: 'elId'
             Ext.getCmp('cancellaSubmit').setVisible(true);
 
         }
+    },
+
+    onToolClick: function(tool, e, owner, eOpts) {
+        var win = Ext.create('Ext.window.Window', {
+            height: 634,
+            width: 780,
+            layout: 'border',
+            title: 'Report servizio',
+            titleAlign: 'center',
+            maximizable: true,
+            closeAction: 'hide',
+            items: [{
+                xtype: 'component',
+                html : '<iframe src="'+ "http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1" + '" width="100%" height="100%"></iframe>',
+            }]
+        });
+        win.show();
     }
 
 });

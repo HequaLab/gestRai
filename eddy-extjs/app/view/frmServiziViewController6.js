@@ -17,6 +17,30 @@ Ext.define('Rai.view.frmServiziViewController6', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.frmreportmanager',
 
+    onInizioReportSelect: function(field, value, eOpts) {
+        var store = Ext.StoreManager.lookup('storeRichiesteServizi');
+        store.filter(
+        {
+            id:"inizioData",
+            property: 'data',
+            value:"'" + value.toString("yyyy-M-d") + "'",
+            operator: 'gt'
+        });
+
+    },
+
+    onFineReportSelect: function(field, value, eOpts) {
+        var store = Ext.StoreManager.lookup('storeRichiesteServizi');
+        store.filter(
+        {
+            id:"fineData",
+            property: 'data',
+            value:"'" + value.toString("yyyy-M-d") + "'",
+            operator: 'lt'
+        });
+
+    },
+
     onCheckboxgroupChange: function(field, newValue, oldValue, eOpts) {
         var bApprovate = Ext.getCmp('checkApprovate').getValue();
         var bLavorazione = Ext.getCmp('checkLavorazione').getValue();
@@ -202,6 +226,24 @@ Ext.define('Rai.view.frmServiziViewController6', {
         });
 
 
+    },
+
+    onToolClick: function(tool, e, owner, eOpts) {
+        var win = Ext.create('Ext.window.Window', {
+            height: 634,
+            width: 780,
+            layout: 'border',
+            title: 'Report servizio',
+            titleAlign: 'center',
+            maximizable: true,
+            autoDestroy: true,
+            closeAction: 'destroy',
+            items: [{
+                xtype: 'component',
+                html : '<iframe src="'+ "http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1" + '" width="100%" height="100%"></iframe>',
+            }]
+        });
+        win.show();
     }
 
 });

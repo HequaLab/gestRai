@@ -84,21 +84,11 @@
                                         ],
                                         "fn": "summaryRenderer",
                                         "implHandler": [
-                                            "return \"Totali\";"
+                                            "return \"\";"
                                         ]
                                     },
                                     "name": "summaryRenderer",
                                     "designerId": "b09f8918-b9fa-43fc-a842-098e2eb31ffb"
-                                },
-                                {
-                                    "type": "Ext.grid.filters.filter.Date",
-                                    "reference": {
-                                        "name": "filter",
-                                        "type": "object"
-                                    },
-                                    "codeClass": null,
-                                    "name": "MyDateFilter1",
-                                    "designerId": "e0557a29-bb5a-4cb0-a769-a919cec352e5"
                                 }
                             ]
                         },
@@ -133,23 +123,88 @@
                                         ],
                                         "fn": "summaryRenderer",
                                         "implHandler": [
-                                            "return \"Totali\";"
+                                            "return \"\";"
                                         ]
                                     },
                                     "name": "summaryRenderer",
                                     "designerId": "84c9e1f7-649e-43f9-a614-c4c80ed4f0e3"
-                                },
-                                {
-                                    "type": "Ext.grid.filters.filter.Date",
-                                    "reference": {
-                                        "name": "filter",
-                                        "type": "object"
-                                    },
-                                    "codeClass": null,
-                                    "name": "MyDateFilter1",
-                                    "designerId": "17480586-43bb-4ade-b2ef-c05afc262ea8"
                                 }
                             ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "stato",
+                                "flex": 1,
+                                "text": "Stato"
+                            },
+                            "name": "MyColumn",
+                            "designerId": "d592f982-df5e-4906-9331-9b6f853109fb"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "operatore",
+                                "flex": 1,
+                                "text": "Op. richiedente"
+                            },
+                            "name": "MyColumn52",
+                            "designerId": "a3e15e20-ba53-4f67-a0ab-8dda2e61efb5"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "utenteApprovante",
+                                "flex": 1,
+                                "text": "Op. approvante"
+                            },
+                            "name": "MyColumn48",
+                            "designerId": "bd68105f-85a0-459e-a409-a01837e2a107"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "lotto",
+                                "flex": 1,
+                                "text": "Lotto"
+                            },
+                            "name": "MyColumn47",
+                            "designerId": "ece73cb3-2557-4a74-8679-c86180b0f9e4"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "tipologia",
+                                "flex": 1,
+                                "text": "Tipologia"
+                            },
+                            "name": "MyColumn50",
+                            "designerId": "3228beaf-3b3c-4fba-8bdb-3071e9ef0d60"
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -163,8 +218,23 @@
                                 "flex": 1,
                                 "text": "Luogo"
                             },
-                            "name": "MyColumn",
-                            "designerId": "d592f982-df5e-4906-9331-9b6f853109fb"
+                            "name": "MyColumn49",
+                            "designerId": "ed13558a-d1da-4e4f-87cd-228bfef05f19"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "uorg",
+                                "flex": 1,
+                                "text": "Uorg"
+                            },
+                            "name": "MyColumn51",
+                            "designerId": "23c4d613-0aec-4768-bf3c-5acf14ce83e6"
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -230,7 +300,7 @@
                                         ],
                                         "fn": "renderer",
                                         "implHandler": [
-                                            ""
+                                            "return value;"
                                         ]
                                     },
                                     "name": "renderer",
@@ -247,7 +317,7 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "ore",
-                                "flex": 0.7,
+                                "flex": 1,
                                 "summaryType": "sum",
                                 "text": "Ore/Qt.a"
                             },
@@ -280,14 +350,25 @@
                                     "designerId": "425c50fe-8b41-4467-bed4-a028e4160f47"
                                 },
                                 {
-                                    "type": "Ext.grid.filters.filter.Number",
+                                    "type": "fixedfunction",
                                     "reference": {
-                                        "name": "filter",
-                                        "type": "object"
+                                        "name": "items",
+                                        "type": "array"
                                     },
                                     "codeClass": null,
-                                    "name": "MyNumberFilter",
-                                    "designerId": "515c4813-7f97-4347-b9bf-ae21766dbd55"
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "val",
+                                            "params",
+                                            "data"
+                                        ],
+                                        "fn": "summaryRenderer",
+                                        "implHandler": [
+                                            "return \"\";"
+                                        ]
+                                    },
+                                    "name": "summaryRenderer",
+                                    "designerId": "0225a9df-5118-41fa-b593-c3c7c61c4933"
                                 }
                             ]
                         },
@@ -300,12 +381,35 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "nome",
-                                "flex": 0.5,
+                                "flex": 1,
                                 "summaryType": "sum",
-                                "text": "Voce"
+                                "text": "Servizio"
                             },
                             "name": "MyColumn36",
-                            "designerId": "a6c9abed-9116-4f7c-9259-ccc99a6d1ff6"
+                            "designerId": "a6c9abed-9116-4f7c-9259-ccc99a6d1ff6",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "val",
+                                            "params",
+                                            "data"
+                                        ],
+                                        "fn": "summaryRenderer",
+                                        "implHandler": [
+                                            "return \"\";"
+                                        ]
+                                    },
+                                    "name": "summaryRenderer",
+                                    "designerId": "7445faa0-2d74-4014-9968-7ffa652967f0"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -315,13 +419,36 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "nome",
-                                "flex": 0.5,
+                                "dataIndex": "voce",
+                                "flex": 1,
                                 "summaryType": "sum",
                                 "text": "Voce"
                             },
                             "name": "MyColumn14",
-                            "designerId": "241da56b-d5a9-4589-ba82-4df6a17f13be"
+                            "designerId": "241da56b-d5a9-4589-ba82-4df6a17f13be",
+                            "cn": [
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "val",
+                                            "params",
+                                            "data"
+                                        ],
+                                        "fn": "summaryRenderer",
+                                        "implHandler": [
+                                            "return \"\";"
+                                        ]
+                                    },
+                                    "name": "summaryRenderer",
+                                    "designerId": "50c02291-8f87-4220-b65e-b917cb65f1be"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -332,23 +459,13 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "importo",
-                                "flex": 0.7,
+                                "flex": 1,
                                 "summaryType": "sum",
                                 "text": "Costo unitario"
                             },
                             "name": "MyColumn37",
                             "designerId": "f1fbbeec-bf11-462a-bc6b-7b05cafe808c",
                             "cn": [
-                                {
-                                    "type": "Ext.grid.filters.filter.Number",
-                                    "reference": {
-                                        "name": "filter",
-                                        "type": "object"
-                                    },
-                                    "codeClass": null,
-                                    "name": "MyNumberFilter1",
-                                    "designerId": "9b2f2462-ce8e-4d74-a93d-29595e33f323"
-                                },
                                 {
                                     "type": "fixedfunction",
                                     "reference": {
@@ -373,6 +490,27 @@
                                     },
                                     "name": "renderer",
                                     "designerId": "980416a3-46da-44ff-8cb6-7e39267537c1"
+                                },
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "val",
+                                            "params",
+                                            "data"
+                                        ],
+                                        "fn": "summaryRenderer",
+                                        "implHandler": [
+                                            "return \"\";"
+                                        ]
+                                    },
+                                    "name": "summaryRenderer",
+                                    "designerId": "249e83f3-91f7-4d19-b9a4-f8f13724edbe"
                                 }
                             ]
                         },
@@ -409,11 +547,37 @@
                                         ],
                                         "fn": "summaryRenderer",
                                         "implHandler": [
-                                            "return \"<b>Costo totale: \" + val + \"</b>\";"
+                                            "",
+                                            "return '<div style=\"color:Blue;\"><b>Tot. &#8364 ' + val + \"</b></div>\";"
                                         ]
                                     },
                                     "name": "summaryRenderer",
                                     "designerId": "16fa4082-5d34-4a6d-ae9e-0afb97d5f5be"
+                                },
+                                {
+                                    "type": "fixedfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "value",
+                                            "metaData",
+                                            "record",
+                                            "rowIndex",
+                                            "colIndex",
+                                            "store",
+                                            "view"
+                                        ],
+                                        "fn": "renderer",
+                                        "implHandler": [
+                                            " return '&#8364;' + ' '  +  Ext.util.Format.number(value, '0.00');"
+                                        ]
+                                    },
+                                    "name": "renderer",
+                                    "designerId": "da8eed92-346e-493f-b1d7-2c0aeedc6ec1"
                                 }
                             ]
                         },
@@ -508,7 +672,35 @@
                                         "width": 230
                                     },
                                     "name": "MyDateField4",
-                                    "designerId": "95ed2708-1357-42cf-ba4a-5f29589173c2"
+                                    "designerId": "95ed2708-1357-42cf-ba4a-5f29589173c2",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onInizioReportSelect",
+                                                "implHandler": [
+                                                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                                                    "store.filter(",
+                                                    "    {",
+                                                    "        id:\"inizioData\",",
+                                                    "        property: 'data',",
+                                                    "        value:\"'\" + value.toString(\"yyyy-M-d\") + \"'\",",
+                                                    "        operator: 'gt'",
+                                                    "    });",
+                                                    ""
+                                                ],
+                                                "name": "select",
+                                                "scope": "me"
+                                            },
+                                            "name": "onInizioReportSelect",
+                                            "designerId": "c7f68afa-d8db-4f34-b6ba-08f2898dd111"
+                                        }
+                                    ]
                                 },
                                 {
                                     "type": "Ext.form.field.Date",
@@ -527,7 +719,35 @@
                                         "width": 235
                                     },
                                     "name": "MyDateField5",
-                                    "designerId": "cc048994-f14c-4602-bf3b-cd08b08c0af0"
+                                    "designerId": "cc048994-f14c-4602-bf3b-cd08b08c0af0",
+                                    "cn": [
+                                        {
+                                            "type": "viewcontrollereventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onFineReportSelect",
+                                                "implHandler": [
+                                                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                                                    "store.filter(",
+                                                    "    {",
+                                                    "        id:\"fineData\",",
+                                                    "        property: 'data',",
+                                                    "        value:\"'\" + value.toString(\"yyyy-M-d\") + \"'\",",
+                                                    "        operator: 'lt'",
+                                                    "    });",
+                                                    ""
+                                                ],
+                                                "name": "select",
+                                                "scope": "me"
+                                            },
+                                            "name": "onFineReportSelect",
+                                            "designerId": "321eba99-f1ff-4372-b4d0-aa80fd9205fe"
+                                        }
+                                    ]
                                 },
                                 {
                                     "type": "Ext.toolbar.Separator",
@@ -580,45 +800,6 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
-                                                        "text": "Oggi"
-                                                    },
-                                                    "name": "MyCheckItem",
-                                                    "designerId": "60a41b07-7f3c-445f-8e5e-f128b4094f84"
-                                                },
-                                                {
-                                                    "type": "Ext.menu.CheckItem",
-                                                    "reference": {
-                                                        "name": "items",
-                                                        "type": "array"
-                                                    },
-                                                    "codeClass": null,
-                                                    "userConfig": {
-                                                        "text": "Questa settimaa"
-                                                    },
-                                                    "name": "MyCheckItem4",
-                                                    "designerId": "8d7e50f1-d2c6-44fa-849d-ec838bb599cd"
-                                                },
-                                                {
-                                                    "type": "Ext.menu.CheckItem",
-                                                    "reference": {
-                                                        "name": "items",
-                                                        "type": "array"
-                                                    },
-                                                    "codeClass": null,
-                                                    "userConfig": {
-                                                        "text": "Settimana scorsa"
-                                                    },
-                                                    "name": "MyCheckItem1",
-                                                    "designerId": "a8782a8d-5042-4468-b852-4d44cd5b8b50"
-                                                },
-                                                {
-                                                    "type": "Ext.menu.CheckItem",
-                                                    "reference": {
-                                                        "name": "items",
-                                                        "type": "array"
-                                                    },
-                                                    "codeClass": null,
-                                                    "userConfig": {
                                                         "checked": true,
                                                         "text": "Questo mese"
                                                     },
@@ -645,7 +826,19 @@
                                                                     "Ext.getCmp('fineReport').setValue(dataFine);",
                                                                     "",
                                                                     "",
-                                                                    ""
+                                                                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
+                                                                    "store.filter(",
+                                                                    "    {",
+                                                                    "        property: 'data',",
+                                                                    "        value: \"'\" + dataInizio.toString(\"yyyy-M-d\") + \"'\",",
+                                                                    "        operator: 'gt'",
+                                                                    "    });",
+                                                                    "store.filter(",
+                                                                    "    {",
+                                                                    "        property: 'data',",
+                                                                    "        value: \"'\" + dataFine.toString(\"yyyy-M-d\") + \"'\",",
+                                                                    "        operator: 'lt'",
+                                                                    "    });"
                                                                 ]
                                                             },
                                                             "name": "handler",
@@ -680,6 +873,7 @@
                                                                 ],
                                                                 "fn": "handler",
                                                                 "implHandler": [
+                                                                    "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
                                                                     "var dataInizio = new Date().addMonths(-1).moveToFirstDayOfMonth ( ),",
                                                                     "    dataFine = new Date().addMonths(-1).moveToLastDayOfMonth ( );",
                                                                     "Ext.getCmp('inizioReport').setValue(dataInizio);",
@@ -688,13 +882,13 @@
                                                                     "store.filter(",
                                                                     "    {",
                                                                     "        property: 'data',",
-                                                                    "        value: dataInizio,",
+                                                                    "        value: \"'\" + dataInizio.toString(\"yyyy-M-d\") + \"'\",",
                                                                     "        operator: 'gt'",
                                                                     "    });",
                                                                     "store.filter(",
                                                                     "    {",
                                                                     "        property: 'data',",
-                                                                    "        value: dataFine,",
+                                                                    "        value: \"'\" + dataFine.toString(\"yyyy-M-d\") + \"'\",",
                                                                     "        operator: 'lt'",
                                                                     "    });"
                                                                 ]
@@ -1522,8 +1716,36 @@
                                                 ],
                                                 "fn": "handler",
                                                 "implHandler": [
-                                                    "var store =  Ext.StoreManager.lookup('storeRichiesteServizi');",
-                                                    "store.removeFilter(\"filtroLuogo\");"
+                                                    "var filterObj = [];",
+                                                    "",
+                                                    "var storeFilters = Ext.StoreManager.lookup('storeRichiesteServizi').getFilters();",
+                                                    "for (var i = 0; i < storeFilters.items.length; i++){",
+                                                    "    var temp = {",
+                                                    "        property:storeFilters.items[i]._property,",
+                                                    "        value:storeFilters.items[i]._value,",
+                                                    "        operator:storeFilters.items[i]._operator",
+                                                    "    };",
+                                                    "    filterObj.push(temp);",
+                                                    "}",
+                                                    "",
+                                                    "Ext.Ajax.request({",
+                                                    "    url: '/richiestaNuovoServizio/reportPdf',",
+                                                    "    method: 'GET',",
+                                                    "    headers: {",
+                                                    "        'Authorization': 'Bearer ' + ACCESS_TOKEN,",
+                                                    "        'Content-Type': 'application/json'",
+                                                    "    },",
+                                                    "    params : {filter:JSON.stringify(filterObj)},",
+                                                    "    success: function (response, options) {",
+                                                    "        download(response);",
+                                                    "    },",
+                                                    "    failure: function (response, options) { Ext.Msg.show({",
+                                                    "        title:'Errore con il server',",
+                                                    "        msg: \"Risposta: \" + response,",
+                                                    "        buttons: Ext.Msg.Ok,",
+                                                    "    });",
+                                                    "                                          }",
+                                                    "});"
                                                 ]
                                             },
                                             "name": "handler",
@@ -1546,7 +1768,42 @@
                                         "text": "Esporta EXCEL"
                                     },
                                     "name": "MyButton14",
-                                    "designerId": "a1629004-24c1-4f46-bc61-0f8fa631f92a"
+                                    "designerId": "a1629004-24c1-4f46-bc61-0f8fa631f92a",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "var win = Ext.create('Ext.window.Window', {",
+                                                    "    height: 634,",
+                                                    "    width: 780,",
+                                                    "    layout: 'border',",
+                                                    "    title: 'Report servizio',",
+                                                    "    titleAlign: 'center',",
+                                                    "    maximizable: true,",
+                                                    "    closeAction: 'hide',",
+                                                    "    items: [{",
+                                                    "        xtype: 'component',",
+                                                    "        html : '<iframe src=\"'+ \"http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1\" + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                                                    "    }]",
+                                                    "});",
+                                                    "win.show();"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "46998062-63d5-4338-8486-80612aa0bfa4"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -1618,6 +1875,53 @@
             },
             "name": "onPanelAfterRender",
             "designerId": "c7198dc2-7741-44c2-bcb8-ccebf4d47863"
+        },
+        {
+            "type": "Ext.panel.Tool",
+            "reference": {
+                "name": "tools",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "type": "help"
+            },
+            "name": "MyTool1",
+            "designerId": "63c34182-d077-48bc-b476-9e605618168c",
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onToolClick",
+                        "implHandler": [
+                            "var win = Ext.create('Ext.window.Window', {",
+                            "    height: 634,",
+                            "    width: 780,",
+                            "    layout: 'border',",
+                            "    title: 'Report servizio',",
+                            "    titleAlign: 'center',",
+                            "    maximizable: true,",
+                            "    autoDestroy: true,",
+                            "    closeAction: 'destroy',",
+                            "    items: [{",
+                            "        xtype: 'component',",
+                            "        html : '<iframe src=\"'+ \"http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1\" + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                            "    }]",
+                            "});",
+                            "win.show();"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "name": "onToolClick",
+                    "designerId": "3d6c9798-90b0-4741-80b8-87362657f4a2"
+                }
+            ]
         }
     ]
 }

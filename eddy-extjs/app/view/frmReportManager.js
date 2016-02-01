@@ -22,8 +22,6 @@ Ext.define('Rai.view.frmReportManager', {
         'Rai.view.frmServiziViewController6',
         'Ext.grid.Panel',
         'Ext.grid.column.Date',
-        'Ext.grid.filters.filter.Date',
-        'Ext.grid.filters.filter.Number',
         'Ext.view.Table',
         'Ext.toolbar.Paging',
         'Ext.form.Label',
@@ -37,7 +35,8 @@ Ext.define('Rai.view.frmReportManager', {
         'Ext.form.field.ComboBox',
         'Ext.grid.feature.Summary',
         'Ext.grid.filters.Filters',
-        'Ext.form.field.TextArea'
+        'Ext.form.field.TextArea',
+        'Ext.panel.Tool'
     ],
 
     controller: 'frmreportmanager',
@@ -72,33 +71,63 @@ Ext.define('Rai.view.frmReportManager', {
                         {
                             xtype: 'datecolumn',
                             summaryRenderer: function(val, params, data) {
-                                return "Totali";
+                                return "";
                             },
                             summaryType: 'count',
                             dataIndex: 'data',
                             text: 'Data inizio',
-                            flex: 1,
-                            filter: {
-                                type: 'date'
-                            }
+                            flex: 1
                         },
                         {
                             xtype: 'datecolumn',
                             summaryRenderer: function(val, params, data) {
-                                return "Totali";
+                                return "";
                             },
                             summaryType: 'count',
                             dataIndex: 'dataFine',
                             text: 'Data fine',
-                            flex: 1,
-                            filter: {
-                                type: 'date'
-                            }
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'stato',
+                            text: 'Stato',
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'operatore',
+                            text: 'Op. richiedente',
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'utenteApprovante',
+                            text: 'Op. approvante',
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'lotto',
+                            text: 'Lotto',
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'tipologia',
+                            text: 'Tipologia',
+                            flex: 1
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'luogo',
                             text: 'Luogo',
+                            flex: 1
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'uorg',
+                            text: 'Uorg',
                             flex: 1
                         },
                         {
@@ -116,7 +145,7 @@ Ext.define('Rai.view.frmReportManager', {
                         {
                             xtype: 'gridcolumn',
                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
-
+                                return value;
                             },
                             dataIndex: 'ora',
                             text: 'Ora',
@@ -127,45 +156,55 @@ Ext.define('Rai.view.frmReportManager', {
                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                                 return value;
                             },
+                            summaryRenderer: function(val, params, data) {
+                                return "";
+                            },
                             summaryType: 'sum',
                             dataIndex: 'ore',
                             text: 'Ore/Qt.a',
-                            flex: 0.7,
-                            filter: {
-                                type: 'number'
-                            }
+                            flex: 1
                         },
                         {
                             xtype: 'gridcolumn',
+                            summaryRenderer: function(val, params, data) {
+                                return "";
+                            },
                             summaryType: 'sum',
                             dataIndex: 'nome',
-                            text: 'Voce',
-                            flex: 0.5
+                            text: 'Servizio',
+                            flex: 1
                         },
                         {
                             xtype: 'gridcolumn',
+                            summaryRenderer: function(val, params, data) {
+                                return "";
+                            },
                             summaryType: 'sum',
-                            dataIndex: 'nome',
+                            dataIndex: 'voce',
                             text: 'Voce',
-                            flex: 0.5
+                            flex: 1
                         },
                         {
                             xtype: 'gridcolumn',
                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
                                 return '&#8364;' + ' '  + value;
                             },
+                            summaryRenderer: function(val, params, data) {
+                                return "";
+                            },
                             summaryType: 'sum',
                             dataIndex: 'importo',
                             text: 'Costo unitario',
-                            flex: 0.7,
-                            filter: {
-                                type: 'number'
-                            }
+                            flex: 1
                         },
                         {
                             xtype: 'gridcolumn',
                             summaryRenderer: function(val, params, data) {
-                                return "<b>Costo totale: " + val + "</b>";
+
+                                return '<div style="color:Blue;"><b>Tot. &#8364 ' + val + "</b></div>";
+                            },
+                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                return '&#8364;' + ' '  +  Ext.util.Format.number(value, '0.00');
                             },
                             summaryType: 'sum',
                             baseCls: 'costoTotaleTitle',
@@ -207,7 +246,10 @@ Ext.define('Rai.view.frmReportManager', {
                                     width: 230,
                                     fieldLabel: 'Inizio',
                                     labelWidth: 60,
-                                    format: 'd/m/Y'
+                                    format: 'd/m/Y',
+                                    listeners: {
+                                        select: 'onInizioReportSelect'
+                                    }
                                 },
                                 {
                                     xtype: 'datefield',
@@ -217,7 +259,10 @@ Ext.define('Rai.view.frmReportManager', {
                                     width: 235,
                                     fieldLabel: 'Fine',
                                     labelWidth: 60,
-                                    format: 'd/m/Y'
+                                    format: 'd/m/Y',
+                                    listeners: {
+                                        select: 'onFineReportSelect'
+                                    }
                                 },
                                 {
                                     xtype: 'tbseparator'
@@ -235,18 +280,6 @@ Ext.define('Rai.view.frmReportManager', {
                                         items: [
                                             {
                                                 xtype: 'menucheckitem',
-                                                text: 'Oggi'
-                                            },
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Questa settimaa'
-                                            },
-                                            {
-                                                xtype: 'menucheckitem',
-                                                text: 'Settimana scorsa'
-                                            },
-                                            {
-                                                xtype: 'menucheckitem',
                                                 handler: function(item, e) {
                                                     var dataInizio = new Date().moveToFirstDayOfMonth ( ),
                                                         dataFine = new Date().moveToLastDayOfMonth ( );
@@ -254,7 +287,19 @@ Ext.define('Rai.view.frmReportManager', {
                                                     Ext.getCmp('fineReport').setValue(dataFine);
 
 
-
+                                                    var store = Ext.StoreManager.lookup('storeRichiesteServizi');
+                                                    store.filter(
+                                                    {
+                                                        property: 'data',
+                                                        value: "'" + dataInizio.toString("yyyy-M-d") + "'",
+                                                        operator: 'gt'
+                                                    });
+                                                    store.filter(
+                                                    {
+                                                        property: 'data',
+                                                        value: "'" + dataFine.toString("yyyy-M-d") + "'",
+                                                        operator: 'lt'
+                                                    });
                                                 },
                                                 text: 'Questo mese',
                                                 checked: true
@@ -262,6 +307,7 @@ Ext.define('Rai.view.frmReportManager', {
                                             {
                                                 xtype: 'menucheckitem',
                                                 handler: function(item, e) {
+                                                    var store = Ext.StoreManager.lookup('storeRichiesteServizi');
                                                     var dataInizio = new Date().addMonths(-1).moveToFirstDayOfMonth ( ),
                                                         dataFine = new Date().addMonths(-1).moveToLastDayOfMonth ( );
                                                     Ext.getCmp('inizioReport').setValue(dataInizio);
@@ -270,13 +316,13 @@ Ext.define('Rai.view.frmReportManager', {
                                                     store.filter(
                                                     {
                                                         property: 'data',
-                                                        value: dataInizio,
+                                                        value: "'" + dataInizio.toString("yyyy-M-d") + "'",
                                                         operator: 'gt'
                                                     });
                                                     store.filter(
                                                     {
                                                         property: 'data',
-                                                        value: dataFine,
+                                                        value: "'" + dataFine.toString("yyyy-M-d") + "'",
                                                         operator: 'lt'
                                                     });
                                                 },
@@ -554,8 +600,36 @@ Ext.define('Rai.view.frmReportManager', {
                                 {
                                     xtype: 'button',
                                     handler: function(button, e) {
-                                        var store =  Ext.StoreManager.lookup('storeRichiesteServizi');
-                                        store.removeFilter("filtroLuogo");
+                                        var filterObj = [];
+
+                                        var storeFilters = Ext.StoreManager.lookup('storeRichiesteServizi').getFilters();
+                                        for (var i = 0; i < storeFilters.items.length; i++){
+                                            var temp = {
+                                                property:storeFilters.items[i]._property,
+                                                value:storeFilters.items[i]._value,
+                                                operator:storeFilters.items[i]._operator
+                                            };
+                                            filterObj.push(temp);
+                                        }
+
+                                        Ext.Ajax.request({
+                                            url: '/richiestaNuovoServizio/reportPdf',
+                                            method: 'GET',
+                                            headers: {
+                                                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                                                'Content-Type': 'application/json'
+                                            },
+                                            params : {filter:JSON.stringify(filterObj)},
+                                            success: function (response, options) {
+                                                download(response);
+                                            },
+                                            failure: function (response, options) { Ext.Msg.show({
+                                                title:'Errore con il server',
+                                                msg: "Risposta: " + response,
+                                                buttons: Ext.Msg.Ok,
+                                            });
+                                        }
+                                    });
                                     },
                                     flex: 1,
                                     icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlklEQVQ4T32SMXKbQBiF31vJaQQz3MAU7lKEBrUm0gXQDXQEH0G+gXID5QTGfYxJK7ngCDqCPCaNNezLLBYO0YC2Yf6f3W/fvv8Rp1XN442EsK3PvwTDiX2PWJSH7j+2xdtsuvLz7WoIUM2nAlRO6uP3LqQXUM3itYwy/9dL8U+hAwACMv9pu2j7wwDw0FX0oeC0pB9evrtzVT8giSMZrD17TFu5leuNFTSHLNPLgFm8hEUJg+XEHlfnxnX96lXQblASBX9GVw+0WhvwUAuvXrErLwJOh54lPhL2IIOSlqHIlLKFq2FN0vrzn4Kxfd/U5sqZU3r5btMdaQM246WXv6wHFdAqk2F6KQ8O2gtwsx8JD0NB6vZrYtEzhbggsZe4BxFBbmT8CBJ1B6F0NanQRd7Pd8lZDuICRiuImVcfw8p8aYIC4psBflohApSQvJX0exAgqxsD81Xg6+ftVOqcdx5hhFsJi0EAZZ6bzAv3MLYwMoGgtHnaRQXzaUboGmDU3CzsQe0hhiBCVwsKSAYCHv2nbeq2/QUkWxEgOg1QagAAAABJRU5ErkJggg==',
@@ -563,6 +637,22 @@ Ext.define('Rai.view.frmReportManager', {
                                 },
                                 {
                                     xtype: 'button',
+                                    handler: function(button, e) {
+                                        var win = Ext.create('Ext.window.Window', {
+                                            height: 634,
+                                            width: 780,
+                                            layout: 'border',
+                                            title: 'Report servizio',
+                                            titleAlign: 'center',
+                                            maximizable: true,
+                                            closeAction: 'hide',
+                                            items: [{
+                                                xtype: 'component',
+                                                html : '<iframe src="'+ "http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1" + '" width="100%" height="100%"></iframe>',
+                                            }]
+                                        });
+                                        win.show();
+                                    },
                                     flex: 1,
                                     alignTarget: '',
                                     defaultAlign: '',
@@ -589,6 +679,15 @@ Ext.define('Rai.view.frmReportManager', {
     ],
     listeners: {
         afterrender: 'onPanelAfterRender'
-    }
+    },
+    tools: [
+        {
+            xtype: 'tool',
+            type: 'help',
+            listeners: {
+                click: 'onToolClick'
+            }
+        }
+    ]
 
 });
