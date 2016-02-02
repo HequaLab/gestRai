@@ -25,6 +25,7 @@ public class ApiRequestDispacher implements RequestDispatcher {
 	@Override
 	public void dispatch(Object resource, HttpContext context) {
 		sessionFactory.createSession();
+		
 		//TODO: Chiedere a Ernesto come mai usa sempre il solito userId in questo caso
 		contextHolder.start(new UserId("7c98887c-213f-4e85-a114-92ea16833190"));
 		try {

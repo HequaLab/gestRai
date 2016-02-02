@@ -23,7 +23,6 @@ public class RichiestaNuovoServizioUpdated
     private String ora;
     private Integer ore;
     private String uorg;
-    private String stato;
     private String lotto;
     private String operatore;
     private String tipologia;
@@ -44,7 +43,7 @@ public class RichiestaNuovoServizioUpdated
     public RichiestaNuovoServizioUpdated(RichiestaNuovoServizioId id,
 	    LocalDate data, LocalDate dataFine, String divisione,
 	    String fornitore, String nome, String note, String ora, Integer ore,
-	    String uorg, String stato, String lotto, String operatore,
+	    String uorg,  String lotto, String operatore,
 	    String tipologia, Integer matricola, String produzione,
 	    String luogo,String utenteApprovante,Double importo,Double costoTotale, 
 	    String statoEsportazione,String voce, String luogoId) {
@@ -58,7 +57,6 @@ public class RichiestaNuovoServizioUpdated
 	this.setOra(ora);
 	this.setOre(ore);
 	this.setUorg(uorg);
-	this.setStato(stato);
 	this.setLotto(lotto);
 	this.setOperatore(operatore);
 	this.setTipologia(tipologia);
@@ -138,13 +136,7 @@ public class RichiestaNuovoServizioUpdated
     }
 
 
-    public String getStato() {
-	return stato;
-    }
-
-    public void setStato(String stato) {
-	this.stato = stato;
-    }
+ 
 
     public String getLotto() {
 	return lotto;

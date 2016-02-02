@@ -39,8 +39,8 @@ public class LottiView extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@Type(type = "LottiIdType")
-	private LottiId lottiId;
+    	@Type(type = "LottiIdType")
+    	private LottiId lottiId;
 	
 	private String descrizione;
 	private String divisione;

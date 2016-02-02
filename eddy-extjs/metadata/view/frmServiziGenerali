@@ -461,7 +461,7 @@
                     "Ext.getCmp(\"mainCont\").add(cmp);",
                     "cmp.show();",
                     "",
-                    "",
+                    "var store2 = Ext.StoreManager.lookup('storeServizi').load();",
                     "",
                     ""
                 ],

@@ -8,7 +8,8 @@ import io.dropwizard.jersey.params.AbstractParam;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizioId;
 
 public class RichiestaNuovoServizioIdParam extends AbstractParam<RichiestaNuovoServizioId> {
-
+    
+    	
 	public RichiestaNuovoServizioIdParam(String input) {
 		super(input);
 	}

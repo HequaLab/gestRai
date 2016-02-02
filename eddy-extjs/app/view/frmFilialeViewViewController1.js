@@ -55,7 +55,7 @@ Ext.define('Rai.view.frmFilialeViewViewController1', {
         Ext.getCmp("mainCont").add(cmp);
         cmp.show();
 
-
+        var store2 = Ext.StoreManager.lookup('storeServizi').load();
 
 
     }

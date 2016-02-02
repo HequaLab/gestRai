@@ -10,11 +10,12 @@ var daysBetween = function(timeStampA, timeStampB) {
 };
 
 function download(response){
-  //  this.getView().unmask("Loading...");
-    var disposition = response.getResponseHeader('Content-Disposition');
-    var filename = disposition.slice(disposition.indexOf("=")+1,disposition.length);
-    var type = response.getResponseHeader('Content-Type');
-    var blob = new Blob([response.responseText], { type: type });
+    //  this.getView().unmask("Loading...");
+    // var disposition = response.getResponseHeader('Content-Disposition');
+    // var filename = disposition.slice(disposition.indexOf("=")+1,disposition.length);
+    var filename = "Download.pdf";
+    //var type = response.getResponseHeader('Content-Type');
+    var blob = new Blob([response.responseText], { type: 'application/pdf' });
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
         // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created These URLs will no longer resolve as the data backing the URL has been freed."
         window.navigator.msSaveBlob(blob, filename);

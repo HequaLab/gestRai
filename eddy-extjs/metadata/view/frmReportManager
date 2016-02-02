@@ -1728,6 +1728,8 @@
                                                     "    filterObj.push(temp);",
                                                     "}",
                                                     "",
+                                                    "",
+                                                    "",
                                                     "Ext.Ajax.request({",
                                                     "    url: '/richiestaNuovoServizio/reportPdf',",
                                                     "    method: 'GET',",
@@ -1899,6 +1901,7 @@
                     "userConfig": {
                         "fn": "onToolClick",
                         "implHandler": [
+                            "return ;",
                             "var win = Ext.create('Ext.window.Window', {",
                             "    height: 634,",
                             "    width: 780,",

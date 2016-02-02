@@ -53,7 +53,7 @@ Ext.define('Rai.view.frmLuoghi', {
                 {
                     xtype: 'gridpanel',
                     id: 'luogoGrid',
-                    title: 'Elenco produzioni',
+                    title: 'Elenco luoghi',
                     store: 'storeLuoghi',
                     columns: [
                         {

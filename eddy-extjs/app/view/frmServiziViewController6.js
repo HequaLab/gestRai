@@ -229,6 +229,7 @@ Ext.define('Rai.view.frmServiziViewController6', {
     },
 
     onToolClick: function(tool, e, owner, eOpts) {
+        return ;
         var win = Ext.create('Ext.window.Window', {
             height: 634,
             width: 780,

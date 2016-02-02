@@ -82,7 +82,7 @@ public class OAuth2Resource extends AbstractRes {
 	public UserView postForToken(@Auth UserView user) {
 		user.setPassword("****");
 		//user.setUserName("****");
-		user.setUserId(null);
+		//user.setUserId(null);
 		return user;
 	}
 

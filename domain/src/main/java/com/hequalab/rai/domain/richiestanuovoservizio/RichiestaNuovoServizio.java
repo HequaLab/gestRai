@@ -12,32 +12,64 @@ import com.hequalab.rai.dddd.DeletableAggregate;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioCreated;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioDeleted;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioUpdated;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioApprovata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioEliminata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioRifiutata;
+import com.hequalab.rai.domain.user.UserId;
 
-public class RichiestaNuovoServizio extends DeletableAggregate<RichiestaNuovoServizio,RichiestaNuovoServizioId,RichiestaNuovoServizioDeleted> {
+public class RichiestaNuovoServizio extends
+	DeletableAggregate<RichiestaNuovoServizio, RichiestaNuovoServizioId, RichiestaNuovoServizioDeleted> {
 
-	private RichiestaNuovoServizio(RichiestaNuovoServizioId id) {
-		super(id, RichiestaNuovoServizioDeleted.class);
-	}
+    private RichiestaNuovoServizio(RichiestaNuovoServizioId id) {
+	super(id, RichiestaNuovoServizioDeleted.class);
+    }
 
-	public RichiestaNuovoServizio(RichiestaNuovoServizioId id ,LocalDate data,
-		LocalDate dataFine,String divisione,String fornitore,String nome,String note,
-		String ora,Integer ore,String uorg,String stato,String lotto,String operatore,
-		String tipologia,Integer matricola,String produzione,String luogo,LocalDateTime timeStamp,
-		String utenteApprovante, Double importo,Double costoTotale, String statoEsportazione,String voce, String luogoId) {
-		this(id);
-		applyChange(new RichiestaNuovoServizioCreated(id , data, dataFine, divisione, 
-			fornitore, nome, note, ora, ore, uorg, stato, lotto, operatore, tipologia,
-			matricola, produzione, luogo,timeStamp,utenteApprovante, importo, costoTotale, statoEsportazione,voce, luogoId));
-	}
-	
-	public RichiestaNuovoServizio update( LocalDate data,LocalDate dataFine,String divisione,String fornitore,
-		String nome,String note,String ora,Integer ore,String uorg,String stato,String lotto,
-		String operatore,String tipologia,Integer matricola,String produzione,String luogo,
-		String utenteApprovante,Double importo,Double costoTotale,String statoEsportazione,String voce, String luogoId) {
-		applyChange(new RichiestaNuovoServizioUpdated(getId() , data, dataFine, divisione, 
-			fornitore, nome, note, ora, ore, uorg, stato, lotto, operatore, tipologia, matricola,
-			produzione, luogo, utenteApprovante, importo,costoTotale, statoEsportazione,voce, luogoId));
-		return this;
-	}
+    public RichiestaNuovoServizio(RichiestaNuovoServizioId id, LocalDate data,
+	    LocalDate dataFine, String divisione, String fornitore, String nome,
+	    String note, String ora, Integer ore, String uorg, String stato,
+	    String lotto, String operatore, String tipologia, Integer matricola,
+	    String produzione, String luogo, LocalDateTime timeStamp,
+	    String utenteApprovante, Double importo, Double costoTotale,
+	    String statoEsportazione, String voce, String luogoId) {
+	this(id);
+	applyChange(new RichiestaNuovoServizioCreated(id, data, dataFine,
+		divisione, fornitore, nome, note, ora, ore, uorg, stato, lotto,
+		operatore, tipologia, matricola, produzione, luogo, timeStamp,
+		utenteApprovante, importo, costoTotale, statoEsportazione, voce,
+		luogoId));
+    }
+
+    public RichiestaNuovoServizio update(LocalDate data, LocalDate dataFine,
+	    String divisione, String fornitore, String nome, String note,
+	    String ora, Integer ore, String uorg, String lotto,
+	    String operatore, String tipologia, Integer matricola,
+	    String produzione, String luogo, String utenteApprovante,
+	    Double importo, Double costoTotale, String statoEsportazione,
+	    String voce, String luogoId) {
+	applyChange(new RichiestaNuovoServizioUpdated(getId(), data, dataFine,
+		divisione, fornitore, nome, note, ora, ore, uorg, lotto,
+		operatore, tipologia, matricola, produzione, luogo,
+		utenteApprovante, importo, costoTotale, statoEsportazione, voce,
+		luogoId));
+	return this;
+    }
+
+    public RichiestaNuovoServizio approva(RichiestaNuovoServizioId id,
+	    UserId user, LocalDateTime timeStamp) {
+	applyChange(new RichiestaServizioApprovata(id, user, timeStamp));
+	return this;
+    }
+
+    public RichiestaNuovoServizio rifiuta(RichiestaNuovoServizioId id,
+	    UserId user, LocalDateTime timeStamp) {
+	applyChange(new RichiestaServizioRifiutata(id, user, timeStamp));
+	return this;
+    }
+
+    public RichiestaNuovoServizio elimina(RichiestaNuovoServizioId id,
+	    UserId user, LocalDateTime timeStamp) {
+	applyChange(new RichiestaServizioEliminata(id, user, timeStamp));
+	return this;
+    }
 
 }

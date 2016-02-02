@@ -28,6 +28,8 @@ import com.hequalab.rai.api.resources.ProduzioniRes;
 import com.hequalab.rai.api.resources.RichiestaNuovoServizioRes;
 import com.hequalab.rai.api.resources.ServiziRes;
 import com.hequalab.rai.api.resources.UsersRes;
+import com.hequalab.rai.api.utility.ClientMail;
+import com.hequalab.rai.api.utility.MailClientConf;
 import com.hequalab.rai.api.write.ApiContext;
 import com.hequalab.rai.api.write.eventstore.ApiEventStoreDao;
 import com.hequalab.rai.api.write.eventstore.JacksonIdentitySerializer;
@@ -48,119 +50,138 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
+
+
+
 public class Api extends Application<ApiConf> {
 
-	private final HibernateBundle<ApiConf> hibernate = new ApiHibernateBundle(
-			"com.hequalab.rai");
+    static public MailClientConf mailClientConf;
+    
+    private final HibernateBundle<ApiConf> hibernate = new ApiHibernateBundle(
+	    "com.hequalab.rai");
 
-	public static void main(String[] args) throws Exception {
-		new Api().run(args);
-	}
+    public static void main(String[] args) throws Exception {
+	new Api().run(args);
+    }
 
-	@Override
-	public void initialize(Bootstrap<ApiConf> bootstrap) {
+    @Override
+    public void initialize(Bootstrap<ApiConf> bootstrap) {
+	bootstrap
+		.addBundle(new AssetsBundle("/META-INF/resources/static/webapp",
+			"/webapp/", "index.html", "webapp"));
+	bootstrap.addBundle(new RedirectBundle(new UriRedirect("/", "/webapp/"),
+		new UriRedirect("/webapp", "/webapp/")));
+	bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/", "/files/"));
+
+	bootstrap.addBundle(hibernate);
+	SimpleModule module = new SimpleModule();
+	module.addSerializer(UUIDIdentity.class,
+		new JacksonIdentitySerializer());
+	bootstrap.getObjectMapper().registerModule(module);
+	bootstrap.getObjectMapper().registerModule(new JodaModule());
+	bootstrap.getObjectMapper().configure(
+		com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+		false);
+    }
+
+    @Override
+    public void run(ApiConf conf, Environment env) throws Exception {
+
+	mailClientConf = conf.getMailClientConf();
+	//clientMail.sendEmail("info@aedeslab.com", "Prova", "Email inviata per prova");
 	
-		bootstrap.addBundle(new AssetsBundle("/META-INF/resources/static/webapp", "/webapp/", "index.html","webapp"));
-		bootstrap.addBundle(new RedirectBundle(new UriRedirect("/", "/webapp/"), new UriRedirect("/webapp","/webapp/")));				
-		bootstrap.addBundle(new ConfiguredAssetsBundle("/assets/","/files/"));
+	AccessTokenDAO accessTokenDAO = new AccessTokenDAO();
 
-		bootstrap.addBundle(hibernate);
-		SimpleModule module = new SimpleModule();
-		module.addSerializer(UUIDIdentity.class,
-				new JacksonIdentitySerializer());
-		bootstrap.getObjectMapper().registerModule(module);
-		bootstrap.getObjectMapper().registerModule(new JodaModule());
-		bootstrap
-				.getObjectMapper()
-				.configure(
-						com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
-						false);
-	}
+	// Hibernate session
+	SessionFactory hibSessionFactory = hibernate.getSessionFactory();
 
-	@Override
-	public void run(ApiConf conf, Environment env) throws Exception {
+	// Memory Bus (dispatcher and publisher)
+	DefaultEventBus<ApiContext> bus = new DefaultEventBus<ApiContext>();
+	EventDispatcher dispatcher = bus;
+	EventPublisher<ApiContext> publisher = bus;
 
-		AccessTokenDAO accessTokenDAO = new AccessTokenDAO();
-		
-		// Hibernate session
-		SessionFactory hibSessionFactory = hibernate.getSessionFactory();
+	// EventStore
+	EventStoreDao<ApiContext> dao = new ApiEventStoreDao(hibSessionFactory);
+	EventStore<ApiContext> store = new DefaultEventStore<ApiContext>(dao,
+		publisher);
 
-		// Memory Bus (dispatcher and publisher)
-		DefaultEventBus<ApiContext> bus = new DefaultEventBus<ApiContext>();
-		EventDispatcher dispatcher = bus;
-		EventPublisher<ApiContext> publisher = bus;
+	// Context
+	ApiContextHolder contextHolder = new ApiContextHolder();
 
-		// EventStore
-		EventStoreDao<ApiContext> dao = new ApiEventStoreDao(
-				hibSessionFactory);
-		EventStore<ApiContext> store = new DefaultEventStore<ApiContext>(dao,
-				publisher);
+	/*
+	 * View Services (for each view svc)
+	 */
 
-		// Context
-		ApiContextHolder contextHolder = new ApiContextHolder();
+	// User
+	UserViewWriter userViewSvc = new UserViewWriter(hibSessionFactory);
+	dispatcher.subscribe(userViewSvc);
 
-		/*
-		 * View Services (for each view svc)
-		 */
+	// #AnchorViewWriter
+	ProduzioniViewWriter produzioniViewSvc = new ProduzioniViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(produzioniViewSvc);
 
-		// User
-		UserViewWriter userViewSvc = new UserViewWriter(hibSessionFactory);
-		dispatcher.subscribe(userViewSvc);
-		
-		// #AnchorViewWriter
-ProduzioniViewWriter produzioniViewSvc = new ProduzioniViewWriter(hibSessionFactory);
-dispatcher.subscribe(produzioniViewSvc);
+	LottiViewWriter lottiViewSvc = new LottiViewWriter(hibSessionFactory);
+	dispatcher.subscribe(lottiViewSvc);
+	LuoghiViewWriter luoghiViewSvc = new LuoghiViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(luoghiViewSvc);
+	RichiestaNuovoServizioViewWriter richiestanuovoservizioViewSvc = new RichiestaNuovoServizioViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(richiestanuovoservizioViewSvc);
+	ServiziViewWriter serviziViewSvc = new ServiziViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(serviziViewSvc);
+	FornitoriViewWriter fornitoriViewSvc = new FornitoriViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(fornitoriViewSvc);
+	FilialiViewWriter filialiViewSvc = new FilialiViewWriter(
+		hibSessionFactory);
+	dispatcher.subscribe(filialiViewSvc);
 
-LottiViewWriter lottiViewSvc = new LottiViewWriter(hibSessionFactory);
-dispatcher.subscribe(lottiViewSvc);
-LuoghiViewWriter luoghiViewSvc = new LuoghiViewWriter(hibSessionFactory);
-dispatcher.subscribe(luoghiViewSvc);
-RichiestaNuovoServizioViewWriter richiestanuovoservizioViewSvc = new RichiestaNuovoServizioViewWriter(hibSessionFactory);
-dispatcher.subscribe(richiestanuovoservizioViewSvc);
-ServiziViewWriter serviziViewSvc = new ServiziViewWriter(hibSessionFactory);
-dispatcher.subscribe(serviziViewSvc);
-FornitoriViewWriter fornitoriViewSvc = new FornitoriViewWriter(hibSessionFactory);
-dispatcher.subscribe(fornitoriViewSvc);
-FilialiViewWriter filialiViewSvc = new FilialiViewWriter(hibSessionFactory);
-dispatcher.subscribe(filialiViewSvc);
-		
+	// Session Factory
+	AggregateSessionFactory sessionFactory = new DefaultAggregateSessionFactory<ApiContext>(
+		store, contextHolder);
+	env.jersey().register(new ApiResourceMethodDispatchAdapter(
+		sessionFactory, contextHolder));
 
-		// Session Factory
-		AggregateSessionFactory sessionFactory = new DefaultAggregateSessionFactory<ApiContext>(store, contextHolder);
-		env.jersey().register(new ApiResourceMethodDispatchAdapter(sessionFactory,contextHolder));
-	
-		/*
-		 * Resources (for each resource)
-		 */
+	/*
+	 * Resources (for each resource)
+	 */
 
-		// User
-		env.jersey().register(new UsersRes(sessionFactory, hibSessionFactory));
+	// User
+	env.jersey().register(new UsersRes(sessionFactory, hibSessionFactory));
 
-		// EventStore
-		env.jersey().register(new EventStoreRes(sessionFactory, hibSessionFactory));	
+	// EventStore
+	env.jersey()
+		.register(new EventStoreRes(sessionFactory, hibSessionFactory));
 
-		// OAuth2
-		env.jersey().register(new OAuth2Resource(sessionFactory, hibSessionFactory,"password", accessTokenDAO));
-		env.jersey().register(new OAuthProvider<>(new SimpleAuthenticator(accessTokenDAO),"oauth2-provider"));
-			
-		// #AnchorRes
-	env.jersey().register(new ProduzioniRes(sessionFactory, hibSessionFactory));
+	// OAuth2
+	env.jersey().register(new OAuth2Resource(sessionFactory,
+		hibSessionFactory, "password", accessTokenDAO));
+	env.jersey().register(new OAuthProvider<>(
+		new SimpleAuthenticator(accessTokenDAO), "oauth2-provider"));
 
+	// #AnchorRes
+	env.jersey()
+		.register(new ProduzioniRes(sessionFactory, hibSessionFactory));
 
 	env.jersey().register(new LottiRes(sessionFactory, hibSessionFactory));
 
 	env.jersey().register(new LuoghiRes(sessionFactory, hibSessionFactory));
 
+	env.jersey().register(new RichiestaNuovoServizioRes(sessionFactory,
+		hibSessionFactory));
 
-	env.jersey().register(new RichiestaNuovoServizioRes(sessionFactory, hibSessionFactory));
+	env.jersey()
+		.register(new ServiziRes(sessionFactory, hibSessionFactory));
 
-	env.jersey().register(new ServiziRes(sessionFactory, hibSessionFactory));
+	env.jersey()
+		.register(new FornitoriRes(sessionFactory, hibSessionFactory));
 
-	env.jersey().register(new FornitoriRes(sessionFactory, hibSessionFactory));
+	env.jersey()
+		.register(new FilialiRes(sessionFactory, hibSessionFactory));
 
-	env.jersey().register(new FilialiRes(sessionFactory, hibSessionFactory));
-
-	
-	}
+    }
 
 }

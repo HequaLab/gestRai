@@ -71,6 +71,24 @@ Ext.define('Rai.view.frmServGenerali', {
 
                     return value;
                     },
+                    dataIndex: 'operatore',
+                    text: 'Operatore',
+                    flex: 1,
+                    filter: {
+                        type: 'string'
+                    }
+                },
+                {
+                    xtype: 'gridcolumn',
+                    renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                        /*
+                        if (record.get('operatore') === 'admin') {
+                        // metaData.css = 'toolbarFilter';
+                    }
+                    */
+
+                    return value;
+                    },
                     dataIndex: 'nome',
                     text: 'Servizio',
                     flex: 1,
@@ -301,7 +319,30 @@ Ext.define('Rai.view.frmServGenerali', {
                                                 return;
                                             }
 
-                                            record.set('stato',"Approvato");
+                                            // record.set('stato',"Approvato");
+
+                                            Ext.Ajax.request({
+                                                url: '/richiestaNuovoServizio/approvaRichiesta/' + record.get('richiestaNuovoServizioId'),
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                                                },
+                                                method:'POST',
+                                                success: function (response, options) {
+                                                    Ext.Msg.show({
+                                                        title:'Richiesta approvata',
+                                                        msg: "Richiesta approvata con successo.",
+                                                        buttons: Ext.Msg.Ok,
+                                                    });},
+                                                    failure: function (response, options) { Ext.Msg.show({
+                                                        title:'Errore con il server',
+                                                        msg: "C'è stato un errore durante l'approvazione della richiesta. Errore: " + response.status,
+                                                        buttons: Ext.Msg.Ok,
+                                                    });
+                                                }
+
+
+                                            });
+
 
                                         }
                                     },
@@ -316,7 +357,7 @@ Ext.define('Rai.view.frmServGenerali', {
 
 
                             },
-                            icon: 'https://cdn2.iconfinder.com/data/icons/free-funktional-icons/48/15_Tick_48x48.png',
+                            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABK0lEQVQ4T6WTzW2DQBBG3zjh7hJcAi1wtTnsVmBSQZwO6CBxB3YDsFJwlFsogRIogWOk/Gy0CNASI4iUPe7M92Z25xvhn0ecfpurZAX7P7CaQhvt8lSu1kabRuJcpdZyEOFpCSBQ3UD5AW8Cm2+IZJepZiUkz9qYJYCr2onDLrftwAJRoU05B5gQu/TjCOCSPmFfaHP0YVNiC+eLNskAuIWqb8/C6aLNXf9Zv9qmF7v4ALAQCjz2lR0kgIc58Qjg/mCXq5OMx9kAaw96DuDwDutXbeorgLuYgLT6vu0uXhfapJOAKYj/5jhTJUI5C/AhvtjdXwHmjLTNVfiiTeWPNM5UZaWdUuvc1srAPSxbGQitJQqEjduDFjAskyVZsrIV6i9I+wkMgCXhXPwH92avn25K/20AAAAASUVORK5CYII=',
                             tooltip: 'Approva la richiesta'
                         },
                         {
@@ -373,7 +414,28 @@ Ext.define('Rai.view.frmServGenerali', {
                                                 return;
                                             }
 
-                                            record.set('stato',"Non approvato");
+
+                                            Ext.Ajax.request({
+                                                url: '/richiestaNuovoServizio/rifiutaRichiesta/' + record.get('richiestaNuovoServizioId'),
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                                                },
+                                                method:'POST',
+                                                success: function (response, options) {
+                                                    Ext.Msg.show({
+                                                        title:'Richiesta rifiutata',
+                                                        msg: "Richiesta rifiutata con successo.",
+                                                        buttons: Ext.Msg.Ok,
+                                                    });},
+                                                    failure: function (response, options) { Ext.Msg.show({
+                                                        title:'Errore con il server',
+                                                        msg: "C'è stato un errore durante il rifiuto della richiesta. Errore: " + response.status,
+                                                        buttons: Ext.Msg.Ok,
+                                                    });
+                                                }
+
+
+                                            });
                                         }
                                     },
                                     animEl: 'elId'
@@ -385,8 +447,105 @@ Ext.define('Rai.view.frmServGenerali', {
 
 
                             },
-                            icon: 'http://findicons.com/files/icons/99/office/128/delete.png',
+                            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZ0lEQVQ4T5VTMVLDMBDcy5Aa+EF4AeYFuGHsjjCDe3hBQufwAOyO5AXQK4Xp4qEg/MC8AJ6Q1GFYRrKVyAqEQZ183t273ZPAO2k/7skeBxCEgAR1mRWIOT9lkhezDxci7iVNorFABj5p606Os2l5Y7+tCdIkqgRybAsElwKpjD4YCGR/Q8QqU+WJvhsCV1kDARnmavbY6u4yKkTk3BGY5Kocipm5i/dGadnBV3inno2yPWkSXwnw4I/GFY6krY7rLWUPTPLJdkJwognM7Lr1XJUHu5SJWiBNokXtCSsZJTEb0GumZuFvbVuwro+SeA7g1Jj4E4E/swveIljHRy6yaXn4F7hJzYxA8K1lIsACkP4mqt2m1iY6MboG+m3r2m1yFpCdF4gYs02M/iLVJCwyVV5sJULer8FgvUgb19urDHLBZpUFDCzQT+zfj0nPrZWtcIvAjNOPe+hS/xDax6XdBjDHSsb+c/4GOP3Lq93zK2QAAAAASUVORK5CYII=',
                             tooltip: 'Non approvare la richiesta'
+                        },
+                        {
+                            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+
+                                Ext.Msg.show({
+                                    title:'Richiesta conferma',
+                                    msg: 'Stai per eliminare la richiesta, vuoi continuare??',
+                                    buttons: Ext.Msg.YESNO,
+                                    buttonText: {
+                                        no:'No',
+                                        yes:'Si'
+                                    },
+                                    fn: function(btn){
+                                        if (btn=='yes'){
+
+                                            if (record.get('stato') === "Approvato"){
+                                                Ext.Msg.show({
+                                                    title:'Operazione non permessa',
+                                                    msg: "La richiesta è stata approvata, non sono permesse modifiche",
+                                                    buttons: Ext.Msg.Ok,
+                                                });
+                                                return;
+                                            }else if (record.get('stato') === "Non approvato"){
+                                                Ext.Msg.show({
+                                                    title:'Operazione non permessa',
+                                                    msg: "La richiesta non è stata approvata, non sono permesse modifiche",
+                                                    buttons: Ext.Msg.Ok,
+                                                });
+                                                return;
+                                            }
+                                            else if (record.get('stato') === "Cancellato"){
+                                                Ext.Msg.show({
+                                                    title:'Operazione non permessa',
+                                                    msg: "La richiesta è stata cancellata, non sono permesse modifiche",
+                                                    buttons: Ext.Msg.Ok,
+                                                });
+                                                return;
+                                            }
+                                            else if (record.get('stato') === "In lavorazione"){
+                                                Ext.Msg.show({
+                                                    title:'Operazione non permessa',
+                                                    msg: "La richiesta è in lavorazione, non sono permesse modifiche",
+                                                    buttons: Ext.Msg.Ok,
+                                                });
+                                                return;
+                                            }
+                                            else if (record.get('stato') === "Erogato"){
+                                                Ext.Msg.show({
+                                                    title:'Operazione non permessa',
+                                                    msg: "Il servizio è stato erogato, non sono permesse modifiche",
+                                                    buttons: Ext.Msg.Ok,
+                                                });
+                                                return;
+                                            }
+
+
+                                            /*
+                                            Possibilità di eliminare la richiesta ad operatore [Il manager devono poter eliminare una richiesta anche approvata
+                                            ma possono farlo al massimo fino a 12 ore prima dall’inizio della richiesta
+                                            */
+                                            //record.set('stato',"Eliminata");
+                                            Ext.Ajax.request({
+                                                url: '/richiestaNuovoServizio/eliminaRichiesta/' + record.get('richiestaNuovoServizioId'),
+                                                headers: {
+                                                    'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                                                },
+                                                method:'POST',
+                                                success: function (response, options) {
+                                                    Ext.Msg.show({
+                                                        title:'Richiesta eliminata',
+                                                        msg: "Richiesta eliminata",
+                                                        buttons: Ext.Msg.Ok,
+                                                    });},
+                                                    failure: function (response, options) { Ext.Msg.show({
+                                                        title:'Errore con il server',
+                                                        msg: "C'è stato un errore durante l'eliminazione della richiesta. Errore: " + response.status,
+                                                        buttons: Ext.Msg.Ok,
+                                                    });
+                                                }
+
+
+                                            });
+
+
+                                        }
+                                    },
+                                    animEl: 'elId'
+                                });
+
+
+
+
+
+
+                            },
+                            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAy0lEQVQ4T+2SPQ6CQBCF3ywtxKNoA60KB9Cj4A24gRxFDwBiC40exWDLjpmNaPhxo7Gwcbt5M/vNy8sQRt41CnhMd7OS+vpAkAEDYL1hhZPUpDEDqa0VUEfBjoDV2Oa+xsDey8q1gbfNOgwSgBfvAAAqvLxMOgBjPfRTEKZWCOPs5lXcznQyqEO/IKK5DcDMRy+vHk4HAPksAxIkk14am6wOEqAsaPsvHfwBz5B+FyIRJo5G3CgqAL4fDKWO5kWjkDLjYr2Drw/pU8ANZfC4EZwIficAAAAASUVORK5CYII=',
+                            tooltip: 'Cancella la richiesta'
                         }
                     ]
                 }

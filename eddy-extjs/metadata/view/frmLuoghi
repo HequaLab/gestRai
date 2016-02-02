@@ -48,7 +48,7 @@
                     "userConfig": {
                         "id": "luogoGrid",
                         "store": "storeLuoghi",
-                        "title": "Elenco produzioni"
+                        "title": "Elenco luoghi"
                     },
                     "name": "MyGridPanel",
                     "designerId": "55875f8e-c46a-4785-8293-7962c8169704",

@@ -447,6 +447,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
             padding: 1,
             width: 310,
             bodyPadding: 10,
+            collapsible: true,
             title: 'Richiesta nuovo servizio',
             items: [
                 {

@@ -6,82 +6,122 @@ package com.hequalab.rai.api.read.views.richiestanuovoservizio;
 
 import org.hibernate.SessionFactory;
 import com.hequalab.rai.api.read.views.AbstractViewWriter;
+import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.write.ApiContext;
 import com.hequalab.rai.dddd.EventListener;
 import com.hequalab.rai.dddd.EventStream;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioCreated;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioDeleted;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioUpdated;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioApprovata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioEliminata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioRifiutata;
+import com.hequalab.rai.domain.user.UserId;
 
+public class RichiestaNuovoServizioViewWriter
+	extends AbstractViewWriter<RichiestaNuovoServizioView> {
 
+    public RichiestaNuovoServizioViewWriter(SessionFactory sessionFactory) {
+	super(sessionFactory, RichiestaNuovoServizioView.class,
+		"richiestanuovoservizioId");
+    }
+    
+    @EventListener
+    public void apply(RichiestaNuovoServizioCreated event,
+	    EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = new RichiestaNuovoServizioView();
+	u.setRichiestaNuovoServizioId(event.getId());
+	u.setData(event.getData());
+	u.setDataFine(event.getDataFine());
+	u.setDivisione(event.getDivisione());
+	u.setFornitore(event.getFornitore());
+	u.setNome(event.getNome());
+	u.setNote(event.getNote());
+	u.setOra(event.getOra());
+	u.setOre(event.getOre());
+	u.setUorg(event.getUorg());
+	u.setStato(event.getStato());
+	u.setLotto(event.getLotto());
+	u.setOperatore(event.getOperatore());
+	u.setTipologia(event.getTipologia());
+	u.setMatricola(event.getMatricola());
+	u.setProduzione(event.getProduzione());
+	u.setLuogo(event.getLuogo());
+	u.setTimeStamp(event.getTimeStamp());
+	u.setUtenteApprovante(event.getUtenteApprovante());
+	u.setImporto(event.getImporto());
+	u.setCostoTotale(event.getCostoTotale());
+	u.setStatoEsportazione(event.getStatoEsportazione());
+	u.setVoce(event.getVoce());
+	u.setLuogoId(event.getLuogoId());
+	session().save(u);
+    }
 
-public class RichiestaNuovoServizioViewWriter extends AbstractViewWriter<RichiestaNuovoServizioView> {
+    @EventListener
+    public void apply(RichiestaNuovoServizioUpdated event,
+	    EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	u.setData(event.getData());
+	u.setDataFine(event.getDataFine());
+	u.setDivisione(event.getDivisione());
+	u.setFornitore(event.getFornitore());
+	u.setNome(event.getNome());
+	u.setNote(event.getNote());
+	u.setOra(event.getOra());
+	u.setOre(event.getOre());
+	u.setUorg(event.getUorg());
+	u.setLotto(event.getLotto());
+	u.setOperatore(event.getOperatore());
+	u.setTipologia(event.getTipologia());
+	u.setMatricola(event.getMatricola());
+	u.setProduzione(event.getProduzione());
+	u.setLuogo(event.getLuogo());
+	u.setUtenteApprovante(event.getUtenteApprovante());
+	u.setImporto(event.getImporto());
+	u.setCostoTotale(event.getCostoTotale());
+	u.setStatoEsportazione(event.getStatoEsportazione());
+	u.setVoce(event.getVoce());
+	u.setLuogoId(event.getLuogoId());
+	session().update(u);
+    }
 
-	public RichiestaNuovoServizioViewWriter(SessionFactory sessionFactory) {
-		super(sessionFactory, RichiestaNuovoServizioView.class, "richiestanuovoservizioId");
-	}
+    @EventListener
+    public void apply(RichiestaNuovoServizioDeleted event,
+	    EventStream<ApiContext> stream) {
+	session().delete(find(event.getId()));
+    }
 
-	@EventListener
-	public void apply(RichiestaNuovoServizioCreated event, EventStream<ApiContext> stream) {
-		RichiestaNuovoServizioView u = new RichiestaNuovoServizioView();
-		u.setRichiestaNuovoServizioId(event.getId());
-		u.setData(event.getData());
-		u.setDataFine(event.getDataFine());
-		u.setDivisione(event.getDivisione());
-		u.setFornitore(event.getFornitore());
-		u.setNome(event.getNome());
-		u.setNote(event.getNote());
-		u.setOra(event.getOra());
-		u.setOre(event.getOre());
-		u.setUorg(event.getUorg());
-		u.setStato(event.getStato());
-		u.setLotto(event.getLotto());
-		u.setOperatore(event.getOperatore());
-		u.setTipologia(event.getTipologia());
-		u.setMatricola(event.getMatricola());
-		u.setProduzione(event.getProduzione());
-		u.setLuogo(event.getLuogo());
-		u.setTimeStamp(event.getTimeStamp());
-		u.setUtenteApprovante(event.getUtenteApprovante());
-		u.setImporto(event.getImporto());
-		u.setCostoTotale(event.getCostoTotale());
-		u.setStatoEsportazione(event.getStatoEsportazione());
-		u.setVoce(event.getVoce());
-		u.setLuogoId(event.getLuogoId());
-		session().save(u);
-	}
+    @EventListener
+    public void apply(RichiestaServizioApprovata event,
+	    EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", event.getUser()).uniqueResult();
+	u.setStato("Approvato");
+	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
+	session().update(u);
 
-	@EventListener
-	public void apply(RichiestaNuovoServizioUpdated event, EventStream<ApiContext> stream) {
-		RichiestaNuovoServizioView u = find(event.getId());
-		u.setData(event.getData());
-		u.setDataFine(event.getDataFine());
-		u.setDivisione(event.getDivisione());
-		u.setFornitore(event.getFornitore());
-		u.setNome(event.getNome());
-		u.setNote(event.getNote());
-		u.setOra(event.getOra());
-		u.setOre(event.getOre());
-		u.setUorg(event.getUorg());
-		u.setStato(event.getStato());
-		u.setLotto(event.getLotto());
-		u.setOperatore(event.getOperatore());
-		u.setTipologia(event.getTipologia());
-		u.setMatricola(event.getMatricola());
-		u.setProduzione(event.getProduzione());
-		u.setLuogo(event.getLuogo());
-		u.setUtenteApprovante(event.getUtenteApprovante());
-		u.setImporto(event.getImporto());
-		u.setCostoTotale(event.getCostoTotale());
-		u.setStatoEsportazione(event.getStatoEsportazione());
-		u.setVoce(event.getVoce());
-		u.setLuogoId(event.getLuogoId());
-		session().update(u);
-	}
+    }
 
-	@EventListener
-	public void apply(RichiestaNuovoServizioDeleted event, EventStream<ApiContext> stream) {
-		session().delete(find(event.getId()));
-	}
-
+    @EventListener
+    public void apply(RichiestaServizioRifiutata event,
+	    EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	UserId id = event.getUser();
+	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
+	u.setStato("Non Approvato");
+	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
+	session().update(u);
+    }
+    
+    @EventListener
+    public void apply(RichiestaServizioEliminata event,
+	    EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	UserId id = event.getUser();
+	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
+	u.setStato("Eliminato");
+	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
+	session().update(u);
+    }
+    
 }

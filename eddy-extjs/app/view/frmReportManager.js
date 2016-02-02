@@ -612,6 +612,8 @@ Ext.define('Rai.view.frmReportManager', {
                                             filterObj.push(temp);
                                         }
 
+
+
                                         Ext.Ajax.request({
                                             url: '/richiestaNuovoServizio/reportPdf',
                                             method: 'GET',
