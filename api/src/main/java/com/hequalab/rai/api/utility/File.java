@@ -44,5 +44,7 @@ public class File extends UUIDIdentity {
     public byte[] decode(String data) {
 	return Base64.decodeBase64(data);
     }
+    
+
 
 }

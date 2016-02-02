@@ -10,6 +10,7 @@ mailClient:
   ssl: true
   userName: klitonfx@gmail.com
   pwd: pushedx1993
+  alias: noreply Oversinerco
 
 
 assets:

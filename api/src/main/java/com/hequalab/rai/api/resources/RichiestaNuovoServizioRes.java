@@ -122,7 +122,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 
 	// HttpCode 460-> Hanno provato ad approvare una richiesta che ha gia
 	// uno stato impostato
-	if (!uv.getStato().toLowerCase().equals("Nessuno"))
+	if (!uv.getStato().toLowerCase().equals("nessuno"))
 	    throw new WebApplicationException(460);
 
 	LocalDateTime timeStamp = LocalDateTime.now();
@@ -238,7 +238,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 
 	// HttpCode 460-> Hanno provato ad approvare una richiesta che ha gia
 	// uno stato impostato
-	if (!uv.getStato().toLowerCase().equals("Nessuno"))
+	if (!uv.getStato().toLowerCase().equals("nessuno"))
 	    throw new WebApplicationException(460);
 
 	LocalDateTime timeStamp = LocalDateTime.now();
@@ -246,7 +246,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	aggSess().save(aggSess().get(RichiestaNuovoServizio.class, id.get())
 		.rifiuta(id.get(), usr, timeStamp));
 
-	uv.setStato("Non Approvato");
+	uv.setStato("Non pprovato");
 	uv.setUtenteApprovante(user.getFirstName() + " " + user.getLastName());
 	return uv;
     }
@@ -265,14 +265,12 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		.createQuery(
 			"from RichiestaNuovoServizioView where richiestanuovoservizioId = :id")
 		.setParameter("id", id.get()).uniqueResult();
-	
+
 	// Devo fare il check dell'ora.
-	
-	
-	
+
 	// HttpCode 460-> Hanno provato ad approvare una richiesta che ha gia
 	// uno stato impostato
-	if (!uv.getStato().toLowerCase().equals("Nessuno"))
+	if (!uv.getStato().toLowerCase().equals("nessuno"))
 	    throw new WebApplicationException(460);
 
 	LocalDateTime timeStamp = LocalDateTime.now();

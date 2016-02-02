@@ -28,8 +28,11 @@ import com.hequalab.rai.api.resources.ProduzioniRes;
 import com.hequalab.rai.api.resources.RichiestaNuovoServizioRes;
 import com.hequalab.rai.api.resources.ServiziRes;
 import com.hequalab.rai.api.resources.UsersRes;
+import com.hequalab.rai.api.utility.CheckEmailWithReport;
 import com.hequalab.rai.api.utility.ClientMail;
 import com.hequalab.rai.api.utility.MailClientConf;
+import com.hequalab.rai.api.utility.QrDecoder;
+import com.hequalab.rai.api.utility.ScheduleReportManager;
 import com.hequalab.rai.api.write.ApiContext;
 import com.hequalab.rai.api.write.eventstore.ApiEventStoreDao;
 import com.hequalab.rai.api.write.eventstore.JacksonIdentitySerializer;
@@ -87,6 +90,9 @@ public class Api extends Application<ApiConf> {
     @Override
     public void run(ApiConf conf, Environment env) throws Exception {
 
+	CheckEmailWithReport c = new CheckEmailWithReport();
+	c.doit();
+	
 	mailClientConf = conf.getMailClientConf();
 	//clientMail.sendEmail("info@aedeslab.com", "Prova", "Email inviata per prova");
 	
@@ -181,6 +187,14 @@ public class Api extends Application<ApiConf> {
 
 	env.jersey()
 		.register(new FilialiRes(sessionFactory, hibSessionFactory));
+	
+	
+	// Schedule manager
+	ScheduleReportManager se = new ScheduleReportManager();
+	se.startAsync();
+	
+	String prova = new QrDecoder().readQRCode("test.png");
+	System.out.println("DECODER :" + prova);
 
     }
 

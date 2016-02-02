@@ -13,6 +13,7 @@ public class ClientMail {
     private Integer smtp;
     private String userName;
     private String pwd;
+    private String alias;
     private Boolean ssl;
 
     public ClientMail() throws EmailException {
@@ -23,15 +24,16 @@ public class ClientMail {
 	this.userName = conf.getUserName();
 	this.pwd = conf.getPwd();
 	this.ssl = conf.getSsl();
+	this.alias = conf.getAlias();
 
 	email = new HtmlEmail();
 	email.setDebug(true);
-	email.setHostName("smtp.gmail.com");
-	email.setSmtpPort(465);
+	email.setHostName(this.hostName);
+	email.setSmtpPort(this.smtp);
 	email.setAuthenticator(
-		new DefaultAuthenticator("klitonfx@gmail.com", "pushedx1993"));
-	email.setSSLOnConnect(true);
-	email.setFrom(this.userName,"gestRAI");
+		new DefaultAuthenticator(this.userName, this.pwd));
+	email.setSSLOnConnect(this.ssl);
+	email.setFrom(this.userName, this.getAlias());
     }
 
     public void sendEmail(String to, String oggetto, String testo)
@@ -87,6 +89,14 @@ public class ClientMail {
 
     public void setSmtp(Integer smtp) {
 	this.smtp = smtp;
+    }
+
+    public String getAlias() {
+	return alias;
+    }
+
+    public void setAlias(String alias) {
+	this.alias = alias;
     }
 
 }

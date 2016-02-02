@@ -32,9 +32,16 @@ public class MailClientConf {
     public void setSmtp(Integer smtp) {
 	this.smtp = smtp;
     }
+    public String getAlias() {
+	return alias;
+    }
+    public void setAlias(String alias) {
+	this.alias = alias;
+    }
     private String hostName;
     private Integer smtp;
     private String userName;
     private String pwd;
     private Boolean ssl;
+    private String alias;
 }

@@ -579,6 +579,7 @@ Ext.define('Rai.view.frmServGenerali', {
                         '<tpl if="name==\'Non approvato\'" ><span style="color:#cf4c35;"><b>Ci sono {rows.length} richieste non approvate</b></span></tpl>',
                         '<tpl if="name==\'Approvato\'" ><span style="color:#73b51e;"><b>Ci sono {rows.length} richieste approvate</b></span></tpl>',
                         '<tpl if="name==\'In lavorazione\'" ><span style="color:#AFB42B;"><b>Ci sono {rows.length} richieste in lavorazione</b></span></tpl>',
+                        '<tpl if="name==\'Eliminato\'" ><span style="color:#AFB42B;"><b>Ci sono {rows.length} richieste eliminate</b></span></tpl>',
                         '',
                         '',
                         ''

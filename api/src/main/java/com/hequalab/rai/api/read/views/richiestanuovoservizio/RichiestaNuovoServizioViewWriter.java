@@ -108,7 +108,7 @@ public class RichiestaNuovoServizioViewWriter
 	RichiestaNuovoServizioView u = find(event.getId());
 	UserId id = event.getUser();
 	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
-	u.setStato("Non Approvato");
+	u.setStato("Non approvato");
 	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
 	session().update(u);
     }
