@@ -185,12 +185,28 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "dataFine",
+                                "dataIndex": "data",
                                 "flex": 0.7,
+                                "format": "d/M/ddd",
                                 "text": "Data"
                             },
                             "name": "MyDateColumn",
                             "designerId": "01c673e3-e265-464e-af0e-d6b156bae44d"
+                        },
+                        {
+                            "type": "Ext.grid.column.Date",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "dataFine",
+                                "flex": 0.7,
+                                "text": "Data fine"
+                            },
+                            "name": "MyDateColumn5",
+                            "designerId": "3ef35e09-dd9c-48d3-9972-cd21c273567c"
                         },
                         {
                             "type": "Ext.grid.column.Column",

@@ -67,10 +67,10 @@ Ext.define('Rai.view.frmLoginViewController', {
                         var stores = Ext.data.StoreManager.map;
 
                         for (name in stores) {
-                            if (name.indexOf('eports') >= 0)continue;
                             if (stores.hasOwnProperty(name)) {
                                 store = stores[name];
                                 store.clearFilter();
+                                store.proxy.headers = null;
                                 store.proxy.headers = {"Authorization":"Bearer " + tokenAccesso};
                                 store.autoSync = true;
                                 store.autoLoad = true;

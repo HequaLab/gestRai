@@ -5,7 +5,10 @@ package com.hequalab.rai.domain.richiestanuovoservizio.events;
  */
 
 import com.hequalab.rai.dddd.DefaultEvent;
+import com.hequalab.rai.domain.produzioni.ProduzioniId;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizioId;
+import com.hequalab.rai.domain.servizi.ServiziId;
+import com.hequalab.rai.domain.user.UserId;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -37,6 +40,28 @@ public class RichiestaNuovoServizioCreated
     private String statoEsportazione;
     private String voce;
     private String luogoId;
+    private UserId user; // Utente che ha effettuato la richiesta: mi serve nel
+			 // listener MailSender
+    private String baseUri;
+    
+    public ProduzioniId getIdProduzione() {
+	return idProduzione;
+    }
+
+    public void setIdProduzione(ProduzioniId idProduzione) {
+	this.idProduzione = idProduzione;
+    }
+
+    public ServiziId getIdServizio() {
+	return idServizio;
+    }
+
+    public void setIdServizio(ServiziId idServizio) {
+	this.idServizio = idServizio;
+    }
+
+    private ProduzioniId idProduzione;
+    private ServiziId idServizio;
 
     private String utenteApprovante;
 
@@ -49,8 +74,10 @@ public class RichiestaNuovoServizioCreated
 	    String fornitore, String nome, String note, String ora, Integer ore,
 	    String uorg, String stato, String lotto, String operatore,
 	    String tipologia, Integer matricola, String produzione,
-	    String luogo, LocalDateTime timeStamp, String utenteApprovante,Double importo,
-	    Double costoTotale, String statoEsportazione,String voce,String luogoId) {
+	    String luogo, LocalDateTime timeStamp, String utenteApprovante,
+	    Double importo, Double costoTotale, String statoEsportazione,
+	    String voce, String luogoId, ProduzioniId idProduzione,
+	    ServiziId idServizio, UserId user, String baseUri) {
 	super(id);
 	this.setData(data);
 	this.setDataFine(dataFine);
@@ -75,6 +102,10 @@ public class RichiestaNuovoServizioCreated
 	this.setStatoEsportazione(statoEsportazione);
 	this.setVoce(voce);
 	this.setLuogoId(luogoId);
+	this.setIdProduzione(idProduzione);
+	this.setIdServizio(idServizio);
+	this.setUser(user);
+	this.setBaseUri(baseUri);
     }
 
     public LocalDate getData() {
@@ -140,7 +171,6 @@ public class RichiestaNuovoServizioCreated
     public void setOre(Integer ore) {
 	this.ore = ore;
     }
-
 
     public String getStato() {
 	return stato;
@@ -260,6 +290,22 @@ public class RichiestaNuovoServizioCreated
 
     public void setLuogoId(String luogoId) {
 	this.luogoId = luogoId;
+    }
+
+    public UserId getUser() {
+	return user;
+    }
+
+    public void setUser(UserId user) {
+	this.user = user;
+    }
+
+    public String getBaseUri() {
+	return baseUri;
+    }
+
+    public void setBaseUri(String baseUri) {
+	this.baseUri = baseUri;
     }
 
 }

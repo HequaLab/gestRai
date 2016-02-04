@@ -54,6 +54,8 @@ public class RichiestaNuovoServizioViewWriter
 	u.setStatoEsportazione(event.getStatoEsportazione());
 	u.setVoce(event.getVoce());
 	u.setLuogoId(event.getLuogoId());
+	u.setIdProduzione(event.getIdProduzione());
+	u.setIdServizio(event.getIdServizio());
 	session().save(u);
     }
 

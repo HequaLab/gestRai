@@ -7,7 +7,9 @@ import org.joda.time.LocalDate;
  */
 
 import com.hequalab.rai.dddd.DefaultEvent;
+import com.hequalab.rai.domain.produzioni.ProduzioniId;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizioId;
+import com.hequalab.rai.domain.servizi.ServiziId;
 
 public class RichiestaNuovoServizioUpdated
 	extends DefaultEvent<RichiestaNuovoServizioId> {
@@ -35,6 +37,24 @@ public class RichiestaNuovoServizioUpdated
     private String statoEsportazione;
     private String voce;
     private String luogoId;
+    private ProduzioniId idProduzione;
+    private ServiziId idServizio;
+
+    public ProduzioniId getIdProduzione() {
+        return idProduzione;
+    }
+
+    public void setIdProduzione(ProduzioniId idProduzione) {
+        this.idProduzione = idProduzione;
+    }
+
+    public ServiziId getIdServizio() {
+        return idServizio;
+    }
+
+    public void setIdServizio(ServiziId idServizio) {
+        this.idServizio = idServizio;
+    }
 
     @SuppressWarnings("unused")
     private RichiestaNuovoServizioUpdated() {
@@ -46,7 +66,7 @@ public class RichiestaNuovoServizioUpdated
 	    String uorg,  String lotto, String operatore,
 	    String tipologia, Integer matricola, String produzione,
 	    String luogo,String utenteApprovante,Double importo,Double costoTotale, 
-	    String statoEsportazione,String voce, String luogoId) {
+	    String statoEsportazione,String voce, String luogoId, ProduzioniId idProduzione, ServiziId idServizio) {
 	super(id);
 	this.setData(data);
 	this.setDataFine(dataFine);
@@ -69,6 +89,8 @@ public class RichiestaNuovoServizioUpdated
 	this.setStatoEsportazione(statoEsportazione);
 	this.setVoce(voce);
 	this.setLuogoId(luogoId);
+	this.setIdProduzione(idProduzione);
+	this.setIdServizio(idServizio);
     }
 
     public LocalDate getData() {

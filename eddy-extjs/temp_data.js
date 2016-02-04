@@ -1,6 +1,26 @@
 var ACCESS_TOKEN = null,
     USER = null;
 
+
+// Funzione di utilità: 
+Ext.define('Override.data.Proxy', {
+    override : 'Ext.data.Proxy',
+    listeners: {
+        exception : function() {
+            Ext.Msg.show({
+                title: 'Errore inaspettato',
+                msg: "C'è stato un errore durante il caricamento dei dati. Riprovare. \n Se l'errore persiste contattare l'assistenza.",
+                width: 300,
+                buttons: Ext.Msg.OK,
+                icon: Ext.MessageBox.ERROR
+            });
+        }
+    }
+});
+
+
+
+
 var daysBetween = function(timeStampA, timeStampB) {
     var oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
     var firstDate = new Date(timeStampA * 1000);
@@ -9,32 +29,82 @@ var daysBetween = function(timeStampA, timeStampB) {
     return diffDays;
 };
 
-function download(response){
-    //  this.getView().unmask("Loading...");
-    // var disposition = response.getResponseHeader('Content-Disposition');
-    // var filename = disposition.slice(disposition.indexOf("=")+1,disposition.length);
-    var filename = "Download.pdf";
-    //var type = response.getResponseHeader('Content-Type');
-    var blob = new Blob([response.responseText], { type: 'application/pdf' });
-    if (typeof window.navigator.msSaveBlob !== 'undefined') {
-        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created These URLs will no longer resolve as the data backing the URL has been freed."
-        window.navigator.msSaveBlob(blob, filename);
-    } 
-    else {
-        var URL = window.URL || window.webkitURL;
-        var downloadUrl = URL.createObjectURL(blob);
-        if (filename) {
-            // use HTML5 a[download] attribute to specify filename
-            var a = document.createElement("a");
-            // safari doesn't support this yet
-            a.href = downloadUrl;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-        } 
-        setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
-    } 
-}
+
+
+
+download = function(config, id) {
+    var form,
+        removeNode = download.removeNode,
+        frameId = id,
+
+        iframe = Ext.core.DomHelper.append(document.body, {
+            id: frameId,
+            name: frameId,
+            style: 'display:none',
+            tag: 'iframe'
+        }),
+
+        inputs = paramsToInputs(config.params);
+
+
+    // If the download succeeds the load event won't fire but it can in the failure case. We avoid using Ext.Element on
+    // the iframe element as that could cause a leak. Similarly, the load handler is registered in such a way as to
+    // avoid a closure.
+    iframe.onload = download.onload;
+
+    
+    form = Ext.DomHelper.append(document.body, {
+        action: config.url,
+        cn: inputs,
+        method: config.method || 'GET',
+        tag: 'form',
+        target: frameId
+    });
+
+    form.submit();
+
+    removeNode(form);
+
+    // Can't remove the iframe immediately or the download won't happen, so wait for 10 minutes
+    Ext.defer(removeNode, 1000 * 60 * 10, null, [iframe]);
+
+    function paramsToInputs(params) {
+     
+        var inputs = [];
+        for (var key in params) {
+            var values = [].concat(params[key]);
+            Ext.each(values, function(value) {
+                inputs.push(createInput(key, value));
+            });
+        }
+        return inputs;
+        
+    }
+
+    function createInput(key, value) {
+        return {
+            name: Ext.htmlEncode(key),
+            tag: 'input',
+            type: 'hidden',
+            value: Ext.htmlEncode(value)
+        };
+    }
+};
+
+// Declared outside the download function to avoid a closure
+download.onload = function() {
+    // Note we only come into here in the failure case, so you'll need to include your own failure handling
+    var response = this.contentDocument.body.innerHTML;
+    alert("Errore durante l'esportazione.");
+
+};
+
+// Declared outside the download function to avoid a closure
+download.removeNode = function(node) {
+    node.onload = null;
+    node.parentNode.removeChild(node);
+};
+
 
 
 Ext.util.base64 = {

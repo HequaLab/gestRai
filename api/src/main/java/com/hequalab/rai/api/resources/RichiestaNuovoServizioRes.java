@@ -1,15 +1,13 @@
 package com.hequalab.rai.api.resources;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
@@ -26,18 +24,22 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.commons.mail.EmailException;
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.google.common.base.Optional;
+import com.hequalab.rai.api.auth.AccessTokenDAO;
+import com.hequalab.rai.api.auth.SimpleAuthenticator;
 import com.hequalab.rai.api.dtos.Page;
 import com.hequalab.rai.api.dtos.richiestanuovoservizio.RichiestaNuovoServizioCreate;
 import com.hequalab.rai.api.dtos.richiestanuovoservizio.RichiestaNuovoServizioUpdate;
@@ -46,11 +48,13 @@ import com.hequalab.rai.api.params.RichiestaNuovoServizioIdParam;
 import com.hequalab.rai.api.read.views.mailToken.MailTokenView;
 import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioView;
 import com.hequalab.rai.api.read.views.user.UserView;
-import com.hequalab.rai.api.utility.ClientMail;
+import com.hequalab.rai.api.utility.ForbiddenException;
 import com.hequalab.rai.api.utility.PdfCreator;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
+import com.hequalab.rai.domain.produzioni.ProduzioniId;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizio;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizioId;
+import com.hequalab.rai.domain.servizi.ServiziId;
 import com.hequalab.rai.domain.user.Role;
 import com.hequalab.rai.domain.user.UserId;
 
@@ -69,7 +73,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 @Path("/richiestaNuovoServizio")
 @Produces(MediaType.APPLICATION_JSON)
@@ -123,7 +131,8 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	// HttpCode 460-> Hanno provato ad approvare una richiesta che ha gia
 	// uno stato impostato
 	if (!uv.getStato().toLowerCase().equals("nessuno"))
-	    throw new WebApplicationException(460);
+	    throw new ForbiddenException("Il servizio è " + uv.getStato()
+		    + ", non sono permesse modifiche.");
 
 	LocalDateTime timeStamp = LocalDateTime.now();
 	UserId usr = user.getUserId();
@@ -220,6 +229,62 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	return "Richiesta approvata con successo!";
     }
 
+    
+    // Rifiuto richiesta tramite mail
+    @GET
+    @Path("rifiutaRichiesta/{id}/{accessToken}")
+    @UnitOfWork
+    @Timed
+    @CacheControl(noCache = true)
+    public String rifiuta(@PathParam("id") RichiestaNuovoServizioIdParam id,
+	    @PathParam("accessToken") String accessToken) {
+
+	UserId user = null;
+	LocalDateTime timeStamp = LocalDateTime.now();
+
+	// Procedura che controlla il token di accesso: se valido ritorna l'id
+	// dell'user
+
+	@SuppressWarnings("unchecked")
+	List<MailTokenView> v = (List<MailTokenView>) hibSess()
+		.createQuery(
+			"from MailTokenView where accessToken = :accessToken order by expiration DESC")
+		.setParameter("accessToken", accessToken).list();
+
+	if (v == null || v.size() == 0) {
+	    return "Impossibile rifiutare la richiesta: token inesistente!";
+	}
+
+	MailTokenView tokenView = v.get(0);
+	user = tokenView.getUser();
+
+	// Controllo validità token
+	if (DateTime.now().getMillis() > tokenView.getExpiration().toDateTime()
+		.getMillis()) {
+	    return "Impossibile rifiutare la richiesta: Token scaduto!";
+	}
+
+	// Controllo i privilegi
+	UserView uv = (UserView) hibSess()
+		.createQuery("from UserView where userId = :id")
+		.setParameter("id", user).uniqueResult();
+	if (uv == null) {
+	    return "Impossibile rifiutare la richiesta: utente non trovato!";
+	}
+
+	// NB. Probabilmente la mancanza di privilegi non si ha mai.
+	for (Role r : uv.getRoles()) {
+	    if (r.equals(Role.Operatore) || r.equals(Role.SOperatore)) {
+		return "Impossibile rifiutare la richiesta: utente senza privilegi!";
+	    }
+	}
+
+	aggSess().save(aggSess().get(RichiestaNuovoServizio.class, id.get())
+		.approva(id.get(), user, timeStamp));
+
+	return "Richiesta rifiutata con successo!";
+    }
+
     // Api per rifiuto richiesta da extjs
     @SuppressWarnings("unchecked")
     @POST
@@ -266,12 +331,48 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 			"from RichiestaNuovoServizioView where richiestanuovoservizioId = :id")
 		.setParameter("id", id.get()).uniqueResult();
 
+	String nameU = user.getFirstName() + " " + user.getLastName();
+	for (Role r : user.getRoles()) {
+	    if ((r.equals(Role.Operatore) || r.equals(Role.SOperatore)) && !uv
+		    .getOperatore().toLowerCase().equals(nameU.toLowerCase())) {
+		throw new ForbiddenException(
+			"Non si possono eliminare richieste di altri utenti");
+	    }
+	}
+
 	// Devo fare il check dell'ora.
+	LocalDate data = uv.getData();
+	String tipologia = uv.getTipologia();
+	String ora = uv.getOra();
+
+	if (tipologia.toLowerCase().equals("canone"))
+	    ora = "08:00"; // 8 di mattina
+	String strTimeStampInizioLavoro = data.toString("yyyy-MM-dd") + " "
+		+ ora;
+
+	LocalDateTime timeStampInizioLavoro = null;
+	try {
+	    timeStampInizioLavoro = new LocalDateTime(
+		    new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm")
+			    .parse(strTimeStampInizioLavoro).getTime()
+			    - (12 /* ore */ * 3600 * 1000));
+
+	} catch (ParseException e) {
+	    throw new ForbiddenException(
+		    "Non è stato possibile ricreare la data di inizio servizio!");
+	}
 
 	// HttpCode 460-> Hanno provato ad approvare una richiesta che ha gia
 	// uno stato impostato
 	if (!uv.getStato().toLowerCase().equals("nessuno"))
 	    throw new WebApplicationException(460);
+
+	if (DateTime.now().getMillis() > timeStampInizioLavoro.toDateTime()
+		.getMillis()) {
+	    throw new ForbiddenException(
+		    "Non è possibile cancellare un servizio che inizia in meno di 12 ore");
+
+	}
 
 	LocalDateTime timeStamp = LocalDateTime.now();
 	UserId usr = user.getUserId();
@@ -285,14 +386,20 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 
     @SuppressWarnings("unchecked")
     @GET
-    @Path("/reportPdf")
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Path("/reportPdf/{dataInizio}/{dataFine}")
+    // @Produces("application/pdf")
     @UnitOfWork
     @Timed
     @CacheControl(noCache = true)
-    public StreamingOutput reportPdf(@Auth UserView user,
-	    @DefaultValue("") @QueryParam("filter") String filter)
-		    throws Exception {
+    public Response reportPdf(@QueryParam("filter") String filter,
+	    @QueryParam("auth") String auth,
+	    @PathParam("dataInizio") Long dataInizio,
+	    @PathParam("dataFine") Long dataFine) throws Exception {
+
+	Optional<UserView> userV = new SimpleAuthenticator(new AccessTokenDAO())
+		.authenticate(auth);
+	if (!userV.isPresent())
+	    throw new WebApplicationException(401);
 
 	ExtJsParams filterParams = new ExtJsParams(
 		"select wv from RichiestaNuovoServizioView wv ", "wv");
@@ -300,6 +407,53 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 
 	List<RichiestaNuovoServizioView> dnv = hibSess()
 		.createQuery(filterParams.getSqlStatement()).list();
+	double costoTot = 0;
+	LocalDate dtInizioReport = new LocalDate(dataInizio);
+	LocalDate dtFineReport = new LocalDate(dataFine);
+
+	// Calcolo tutti i costi totali
+	for (RichiestaNuovoServizioView v : dnv) {
+	    int giorniComputo = 0, mesiComputo = 0;
+
+	    if (v.getDataFine().isBefore(dtFineReport)
+		    || v.getDataFine().isEqual(dtFineReport)) {
+		// caso 1: data minore di quella di fine report
+		giorniComputo = Days.daysBetween(v.getData(), v.getDataFine())
+			.getDays();
+
+	    } else {
+		// caso 2
+		giorniComputo = Days.daysBetween(v.getData(), dtFineReport)
+			.getDays();
+
+	    }
+	    giorniComputo += 1;
+
+	    double costoTotale = 0;
+	    // Calcolo il costo totale in base alla tipologia
+	    switch (v.getTipologia()) {
+	    case "Canone":
+		// Applicare mesi computo
+		costoTotale = v.getImporto();
+		break;
+	    case "Modulo":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    case "Richiesta":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    case "Trasporto":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    default:
+		break;
+	    }
+
+	    costoTot += costoTotale;
+	    v.setCostoTotale(costoTotale);
+	    if (v.getOre() == null && v.getTipologia().equals("Canone"))
+		v.setOre(0);
+	}
 
 	List<RichiestaNuovoServizioView> data1 = new ArrayList<RichiestaNuovoServizioView>();
 	data1 = dnv;
@@ -313,8 +467,12 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	Map parameters = new HashMap();
 
 	parameters.put("logo",
-		ImageIO.read(getClass().getResource("RAI_logo.png")));
-	// parameters.put("profiloApprovante", );
+		ImageIO.read(getClass().getResource("logo_rai_inverso.png")));
+
+	parameters.put("inizioReport",
+		new DateTime(dataInizio).toString("dd/MM/y"));
+	parameters.put("fineReport", new DateTime(dataFine).toString("dd/M/y"));
+	parameters.put("costoTot", costoTot);
 
 	JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
 	JasperReport jasperReport = JasperCompileManager
@@ -323,33 +481,154 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
 		parameters, beanColDataSource);
 
-	String nomeFile = "TEST.pdf";
-	new java.io.File("static_assets/files/").mkdirs();
-	JasperExportManager.exportReportToPdfFile(jasperPrint,
-		"static_assets/files/" + nomeFile);
+	StreamingOutput ou = new StreamingOutput() {
 
-	return new StreamingOutput() {
 	    @Override
 	    public void write(OutputStream output) throws IOException {
 		try {
-		    File f = new File("static_assets/files/TEST.pdf");
-		    @SuppressWarnings("resource")
-		    FileInputStream fileInputStream = new FileInputStream(f);
-		    byte[] buffer = new byte[1024];
-		    int count = 0;
-
-		    while ((count = fileInputStream.read(buffer)) >= 0) {
-			output.write(buffer, 0, count);
-		    }
-
-		    output.flush();
-		    // JasperExportManager.exportReportToPdfStream(jasperPrint,
-		    // output);
-		} catch (Exception e) {
+		    JasperExportManager.exportReportToPdfStream(jasperPrint,
+			    output);
+		} catch (JRException e) {
+		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		}
 	    }
 	};
+
+	return Response.ok(ou, "application/pdf")
+		.header("content-disposition",
+			"attachment; filename = Computo_economico_"
+				+ dtInizioReport.toString("d/MM/y") + "_"
+				+ dtFineReport.toString("d/MM/y") + ".pdf")
+		.build();
+
+    }
+
+    @SuppressWarnings("unchecked")
+    @GET
+    @Path("/reportExcel/{dataInizio}/{dataFine}")
+    @UnitOfWork
+    @Produces("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    @Timed
+    @CacheControl(noCache = true)
+    public Response reportExcel(@QueryParam("filter") String filter,
+	    @QueryParam("auth") String auth,
+	    @PathParam("dataInizio") Long dataInizio,
+	    @PathParam("dataFine") Long dataFine) throws Exception {
+
+	Optional<UserView> userV = new SimpleAuthenticator(new AccessTokenDAO())
+		.authenticate(auth);
+	if (!userV.isPresent())
+	    throw new WebApplicationException(401);
+
+	ExtJsParams filterParams = new ExtJsParams(
+		"select wv from RichiestaNuovoServizioView wv ", "wv");
+	filterParams.addFilters(filter);
+
+	List<RichiestaNuovoServizioView> dnv = hibSess()
+		.createQuery(filterParams.getSqlStatement()).list();
+	double costoTot = 0;
+	LocalDate dtInizioReport = new LocalDate(dataInizio);
+	LocalDate dtFineReport = new LocalDate(dataFine);
+
+	// Calcolo tutti i costi totali
+	for (RichiestaNuovoServizioView v : dnv) {
+	    int giorniComputo = 0, mesiComputo = 0;
+
+	    if (v.getDataFine().isBefore(dtFineReport)
+		    || v.getDataFine().isEqual(dtFineReport)) {
+		// caso 1: data minore di quella di fine report
+		giorniComputo = Days.daysBetween(v.getData(), v.getDataFine())
+			.getDays();
+
+	    } else {
+		// caso 2
+		giorniComputo = Days.daysBetween(v.getData(), dtFineReport)
+			.getDays();
+
+	    }
+	    giorniComputo += 1;
+
+	    double costoTotale = 0;
+	    // Calcolo il costo totale in base alla tipologia
+	    switch (v.getTipologia()) {
+	    case "Canone":
+		// Applicare mesi computo
+		costoTotale = v.getImporto();
+		break;
+	    case "Modulo":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    case "Richiesta":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    case "Trasporto":
+		costoTotale = giorniComputo * v.getOre() * v.getImporto();
+		break;
+	    default:
+		break;
+	    }
+
+	    costoTot += costoTotale;
+	    v.setCostoTotale(costoTotale);
+	    if (v.getOre() == null && v.getTipologia().equals("Canone"))
+		v.setOre(0);
+	}
+
+	List<RichiestaNuovoServizioView> data1 = new ArrayList<RichiestaNuovoServizioView>();
+	data1 = dnv;
+	JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(
+		data1);
+
+	InputStream inputStream = this.getClass()
+		.getResourceAsStream("report_computo_excel.jrxml");
+
+	@SuppressWarnings("rawtypes")
+	Map parameters = new HashMap();
+
+	parameters.put("logo",
+		ImageIO.read(getClass().getResource("logo_report.png")));
+
+	parameters.put("inizioReport",
+		new DateTime(dataInizio).toString("dd/MM/y"));
+	parameters.put("fineReport", new DateTime(dataFine).toString("dd/M/y"));
+	parameters.put("costoTot", costoTot);
+
+	JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
+	JasperReport jasperReport = JasperCompileManager
+		.compileReport(jasperDesign);
+
+	JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+		parameters, beanColDataSource);
+
+	StreamingOutput ou = new StreamingOutput() {
+
+	    @Override
+	    public void write(OutputStream output) throws IOException {
+		try {
+		    JRXlsExporter exporter = new JRXlsExporter();
+		    exporter.setExporterInput(
+			    new SimpleExporterInput(jasperPrint));
+		    exporter.setExporterOutput(
+			    new SimpleOutputStreamExporterOutput(output));
+		    SimpleXlsReportConfiguration xlsReportConfiguration = new SimpleXlsReportConfiguration();
+		    xlsReportConfiguration.setOnePagePerSheet(false);
+		    xlsReportConfiguration.setRemoveEmptySpaceBetweenRows(true);
+		    exporter.setConfiguration(xlsReportConfiguration);
+		    exporter.exportReport();
+		} catch (JRException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+	};
+
+	return Response.ok(ou)
+		.header("content-disposition",
+			"attachment; filename = Computo_economico_"
+				+ dtInizioReport.toString("d/MM/y") + "_"
+				+ dtFineReport.toString("d/MM/y") + ".xls")
+		.build();
 
     }
 
@@ -404,20 +683,21 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	List<RichiestaNuovoServizioView> lista = (List<RichiestaNuovoServizioView>) hibSess()
 		.createQuery("from RichiestaNuovoServizioView where "
 			+ "divisione = :divisione and " + "lotto = :lotto and "
-			+ "luogo = :luogo and " + "matricola = :matricola  and "
-			+ "nome = :nome and " + "produzione = :produzione and "
-			+ "ora = :ora and " + "ore = :ore and "
-			+ "tipologia = :tipologia and  " + "uorg = :uorg")
+			+ "luogo = :luogo and " + "matricola = :matricola and "
+			+ "nome = :nome and " + "produzione = :produzione  and "
+			+ "tipologia = :tipologia and  " + "uorg = :uorg and "
+			+ "ora = :ora  and data = :data and dataFine = :dataFine")
 		.setParameter("divisione", form.getDivisione())
 		.setParameter("lotto", form.getLotto())
 		.setParameter("luogo", form.getLuogo())
 		.setParameter("matricola", form.getMatricola())
 		.setParameter("nome", form.getNome())
 		.setParameter("produzione", form.getProduzione())
-		.setParameter("ora", form.getOra())
-		.setParameter("ore", form.getOre())
 		.setParameter("uorg", form.getUorg())
-		.setParameter("tipologia", form.getTipologia()).list();
+		.setParameter("tipologia", form.getTipologia())
+		.setParameter("ora", form.getOra())
+		.setParameter("data", form.getData())
+		.setParameter("dataFine", form.getDataFine()).list();
 
 	if (lista.size() > 0)
 	    return "YES";
@@ -433,6 +713,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	    @PathParam("id") RichiestaNuovoServizioIdParam id)
 		    throws IllegalAccessException, JsonParseException,
 		    JsonMappingException, IOException {
+
 	aggSess().save(
 		aggSess().get(RichiestaNuovoServizio.class, id.get()).delete());
     }
@@ -445,6 +726,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		    throws IllegalAccessException {
 
 	RichiestaNuovoServizioId id = new RichiestaNuovoServizioId();
+	
 	RichiestaNuovoServizio rec = new RichiestaNuovoServizio(id,
 		form.getData(), form.getDataFine(), form.getDivisione(),
 		form.getFornitore(), form.getNome(), form.getNote(),
@@ -453,52 +735,9 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		form.getMatricola(), form.getProduzione(), form.getLuogo(),
 		org.joda.time.LocalDateTime.now(), form.getUtenteApprovante(),
 		form.getImporto(), form.getCostoTotale(),
-		form.getStatoEsportazione(), form.getVoce(), form.getLuogoId());
+		form.getStatoEsportazione(), form.getVoce(), form.getLuogoId(),
+		form.getIdProduzione(), form.getIdServizio(),user.getUserId(), uriInfo.getBaseUri().toString());
 	aggSess().save(rec);
-
-	// Creo il token di accesso per l'email e invio l'email ai MANAGER
-	// dell'utente.
-
-	@SuppressWarnings("unused")
-	List<MailTokenView> newToken = new ArrayList<MailTokenView>();
-
-	String[] superiori = user.getSuperiore().split(",");
-	for (String s : superiori) {
-	    UserView superiore = (UserView) hibSess()
-		    .createQuery("from UserView where userName = :userName")
-		    .setParameter("userName", s).uniqueResult();
-	    if (superiore == null)
-		continue;
-
-	    MailTokenView e = new MailTokenView();
-	    e.setUser(superiore.getUserId());
-	    e.setExpiration(new DateTime(
-		    DateTime.now().getMillis() + (48 * 3600 * 1000))
-			    .toLocalDateTime());
-	    e.setAccessToken(UUID.randomUUID().toString());
-	    hibSess().save(e);
-
-	    // Invio l'email al Manager
-	    String mail = superiore.getEmail();
-	    if (mail == null)
-		continue;
-
-	    try {
-		ClientMail cMail = new ClientMail();
-		String testo = "E' stato richiesto un nuovo servizio. <br>"
-			+ "Nome servizio: " + form.getNome() + "<br>"
-			+ "Utente richiedente: " + form.getOperatore() + "<br>"
-			+ "<b>Link approvazione: </b>" + uriInfo.getBaseUri()
-			+ "richiestaNuovoServizio/approvaRichiesta/"
-			+ id.getUuid().toString() + "/" + e.getAccessToken();
-
-		cMail.sendEmail(mail, "Richiesto nuovo servizio", testo);
-	    } catch (EmailException e1) {
-		e1.printStackTrace();
-		continue;
-	    }
-
-	}
 
 	RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();
 	uv.setRichiestaNuovoServizioId(id);
@@ -521,6 +760,8 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	uv.setVoce(form.getVoce());
 	uv.setStatoEsportazione(form.getStatoEsportazione());
 	uv.setLuogoId(form.getLuogoId());
+	uv.setIdProduzione(form.getIdProduzione());
+	uv.setIdServizio(form.getIdServizio());
 	return uv;
     }
 
@@ -575,6 +816,10 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	String voce = rep.getVoce() != null ? rep.getVoce() : recOld.getVoce();
 	String luogoId = rep.getLuogoId() != null ? rep.getLuogoId()
 		: recOld.getLuogoId();
+	ProduzioniId idProduzione = rep.getIdProduzione() != null
+		? rep.getIdProduzione() : recOld.getIdProduzione();
+	ServiziId idServizio = rep.getIdServizio() != null ? rep.getIdServizio()
+		: recOld.getIdServizio();
 
 	RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();
 	uv.setRichiestaNuovoServizioId(id.get());
@@ -600,12 +845,15 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	uv.setStatoEsportazione(statoEsportazione);
 	uv.setVoce(voce);
 	uv.setLuogoId(luogoId);
+	uv.setIdServizio(idServizio);
+	uv.setIdProduzione(idProduzione);
 
 	aggSess().save(aggSess().get(RichiestaNuovoServizio.class, id.get())
 		.update(data, dataFine, divisione, fornitore, nome, note, ora,
 			ore, uorg, lotto, operatore, tipologia, matricola,
 			produzione, luogo, utenteApprovante, importo,
-			costoTotale, statoEsportazione, voce, luogoId));
+			costoTotale, statoEsportazione, voce, luogoId,
+			idProduzione, idServizio));
 
 	return uv;
     }

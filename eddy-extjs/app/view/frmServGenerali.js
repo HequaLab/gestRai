@@ -146,6 +146,7 @@ Ext.define('Rai.view.frmServGenerali', {
                     dataIndex: 'data',
                     text: 'Data inizio',
                     flex: 0.8,
+                    format: 'd-m-Y',
                     editor: {
                         xtype: 'datefield',
                         name: 'Data'
@@ -185,6 +186,7 @@ Ext.define('Rai.view.frmServGenerali', {
                     dataIndex: 'dataFine',
                     text: 'Data fine',
                     flex: 0.8,
+                    format: 'd-m-Y',
                     editor: {
                         xtype: 'datefield',
                         name: 'Data'
@@ -321,6 +323,7 @@ Ext.define('Rai.view.frmServGenerali', {
 
                                             // record.set('stato',"Approvato");
 
+                                            Ext.MessageBox.wait('Approvazione della richiesta in corso..');
                                             Ext.Ajax.request({
                                                 url: '/richiestaNuovoServizio/approvaRichiesta/' + record.get('richiestaNuovoServizioId'),
                                                 headers: {
@@ -328,26 +331,32 @@ Ext.define('Rai.view.frmServGenerali', {
                                                 },
                                                 method:'POST',
                                                 success: function (response, options) {
+                                                    Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                                    Ext.MessageBox.updateProgress(1);
+                                                    Ext.MessageBox.hide();
                                                     Ext.Msg.show({
                                                         title:'Richiesta approvata',
                                                         msg: "Richiesta approvata con successo.",
                                                         buttons: Ext.Msg.Ok,
                                                     });},
-                                                    failure: function (response, options) { Ext.Msg.show({
-                                                        title:'Errore con il server',
-                                                        msg: "C'è stato un errore durante l'approvazione della richiesta. Errore: " + response.status,
-                                                        buttons: Ext.Msg.Ok,
-                                                    });
-                                                }
+                                                    failure: function (response, options) {
+                                                        Ext.MessageBox.updateProgress(1);
+                                                        Ext.MessageBox.hide();
+                                                        Ext.Msg.show({
+                                                            title:'Errore con il server',
+                                                            msg: "C'è stato un errore durante l'approvazione della richiesta. Errore: " + response.status,
+                                                            buttons: Ext.Msg.Ok,
+                                                        });
+                                                    }
 
 
-                                            });
+                                                });
 
 
-                                        }
-                                    },
-                                    animEl: 'elId'
-                                });
+                                            }
+                                        },
+                                        animEl: 'elId'
+                                    });
 
 
 
@@ -415,6 +424,7 @@ Ext.define('Rai.view.frmServGenerali', {
                                             }
 
 
+                                            Ext.MessageBox.wait('Rifiuto della richiesta in corso...');
                                             Ext.Ajax.request({
                                                 url: '/richiestaNuovoServizio/rifiutaRichiesta/' + record.get('richiestaNuovoServizioId'),
                                                 headers: {
@@ -422,24 +432,29 @@ Ext.define('Rai.view.frmServGenerali', {
                                                 },
                                                 method:'POST',
                                                 success: function (response, options) {
+                                                    Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                                    Ext.MessageBox.updateProgress(1);
+                                                    Ext.MessageBox.hide();
                                                     Ext.Msg.show({
                                                         title:'Richiesta rifiutata',
                                                         msg: "Richiesta rifiutata con successo.",
                                                         buttons: Ext.Msg.Ok,
                                                     });},
-                                                    failure: function (response, options) { Ext.Msg.show({
-                                                        title:'Errore con il server',
-                                                        msg: "C'è stato un errore durante il rifiuto della richiesta. Errore: " + response.status,
-                                                        buttons: Ext.Msg.Ok,
-                                                    });
-                                                }
+                                                    failure: function (response, options) {
+                                                        Ext.MessageBox.updateProgress(1);
+                                                        Ext.MessageBox.hide();Ext.Msg.show({
+                                                            title:'Errore con il server',
+                                                            msg: "C'è stato un errore durante il rifiuto della richiesta. Errore: " + response.status,
+                                                            buttons: Ext.Msg.Ok,
+                                                        });
+                                                    }
 
 
-                                            });
-                                        }
-                                    },
-                                    animEl: 'elId'
-                                });
+                                                });
+                                            }
+                                        },
+                                        animEl: 'elId'
+                                    });
 
 
 
@@ -509,7 +524,9 @@ Ext.define('Rai.view.frmServGenerali', {
                                             Possibilità di eliminare la richiesta ad operatore [Il manager devono poter eliminare una richiesta anche approvata
                                             ma possono farlo al massimo fino a 12 ore prima dall’inizio della richiesta
                                             */
-                                            //record.set('stato',"Eliminata");
+
+                                            Ext.MessageBox.wait('Rimozione della richiesta in corso...');
+
                                             Ext.Ajax.request({
                                                 url: '/richiestaNuovoServizio/eliminaRichiesta/' + record.get('richiestaNuovoServizioId'),
                                                 headers: {
@@ -517,26 +534,33 @@ Ext.define('Rai.view.frmServGenerali', {
                                                 },
                                                 method:'POST',
                                                 success: function (response, options) {
+                                                    Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                                    Ext.MessageBox.updateProgress(1);
+                                                    Ext.MessageBox.hide();
+
                                                     Ext.Msg.show({
                                                         title:'Richiesta eliminata',
                                                         msg: "Richiesta eliminata",
                                                         buttons: Ext.Msg.Ok,
                                                     });},
-                                                    failure: function (response, options) { Ext.Msg.show({
-                                                        title:'Errore con il server',
-                                                        msg: "C'è stato un errore durante l'eliminazione della richiesta. Errore: " + response.status,
-                                                        buttons: Ext.Msg.Ok,
-                                                    });
-                                                }
+                                                    failure: function (response, options) {
+                                                        Ext.MessageBox.updateProgress(1);
+                                                        Ext.MessageBox.hide();
+                                                        Ext.Msg.show({
+                                                            title:'Errore con il server',
+                                                            msg: "C'è stato un errore durante l'eliminazione della richiesta. Errore: " + response.status,
+                                                            buttons: Ext.Msg.Ok,
+                                                        });
+                                                    }
 
 
-                                            });
+                                                });
 
 
-                                        }
-                                    },
-                                    animEl: 'elId'
-                                });
+                                            }
+                                        },
+                                        animEl: 'elId'
+                                    });
 
 
 

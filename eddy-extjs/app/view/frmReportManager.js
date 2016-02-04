@@ -74,9 +74,11 @@ Ext.define('Rai.view.frmReportManager', {
                                 return "";
                             },
                             summaryType: 'count',
+                            id: 'inizioData',
                             dataIndex: 'data',
                             text: 'Data inizio',
-                            flex: 1
+                            flex: 1,
+                            format: 'd-m-Y'
                         },
                         {
                             xtype: 'datecolumn',
@@ -86,7 +88,8 @@ Ext.define('Rai.view.frmReportManager', {
                             summaryType: 'count',
                             dataIndex: 'dataFine',
                             text: 'Data fine',
-                            flex: 1
+                            flex: 1,
+                            format: 'd-m-Y'
                         },
                         {
                             xtype: 'gridcolumn',
@@ -612,26 +615,16 @@ Ext.define('Rai.view.frmReportManager', {
                                             filterObj.push(temp);
                                         }
 
-
-
-                                        Ext.Ajax.request({
-                                            url: '/richiestaNuovoServizio/reportPdf',
+                                        var url =  '/richiestaNuovoServizio/reportPdf/' +  ( Ext.getCmp('inizioReport').getValue().getTime()) + '/' + (Ext.getCmp('fineReport').getValue().getTime());
+                                        download({
+                                            url: '/richiestaNuovoServizio/reportPdf/' +  ( Ext.getCmp('inizioReport').getValue().getTime()) + '/' + (Ext.getCmp('fineReport').getValue().getTime()),
                                             method: 'GET',
-                                            headers: {
-                                                'Authorization': 'Bearer ' + ACCESS_TOKEN,
-                                                'Content-Type': 'application/json'
-                                            },
-                                            params : {filter:JSON.stringify(filterObj)},
-                                            success: function (response, options) {
-                                                download(response);
-                                            },
-                                            failure: function (response, options) { Ext.Msg.show({
-                                                title:'Errore con il server',
-                                                msg: "Risposta: " + response,
-                                                buttons: Ext.Msg.Ok,
-                                            });
-                                        }
-                                    });
+                                            params : {filter:JSON.stringify(filterObj), auth:ACCESS_TOKEN},
+                                        },Ext.id());
+
+
+
+
                                     },
                                     flex: 1,
                                     icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABlklEQVQ4T32SMXKbQBiF31vJaQQz3MAU7lKEBrUm0gXQDXQEH0G+gXID5QTGfYxJK7ngCDqCPCaNNezLLBYO0YC2Yf6f3W/fvv8Rp1XN442EsK3PvwTDiX2PWJSH7j+2xdtsuvLz7WoIUM2nAlRO6uP3LqQXUM3itYwy/9dL8U+hAwACMv9pu2j7wwDw0FX0oeC0pB9evrtzVT8giSMZrD17TFu5leuNFTSHLNPLgFm8hEUJg+XEHlfnxnX96lXQblASBX9GVw+0WhvwUAuvXrErLwJOh54lPhL2IIOSlqHIlLKFq2FN0vrzn4Kxfd/U5sqZU3r5btMdaQM246WXv6wHFdAqk2F6KQ8O2gtwsx8JD0NB6vZrYtEzhbggsZe4BxFBbmT8CBJ1B6F0NanQRd7Pd8lZDuICRiuImVcfw8p8aYIC4psBflohApSQvJX0exAgqxsD81Xg6+ftVOqcdx5hhFsJi0EAZZ6bzAv3MLYwMoGgtHnaRQXzaUboGmDU3CzsQe0hhiBCVwsKSAYCHv2nbeq2/QUkWxEgOg1QagAAAABJRU5ErkJggg==',
@@ -640,20 +633,27 @@ Ext.define('Rai.view.frmReportManager', {
                                 {
                                     xtype: 'button',
                                     handler: function(button, e) {
-                                        var win = Ext.create('Ext.window.Window', {
-                                            height: 634,
-                                            width: 780,
-                                            layout: 'border',
-                                            title: 'Report servizio',
-                                            titleAlign: 'center',
-                                            maximizable: true,
-                                            closeAction: 'hide',
-                                            items: [{
-                                                xtype: 'component',
-                                                html : '<iframe src="'+ "http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1" + '" width="100%" height="100%"></iframe>',
-                                            }]
-                                        });
-                                        win.show();
+                                        var filterObj = [];
+
+                                        var storeFilters = Ext.StoreManager.lookup('storeRichiesteServizi').getFilters();
+                                        for (var i = 0; i < storeFilters.items.length; i++){
+                                            var temp = {
+                                                property:storeFilters.items[i]._property,
+                                                value:storeFilters.items[i]._value,
+                                                operator:storeFilters.items[i]._operator
+                                            };
+                                            filterObj.push(temp);
+                                        }
+
+                                        var url =  '/richiestaNuovoServizio/reportExcel/' +  ( Ext.getCmp('inizioReport').getValue().getTime()) + '/' + (Ext.getCmp('fineReport').getValue().getTime());
+                                        download({
+                                            url: '/richiestaNuovoServizio/reportExcel/' +  ( Ext.getCmp('inizioReport').getValue().getTime()) + '/' + (Ext.getCmp('fineReport').getValue().getTime()),
+                                            method: 'GET',
+                                            params : {filter:JSON.stringify(filterObj), auth:ACCESS_TOKEN},
+                                        },Ext.id());
+
+
+
                                     },
                                     flex: 1,
                                     alignTarget: '',

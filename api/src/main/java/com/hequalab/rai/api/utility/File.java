@@ -41,6 +41,7 @@ public class File extends UUIDIdentity {
 	return this.URL == null ? null : "../files/" + this.URL;
     }
 
+    
     public byte[] decode(String data) {
 	return Base64.decodeBase64(data);
     }

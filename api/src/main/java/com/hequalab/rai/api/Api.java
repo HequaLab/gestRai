@@ -1,5 +1,14 @@
 package com.hequalab.rai.api;
 
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDResources;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 import org.hibernate.SessionFactory;
 
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
@@ -7,6 +16,7 @@ import com.bazaarvoice.dropwizard.redirect.RedirectBundle;
 import com.bazaarvoice.dropwizard.redirect.UriRedirect;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.hequalab.rai.api.action.mail.richiestanuovoservizio.RichiestaNuovoServizioMailSender;
 import com.hequalab.rai.api.auth.AccessTokenDAO;
 import com.hequalab.rai.api.auth.SimpleAuthenticator;
 import com.hequalab.rai.api.read.views.filiali.FilialiViewWriter;
@@ -29,7 +39,6 @@ import com.hequalab.rai.api.resources.RichiestaNuovoServizioRes;
 import com.hequalab.rai.api.resources.ServiziRes;
 import com.hequalab.rai.api.resources.UsersRes;
 import com.hequalab.rai.api.utility.CheckEmailWithReport;
-import com.hequalab.rai.api.utility.ClientMail;
 import com.hequalab.rai.api.utility.MailClientConf;
 import com.hequalab.rai.api.utility.QrDecoder;
 import com.hequalab.rai.api.utility.ScheduleReportManager;
@@ -53,13 +62,10 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-
-
-
 public class Api extends Application<ApiConf> {
 
     static public MailClientConf mailClientConf;
-    
+
     private final HibernateBundle<ApiConf> hibernate = new ApiHibernateBundle(
 	    "com.hequalab.rai");
 
@@ -92,10 +98,11 @@ public class Api extends Application<ApiConf> {
 
 	CheckEmailWithReport c = new CheckEmailWithReport();
 	c.doit();
-	
+
 	mailClientConf = conf.getMailClientConf();
-	//clientMail.sendEmail("info@aedeslab.com", "Prova", "Email inviata per prova");
-	
+	// clientMail.sendEmail("info@aedeslab.com", "Prova", "Email inviata per
+	// prova");
+
 	AccessTokenDAO accessTokenDAO = new AccessTokenDAO();
 
 	// Hibernate session
@@ -122,6 +129,12 @@ public class Api extends Application<ApiConf> {
 	UserViewWriter userViewSvc = new UserViewWriter(hibSessionFactory);
 	dispatcher.subscribe(userViewSvc);
 
+	// Action
+
+	// MailSender
+	RichiestaNuovoServizioMailSender richiestaNuovoServizioMailSender = new RichiestaNuovoServizioMailSender(hibSessionFactory);
+	dispatcher.subscribe(richiestaNuovoServizioMailSender);
+	
 	// #AnchorViewWriter
 	ProduzioniViewWriter produzioniViewSvc = new ProduzioniViewWriter(
 		hibSessionFactory);
@@ -187,12 +200,48 @@ public class Api extends Application<ApiConf> {
 
 	env.jersey()
 		.register(new FilialiRes(sessionFactory, hibSessionFactory));
-	
-	
+
 	// Schedule manager
 	ScheduleReportManager se = new ScheduleReportManager();
 	se.startAsync();
-	
+
+	// Prendo le immagini dal PDF
+	try {
+	    String sourceDir = "split.pdf";// Paste pdf files in PDFCopy folder
+					   // to read
+	    String destinationDir = "email/test/";
+	    File oldFile = new File(sourceDir);
+	    if (oldFile.exists()) {
+		PDDocument document = PDDocument.load(sourceDir);
+
+		List<PDPage> list = document.getDocumentCatalog().getAllPages();
+
+		String fileName = oldFile.getName().replace(".pdf", "_cover");
+		int totalImages = 1;
+		for (PDPage page : list) {
+		    PDResources pdResources = page.getResources();
+
+		    Map pageImages = pdResources.getImages();
+		    if (pageImages != null) {
+
+			Iterator imageIter = pageImages.keySet().iterator();
+			while (imageIter.hasNext()) {
+			    String key = (String) imageIter.next();
+			    PDXObjectImage pdxObjectImage = (PDXObjectImage) pageImages
+				    .get(key);
+			    pdxObjectImage.write2file(destinationDir + fileName
+				    + "_" + totalImages);
+			    totalImages++;
+			}
+		    }
+		}
+	    } else {
+		System.err.println("File not exists");
+	    }
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+
 	String prova = new QrDecoder().readQRCode("test.png");
 	System.out.println("DECODER :" + prova);
 

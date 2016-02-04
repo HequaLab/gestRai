@@ -33,7 +33,6 @@ import com.hequalab.rai.api.params.FilialiIdParam;
 import com.hequalab.rai.api.read.views.filiali.FilialiView;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 
-
 import com.hequalab.rai.api.read.views.user.UserView;
 import io.dropwizard.auth.Auth;
 
@@ -49,95 +48,91 @@ import com.hequalab.rai.domain.filiali.FilialiId;
 @Consumes(MediaType.APPLICATION_JSON)
 public class FilialiRes extends AbstractRes {
 
-	public FilialiRes(AggregateSessionFactory aggregateSessionFactory,
-			SessionFactory sessionFactory) {
-		super(aggregateSessionFactory, sessionFactory);
-	}
-	
-	@GET
-	@UnitOfWork
-	@Timed
-	@CacheControl(noCache = true)
-	public Page<FilialiView> list(@Auth UserView user,
-			@DefaultValue("1") @QueryParam("page") Integer page,
-			@DefaultValue("10") @QueryParam("limit") Integer size,
-			@DefaultValue("") @QueryParam("filter") String filter,
-			@DefaultValue("") @QueryParam("sort") String sort) throws Exception {
+    public FilialiRes(AggregateSessionFactory aggregateSessionFactory,
+	    SessionFactory sessionFactory) {
+	super(aggregateSessionFactory, sessionFactory);
+    }
 
-		ExtJsParams filterParams = new ExtJsParams(
-				"select wv from FilialiView wv ", "wv");
-		filterParams.addFilters(filter);
-		filterParams.addOrders(sort);
-		@SuppressWarnings("unchecked")
-		List<FilialiView> dnv = hibSess().createQuery(
-				filterParams.getSqlStatement()).list();
+    @GET
+    @UnitOfWork
+    @Timed
+    @CacheControl(noCache = true)
+    public Page<FilialiView> list(@Auth UserView user,
+	    @DefaultValue("1") @QueryParam("page") Integer page,
+	    @DefaultValue("10") @QueryParam("limit") Integer size,
+	    @DefaultValue("") @QueryParam("filter") String filter,
+	    @DefaultValue("") @QueryParam("sort") String sort)
+		    throws Exception {
 
-		return page(dnv, page, size);
-	}
-	
-	@GET @Path("/{id}")
-	@UnitOfWork @Timed
-	@CacheControl(noCache = true)
-	public FilialiView fetch(@PathParam("id") FilialiIdParam id) {
-		return (FilialiView) hibSess()
-				.createQuery("from FilialiView where filialiId = :id")
-				.setParameter("id", id.get()).uniqueResult();
-	}
+	ExtJsParams filterParams = new ExtJsParams(
+		"select wv from FilialiView wv ", "wv");
+	filterParams.addFilters(filter);
+	filterParams.addOrders(sort);
+	@SuppressWarnings("unchecked")
+	List<FilialiView> dnv = hibSess()
+		.createQuery(filterParams.getSqlStatement()).list();
 
-	@DELETE
-	@Path("{id}")
-	@UnitOfWork
-	@Timed
-	public void delete(@Auth UserView user, @PathParam("id") FilialiIdParam id)
-			throws IllegalAccessException, JsonParseException,
-			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Filiali.class, id.get()).delete());
-	}
+	return page(dnv, page, size);
+    }
 
-	@POST
-	@UnitOfWork
-	@Timed
-	public FilialiView create(@Auth UserView user, @Valid FilialiCreate form,
-			@Context UriInfo uriInfo) throws IllegalAccessException {
-		
-		
-		FilialiId id = new FilialiId();
-		Filiali rec = new Filiali(id, form.getNome());
-		aggSess().save(rec);
+    @GET
+    @Path("/{id}")
+    @UnitOfWork
+    @Timed
+    @CacheControl(noCache = true)
+    public FilialiView fetch(@PathParam("id") FilialiIdParam id) {
+	return (FilialiView) hibSess()
+		.createQuery("from FilialiView where filialiId = :id")
+		.setParameter("id", id.get()).uniqueResult();
+    }
 
-		FilialiView uv = new FilialiView();
-		uv.setFilialiId(id);
-		uv.setNome(form.getNome());
-		return uv;
-	}
+    @DELETE
+    @Path("{id}")
+    @UnitOfWork
+    @Timed
+    public void delete(@Auth UserView user, @PathParam("id") FilialiIdParam id)
+	    throws IllegalAccessException, JsonParseException,
+	    JsonMappingException, IOException {
+	aggSess().save(aggSess().get(Filiali.class, id.get()).delete());
+    }
 
-	@PUT
-	@Path("{id}")
-	@UnitOfWork
-	@Timed
-	public FilialiView update(@Auth UserView user, @PathParam("id") FilialiIdParam id,
-			@Valid FilialiUpdate rep) throws IllegalAccessException {
+    @POST
+    @UnitOfWork
+    @Timed
+    public FilialiView create(@Auth UserView user, @Valid FilialiCreate form,
+	    @Context UriInfo uriInfo) throws IllegalAccessException {
 
-		FilialiView recOld = (FilialiView) hibSess()
-				.createQuery("from FilialiView where filialiId = :id")
-				.setParameter("id", id.get()).uniqueResult();
-				
-		String nome = rep.getNome() != null ? rep.getNome() : recOld.getNome();
-			
+	FilialiId id = new FilialiId();
+	Filiali rec = new Filiali(id, form.getNome());
+	aggSess().save(rec);
 
-		
+	FilialiView uv = new FilialiView();
+	uv.setFilialiId(id);
+	uv.setNome(form.getNome());
+	return uv;
+    }
 
-		aggSess().save(
-				aggSess().get(Filiali.class, id.get()).update( nome ));
-				
+    @PUT
+    @Path("{id}")
+    @UnitOfWork
+    @Timed
+    public FilialiView update(@Auth UserView user,
+	    @PathParam("id") FilialiIdParam id, @Valid FilialiUpdate rep)
+		    throws IllegalAccessException {
 
-		FilialiView uv = new FilialiView();
-		uv.setFilialiId(id.get());
-		uv.setNome(nome);
-		
-		return uv;
-	}
-	
-	
-	
+	FilialiView recOld = (FilialiView) hibSess()
+		.createQuery("from FilialiView where filialiId = :id")
+		.setParameter("id", id.get()).uniqueResult();
+
+	String nome = rep.getNome() != null ? rep.getNome() : recOld.getNome();
+
+	aggSess().save(aggSess().get(Filiali.class, id.get()).update(nome));
+
+	FilialiView uv = new FilialiView();
+	uv.setFilialiId(id.get());
+	uv.setNome(nome);
+
+	return uv;
+    }
+
 }

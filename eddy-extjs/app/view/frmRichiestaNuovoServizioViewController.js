@@ -70,19 +70,16 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
     },
 
     onRichiediServizio: function(button, e, eOpts) {
-
-
         Ext.Msg.show({
-            title:'Richiesta servizio',
+            title: 'Richiesta servizio',
             msg: 'Stai per richiedere un servizio, vuoi continuae?',
             buttons: Ext.Msg.YESNO,
             buttonText: {
-                no:'No',
-                yes:'Si'
+                no: 'No',
+                yes: 'Si'
             },
-            fn: function(btn){
-                if (btn=='yes'){
-
+            fn: function(btn) {
+                if (btn == 'yes') {
                     var servizio = Ext.getCmp('servizioCombo').getValue(),
                         uorg = Ext.getCmp('uorg').getValue(),
                         data = Ext.getCmp('dataRichiesta').getValue(),
@@ -94,158 +91,157 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                         stato = "Nessuno",
                         tipologia = Ext.getCmp('comboTipologia').getValue(),
                         lotto = Ext.getCmp('lotto').getValue(),
-                        matricola = Ext.getCmp('matricola').getValue(),
-                        produzione = Ext.getCmp('produzione').getValue(),
+                        matricola = Ext.getCmp('matricola').getRawValue(),
+                        produzione = Ext.getCmp('produzione').getRawValue(),
                         luogoId = Ext.getCmp('luogo').getValue(),
-                        index = (luogoId !== undefined ? Ext.StoreMgr.lookup("storeLuoghi").findExact('luoghiId',luogoId) : undefined),
+                        index = (luogoId !== undefined ? Ext.StoreMgr.lookup("storeLuoghi").findExact('luoghiId', luogoId) : undefined),
                         rec = index !== undefined ? Ext.StoreMgr.lookup("storeLuoghi").getAt(index) : undfined,
-                        luogo = rec !== null ? rec.get('descrizione') + " ( " + rec.get('indirizzo') + " - " + rec.get('cap') + " )":"Nessuno",
-                        importo = Ext.StoreManager.lookup("storeServizi").findRecord('serviziId',servizio).get('importo'),
-                        nomeServizio = Ext.StoreManager.lookup("storeServizi").findRecord('serviziId',servizio).get('descrizione'),
+                        luogo = rec !== null ? rec.get('descrizione') + " ( " + rec.get('indirizzo') + " - " + rec.get('cap') + " )" : "Nessuno",
+                        importo = Ext.StoreManager.lookup("storeServizi").findRecord('serviziId', servizio).get('importo'),
+                        nomeServizio = Ext.StoreManager.lookup("storeServizi").findRecord('serviziId', servizio).get('descrizione'),
                         operatore = USER.firstName + " " + USER.lastName,
-                        voce = Ext.getCmp('codiciCombo').getValue();
-
-
+                        voce = Ext.getCmp('codiciCombo').getRawValue(),
+                        idProduzione = Ext.getCmp('produzione').getValue(),
+                        idServizio = Ext.getCmp('servizioCombo').getValue();
                     var costoTotale = 0;
-                    if (tipologia === 'Canone')costoTotale = importo;
-                    else if (tipologia === 'Modulo')costoTotale = importo * ore;
-                    else if (tipologia === 'Richiesta')costoTotale = importo * ore;
-                    else if (tipologia === 'Trasporto')costoTotale = importo * ore;
-
-                    if (servizio === undefined || servizio === "")
-                    {    Ext.Msg.show({
-                        title:'Errore',
-                        msg: "Non hai selezionato il servizio",
-                        buttons: Ext.Msg.Ok,
-                    });
-                    return;
-                }
-
-
-                if ((data === undefined || data === null))
-                {    Ext.Msg.show({
-                    title:'Errore',
-                    msg: "Non hai selezionato una data!",
-                    buttons: Ext.Msg.Ok,
-                });
-                return;
-            }
-
-
-            var store = Ext.StoreManager.lookup('storeRichiesteServizi');
-            var emptyApp = new Rai.model.richiestaServizio();
-            emptyApp.set('nome',nomeServizio);
-            emptyApp.set('importo',importo);
-            emptyApp.set('divisione',filiale);
-            emptyApp.set('ora',ora);
-            emptyApp.set('data',data);
-            emptyApp.set('uorg',uorg);
-            emptyApp.set('ore',ore);
-            emptyApp.set('note',note);
-            emptyApp.set('stato',stato);
-            emptyApp.set('dataFine',dataFine);
-            emptyApp.set('tipologia',tipologia);
-            emptyApp.set('lotto',lotto);
-            emptyApp.set('matricola',matricola);
-            emptyApp.set('produzione',produzione);
-            emptyApp.set('luogo',luogo);
-            emptyApp.set('operatore',operatore);
-            emptyApp.set('voce',voce);
-            emptyApp.set('luogoId',luogoId);
-
-
-            Ext.Ajax.request({
-                url: '/richiestaNuovoServizio/controlloOrdine',
-                headers: {
-                    'Authorization': 'Bearer ' + ACCESS_TOKEN,
-                    'Content-Type': 'application/json'
-                },
-                method    : 'POST',
-                jsonData:{
-
-                    nome:servizio,
-                    divisione:filiale,
-                    ora:ora,
-                    data:data.getTime(),
-                    uorg:uorg,
-                    ore:ore,
-                    note:note,
-                    stato:stato,
-                    dataFine:dataFine.getTime(),
-                    tipologia:tipologia,
-                    lotto:lotto,
-                    matricola:matricola,
-                    produzione:produzione,
-                    luogo:luogo
-                },
-                success: function (response, options) {
-                    if (response.text === "YES"){
-
+                    if (tipologia === 'Canone') costoTotale = importo;
+                    else if (tipologia === 'Modulo') costoTotale = importo * ore;
+                    else if (tipologia === 'Richiesta') costoTotale = importo * ore;
+                    else if (tipologia === 'Trasporto') costoTotale = importo * ore;
+                    if (servizio === undefined || servizio === "") {
                         Ext.Msg.show({
-                            title:'Richiesta servizio',
-                            msg: "E' gia stato richiesto un servizio simile da un altro operatore, sei sicuro di voler continuare?",
-                            buttons: Ext.Msg.YESNO,
-                            buttonText: {
-                                no:'No',
-                                yes:'Si'
-                            },
-                            fn: function(btn){
-                                if (btn=='no'){
-                                    alert('premuto no');
-                                    return;
-                                }
-                            }
+                            title: 'Errore',
+                            msg: "Non hai selezionato il servizio",
+                            buttons: Ext.Msg.Ok,
                         });
+                        return;
+                    }
+                    if ((data === undefined || data === null)) {
+                        Ext.Msg.show({
+                            title: 'Errore',
+                            msg: "Non hai selezionato una data!",
+                            buttons: Ext.Msg.Ok,
+                        });
+                        return;
                     }
 
 
-                    store.add(emptyApp);
-                    var self = this;
-                    store.on('write', function() {
-                        store.load();
+                    var store = Ext.StoreManager.lookup('storeRichiesteServizi');
+                    var emptyApp = new Rai.model.richiestaServizio();
+                    emptyApp.set('nome', nomeServizio);
+                    emptyApp.set('importo', importo);
+                    emptyApp.set('divisione', filiale);
+                    emptyApp.set('ora', ora);
+                    emptyApp.set('data', data);
+                    emptyApp.set('uorg', uorg);
+                    emptyApp.set('ore', ore);
+                    emptyApp.set('note', note);
+                    emptyApp.set('stato', stato);
+                    emptyApp.set('dataFine', dataFine);
+                    emptyApp.set('tipologia', tipologia);
+                    emptyApp.set('lotto', lotto);
+                    emptyApp.set('matricola', matricola);
+                    emptyApp.set('produzione', produzione);
+                    emptyApp.set('luogo', luogo);
+                    emptyApp.set('operatore', operatore);
+                    emptyApp.set('voce', voce);
+                    emptyApp.set('luogoId', luogoId);
+                    emptyApp.set('idProduzione',idProduzione);
+                    emptyApp.set('idServizio',idServizio);
+
+                    Ext.Ajax.request({
+                        url: '/richiestaNuovoServizio/controlloOrdine',
+                        headers: {
+                            'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        jsonData: {
+                            nome: nomeServizio,
+                            divisione: filiale,
+                            ora: ora,
+                            data: data.getTime() / 1000,
+                            uorg: uorg,
+                            ore: ore,
+                            note: note,
+                            dataFine: dataFine.getTime() / 1000,
+                            tipologia: tipologia,
+                            lotto: lotto,
+                            matricola: matricola,
+                            produzione: produzione,
+                            luogo: luogo
+                        },
+                        success: function(response, options) {
+
+                            if (response.responseText === "YES") {
+                                Ext.Msg.show({
+                                    title: 'Richiesta servizio',
+                                    msg: "E' gia stato richiesto un servizio simile da un altro operatore, sei sicuro di voler continuare?",
+                                    buttons: Ext.Msg.YESNO,
+                                    buttonText: {
+                                        no: 'No',
+                                        yes: 'Si'
+                                    },
+                                    fn: function(btn) {
+                                        if (btn == 'no') {
+                                            return;
+                                        }else {
+                                            Ext.MessageBox.wait('Creazione richiesta in corso..');
+                                            store.add(emptyApp);
+                                            var self = this;
+                                            store.on('write', function() {
+                                                store.load();
+                                                Ext.MessageBox.updateProgress(1);
+                                                Ext.MessageBox.hide();
+                                            });
+
+                                        }
+                                    }
+                                });
+                            }else {
+                                Ext.MessageBox.wait('Creazione richiesta in corso..');
+                                store.add(emptyApp);
+                                var self = this;
+                                store.on('write', function() {
+                                    store.load();
+                                    Ext.MessageBox.updateProgress(1);
+                                    Ext.MessageBox.hide();
+                                });
+
+                            }
+
+
+                            //  Ext.getCmp('comboTipologia').setValue('Canone');
+                        },
+                        failure: function(response, options) {
+                            Ext.Msg.show({
+                                title: 'Errore server durante richiesta servizio',
+                                msg: "Risposta: " + response,
+                                buttons: Ext.Msg.Ok,
+                            });
+                        }
                     });
-
-
-                    //  Ext.getCmp('comboTipologia').setValue('Canone');
-
-
-                },
-                failure: function (response, options) { Ext.Msg.show({
-                    title:'Errore server durante richiesta servizio',
-                    msg: "Risposta: " + response,
-                    buttons: Ext.Msg.Ok,
-                });
-            }
-
-
+                    Ext.getCmp('oreRichiesta').disable();
+                    Ext.getCmp('oreRichiesta').labelEl.update('Q.ta');
+                    Ext.getCmp('servizioCombo').setValue(null);
+                    Ext.getCmp('uorg').setValue(null);
+                    Ext.getCmp('dataRichiesta').setValue(null);
+                    Ext.getCmp('oraRichiesta').setValue(null);
+                    Ext.getCmp('oreRichiesta').setValue(null);
+                    Ext.getCmp('dataFine').setValue(null);
+                    Ext.getCmp('noteRichiesta').setValue(null);
+                    Ext.getCmp('comboTipologia').setValue(null);
+                    Ext.getCmp('lotto').setValue(null);
+                    Ext.getCmp('dataFine').setValue(null);
+                    Ext.getCmp('codiciCombo').setValue(null);
+                    Ext.getCmp('matricola').setValue(null);
+                    Ext.getCmp('lotto').setValue(null);
+                    Ext.getCmp('luogo').setValue(null);
+                    Ext.getCmp('produzione').setValue(null);
+                }
+            },
+            animEl: 'elId'
         });
-
-        Ext.getCmp('oreRichiesta').disable();
-        Ext.getCmp('oreRichiesta').labelEl.update('Q.ta');
-        Ext.getCmp('servizioCombo').setValue(null);
-        Ext.getCmp('uorg').setValue(null);
-        Ext.getCmp('dataRichiesta').setValue(null);
-        Ext.getCmp('oraRichiesta').setValue(null);
-        Ext.getCmp('oreRichiesta').setValue(null);
-        Ext.getCmp('dataFine').setValue(null);
-        Ext.getCmp('noteRichiesta').setValue(null);
-        Ext.getCmp('comboTipologia').setValue(null);
-        Ext.getCmp('lotto').setValue(null);
-        Ext.getCmp('dataFine').setValue(null);
-        Ext.getCmp('codiciCombo').setValue(null);
-        Ext.getCmp('matricola').setValue(null);
-        Ext.getCmp('lotto').setValue(null);
-        Ext.getCmp('luogo').setValue(null);
-        Ext.getCmp('produzione').setValue(null);
-
-
-    }
-},
-animEl: 'elId'
-});
-
-
-
     },
 
     onClear: function(button, e, eOpts) {
@@ -301,8 +297,7 @@ animEl: 'elId'
 
         if (USER.roles.toLowerCase().indexOf("soperatore") >= 0){
             Ext.getCmp('approvaSubmit').setVisible(true);
-            Ext.getCmp('nonApprovaSubmit').setVisible(true);
-            Ext.getCmp('cancellaSubmit').setVisible(true);
+            Ext.getCmp('rifiutaSubmit').setVisible(true);
 
         }
     },

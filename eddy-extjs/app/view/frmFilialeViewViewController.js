@@ -26,6 +26,20 @@ Ext.define('Rai.view.frmFilialeViewViewController', {
     },
 
     onLogoutClick: function(button, e, eOpts) {
+
+        var stores = Ext.data.StoreManager.map;
+
+        for (name in stores) {
+            if (stores.hasOwnProperty(name)) {
+                store.autoSync = false;
+                store.autoLoad = false;
+                store = stores[name];
+                store.clearFilter();
+                store.proxy.headers = null;
+                // store.load();
+            }
+        }
+
         Ext.getCmp("pageContainer").removeAll();
         var cmp = Ext.create("Rai.view.frmLogin");
         Ext.getCmp("pageContainer").add(cmp);
@@ -33,6 +47,7 @@ Ext.define('Rai.view.frmFilialeViewViewController', {
     },
 
     onPanelAfterRender: function(component, eOpts) {
+
         Ext.getCmp("mainContainer").removeAll();
         var cmp = Ext.create("Rai.view.frmRichiestaNuovoServizio");
         Ext.getCmp("mainContainer").add(cmp);

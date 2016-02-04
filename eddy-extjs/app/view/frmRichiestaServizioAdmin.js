@@ -117,8 +117,15 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                         },
                         {
                             xtype: 'datecolumn',
-                            dataIndex: 'dataFine',
+                            dataIndex: 'data',
                             text: 'Data',
+                            flex: 0.7,
+                            format: 'd/M/ddd'
+                        },
+                        {
+                            xtype: 'datecolumn',
+                            dataIndex: 'dataFine',
+                            text: 'Data fine',
                             flex: 0.7
                         },
                         {

@@ -163,6 +163,12 @@ Ext.define('Rai.model.richiestaServizio', {
         },
         {
             name: 'utenteApprovante'
+        },
+        {
+            name: 'idProduzione'
+        },
+        {
+            name: 'idServizio'
         }
     ]
 });

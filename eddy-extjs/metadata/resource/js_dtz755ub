@@ -7,11 +7,12 @@
     "codeClass": null,
     "userConfig": {
         "bootstrap": true,
-        "defer": false,
+        "defer": true,
         "designer|userClassName": "js_dtz755ub",
         "includeInBundle": true,
         "url": "temp_data.js",
-        "x-compile": true
+        "x-bootstrap": false,
+        "x-compile": false
     },
     "name": "js",
     "designerId": "28182d5f-e547-4344-a946-6ab84056a5d0"

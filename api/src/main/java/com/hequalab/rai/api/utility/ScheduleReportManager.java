@@ -12,7 +12,7 @@ public class ScheduleReportManager extends AbstractScheduledService {
 
     @Override
     protected Scheduler scheduler() {
-	return Scheduler.newFixedRateSchedule(0, 8, TimeUnit.SECONDS);
+	return Scheduler.newFixedRateSchedule(0, 5, TimeUnit.MINUTES);
     }
 
     @Override

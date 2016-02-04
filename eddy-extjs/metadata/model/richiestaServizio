@@ -378,6 +378,32 @@
             },
             "name": "MyField37",
             "designerId": "02728c01-d8d2-4d2c-9c10-6a5c2cf7f744"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "idProduzione"
+            },
+            "name": "MyField38",
+            "designerId": "a8ec47cf-3ba4-40f8-8483-717e769dc982"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "idServizio"
+            },
+            "name": "MyField39",
+            "designerId": "e4e12ba0-0d27-4f19-a01d-e01b43571a3d"
         }
     ]
 }

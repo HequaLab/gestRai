@@ -1,0 +1,17 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "defer": false,
+        "designer|userClassName": "js_34f8hjpf",
+        "url": "smartsupp.js",
+        "x-bootstrap": false,
+        "x-compile": false
+    },
+    "name": "js1",
+    "designerId": "8f11be49-e9b0-47c0-9b58-975318bf31e1"
+}
