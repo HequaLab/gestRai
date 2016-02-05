@@ -15,7 +15,7 @@ public class ClientMail {
 	private Boolean ssl;
 
 	public ClientMail(MailClientConf conf) throws EmailException {
-
+		
 		this.hostName = conf.getHostName();
 		this.setSmtp(conf.getSmtp());
 		this.userName = conf.getUserName();

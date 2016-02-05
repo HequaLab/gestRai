@@ -1,0 +1,7 @@
+{
+    "webBuild": {
+        "environment": "production",
+        "clean": "on",
+        "publishPath": "/Users/kliton/Desktop/final_prod"
+    }
+}

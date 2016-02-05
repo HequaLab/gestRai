@@ -11,8 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.hibernate.SessionFactory;
 import org.joda.time.DateTime;
@@ -41,7 +43,7 @@ public class OAuth2Resource extends AbstractRes {
 	@UnitOfWork
 	@Timed
 	public String postForToken(@QueryParam("id") String username,
-			@QueryParam("pwd") String password) {
+			@QueryParam("pwd") String password, @Context UriInfo uriInfo) {
 
 		if (username == null || password == null)
 			throw new WebApplicationException(Response.status(
@@ -81,8 +83,8 @@ public class OAuth2Resource extends AbstractRes {
 	@Timed
 	public UserView postForToken(@Auth UserView user) {
 		user.setPassword("****");
-		//user.setUserName("****");
-		//user.setUserId(null);
+		// user.setUserName("****");
+		// user.setUserId(null);
 		return user;
 	}
 

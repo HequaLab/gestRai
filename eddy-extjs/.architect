@@ -2854,7 +2854,7 @@
         ]
     },
     "canvasState": {
-        "topInstance": null
+        "topInstance": "b3d9e2ea-dd17-45a4-9c3f-605152daf1d3"
     },
     "inspectorState": {
         "topInstance": "b3d9e2ea-dd17-45a4-9c3f-605152daf1d3",
@@ -2862,6 +2862,6 @@
     },
     "editMode": "code",
     "userSettings": {
-        "no-cmd": true
+        "no-cmd": false
     }
 }
