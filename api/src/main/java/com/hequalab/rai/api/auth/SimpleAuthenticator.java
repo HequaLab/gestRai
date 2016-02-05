@@ -1,17 +1,15 @@
 package com.hequalab.rai.api.auth;
 
-import io.dropwizard.auth.AuthenticationException;
-import io.dropwizard.auth.Authenticator;
-
 import java.util.UUID;
-
-import lombok.AllArgsConstructor;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
-import com.hequalab.rai.api.read.views.user.UserView;
 import com.google.common.base.Optional;
+import com.hequalab.rai.api.read.views.user.UserView;
+
+import io.dropwizard.auth.AuthenticationException;
+import io.dropwizard.auth.Authenticator;
 
 public class SimpleAuthenticator implements Authenticator<String, UserView> {
 	public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 60;

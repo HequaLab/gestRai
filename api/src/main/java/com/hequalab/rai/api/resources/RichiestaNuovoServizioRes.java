@@ -49,7 +49,6 @@ import com.hequalab.rai.api.read.views.mailToken.MailTokenView;
 import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioView;
 import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.utility.ForbiddenException;
-import com.hequalab.rai.api.utility.PdfCreator;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 import com.hequalab.rai.domain.produzioni.ProduzioniId;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizio;
@@ -155,7 +154,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 
 		parameters.put("logo",
 				ImageIO.read(getClass().getResource("RAI_logo.png")));
-		// parameters.put("profiloApprovante", );
+		parameters.put("idRichiesta", id.get().toString());
 
 		JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
 		JasperReport jasperReport = JasperCompileManager
@@ -288,7 +287,6 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	}
 
 	// Api per rifiuto richiesta da extjs
-	@SuppressWarnings("unchecked")
 	@POST
 	@Path("rifiutaRichiesta/{id}")
 	@UnitOfWork
@@ -837,7 +835,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		uv.setIdServizio(idServizio);
 		uv.setIdProduzione(idProduzione);
 
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(RichiestaNuovoServizio.class, id.get())
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(RichiestaNuovoServizio.class, id.get())
 				.update(data, dataFine, divisione, fornitore, nome, note, ora,
 						ore, uorg, lotto, operatore, tipologia, matricola,
 						produzione, luogo, utenteApprovante, importo,

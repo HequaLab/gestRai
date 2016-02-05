@@ -3,67 +3,67 @@ package com.hequalab.rai.api.utility;
 import java.util.List;
 
 public class MailClientConf {
-    public String getHostName() {
-	return hostName;
-    }
+	public String getHostName() {
+		return hostName;
+	}
 
-    public void setHostName(String hostName) {
-	this.hostName = hostName;
-    }
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
 
-    public String getUserName() {
-	return userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setUserName(String userName) {
-	this.userName = userName;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getPwd() {
-	return pwd;
-    }
+	public String getPwd() {
+		return pwd;
+	}
 
-    public void setPwd(String pwd) {
-	this.pwd = pwd;
-    }
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
-    public Boolean getSsl() {
-	return ssl;
-    }
+	public Boolean getSsl() {
+		return ssl;
+	}
 
-    public void setSsl(Boolean sSL) {
-	ssl = sSL;
-    }
+	public void setSsl(Boolean sSL) {
+		ssl = sSL;
+	}
 
-    public Integer getSmtp() {
-	return smtp;
-    }
+	public Integer getSmtp() {
+		return smtp;
+	}
 
-    public void setSmtp(Integer smtp) {
-	this.smtp = smtp;
-    }
+	public void setSmtp(Integer smtp) {
+		this.smtp = smtp;
+	}
 
-    public String getAlias() {
-	return alias;
-    }
+	public String getAlias() {
+		return alias;
+	}
 
-    public void setAlias(String alias) {
-	this.alias = alias;
-    }
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
 
-    public List<String> getMailAmministratori() {
-	return mailAmministratori;
-    }
+	public List<String> getMailAmministratori() {
+		return mailAmministratori;
+	}
 
-    public void setMailAmministratori(List<String> mailAmministratori) {
-	this.mailAmministratori = mailAmministratori;
-    }
+	public void setMailAmministratori(List<String> mailAmministratori) {
+		this.mailAmministratori = mailAmministratori;
+	}
 
-    private String hostName;
-    private Integer smtp;
-    private String userName;
-    private String pwd;
-    private Boolean ssl;
-    private String alias;
-    private List<String> mailAmministratori;
+	private String hostName;
+	private Integer smtp;
+	private String userName;
+	private String pwd;
+	private Boolean ssl;
+	private String alias;
+	private List<String> mailAmministratori;
 }

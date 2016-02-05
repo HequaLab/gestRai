@@ -8,37 +8,46 @@ import com.bazaarvoice.dropwizard.assets.AssetsBundleConfiguration;
 import com.bazaarvoice.dropwizard.assets.AssetsConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hequalab.rai.api.utility.MailClientConf;
+import com.hequalab.rai.api.utility.MailReceiverConf;
 
 public class ApiConf extends Configuration
-	implements AssetsBundleConfiguration {
+		implements AssetsBundleConfiguration {
 
-    @Valid
-    @NotNull
-    @JsonProperty("mailClient")
-    private MailClientConf mailClientConf;
-    MailClientConf getMailClientConf(){
-	return mailClientConf;
-    }
-    
-    
-    @Valid
-    @NotNull
-    @JsonProperty("database")
-    private DataSourceFactory database = new DataSourceFactory();
+	@Valid
+	@NotNull
+	@JsonProperty("mailClient")
+	private MailClientConf mailClientConf;
 
-    public DataSourceFactory getDataSourceFactory() {
-	return database;
-    }
-    
-    
-    @Valid
-    @NotNull
-    @JsonProperty
-    private final AssetsConfiguration assets = new AssetsConfiguration();
+	MailClientConf getMailClientConf() {
+		return mailClientConf;
+	}
 
-    @Override
-    public AssetsConfiguration getAssetsConfiguration() {
-	return assets;
-    }
+	@Valid
+	@NotNull
+	@JsonProperty("mailReceiver")
+	private MailReceiverConf mailReceiverConf;
+
+	MailReceiverConf getMailReceiverConf() {
+		return mailReceiverConf;
+	}
+
+	@Valid
+	@NotNull
+	@JsonProperty("database")
+	private DataSourceFactory database = new DataSourceFactory();
+
+	public DataSourceFactory getDataSourceFactory() {
+		return database;
+	}
+
+	@Valid
+	@NotNull
+	@JsonProperty
+	private final AssetsConfiguration assets = new AssetsConfiguration();
+
+	@Override
+	public AssetsConfiguration getAssetsConfiguration() {
+		return assets;
+	}
 
 }

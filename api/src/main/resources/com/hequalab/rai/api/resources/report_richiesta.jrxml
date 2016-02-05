@@ -2,8 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_richiesta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fecfda0f-6dc4-4095-9eb1-0f8062ba466b">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="77"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="logo" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="idRichiesta" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -93,10 +94,6 @@
 				</textElement>
 				<text><![CDATA[Oggetto: Richiesta intervento]]></text>
 			</staticText>
-			<image>
-				<reportElement x="437" y="0" width="46" height="37" uuid="097a6366-d560-4e7a-833f-d133f625ddde"/>
-				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(      new com.google.zxing.qrcode.QRCodeWriter().encode(         "klitongenio",          com.google.zxing.BarcodeFormat.QR_CODE, 50, 50))]]></imageExpression>
-			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -241,8 +238,8 @@
 				<textFieldExpression><![CDATA[$F{utenteApprovante}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="375" y="90" width="155" height="140" uuid="0a5b6d59-8641-49c0-9e27-9988a1b16731"/>
-				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(      new com.google.zxing.qrcode.QRCodeWriter().encode(         "ciao mondo",          com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
+				<reportElement x="395" y="50" width="155" height="140" uuid="0a5b6d59-8641-49c0-9e27-9988a1b16731"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(      new com.google.zxing.qrcode.QRCodeWriter().encode(    $P{idRichiesta}    ,          com.google.zxing.BarcodeFormat.QR_CODE, 300, 300))]]></imageExpression>
 			</image>
 		</band>
 	</detail>

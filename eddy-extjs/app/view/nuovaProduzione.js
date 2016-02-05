@@ -20,7 +20,7 @@ Ext.define('Rai.view.nuovaProduzione', {
     requires: [
         'Rai.view.nuovaProduzioneViewModel',
         'Ext.button.Button',
-        'Ext.form.field.Text'
+        'Ext.form.field.Number'
     ],
 
     viewModel: {
@@ -63,6 +63,17 @@ Ext.define('Rai.view.nuovaProduzione', {
                     return;
                 }
 
+
+                if (matricola === undefined || matricola === null){
+
+                    Ext.Msg.show({
+                        title:"Errore",
+                        msg:"Non hai inserito la matricola!"
+                    });
+
+                    return;
+                }
+
                 var store = Ext.StoreManager.lookup('storeProduzioni');
                 var emptyApp = new Rai.model.produzioni();
                 emptyApp.set("descrizione",nome);
@@ -83,18 +94,18 @@ Ext.define('Rai.view.nuovaProduzione', {
         {
             xtype: 'textfield',
             x: 80,
-            y: 60,
-            id: 'nomeMatricola',
-            width: 270,
-            fieldLabel: 'Matricola'
-        },
-        {
-            xtype: 'textfield',
-            x: 80,
             y: 30,
             id: 'nomeProd',
             width: 270,
             fieldLabel: 'Produzione'
+        },
+        {
+            xtype: 'numberfield',
+            x: 80,
+            y: 60,
+            id: 'nomeMatricola',
+            width: 270,
+            fieldLabel: 'Matricola'
         }
     ]
 

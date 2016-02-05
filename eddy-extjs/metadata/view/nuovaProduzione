@@ -106,6 +106,17 @@
                             "    return;",
                             "}",
                             "",
+                            "",
+                            "if (matricola === undefined || matricola === null){",
+                            "",
+                            "    Ext.Msg.show({",
+                            "        title:\"Errore\",",
+                            "        msg:\"Non hai inserito la matricola!\"",
+                            "    });",
+                            "",
+                            "    return;",
+                            "}",
+                            "",
                             "var store = Ext.StoreManager.lookup('storeProduzioni');",
                             "var emptyApp = new Rai.model.produzioni();",
                             "emptyApp.set(\"descrizione\",nome);",
@@ -131,23 +142,6 @@
             },
             "codeClass": null,
             "userConfig": {
-                "fieldLabel": "Matricola",
-                "id": "nomeMatricola",
-                "layout|x": 80,
-                "layout|y": 60,
-                "width": 270
-            },
-            "name": "MyTextField27",
-            "designerId": "8e1b4a1c-8454-46fa-bdd6-ab1e4d0171fc"
-        },
-        {
-            "type": "Ext.form.field.Text",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
                 "fieldLabel": "Produzione",
                 "id": "nomeProd",
                 "layout|x": 80,
@@ -156,6 +150,23 @@
             },
             "name": "MyTextField28",
             "designerId": "98d0bab6-0a7a-4189-8a42-874a4868bc0f"
+        },
+        {
+            "type": "Ext.form.field.Number",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fieldLabel": "Matricola",
+                "id": "nomeMatricola",
+                "layout|x": 80,
+                "layout|y": 60,
+                "width": 270
+            },
+            "name": "MyNumberField1",
+            "designerId": "8bab2a78-5d6a-4afc-99ee-29ed775d918f"
         }
     ]
 }

@@ -5,7 +5,13 @@ logging:
     "org.hibernate.type": DEBUG
 
 
+# Configurazine dell'auth: tempo di validità del token
+# TODO:: Da implementare la lettura della variabile nel framework
+#userAuth:
+#  minuti: 120 # Rimane attivo per 2 ore
 
+
+# Configurazione dell'account che invia le mail negli EventListener MailSender
 mailClient:
   hostName: smtp.gmail.com
   smtp: 587
@@ -18,9 +24,17 @@ mailClient:
    - info@aedeslab.com
 
 
+# Conigurazione account email che riceve le email con i report [protocollo: imaps]
+mailReceiver:
+  hostName: smtp.gmail.com
+  userName: klitonfx@gmail.com
+  pwd: pushedx1993
+
+
 assets:
   overrides:
     /files: static_assets/files
+
 
 server:
   applicationConnectors:
@@ -29,6 +43,7 @@ server:
   adminConnectors:
   - type: http
     port: 9301
+
 
 database:
   driverClass: com.mysql.jdbc.Driver
@@ -49,9 +64,3 @@ database:
   minSize: 8
   maxSize: 32
   checkConnectionWhileIdle: false
-
-# CREATE DATABASE  IF NOT EXISTS eddy;
-# GRANT ALL ON eddy.* TO 'eddy'@'localhost.localdomain' IDENTIFIED BY 'eddy' WITH GRANT OPTION;
-# GRANT ALL ON eddy.* TO 'eddy'@'localhost' IDENTIFIED BY 'eddy' WITH GRANT OPTION;
-# FLUSH PRIVILEGES;
-
