@@ -4,6 +4,8 @@ logging:
     "org.hibernate.SQL": DEBUG
     "org.hibernate.type": DEBUG
 
+
+
 mailClient:
   hostName: smtp.gmail.com
   smtp: 587
@@ -11,6 +13,9 @@ mailClient:
   userName: klitonfx@gmail.com
   pwd: pushedx1993
   alias: noreply Oversinerco
+  mailAmministratori:
+   - klitonfx@gmail.com
+   - info@aedeslab.com
 
 
 assets:

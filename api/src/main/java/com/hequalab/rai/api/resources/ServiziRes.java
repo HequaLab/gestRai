@@ -33,7 +33,6 @@ import com.hequalab.rai.api.params.ServiziIdParam;
 import com.hequalab.rai.api.read.views.servizi.ServiziView;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 
-
 import com.hequalab.rai.api.read.views.user.UserView;
 import io.dropwizard.auth.Auth;
 
@@ -53,7 +52,7 @@ public class ServiziRes extends AbstractRes {
 			SessionFactory sessionFactory) {
 		super(aggregateSessionFactory, sessionFactory);
 	}
-	
+
 	@GET
 	@UnitOfWork
 	@Timed
@@ -74,9 +73,11 @@ public class ServiziRes extends AbstractRes {
 
 		return page(dnv, page, size);
 	}
-	
-	@GET @Path("/{id}")
-	@UnitOfWork @Timed
+
+	@GET
+	@Path("/{id}")
+	@UnitOfWork
+	@Timed
 	@CacheControl(noCache = true)
 	public ServiziView fetch(@PathParam("id") ServiziIdParam id) {
 		return (ServiziView) hibSess()
@@ -91,7 +92,7 @@ public class ServiziRes extends AbstractRes {
 	public void delete(@Auth UserView user, @PathParam("id") ServiziIdParam id)
 			throws IllegalAccessException, JsonParseException,
 			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Servizi.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(Servizi.class, id.get()).delete());
 	}
 
 	@POST
@@ -99,11 +100,10 @@ public class ServiziRes extends AbstractRes {
 	@Timed
 	public ServiziView create(@Auth UserView user, @Valid ServiziCreate form,
 			@Context UriInfo uriInfo) throws IllegalAccessException {
-		
-		
+
 		ServiziId id = new ServiziId();
 		Servizi rec = new Servizi(id, form.getDescrizione(), form.getlotto(), form.getImporto(), form.getNote(), form.getTipologia(), form.getCodice(), form.getTipo());
-		aggSess().save(rec);
+		aggSess().save(user.getUserId().getUuid(), rec);
 
 		ServiziView uv = new ServiziView();
 		uv.setServiziId(id);
@@ -127,7 +127,7 @@ public class ServiziRes extends AbstractRes {
 		ServiziView recOld = (ServiziView) hibSess()
 				.createQuery("from ServiziView where serviziId = :id")
 				.setParameter("id", id.get()).uniqueResult();
-		
+
 		String descrizione = rep.getDescrizione() != null ? rep.getDescrizione() : recOld.getDescrizione();
 		String lotto = rep.getlotto() != null ? rep.getlotto() : recOld.getlotto();
 		Double importo = rep.getImporto() != null ? rep.getImporto() : recOld.getImporto();
@@ -136,8 +136,8 @@ public class ServiziRes extends AbstractRes {
 		String codice = rep.getCodice() != null ? rep.getCodice() : recOld.getCodice();
 		String tipo = rep.getTipo() != null ? rep.getTipo() : recOld.getTipo();
 
-		aggSess().save(
-				aggSess().get(Servizi.class, id.get()).update( descrizione, lotto, importo, note, tipologia, codice, tipo ));	
+		aggSess().save(user.getUserId().getUuid(),
+				aggSess().get(Servizi.class, id.get()).update(descrizione, lotto, importo, note, tipologia, codice, tipo));
 
 		ServiziView uv = new ServiziView();
 		uv.setServiziId(id.get());
@@ -148,10 +148,8 @@ public class ServiziRes extends AbstractRes {
 		uv.setTipologia(tipologia);
 		uv.setCodice(codice);
 		uv.setTipo(tipo);
-		
+
 		return uv;
 	}
-	
-	
-	
+
 }

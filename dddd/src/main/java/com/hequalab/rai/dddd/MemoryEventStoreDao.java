@@ -2,6 +2,7 @@ package com.hequalab.rai.dddd;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
@@ -42,6 +43,19 @@ public class MemoryEventStoreDao<C extends Context> implements EventStoreDao<C> 
 		List<EventStream<C>> copy = Lists.newArrayList(queue.get(id));
 		Collections.reverse(copy);
 		return ImmutableList.copyOf(copy);
+	}
+
+	@Override
+	public EventStream<C> append(Identity id, long version,
+		ContextProvider<C> contextProvider, Iterable<Event<?>> events,
+		UUID userId) {
+		int actual = queue.get(id).size() + 1;
+		if (actual != version) {
+			throw new IllegalStateException("Aggregate " + id + " excpected version is " + version + " but actual is " + actual);
+		}
+		EventStream<C> stream = new EventStream<C>(id, LocalDateTime.now(), version, contextProvider.getCurrent(), events);
+		queue.put(stream.getId(), stream);
+                return stream;
 	}
 
 }

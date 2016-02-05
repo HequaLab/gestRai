@@ -96,7 +96,7 @@ public class ProduzioniRes extends AbstractRes {
 			@PathParam("id") ProduzioniIdParam id)
 			throws IllegalAccessException, JsonParseException,
 			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Produzioni.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(),aggSess().get(Produzioni.class, id.get()).delete());
 	}
 
 	@POST
@@ -109,7 +109,8 @@ public class ProduzioniRes extends AbstractRes {
 		ProduzioniId id = new ProduzioniId();
 		Produzioni rec = new Produzioni(id, form.getDescrizione(),
 				form.getDivisione(), form.getMatricola());
-		aggSess().save(rec);
+		
+		aggSess().save(user.getUserId().getUuid(),rec);
 
 		ProduzioniView uv = new ProduzioniView();
 		uv.setProduzioniId(id);
@@ -137,7 +138,7 @@ public class ProduzioniRes extends AbstractRes {
 		String matricola = rep.getMatricola()!= null ? rep.getMatricola()
 			: recOld.getMatricola();
 
-		aggSess().save(
+		aggSess().save(user.getUserId().getUuid(),
 				aggSess().get(Produzioni.class, id.get()).update(descrizione,
 						divisione,matricola));
 

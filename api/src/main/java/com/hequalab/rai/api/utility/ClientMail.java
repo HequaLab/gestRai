@@ -16,8 +16,7 @@ public class ClientMail {
     private String alias;
     private Boolean ssl;
 
-    public ClientMail() throws EmailException {
-	MailClientConf conf = Api.mailClientConf;
+    public ClientMail(MailClientConf conf) throws EmailException {
 
 	this.hostName = conf.getHostName();
 	this.setSmtp(conf.getSmtp());

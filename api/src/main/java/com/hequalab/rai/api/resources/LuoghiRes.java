@@ -55,7 +55,7 @@ public class LuoghiRes extends AbstractRes {
 			SessionFactory sessionFactory) {
 		super(aggregateSessionFactory, sessionFactory);
 	}
-	
+
 	@GET
 	@UnitOfWork
 	@Timed
@@ -76,9 +76,11 @@ public class LuoghiRes extends AbstractRes {
 
 		return page(dnv, page, size);
 	}
-	
-	@GET @Path("/{id}")
-	@UnitOfWork @Timed
+
+	@GET
+	@Path("/{id}")
+	@UnitOfWork
+	@Timed
 	@CacheControl(noCache = true)
 	public LuoghiView fetch(@PathParam("id") LuoghiIdParam id) {
 		return (LuoghiView) hibSess()
@@ -93,7 +95,7 @@ public class LuoghiRes extends AbstractRes {
 	public void delete(@Auth UserView user, @PathParam("id") LuoghiIdParam id)
 			throws IllegalAccessException, JsonParseException,
 			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Luoghi.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(Luoghi.class, id.get()).delete());
 	}
 
 	@POST
@@ -101,12 +103,11 @@ public class LuoghiRes extends AbstractRes {
 	@Timed
 	public LuoghiView create(@Auth UserView user, @Valid LuoghiCreate form,
 			@Context UriInfo uriInfo) throws IllegalAccessException {
-		
-		
+
 		LuoghiId id = new LuoghiId();
-		Luoghi rec = new Luoghi(id, form.getIndirizzo(), form.getDescrizione(), form.getCap(),form.getDivisione());
-		aggSess().save(rec);
-		
+		Luoghi rec = new Luoghi(id, form.getIndirizzo(), form.getDescrizione(), form.getCap(), form.getDivisione());
+		aggSess().save(user.getUserId().getUuid(), rec);
+
 		LuoghiView uv = new LuoghiView();
 		uv.setLuoghiId(id);
 		uv.setIndirizzo(form.getIndirizzo());
@@ -126,16 +127,13 @@ public class LuoghiRes extends AbstractRes {
 		LuoghiView recOld = (LuoghiView) hibSess()
 				.createQuery("from LuoghiView where luoghiId = :id")
 				.setParameter("id", id.get()).uniqueResult();
-				
+
 		String indirizzo = rep.getIndirizzo() != null ? rep.getIndirizzo() : recOld.getIndirizzo();
 		String descrizione = rep.getDescrizione() != null ? rep.getDescrizione() : recOld.getDescrizione();
 		String cap = rep.getCap() != null ? rep.getCap() : recOld.getCap();
 		String divisione = rep.getDivisione() != null ? rep.getDivisione() : recOld.getDivisione();
-		
 
-		aggSess().save(
-				aggSess().get(Luoghi.class, id.get()).update( indirizzo, descrizione, cap, divisione ));
-				
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(Luoghi.class, id.get()).update(indirizzo, descrizione, cap, divisione));
 
 		LuoghiView uv = new LuoghiView();
 		uv.setLuoghiId(id.get());
@@ -143,10 +141,8 @@ public class LuoghiRes extends AbstractRes {
 		uv.setDescrizione(descrizione);
 		uv.setCap(cap);
 		uv.setDivisione(divisione);
-		
+
 		return uv;
 	}
-	
-	
-	
+
 }

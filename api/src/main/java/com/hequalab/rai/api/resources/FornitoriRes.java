@@ -33,7 +33,6 @@ import com.hequalab.rai.api.params.FornitoriIdParam;
 import com.hequalab.rai.api.read.views.fornitori.FornitoriView;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 
-
 import com.hequalab.rai.api.read.views.user.UserView;
 import io.dropwizard.auth.Auth;
 
@@ -53,7 +52,7 @@ public class FornitoriRes extends AbstractRes {
 			SessionFactory sessionFactory) {
 		super(aggregateSessionFactory, sessionFactory);
 	}
-	
+
 	@GET
 	@UnitOfWork
 	@Timed
@@ -74,9 +73,11 @@ public class FornitoriRes extends AbstractRes {
 
 		return page(dnv, page, size);
 	}
-	
-	@GET @Path("/{id}")
-	@UnitOfWork @Timed
+
+	@GET
+	@Path("/{id}")
+	@UnitOfWork
+	@Timed
 	@CacheControl(noCache = true)
 	public FornitoriView fetch(@PathParam("id") FornitoriIdParam id) {
 		return (FornitoriView) hibSess()
@@ -91,7 +92,7 @@ public class FornitoriRes extends AbstractRes {
 	public void delete(@Auth UserView user, @PathParam("id") FornitoriIdParam id)
 			throws IllegalAccessException, JsonParseException,
 			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Fornitori.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(Fornitori.class, id.get()).delete());
 	}
 
 	@POST
@@ -99,11 +100,10 @@ public class FornitoriRes extends AbstractRes {
 	@Timed
 	public FornitoriView create(@Auth UserView user, @Valid FornitoriCreate form,
 			@Context UriInfo uriInfo) throws IllegalAccessException {
-		
-		
+
 		FornitoriId id = new FornitoriId();
 		Fornitori rec = new Fornitori(id, form.getNote(), form.getRagioneSociale());
-		aggSess().save(rec);
+		aggSess().save(user.getUserId().getUuid(), rec);
 
 		FornitoriView uv = new FornitoriView();
 		uv.setFornitoriId(id);
@@ -122,25 +122,19 @@ public class FornitoriRes extends AbstractRes {
 		FornitoriView recOld = (FornitoriView) hibSess()
 				.createQuery("from FornitoriView where fornitoriId = :id")
 				.setParameter("id", id.get()).uniqueResult();
-				
+
 		String note = rep.getNote() != null ? rep.getNote() : recOld.getNote();
 		String ragioneSociale = rep.getRagioneSociale() != null ? rep.getRagioneSociale() : recOld.getRagioneSociale();
-			
 
-		
-
-		aggSess().save(
-				aggSess().get(Fornitori.class, id.get()).update( note, ragioneSociale ));
-				
+		aggSess().save(user.getUserId().getUuid(),
+				aggSess().get(Fornitori.class, id.get()).update(note, ragioneSociale));
 
 		FornitoriView uv = new FornitoriView();
 		uv.setFornitoriId(id.get());
 		uv.setNote(note);
 		uv.setRagioneSociale(ragioneSociale);
-		
+
 		return uv;
 	}
-	
-	
-	
+
 }

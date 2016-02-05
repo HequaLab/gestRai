@@ -2,6 +2,7 @@ package com.hequalab.rai.dddd;
 
 import java.lang.reflect.Constructor;
 import java.util.Map;
+import java.util.UUID;
 
 import com.google.common.collect.Maps;
 
@@ -70,6 +71,19 @@ public class DefaultAggregateSession<C extends Context> implements AggregateSess
 			eventStore.append(
 				aggregate.getId(), aggregate.getVersion(),
 				contextProvider, events);
+		}
+	}
+	
+	
+	public <T extends Aggregate<?>>  void save( UUID userId, T aggregate) {
+	  
+	    cache.put(aggregate.getId(), aggregate);
+		if (aggregate.hasUncommittedChanges()) {
+			Iterable<Event<?>> events = aggregate.getUncommittedChanges();
+			aggregate.markChangesAsCommitted();
+			eventStore.append(
+				aggregate.getId(), aggregate.getVersion(),
+				contextProvider, events, userId);
 		}
 	}
 

@@ -1,5 +1,7 @@
 package com.hequalab.rai.dddd;
 
+import java.util.UUID;
+
 public class DefaultEventStore<C extends Context> implements EventStore<C> {
 
 	private final EventStoreDao<C> dao;
@@ -24,6 +26,14 @@ public class DefaultEventStore<C extends Context> implements EventStore<C> {
 	@Override
 	public Iterable<EventStream<C>> get(Identity id) {
 		return dao.get(id);
+	}
+
+	@Override
+	public EventStream<C> append(Identity id, long version,
+		ContextProvider<C> contextProvider, Iterable<Event<?>> events,
+		UUID userId) {
+	    return pub.publish(dao.append(id, version, contextProvider, events, userId));
+
 	}
 
 }

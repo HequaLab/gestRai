@@ -15,7 +15,7 @@
             }
         },
         "urlPrefix": "http://localhost/Rai/",
-        "exportPath": "/Users/kliton/Documents/Lavoro/HeQua/Rai/com.hequalab.rai/web/target/classes/META-INF/resources/static/webapp/",
+        "exportPath": "../web/target/classes/META-INF/resources/static/webapp/",
         "spacesToIndent": 4,
         "sdkPath": "",
         "lineEnding": "LF",

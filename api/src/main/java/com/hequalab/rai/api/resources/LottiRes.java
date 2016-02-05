@@ -33,7 +33,6 @@ import com.hequalab.rai.api.params.LottiIdParam;
 import com.hequalab.rai.api.read.views.lotti.LottiView;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 
-
 import com.hequalab.rai.api.read.views.user.UserView;
 import io.dropwizard.auth.Auth;
 
@@ -53,7 +52,7 @@ public class LottiRes extends AbstractRes {
 			SessionFactory sessionFactory) {
 		super(aggregateSessionFactory, sessionFactory);
 	}
-	
+
 	@GET
 	@UnitOfWork
 	@Timed
@@ -74,9 +73,11 @@ public class LottiRes extends AbstractRes {
 
 		return page(dnv, page, size);
 	}
-	
-	@GET @Path("/{id}")
-	@UnitOfWork @Timed
+
+	@GET
+	@Path("/{id}")
+	@UnitOfWork
+	@Timed
 	@CacheControl(noCache = true)
 	public LottiView fetch(@PathParam("id") LottiIdParam id) {
 		return (LottiView) hibSess()
@@ -91,7 +92,7 @@ public class LottiRes extends AbstractRes {
 	public void delete(@Auth UserView user, @PathParam("id") LottiIdParam id)
 			throws IllegalAccessException, JsonParseException,
 			JsonMappingException, IOException {
-		aggSess().save(aggSess().get(Lotti.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(Lotti.class, id.get()).delete());
 	}
 
 	@POST
@@ -99,11 +100,10 @@ public class LottiRes extends AbstractRes {
 	@Timed
 	public LottiView create(@Auth UserView user, @Valid LottiCreate form,
 			@Context UriInfo uriInfo) throws IllegalAccessException {
-		
-		
+
 		LottiId id = new LottiId();
-		Lotti rec = new Lotti(id, form.getDescrizione(),form.getDivisione());
-		aggSess().save(rec);
+		Lotti rec = new Lotti(id, form.getDescrizione(), form.getDivisione());
+		aggSess().save(user.getUserId().getUuid(), rec);
 
 		LottiView uv = new LottiView();
 		uv.setLottiId(id);
@@ -122,25 +122,19 @@ public class LottiRes extends AbstractRes {
 		LottiView recOld = (LottiView) hibSess()
 				.createQuery("from LottiView where lottiId = :id")
 				.setParameter("id", id.get()).uniqueResult();
-				
+
 		String descrizione = rep.getDescrizione() != null ? rep.getDescrizione() : recOld.getDescrizione();
 		String divisione = rep.getDivisione() != null ? rep.getDivisione() : recOld.getDivisione();
 
-
-		
-
-		aggSess().save(
-				aggSess().get(Lotti.class, id.get()).update( descrizione,divisione ));
-				
+		aggSess().save(user.getUserId().getUuid(),
+				aggSess().get(Lotti.class, id.get()).update(descrizione, divisione));
 
 		LottiView uv = new LottiView();
 		uv.setLottiId(id.get());
 		uv.setDescrizione(descrizione);
 		uv.setDivisione(divisione);
-		
+
 		return uv;
 	}
-	
-	
-	
+
 }

@@ -11,23 +11,26 @@ import org.joda.time.DateTime;
 import com.hequalab.rai.api.read.views.mailToken.MailTokenView;
 import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.utility.ClientMail;
+import com.hequalab.rai.api.utility.MailClientConf;
 import com.hequalab.rai.dddd.EventListener;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioCreated;
 
 public class RichiestaNuovoServizioMailSender {
 
     private final SessionFactory sessionFactory;
+    private final MailClientConf mailClientConf;
 
-    public RichiestaNuovoServizioMailSender(SessionFactory sessionFactory) {
+    public RichiestaNuovoServizioMailSender(MailClientConf mf,
+	    SessionFactory sessionFactory) {
 	this.sessionFactory = sessionFactory;
+	this.mailClientConf = mf;
     }
 
     @EventListener
-    public void apply(RichiestaNuovoServizioCreated event) {
+    public void apply(RichiestaNuovoServizioCreated event) throws EmailException {
 
 	// Creo il token di accesso per l'email e invio l'email ai MANAGER
-	// dell'utente.
-
+	// dell'utente e agli amministratori
 	@SuppressWarnings("unused")
 	List<MailTokenView> newToken = new ArrayList<MailTokenView>();
 	UserView user = (UserView) sessionFactory.getCurrentSession()
@@ -35,7 +38,15 @@ public class RichiestaNuovoServizioMailSender {
 		.setParameter("id", event.getUser()).uniqueResult();
 
 	String[] superiori = user.getSuperiore().split(",");
-	for (String s : superiori) {
+
+	List<String> destinatari = this.mailClientConf.getMailAmministratori();
+
+	for (String s : superiori)
+	    destinatari.add(s);
+
+	ClientMail cMail = new ClientMail(this.mailClientConf);
+	
+	for (String s : destinatari) {
 	    UserView superiore = (UserView) sessionFactory.getCurrentSession()
 		    .createQuery("from UserView where userName = :userName")
 		    .setParameter("userName", s).uniqueResult();
@@ -59,7 +70,7 @@ public class RichiestaNuovoServizioMailSender {
 	    String styleDecline = "border:1px solid #666; cursor:pointer;display:block;margin:10px auto 0;padding:5px;text-align:center; text-decoration:none;width:220px;-moz-border-radius:15px;-webkit-border-radius:15px;background:#D32F2F;background-image:-moz-linear-gradient(top,#E53935, #C62828);background-image:-o-linear-gradient(top,#E53935, #C62828);background-image:-webkit-gradient(linear, center top, center bottom,from(#E53935), to(#C62828));background-image:linear-gradient(top, #E53935, #C62828);border-radius:15px;color:#FFF;font-size:.75em;font-weight:bold;text-shadow:-1px -1px 0 #444;";
 
 	    try {
-		ClientMail cMail = new ClientMail();
+		
 		String testo = "E' stato richiesto un nuovo servizio: <br> <br>"
 			+ "Lotto: " + event.getLotto() + "<br>"
 			+ "Servizio: <b>" + event.getNome() + "</b><br>"
@@ -90,9 +101,11 @@ public class RichiestaNuovoServizioMailSender {
 		e1.printStackTrace();
 		continue;
 	    }
-
 	}
+    }
 
+    public MailClientConf getMailClientConf() {
+	return mailClientConf;
     }
 
 }

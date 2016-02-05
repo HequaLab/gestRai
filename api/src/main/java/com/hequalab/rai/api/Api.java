@@ -1,14 +1,5 @@
 package com.hequalab.rai.api;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDResources;
-import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 import org.hibernate.SessionFactory;
 
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
@@ -16,7 +7,6 @@ import com.bazaarvoice.dropwizard.redirect.RedirectBundle;
 import com.bazaarvoice.dropwizard.redirect.UriRedirect;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.hequalab.rai.api.action.mail.richiestanuovoservizio.RichiestaNuovoServizioMailSender;
 import com.hequalab.rai.api.auth.AccessTokenDAO;
 import com.hequalab.rai.api.auth.SimpleAuthenticator;
 import com.hequalab.rai.api.read.views.filiali.FilialiViewWriter;
@@ -40,7 +30,6 @@ import com.hequalab.rai.api.resources.ServiziRes;
 import com.hequalab.rai.api.resources.UsersRes;
 import com.hequalab.rai.api.utility.CheckEmailWithReport;
 import com.hequalab.rai.api.utility.MailClientConf;
-import com.hequalab.rai.api.utility.QrDecoder;
 import com.hequalab.rai.api.utility.ScheduleReportManager;
 import com.hequalab.rai.api.write.ApiContext;
 import com.hequalab.rai.api.write.eventstore.ApiEventStoreDao;
@@ -96,12 +85,12 @@ public class Api extends Application<ApiConf> {
     @Override
     public void run(ApiConf conf, Environment env) throws Exception {
 
+	// Scheduler
 	CheckEmailWithReport c = new CheckEmailWithReport();
 	c.doit();
 
-	mailClientConf = conf.getMailClientConf();
-	// clientMail.sendEmail("info@aedeslab.com", "Prova", "Email inviata per
-	// prova");
+	// Configurazione client mail letta dal file config Yaml
+	MailClientConf mailClientConf = conf.getMailClientConf();
 
 	AccessTokenDAO accessTokenDAO = new AccessTokenDAO();
 
@@ -130,11 +119,13 @@ public class Api extends Application<ApiConf> {
 	dispatcher.subscribe(userViewSvc);
 
 	// Action
+		
 
 	// MailSender
-	RichiestaNuovoServizioMailSender richiestaNuovoServizioMailSender = new RichiestaNuovoServizioMailSender(hibSessionFactory);
-	dispatcher.subscribe(richiestaNuovoServizioMailSender);
-	
+//	RichiestaNuovoServizioMailSender richiestaNuovoServizioMailSender = new RichiestaNuovoServizioMailSender(
+//		mailClientConf, hibSessionFactory);
+//	dispatcher.subscribe(richiestaNuovoServizioMailSender);
+
 	// #AnchorViewWriter
 	ProduzioniViewWriter produzioniViewSvc = new ProduzioniViewWriter(
 		hibSessionFactory);
@@ -161,9 +152,12 @@ public class Api extends Application<ApiConf> {
 	// Session Factory
 	AggregateSessionFactory sessionFactory = new DefaultAggregateSessionFactory<ApiContext>(
 		store, contextHolder);
+
+	// E' qui che setta l'id per tutti gli utenti
 	env.jersey().register(new ApiResourceMethodDispatchAdapter(
 		sessionFactory, contextHolder));
 
+	
 	/*
 	 * Resources (for each resource)
 	 */
@@ -205,45 +199,31 @@ public class Api extends Application<ApiConf> {
 	ScheduleReportManager se = new ScheduleReportManager();
 	se.startAsync();
 
-	// Prendo le immagini dal PDF
-	try {
-	    String sourceDir = "split.pdf";// Paste pdf files in PDFCopy folder
-					   // to read
-	    String destinationDir = "email/test/";
-	    File oldFile = new File(sourceDir);
-	    if (oldFile.exists()) {
-		PDDocument document = PDDocument.load(sourceDir);
-
-		List<PDPage> list = document.getDocumentCatalog().getAllPages();
-
-		String fileName = oldFile.getName().replace(".pdf", "_cover");
-		int totalImages = 1;
-		for (PDPage page : list) {
-		    PDResources pdResources = page.getResources();
-
-		    Map pageImages = pdResources.getImages();
-		    if (pageImages != null) {
-
-			Iterator imageIter = pageImages.keySet().iterator();
-			while (imageIter.hasNext()) {
-			    String key = (String) imageIter.next();
-			    PDXObjectImage pdxObjectImage = (PDXObjectImage) pageImages
-				    .get(key);
-			    pdxObjectImage.write2file(destinationDir + fileName
-				    + "_" + totalImages);
-			    totalImages++;
-			}
-		    }
-		}
-	    } else {
-		System.err.println("File not exists");
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-
-	String prova = new QrDecoder().readQRCode("test.png");
-	System.out.println("DECODER :" + prova);
+	/*
+	 * // Prendo le immagini dal PDF try { String sourceDir = "split.pdf";//
+	 * Paste pdf files in PDFCopy folder // to read String destinationDir =
+	 * "email/test/"; File oldFile = new File(sourceDir); if
+	 * (oldFile.exists()) { PDDocument document =
+	 * PDDocument.load(sourceDir);
+	 * 
+	 * List<PDPage> list = document.getDocumentCatalog().getAllPages();
+	 * 
+	 * String fileName = oldFile.getName().replace(".pdf", "_cover"); int
+	 * totalImages = 1; for (PDPage page : list) { PDResources pdResources =
+	 * page.getResources();
+	 * 
+	 * Map pageImages = pdResources.getImages(); if (pageImages != null) {
+	 * 
+	 * Iterator imageIter = pageImages.keySet().iterator(); while
+	 * (imageIter.hasNext()) { String key = (String) imageIter.next();
+	 * PDXObjectImage pdxObjectImage = (PDXObjectImage) pageImages
+	 * .get(key); pdxObjectImage.write2file(destinationDir + fileName + "_"
+	 * + totalImages); totalImages++; } } } } else { System.err.println(
+	 * "File not exists"); } } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * String prova = new QrDecoder().readQRCode("test.png");
+	 * System.out.println("DECODER :" + prova);
+	 */
 
     }
 
