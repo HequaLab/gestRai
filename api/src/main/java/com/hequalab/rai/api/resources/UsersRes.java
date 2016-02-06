@@ -2,6 +2,7 @@ package com.hequalab.rai.api.resources;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -45,6 +46,8 @@ public class UsersRes extends AbstractRes {
 	public UsersRes(AggregateSessionFactory aggregateSessionFactory,
 			SessionFactory sessionFactory) {
 		super(aggregateSessionFactory, sessionFactory);
+		
+		//this.createAdmin();
 	}
 
 	@GET
@@ -93,7 +96,7 @@ public class UsersRes extends AbstractRes {
 		 * "Consorzio" [Admin]
 		 */
 
-		if (!userAuth.getRoles().contains(Role.Consorzio))
+		if (!userAuth.getRoles().contains(Role.Consorzio) || !userAuth.getRoles().contains(Role.Admin))
 			return null;
 
 		UserId id = new UserId();
@@ -138,7 +141,7 @@ public class UsersRes extends AbstractRes {
 				: recOld.getSuperiore();
 		Set<Role> roleOld = recOld.getRoles();
 
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(User.class, id.get()).update(userName,
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(User.class, id.get()).update(userName,
 				firstName, lastName, email, divisione, superiore));
 
 		if ((rep.getRoles() != null && (user.getRoles().contains(Role.Consorzio)
@@ -169,9 +172,8 @@ public class UsersRes extends AbstractRes {
 	public void updatePassword(@Auth UserView user,
 			@PathParam("id") UserIdParam id, @Valid UserUpdatePassword rep)
 					throws IllegalAccessException {
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(User.class, id.get())
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(User.class, id.get())
 				.updatePassword(rep.getPassword()));
-		// TODO: Non funiona perchÃ¨ passo anche i roles
 	}
 
 	@DELETE
@@ -180,7 +182,7 @@ public class UsersRes extends AbstractRes {
 	@Timed
 	public void delete(@Auth UserView user, @PathParam("id") UserIdParam id)
 			throws IllegalAccessException {
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(User.class, id.get()).delete());
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(User.class, id.get()).delete());
 	}
 
 	@POST
@@ -189,7 +191,7 @@ public class UsersRes extends AbstractRes {
 	@Timed
 	public void addRole(@Auth UserView user, @PathParam("id") UserIdParam id,
 			@PathParam("role") Role role) throws IllegalAccessException {
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(User.class, id.get()).addRole(role));
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(User.class, id.get()).addRole(role));
 	}
 
 	@DELETE
@@ -198,7 +200,25 @@ public class UsersRes extends AbstractRes {
 	@Timed
 	public void deleteRole(@Auth UserView user, @PathParam("id") UserIdParam id,
 			@PathParam("role") Role role) throws IllegalAccessException {
-		aggSess().save(user.getUserId().getUuid(),aggSess().get(User.class, id.get()).removeRole(role));
+		aggSess().save(user.getUserId().getUuid(), aggSess().get(User.class, id.get()).removeRole(role));
+	}
+
+	public void createAdmin() {
+
+		UserView check = (UserView) hibSess()
+				.createQuery("from UserView where userName = admin and password = admin")
+				.uniqueResult();
+
+		if (check != null)
+			return;
+
+		UserId id = new UserId();
+		User user = new User(id, "admin", "",
+				"", "", "admin",
+				"", "");
+		aggSess().save(user);
+		aggSess().save(user.addRole(Role.Admin));
+
 	}
 
 }

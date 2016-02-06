@@ -54,6 +54,54 @@
                     },
                     "name": "MyJsonWriter",
                     "designerId": "6006f78d-897e-4335-b428-25c10f937c40"
+                },
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onRestException",
+                        "implHandler": [
+                            "if (operation.error.status === 401){",
+                            "    var stores = Ext.data.StoreManager.map;",
+                            "    for (name in stores) {",
+                            "        if (stores.hasOwnProperty(name)) {",
+                            "            store.autoSync = false;",
+                            "            store.autoLoad = false;",
+                            "            store = stores[name];",
+                            "            store.clearFilter(true);",
+                            "            store.proxy.headers = null;",
+                            "        }",
+                            "    }",
+                            "",
+                            "    Ext.MessageBox.show({",
+                            "",
+                            "        title:\"Logout\",",
+                            "        msg:\"Sei stato inattivo per troppo tempo, verrai disconnesso,\",",
+                            "        buttons: Ext.Msg.OK,",
+                            "        fn: function(){",
+                            "            Ext.getCmp(\"pageContainer\").removeAll();",
+                            "            var cmp = Ext.create(\"Rai.view.frmLogin\");",
+                            "            Ext.getCmp(\"pageContainer\").add(cmp);",
+                            "            cmp.show();",
+                            "            // window.location.reload();",
+                            "        }",
+                            "",
+                            "",
+                            "    });",
+                            "",
+                            "",
+                            "",
+                            "}"
+                        ],
+                        "name": "exception",
+                        "scope": "me"
+                    },
+                    "name": "onRestException",
+                    "designerId": "156d99ad-b938-46af-a942-481c40ee08f5"
                 }
             ]
         }

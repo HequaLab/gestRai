@@ -18,6 +18,7 @@ import com.hequalab.rai.api.read.views.luoghi.LuoghiViewWriter;
 import com.hequalab.rai.api.read.views.produzioni.ProduzioniViewWriter;
 import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioViewWriter;
 import com.hequalab.rai.api.read.views.servizi.ServiziViewWriter;
+import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.read.views.user.UserViewWriter;
 import com.hequalab.rai.api.resources.EventStoreRes;
 import com.hequalab.rai.api.resources.FilialiRes;
@@ -84,13 +85,10 @@ public class Api extends Application<ApiConf> {
 	@Override
 	public void run(ApiConf conf, Environment env) throws Exception {
 
-		
-
 		// Configurazione client mail letta dal file config Yaml
 		MailClientConf mailClientConf = conf.getMailClientConf();
 		MailReceiverConf mailReiceiverConf = conf.getMailReceiverConf();
 
-		
 		AccessTokenDAO accessTokenDAO = new AccessTokenDAO();
 
 		// Hibernate session
@@ -192,12 +190,10 @@ public class Api extends Application<ApiConf> {
 		env.jersey()
 				.register(new FilialiRes(sessionFactory, hibSessionFactory));
 
+	
 		// Schedule manager
 		ScheduleReportManager se = new ScheduleReportManager(mailReiceiverConf, mailClientConf);
 		se.startAsync();
-
-		
-		 
 
 	}
 

@@ -12,7 +12,7 @@ import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 
 public class SimpleAuthenticator implements Authenticator<String, UserView> {
-	public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 60;
+	public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 1;
 	private AccessTokenDAO accessTokenDAO;
 	
 	public SimpleAuthenticator(AccessTokenDAO accessTokenDao) {

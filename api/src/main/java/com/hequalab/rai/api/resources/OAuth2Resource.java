@@ -5,8 +5,10 @@ import io.dropwizard.hibernate.UnitOfWork;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -23,6 +25,7 @@ import com.hequalab.rai.api.auth.AccessToken;
 import com.hequalab.rai.api.auth.AccessTokenDAO;
 import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
+import com.hequalab.rai.domain.user.User;
 import com.codahale.metrics.annotation.Timed;
 
 @Path("/oauth2")
@@ -43,7 +46,9 @@ public class OAuth2Resource extends AbstractRes {
 	@UnitOfWork
 	@Timed
 	public String postForToken(@QueryParam("id") String username,
-			@QueryParam("pwd") String password, @Context UriInfo uriInfo) {
+			@QueryParam("pwd") String password, @Context UriInfo uriInfo, @Context HttpServletRequest requestContext, @HeaderParam("user-agent") String userAgent) {
+
+		String ip = requestContext.getRemoteAddr();
 
 		if (username == null || password == null)
 			throw new WebApplicationException(Response.status(
@@ -74,6 +79,10 @@ public class OAuth2Resource extends AbstractRes {
 		// User was found, generate a token and return it.
 		AccessToken accessToken = accessTokenDAO.generateNewAccessToken(user,
 				new DateTime());
+
+		aggSess().save(accessToken.getUser().getUserId().getUuid(),
+				aggSess().get(User.class, accessToken.getUser().getUserId()).login(ip, userAgent, accessToken.getAccessTokenId().toString()));
+
 		return accessToken.getAccessTokenId().toString();
 	}
 

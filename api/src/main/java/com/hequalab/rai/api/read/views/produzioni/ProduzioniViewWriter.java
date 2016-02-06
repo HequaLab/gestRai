@@ -23,6 +23,13 @@ public class ProduzioniViewWriter extends AbstractViewWriter<ProduzioniView> {
 
 	@EventListener
 	public void apply(ProduzioniCreated event, EventStream<ApiContext> stream) {
+		
+		try {
+			  Thread.sleep(1000*10);
+			} catch (InterruptedException ie) {
+			    //Handle exception
+			}
+		
 		ProduzioniView u = new ProduzioniView();
 		u.setProduzioniId(event.getId());
 		u.setDescrizione(event.getDescrizione());
