@@ -53,7 +53,7 @@ download = function(config, id) {
     // avoid a closure.
     iframe.onload = download.onload;
 
-    
+
     form = Ext.DomHelper.append(document.body, {
         action: config.url,
         cn: inputs,
@@ -70,7 +70,7 @@ download = function(config, id) {
     Ext.defer(removeNode, 1000 * 60 * 10, null, [iframe]);
 
     function paramsToInputs(params) {
-     
+
         var inputs = [];
         for (var key in params) {
             var values = [].concat(params[key]);
@@ -79,7 +79,7 @@ download = function(config, id) {
             });
         }
         return inputs;
-        
+
     }
 
     function createInput(key, value) {
