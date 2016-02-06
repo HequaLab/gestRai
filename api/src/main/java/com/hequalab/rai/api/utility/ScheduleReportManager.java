@@ -67,7 +67,7 @@ public class ScheduleReportManager extends AbstractScheduledService {
 			folder.open(Folder.READ_WRITE);
 			Message messages[] = folder
 					.search(new FlagTerm(new Flags(Flag.SEEN), false));
-			System.out.println(" CI SONO " + messages.length + " MESSAGGI DA LEGGERE");
+			System.out.println("SCHEDULE: CI SONO " + messages.length + " MESSAGGI DA LEGGERE");
 			for (int i = 0; i < messages.length; ++i) {
 				Message msg = messages[i];
 
