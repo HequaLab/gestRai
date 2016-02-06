@@ -1,1 +1,8 @@
-var _smartsupp=_smartsupp||{};_smartsupp.key="8ee3c8145208e69a46363fee6326bcbf3efdcda4";window.smartsupp||(function(e){var a,f,b=smartsupp=function(){b._.push(arguments)};b._=[];a=e.getElementsByTagName("script")[0];f=e.createElement("script");f.type="text/javascript";f.charset="utf-8";f.async=true;f.src="//www.smartsuppchat.com/loader.js?";a.parentNode.insertBefore(f,a)})(document);
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '8ee3c8145208e69a46363fee6326bcbf3efdcda4';
+window.smartsupp||(function(d) {
+	var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+	s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+	c.type='text/javascript';c.charset='utf-8';c.async=true;
+	c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);

@@ -29,6 +29,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "animCollapse": false,
                 "dock": null,
                 "id": "elencoGrid",
                 "layout|region": "center",
@@ -463,7 +464,8 @@
                     "codeClass": null,
                     "userConfig": {
                         "dataIndex": "stato",
-                        "flex": 1,
+                        "flex": 1.5,
+                        "groupable": true,
                         "text": "Stato"
                     },
                     "name": "MyColumn1",
@@ -491,10 +493,10 @@
                                     "",
                                     "",
                                     "if (value === \"Approvato\"){",
-                                    "    return '<span style=\"color:' + \"#73b51e\" + ';\">' + \"<b>\"  + value + \"</b>\"+ '</span>';",
+                                    "    return '<span style=\"color:' + \"#73b51e\" + ';\">' + \"<b>\"  + value + \" da \" + record.get('utenteApprovante') + \"</b>\"+ '</span>';",
                                     "}",
                                     "else if ( value === \"Non approvato\"){",
-                                    "    return '<span style=\"color:' + \"#cf4c35\" + ';\">' + value + '</span>';",
+                                    "    return '<span style=\"color:' + \"#cf4c35\" + ';\">' + value + \" da \" + record.get('utenteApprovante') + '</span>';",
                                     "}",
                                     "else if ( value === \"Erogato\"){",
                                     "    return '<span style=\"color:' + \"#0277BD\" + ';\"><b>' + value + '</b></span>';",
@@ -504,6 +506,9 @@
                                     "}",
                                     "else if ( value === \"Nessuno\"){",
                                     "    return '<span style=\"color:' + \"#795548\" + ';\"><b>' + value + '</b></span>';",
+                                    "}",
+                                    "else if ( value === \"Eliminato\"){",
+                                    "    return '<span style=\"color:' + \"#D50000\" + ';\"><b>' + value +  \" da \" + record.get('utenteApprovante') + '</b></span>';",
                                     "}",
                                     "",
                                     "",
@@ -1054,47 +1059,6 @@
                     ]
                 },
                 {
-                    "type": "Ext.grid.feature.Grouping",
-                    "reference": {
-                        "name": "features",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "showSummaryRow": true
-                    },
-                    "name": "MyGroupingFeature",
-                    "designerId": "de82ee42-f889-4f69-a2b9-98d48384d72d",
-                    "cn": [
-                        {
-                            "type": "Ext.XTemplate",
-                            "reference": {
-                                "name": "groupHeaderTpl",
-                                "type": "object"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "designer|displayName": "groupHeaderTpl",
-                                "implHandler": [
-                                    "",
-                                    "",
-                                    "<tpl if=\"name=='Erogato'\" ><span style=\"color:#0277BD;\"><b>Ci sono {rows.length} richieste erogate</b></span></tpl>   ",
-                                    "<tpl if=\"name=='Nessuno'\" ><span style=\"color:#795548;\"><b>Ci sono {rows.length} richieste in attesa di approvazione</b></span></tpl>",
-                                    "<tpl if=\"name=='Non approvato'\" ><span style=\"color:#cf4c35;\"><b>Ci sono {rows.length} richieste non approvate</b></span></tpl>",
-                                    "<tpl if=\"name=='Approvato'\" ><span style=\"color:#73b51e;\"><b>Ci sono {rows.length} richieste approvate</b></span></tpl>",
-                                    "<tpl if=\"name=='In lavorazione'\" ><span style=\"color:#AFB42B;\"><b>Ci sono {rows.length} richieste in lavorazione</b></span></tpl>",
-                                    "<tpl if=\"name=='Eliminato'\" ><span style=\"color:#AFB42B;\"><b>Ci sono {rows.length} richieste eliminate</b></span></tpl>",
-                                    "",
-                                    "",
-                                    ""
-                                ]
-                            },
-                            "name": "groupHeaderTpl",
-                            "designerId": "eae098e5-7537-43c0-94c1-0d1cd178f4aa"
-                        }
-                    ]
-                },
-                {
                     "type": "Ext.grid.filters.Filters",
                     "reference": {
                         "name": "plugins",
@@ -1338,7 +1302,7 @@
                     "",
                     "",
                     "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
-                    "store.clearFilter();",
+                    "store.clearFilter(true);",
                     "store.filter({",
                     "    property: \"divisione\",",
                     "    value: USER.divisione ,",

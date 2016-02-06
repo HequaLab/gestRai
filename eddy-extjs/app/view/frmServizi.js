@@ -221,6 +221,9 @@ Ext.define('Rai.view.frmServizi', {
                 }
             ]
         }
-    ]
+    ],
+    listeners: {
+        afterrender: 'onFrmserviziAfterRender'
+    }
 
 });

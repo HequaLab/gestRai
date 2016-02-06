@@ -35,6 +35,7 @@ Ext.define('Rai.store.storeRichiesteServizi', {
             model: 'Rai.model.richiestaServizio',
             proxy: {
                 type: 'rest',
+                groupParam: '',
                 idParam: 'richiestaNuovoServizioId',
                 url: '/richiestaNuovoServizio',
                 reader: {

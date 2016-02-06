@@ -488,7 +488,7 @@
                                         ],
                                         "fn": "renderer",
                                         "implHandler": [
-                                            "return '&#8364;' + ' '  + value;"
+                                            "return '&#8364;' + ' '  + Ext.util.Format.number(value, '0,000.00');"
                                         ]
                                     },
                                     "name": "renderer",
@@ -527,7 +527,7 @@
                             "userConfig": {
                                 "baseCls": "costoTotaleTitle",
                                 "dataIndex": "costoTotale",
-                                "flex": 1,
+                                "flex": 1.3,
                                 "summaryType": "sum",
                                 "tdCls": "costoTotale",
                                 "text": "Costo totale"
@@ -551,7 +551,7 @@
                                         "fn": "summaryRenderer",
                                         "implHandler": [
                                             "",
-                                            "return '<div style=\"color:Blue;\"><b>Tot. &#8364 ' + val + \"</b></div>\";"
+                                            "return '<div style=\"color:Blue;\"><b>Tot. &#8364 ' + Ext.util.Format.number(val, '0,000.00') + \"</b></div>\";"
                                         ]
                                     },
                                     "name": "summaryRenderer",
@@ -576,7 +576,7 @@
                                         ],
                                         "fn": "renderer",
                                         "implHandler": [
-                                            " return '&#8364;' + ' '  +  Ext.util.Format.number(value, '0.00');"
+                                            "return '&#8364;' + ' '  + Ext.util.Format.number(value, '0,000.00');"
                                         ]
                                     },
                                     "name": "renderer",

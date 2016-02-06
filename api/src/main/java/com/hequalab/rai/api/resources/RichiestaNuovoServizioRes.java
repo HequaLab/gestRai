@@ -33,6 +33,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.Months;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -312,7 +313,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 				aggSess().get(RichiestaNuovoServizio.class, id.get())
 						.rifiuta(id.get(), usr, timeStamp));
 
-		uv.setStato("Non pprovato");
+		uv.setStato("Non approvato");
 		uv.setUtenteApprovante(user.getFirstName() + " " + user.getLastName());
 		return uv;
 	}
@@ -420,15 +421,14 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 			if (v.getDataFine().isBefore(dtFineReport)
 					|| v.getDataFine().isEqual(dtFineReport)) {
 				// caso 1: data minore di quella di fine report
-				giorniComputo = Days.daysBetween(v.getData(), v.getDataFine())
-						.getDays();
-
+				giorniComputo = Days.daysBetween(v.getData(), v.getDataFine()).getDays();
+				mesiComputo = Months.monthsBetween(v.getData(), v.getDataFine()).getMonths();
 			} else {
 				// caso 2
-				giorniComputo = Days.daysBetween(v.getData(), dtFineReport)
-						.getDays();
-
+				giorniComputo = Days.daysBetween(v.getData(), dtFineReport).getDays();
+				mesiComputo = Months.monthsBetween(v.getData(), dtFineReport).getMonths();
 			}
+
 			giorniComputo += 1;
 
 			double costoTotale = 0;
@@ -436,7 +436,8 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 			switch (v.getTipologia()) {
 			case "Canone":
 				// Applicare mesi computo
-				costoTotale = v.getImporto();
+				costoTotale = v.getImporto() * mesiComputo;
+				v.setOre(mesiComputo);
 				break;
 			case "Modulo":
 				costoTotale = giorniComputo * v.getOre() * v.getImporto();

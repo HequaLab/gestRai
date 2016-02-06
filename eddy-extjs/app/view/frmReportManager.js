@@ -190,7 +190,7 @@ Ext.define('Rai.view.frmReportManager', {
                         {
                             xtype: 'gridcolumn',
                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
-                                return '&#8364;' + ' '  + value;
+                                return '&#8364;' + ' '  + Ext.util.Format.number(value, '0,000.00');
                             },
                             summaryRenderer: function(val, params, data) {
                                 return "";
@@ -204,17 +204,17 @@ Ext.define('Rai.view.frmReportManager', {
                             xtype: 'gridcolumn',
                             summaryRenderer: function(val, params, data) {
 
-                                return '<div style="color:Blue;"><b>Tot. &#8364 ' + val + "</b></div>";
+                                return '<div style="color:Blue;"><b>Tot. &#8364 ' + Ext.util.Format.number(val, '0,000.00') + "</b></div>";
                             },
                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
-                                return '&#8364;' + ' '  +  Ext.util.Format.number(value, '0.00');
+                                return '&#8364;' + ' '  + Ext.util.Format.number(value, '0,000.00');
                             },
                             summaryType: 'sum',
                             baseCls: 'costoTotaleTitle',
                             dataIndex: 'costoTotale',
                             tdCls: 'costoTotale',
                             text: 'Costo totale',
-                            flex: 1
+                            flex: 1.3
                         }
                     ],
                     dockedItems: [

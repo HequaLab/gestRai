@@ -109,6 +109,9 @@ Ext.define('Rai.view.frmFiliali', {
                 }
             ]
         }
-    ]
+    ],
+    listeners: {
+        afterrender: 'onPanelAfterRender'
+    }
 
 });

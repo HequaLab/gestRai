@@ -52,6 +52,11 @@ Ext.define('Rai.view.frmServiziViewController', {
         Ext.getCmp('codiceTxt').setValue("");
 
 
+    },
+
+    onFrmserviziAfterRender: function(component, eOpts) {
+        var store = Ext.StoreManager.lookup('storeServizi');
+        store.load();
     }
 
 });

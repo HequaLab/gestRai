@@ -49,7 +49,15 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
             Ext.getCmp('oreRichiesta').disable();
         }else if (tipologia == "Modulo"){
             Ext.getCmp('oreRichiesta').labelEl.update('Q.ta');
+            Ext.getCmp('oreRichiesta').setValue(1);
         }
+        else if (tipologia == 'Richiesta'){
+            Ext.getCmp('oreRichiesta').setValue(4);
+        }
+        else if (tipologia == 'Trasporto'){
+            Ext.getCmp('oreRichiesta').setValue(1);
+        }
+
 
     },
 
@@ -124,7 +132,36 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                         });
                         return;
                     }
-
+                    if (tipologia !== 'Canone') {
+                        if (ore === undefined || ore === null) {
+                            Ext.Msg.show({
+                                title: " Errore inserimento dati",
+                                msg: "Devi inserire un quantitativo di ore valido."
+                            });
+                            return;
+                        }
+                        if (tipologia === 'Modulo' && ore < 1) {
+                            Ext.Msg.show({
+                                title: " Errore inserimento dati",
+                                msg: "Per le richieste di tipo modulo devi richiedere almeno una unita'"
+                            });
+                            return;
+                        }
+                        if (tipologia === 'Richiesta' && ore < 4) {
+                            Ext.Msg.show({
+                                title: " Errore inserimento dati",
+                                msg: "Per i servizi di tipo richiesta selezionare almeno  4 ore di lavoro"
+                            });
+                            return;
+                        }
+                        if (tipologia === 'Trasporto' && ore < 1) {
+                            Ext.Msg.show({
+                                title: " Errore inserimento dati",
+                                msg: "Per i servizi di tipo trasporto selezionare almeno 1 ore di lavoro"
+                            });
+                            return;
+                        }
+                    }
 
                     var store = Ext.StoreManager.lookup('storeRichiesteServizi');
                     var emptyApp = new Rai.model.richiestaServizio();
@@ -146,9 +183,8 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                     emptyApp.set('operatore', operatore);
                     emptyApp.set('voce', voce);
                     emptyApp.set('luogoId', luogoId);
-                    emptyApp.set('idProduzione',idProduzione);
-                    emptyApp.set('idServizio',idServizio);
-
+                    emptyApp.set('idProduzione', idProduzione);
+                    emptyApp.set('idServizio', idServizio);
                     Ext.Ajax.request({
                         url: '/richiestaNuovoServizio/controlloOrdine',
                         headers: {
@@ -172,7 +208,6 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                             luogo: luogo
                         },
                         success: function(response, options) {
-
                             if (response.responseText === "YES") {
                                 Ext.Msg.show({
                                     title: 'Richiesta servizio',
@@ -185,8 +220,8 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                                     fn: function(btn) {
                                         if (btn == 'no') {
                                             return;
-                                        }else {
-                                            Ext.MessageBox.wait('Creazione richiesta in corso..',"Attedi",{
+                                        } else {
+                                            Ext.MessageBox.wait('Creazione richiesta in corso..', "Attedi", {
                                                 interval: 1000, //bar will move fast!
                                                 duration: 50000, // 5 secondi?
                                                 increment: 10,
@@ -194,19 +229,17 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                                                 scope: this,
                                             });
                                             store.add(emptyApp);
-
                                             var self = this;
                                             store.on('write', function() {
                                                 store.load();
                                                 Ext.MessageBox.updateProgress(1);
                                                 Ext.MessageBox.hide();
                                             });
-
                                         }
                                     }
                                 });
-                            }else {
-                                Ext.MessageBox.wait('Creazione richiesta in corso..',"Attedi",{
+                            } else {
+                                Ext.MessageBox.wait('Creazione richiesta in corso..', "Attedi", {
                                     interval: 1000, //bar will move fast!
                                     duration: 50000, // 5 secondi?
                                     increment: 10,
@@ -220,10 +253,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                                     Ext.MessageBox.updateProgress(1);
                                     Ext.MessageBox.hide();
                                 });
-
                             }
-
-
                             //  Ext.getCmp('comboTipologia').setValue('Canone');
                         },
                         failure: function(response, options) {
@@ -252,8 +282,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
                     Ext.getCmp('luogo').setValue(null);
                     Ext.getCmp('produzione').setValue(null);
                 }
-            },
-            animEl: 'elId'
+            }, animEl: 'elId'
         });
     },
 

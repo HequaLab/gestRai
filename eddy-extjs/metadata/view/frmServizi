@@ -527,6 +527,25 @@
                     ]
                 }
             ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onFrmserviziAfterRender",
+                "implHandler": [
+                    "var store = Ext.StoreManager.lookup('storeServizi');",
+                    "store.load();"
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onFrmserviziAfterRender",
+            "designerId": "14fa107a-b032-4a14-b134-4299e25ea435"
         }
     ]
 }

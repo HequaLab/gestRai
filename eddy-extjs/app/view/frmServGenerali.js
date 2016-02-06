@@ -33,8 +33,6 @@ Ext.define('Rai.view.frmServGenerali', {
         'Ext.toolbar.Paging',
         'Ext.grid.plugin.CellEditing',
         'Ext.grid.column.Action',
-        'Ext.grid.feature.Grouping',
-        'Ext.XTemplate',
         'Ext.grid.filters.Filters'
     ],
 
@@ -57,6 +55,7 @@ Ext.define('Rai.view.frmServGenerali', {
             xtype: 'gridpanel',
             region: 'center',
             id: 'elencoGrid',
+            animCollapse: false,
             title: 'Elenco richieste servizi',
             store: 'storeRichiesteServizi',
             columns: [
@@ -201,10 +200,10 @@ Ext.define('Rai.view.frmServGenerali', {
 
 
                         if (value === "Approvato"){
-                            return '<span style="color:' + "#73b51e" + ';">' + "<b>"  + value + "</b>"+ '</span>';
+                            return '<span style="color:' + "#73b51e" + ';">' + "<b>"  + value + " da " + record.get('utenteApprovante') + "</b>"+ '</span>';
                         }
                         else if ( value === "Non approvato"){
-                            return '<span style="color:' + "#cf4c35" + ';">' + value + '</span>';
+                            return '<span style="color:' + "#cf4c35" + ';">' + value + " da " + record.get('utenteApprovante') + '</span>';
                         }
                         else if ( value === "Erogato"){
                             return '<span style="color:' + "#0277BD" + ';"><b>' + value + '</b></span>';
@@ -215,13 +214,17 @@ Ext.define('Rai.view.frmServGenerali', {
                         else if ( value === "Nessuno"){
                             return '<span style="color:' + "#795548" + ';"><b>' + value + '</b></span>';
                         }
+                        else if ( value === "Eliminato"){
+                            return '<span style="color:' + "#D50000" + ';"><b>' + value +  " da " + record.get('utenteApprovante') + '</b></span>';
+                        }
 
 
                         else return value;
                     },
                     dataIndex: 'stato',
+                    groupable: true,
                     text: 'Stato',
-                    flex: 1,
+                    flex: 1.5,
                     filter: {
                         type: 'string'
                     }
@@ -589,25 +592,6 @@ Ext.define('Rai.view.frmServGenerali', {
                 },
                 {
                     ptype: 'gridfilters'
-                }
-            ],
-            features: [
-                {
-                    ftype: 'grouping',
-                    showSummaryRow: true,
-                    groupHeaderTpl: [
-                        '',
-                        '',
-                        '<tpl if="name==\'Erogato\'" ><span style="color:#0277BD;"><b>Ci sono {rows.length} richieste erogate</b></span></tpl>   ',
-                        '<tpl if="name==\'Nessuno\'" ><span style="color:#795548;"><b>Ci sono {rows.length} richieste in attesa di approvazione</b></span></tpl>',
-                        '<tpl if="name==\'Non approvato\'" ><span style="color:#cf4c35;"><b>Ci sono {rows.length} richieste non approvate</b></span></tpl>',
-                        '<tpl if="name==\'Approvato\'" ><span style="color:#73b51e;"><b>Ci sono {rows.length} richieste approvate</b></span></tpl>',
-                        '<tpl if="name==\'In lavorazione\'" ><span style="color:#AFB42B;"><b>Ci sono {rows.length} richieste in lavorazione</b></span></tpl>',
-                        '<tpl if="name==\'Eliminato\'" ><span style="color:#AFB42B;"><b>Ci sono {rows.length} richieste eliminate</b></span></tpl>',
-                        '',
-                        '',
-                        ''
-                    ]
                 }
             ]
         }

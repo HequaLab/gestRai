@@ -43,6 +43,12 @@ Ext.define('Rai.view.frmServiziViewController3', {
 
     onButtonOnClear: function() {
         Ext.getCmp('nomeFilialeTxt').setValue('');
+    },
+
+    onPanelAfterRender: function(component, eOpts) {
+        var store = Ext.StoreManager.lookup('storeFiliali');
+        store.load();
+
     }
 
 });

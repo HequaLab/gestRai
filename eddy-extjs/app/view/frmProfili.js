@@ -171,7 +171,7 @@ Ext.define('Rai.view.frmProfili', {
             bodyPadding: 10,
             collapseDirection: 'bottom',
             collapsed: false,
-            collapsible: true,
+            collapsible: false,
             placeholderCollapseHideMode: 2,
             title: 'Gestisci Utenti',
             titleCollapse: true,

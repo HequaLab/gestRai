@@ -27,7 +27,7 @@ Ext.define('Rai.view.frmServGeneraliViewController', {
 
 
         var store = Ext.StoreManager.lookup('storeRichiesteServizi');
-        store.clearFilter();
+        store.clearFilter(true);
         store.filter({
             property: "divisione",
             value: USER.divisione ,

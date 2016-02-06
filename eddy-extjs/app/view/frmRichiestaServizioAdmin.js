@@ -159,6 +159,7 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                                 else return value;
                             },
                             dataIndex: 'stato',
+                            groupable: false,
                             text: 'Stato',
                             flex: 0.7
                         },

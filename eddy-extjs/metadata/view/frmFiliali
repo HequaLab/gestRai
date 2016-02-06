@@ -243,6 +243,26 @@
                     ]
                 }
             ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onPanelAfterRender",
+                "implHandler": [
+                    "var store = Ext.StoreManager.lookup('storeFiliali');",
+                    "store.load();",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onPanelAfterRender",
+            "designerId": "82630486-84d5-4fd1-b336-4d182df98208"
         }
     ]
 }

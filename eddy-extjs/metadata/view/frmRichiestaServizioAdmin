@@ -233,6 +233,7 @@
                             "userConfig": {
                                 "dataIndex": "stato",
                                 "flex": 0.7,
+                                "groupable": false,
                                 "text": "Stato"
                             },
                             "name": "MyColumn1",

@@ -110,6 +110,15 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
                         },
                         {
                             xtype: 'gridcolumn',
+                            dataIndex: 'tipologia',
+                            text: 'Tipologia',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
+                        },
+                        {
+                            xtype: 'gridcolumn',
                             dataIndex: 'operatore',
                             text: 'Operatore',
                             flex: 1,

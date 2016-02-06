@@ -25,6 +25,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "groupParam": "",
                 "idParam": "richiestaNuovoServizioId",
                 "url": "/richiestaNuovoServizio"
             },
