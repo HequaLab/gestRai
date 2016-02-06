@@ -2,6 +2,6 @@
     "webBuild": {
         "environment": "production",
         "clean": "on",
-        "publishPath": "/Users/kliton/Desktop/test_rai"
+        "publishPath": "/Users/kliton/Documents/Lavoro/fc4b/Rai/com.hequalab.rai/web/src/main/resources/webapp"
     }
 }

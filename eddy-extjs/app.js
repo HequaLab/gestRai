@@ -52,7 +52,6 @@ Ext.application({
         'frmMain',
         'frmLogin',
         'frmAdmin',
-        'frmServiziAdmin',
         'frmProfiliManager',
         'frmOperatore',
         'frmLotti',

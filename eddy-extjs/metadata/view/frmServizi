@@ -308,7 +308,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "fieldLabel": "Codice Servizio",
+                        "fieldLabel": "Codice Servizio (Nome)",
                         "id": "descrizioneTxt"
                     },
                     "name": "MyTextField3",

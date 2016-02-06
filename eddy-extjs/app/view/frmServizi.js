@@ -152,7 +152,7 @@ Ext.define('Rai.view.frmServizi', {
                 {
                     xtype: 'textfield',
                     id: 'descrizioneTxt',
-                    fieldLabel: 'Codice Servizio'
+                    fieldLabel: 'Codice Servizio (Nome)'
                 },
                 {
                     xtype: 'textfield',

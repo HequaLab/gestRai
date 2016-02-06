@@ -592,65 +592,6 @@
                             ]
                         }
                     ]
-                },
-                {
-                    "type": "Ext.panel.Panel",
-                    "reference": {
-                        "name": "dockedItems",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "bodyPadding": 10,
-                        "collapsible": true,
-                        "dock": "top",
-                        "height": 160,
-                        "padding": 1,
-                        "title": "Filtri"
-                    },
-                    "name": "MyPanel3",
-                    "designerId": "80299063-d9b6-4e4c-81b3-9a9984436611",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.Date",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fieldLabel": "Label"
-                            },
-                            "name": "MyDateField1",
-                            "designerId": "b7d2ee2e-06cc-46f9-b38e-963be195b3a9"
-                        },
-                        {
-                            "type": "Ext.form.field.ComboBox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fieldLabel": "Servizio"
-                            },
-                            "name": "MyComboBox2",
-                            "designerId": "26cc75c9-f4ef-4fc7-b84e-6e9f21780d14"
-                        },
-                        {
-                            "type": "Ext.form.field.ComboBox",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fieldLabel": "Stato"
-                            },
-                            "name": "MyComboBox3",
-                            "designerId": "3dfa24ec-522e-4989-b969-6467c696eb5e"
-                        }
-                    ]
                 }
             ]
         },

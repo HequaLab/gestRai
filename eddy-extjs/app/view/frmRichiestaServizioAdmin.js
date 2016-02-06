@@ -316,31 +316,6 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                         }
                     ]
                 }
-            ],
-            dockedItems: [
-                {
-                    xtype: 'panel',
-                    dock: 'top',
-                    height: 160,
-                    padding: 1,
-                    bodyPadding: 10,
-                    collapsible: true,
-                    title: 'Filtri',
-                    items: [
-                        {
-                            xtype: 'datefield',
-                            fieldLabel: 'Label'
-                        },
-                        {
-                            xtype: 'combobox',
-                            fieldLabel: 'Servizio'
-                        },
-                        {
-                            xtype: 'combobox',
-                            fieldLabel: 'Stato'
-                        }
-                    ]
-                }
             ]
         },
         {
