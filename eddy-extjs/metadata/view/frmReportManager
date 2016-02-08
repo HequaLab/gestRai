@@ -1390,6 +1390,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "fieldLabel": "Uorg",
+                                        "id": "filtroUorg",
                                         "labelWidth": 40,
                                         "layout|flex": 1,
                                         "tabIndex": 9

@@ -1,0 +1,18 @@
+{
+    "type": "jsoverrideresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "defer": false,
+        "designer|userAliasPrefix": "widget",
+        "designer|userClassName": "js_1hkof787",
+        "id": "multiUpload",
+        "url": "app/override/form/field/File.js",
+        "x-compile": true
+    },
+    "name": "js3",
+    "designerId": "30414f98-51af-4ae3-8857-98c1a96e3017"
+}

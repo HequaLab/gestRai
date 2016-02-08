@@ -20,41 +20,42 @@ Ext.define('Rai.view.uploadWin', {
     requires: [
         'Rai.view.uploadWinViewModel',
         'Rai.view.uploadWinViewController',
-        'Ext.form.field.File',
-        'Ext.button.Button'
+        'Ext.button.Button',
+        'Ext.grid.Panel',
+        'Ext.grid.column.Number',
+        'Ext.view.Table',
+        'Ext.toolbar.Toolbar',
+        'Ext.form.field.File'
     ],
+
+    config: {
+        storeLocale: '{descr:"ok"};'
+    },
 
     controller: 'uploadwin',
     viewModel: {
         type: 'uploadwin'
     },
-    height: 123,
+    height: 242,
     id: 'uploadWin',
-    width: 400,
+    width: 656,
+    layout: 'absolute',
+    bodyStyle: 'color:white;',
     title: 'Upload file',
     titleAlign: 'center',
 
-    layout: {
-        type: 'vbox',
-        align: 'center',
-        padding: 20
-    },
     items: [
-        {
-            xtype: 'filefield',
-            cls: 'upload-icon',
-            id: 'inputField',
-            fieldLabel: 'Label'
-        },
         {
             xtype: 'button',
             handler: function(button, e) {
 
 
-                var filefield = Ext.getCmp('inputField');
-                var file = filefield.getEl().down('input[type=file]').dom.files[0];
+                var filefield = Ext.getCmp('fileUpload');
+                var file = filefield.getEl().down('input[type=file]').dom.files;
+                debugger;
                 var reader = new FileReader();
                 var idRichiesta = this.up('window').idRichiesta;
+
                 reader.onload = (function(theFile) {
                     return function(e) {
                         var encodedFile = Ext.util.base64.encode(e.target.result);
@@ -91,12 +92,66 @@ Ext.define('Rai.view.uploadWin', {
                 // start upload
                 reader.readAsBinaryString(file);
             },
-            width: 275,
-            text: 'MyButton'
+            x: 110,
+            y: 170,
+            height: 30,
+            width: 420,
+            text: 'Invia file'
+        },
+        {
+            xtype: 'gridpanel',
+            x: -4,
+            y: 0,
+            id: 'fileGrid',
+            header: false,
+            title: 'My Grid Panel',
+            columns: [
+                {
+                    xtype: 'gridcolumn',
+                    dataIndex: 'string',
+                    text: 'Nome file',
+                    flex: 2
+                },
+                {
+                    xtype: 'numbercolumn',
+                    dataIndex: 'number',
+                    text: 'Dimensioni',
+                    flex: 1
+                }
+            ],
+            dockedItems: [
+                {
+                    xtype: 'toolbar',
+                    dock: 'top',
+                    items: [
+                        {
+                            xtype: 'filefield',
+                            id: 'fileUpload',
+                            width: 71,
+                            fieldLabel: '',
+                            hideEmptyLabel: false,
+                            hideLabel: true,
+                            labelWidth: 0,
+                            buttonMargin: 0,
+                            buttonOnly: true,
+                            buttonText: 'Aggiungi',
+                            listeners: {
+                                change: 'onFileUploadChange'
+                            }
+                        },
+                        {
+                            xtype: 'button',
+                            style: 'color:white;background-color:#EF9A9A;',
+                            text: 'Rimuovi'
+                        }
+                    ]
+                }
+            ]
         }
     ],
     listeners: {
-        show: 'onUploadWinShow'
+        show: 'onUploadWinShow',
+        afterrender: 'onUploadWinAfterRender'
     }
 
 });

@@ -6,39 +6,37 @@
     },
     "codeClass": null,
     "userConfig": {
-        "container|align": "center",
-        "container|padding": 20,
+        "bodyStyle": [
+            "\"color:white;\""
+        ],
+        "designer|snapToGrid": 10,
         "designer|uiInterfaceName": "default",
         "designer|userAlias": "uploadWin",
         "designer|userClassName": "uploadWin",
-        "height": 123,
+        "height": 242,
         "id": "uploadWin",
-        "layout": "vbox",
+        "layout": "absolute",
+        "storeLocale": [
+            "{descr:\"ok\"};"
+        ],
         "title": "Upload file",
         "titleAlign": "center",
-        "width": 400
+        "width": 656
+    },
+    "configAlternates": {
+        "storeLocale": "object"
     },
     "designerId": "3b2aa3b5-6269-4b62-a593-763c8439bbe6",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "storeLocale",
+            "type": "string"
+        }
+    ],
     "viewControllerInstanceId": "cc1e728e-623f-4a8f-9a39-fdf29c59bd81",
     "viewModelInstanceId": "33205bde-de25-4d2a-83b7-3b3a66b50325",
     "cn": [
-        {
-            "type": "Ext.form.field.File",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "cls": [
-                    "upload-icon"
-                ],
-                "fieldLabel": "Label",
-                "id": "inputField"
-            },
-            "name": "MyFileUpload",
-            "designerId": "f3323865-2972-4010-925f-8cfbe0dca5dc"
-        },
         {
             "type": "Ext.button.Button",
             "reference": {
@@ -47,8 +45,11 @@
             },
             "codeClass": null,
             "userConfig": {
-                "text": "MyButton",
-                "width": 275
+                "height": 30,
+                "layout|x": 110,
+                "layout|y": 170,
+                "text": "Invia file",
+                "width": 420
             },
             "name": "MyButton19",
             "designerId": "ecd42af3-0cdd-4b9c-819e-c07931f6118d",
@@ -69,10 +70,12 @@
                         "implHandler": [
                             "",
                             "",
-                            "var filefield = Ext.getCmp('inputField');",
-                            "var file = filefield.getEl().down('input[type=file]').dom.files[0];",
+                            "var filefield = Ext.getCmp('fileUpload');",
+                            "var file = filefield.getEl().down('input[type=file]').dom.files;",
+                            "debugger;",
                             "var reader = new FileReader();",
                             "var idRichiesta = this.up('window').idRichiesta;",
+                            "",
                             "reader.onload = (function(theFile) {",
                             "    return function(e) {",
                             "        var encodedFile = Ext.util.base64.encode(e.target.result);",
@@ -132,6 +135,162 @@
             },
             "name": "onUploadWinShow",
             "designerId": "3c42e001-9743-462c-bc91-5aa77dc07bc8"
+        },
+        {
+            "type": "Ext.grid.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "header": false,
+                "id": "fileGrid",
+                "layout|x": -4,
+                "layout|y": 0,
+                "title": "My Grid Panel"
+            },
+            "name": "MyGridPanel2",
+            "designerId": "9ce8c6c7-05c9-4779-a771-6c1228724215",
+            "cn": [
+                {
+                    "type": "Ext.grid.column.Column",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "string",
+                        "flex": 2,
+                        "text": "Nome file"
+                    },
+                    "name": "MyColumn11",
+                    "designerId": "f9d1fade-a610-4212-8652-5ee773e4f5dd"
+                },
+                {
+                    "type": "Ext.grid.column.Number",
+                    "reference": {
+                        "name": "columns",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dataIndex": "number",
+                        "flex": 1,
+                        "text": "Dimensioni"
+                    },
+                    "name": "MyNumberColumn1",
+                    "designerId": "a6459dc4-1b98-42d5-8022-03164c872739"
+                },
+                {
+                    "type": "Ext.view.Table",
+                    "reference": {
+                        "name": "viewConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyTable1",
+                    "designerId": "107b57d0-e397-474b-b116-2e3ebd330da0"
+                },
+                {
+                    "type": "Ext.toolbar.Toolbar",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "dock": "top"
+                    },
+                    "name": "MyToolbar8",
+                    "designerId": "cc3dda15-146d-4541-8fe5-3fb13bd9d566",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.File",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "buttonMargin": 0,
+                                "buttonOnly": true,
+                                "buttonText": "Aggiungi",
+                                "fieldLabel": "",
+                                "hideEmptyLabel": false,
+                                "hideLabel": true,
+                                "id": "fileUpload",
+                                "labelWidth": 0,
+                                "layout|flex": null,
+                                "width": 71
+                            },
+                            "name": "MyFileUpload",
+                            "designerId": "aebf2e9e-d136-437e-8275-d24628dc7d1f",
+                            "viewControllerInstanceId": "54094082-08a7-4a79-a523-7d3b9def08bd",
+                            "viewModelInstanceId": "eaf62a8e-e407-4712-b09b-28e824485e66",
+                            "cn": [
+                                {
+                                    "type": "viewcontrollereventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onFileUploadChange",
+                                        "implHandler": [
+                                            "debugger;"
+                                        ],
+                                        "name": "change",
+                                        "scope": "me"
+                                    },
+                                    "name": "onFileUploadChange",
+                                    "designerId": "b2fcab1e-1a58-41c3-af27-2aefcac2cd3d"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.button.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "style": [
+                                    "\"color:white;background-color:#EF9A9A;\""
+                                ],
+                                "text": "Rimuovi"
+                            },
+                            "name": "MyButton34",
+                            "designerId": "acc3b05a-685b-4944-a947-1a53e494e213"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "viewcontrollereventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUploadWinAfterRender",
+                "implHandler": [
+                    "component.storeLocale = Ext.create('Ext.data.Store',{",
+                    "    fields:[\"nomeFile\",\"dimensione\"]",
+                    "});",
+                    ""
+                ],
+                "name": "afterrender",
+                "scope": "me"
+            },
+            "name": "onUploadWinAfterRender",
+            "designerId": "5ddaaa57-be79-48de-8653-14b4c04e2eef"
         }
     ]
 }

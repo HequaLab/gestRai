@@ -534,6 +534,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		LocalDate dtInizioReport = new LocalDate(dataInizio);
 		LocalDate dtFineReport = new LocalDate(dataFine);
 
+
 		// Calcolo tutti i costi totali
 		for (RichiestaNuovoServizioView v : dnv) {
 			int giorniComputo = 0, mesiComputo = 0;
@@ -541,15 +542,14 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 			if (v.getDataFine().isBefore(dtFineReport)
 					|| v.getDataFine().isEqual(dtFineReport)) {
 				// caso 1: data minore di quella di fine report
-				giorniComputo = Days.daysBetween(v.getData(), v.getDataFine())
-						.getDays();
-
+				giorniComputo = Days.daysBetween(v.getData(), v.getDataFine()).getDays();
+				mesiComputo = Months.monthsBetween(v.getData(), v.getDataFine()).getMonths();
 			} else {
 				// caso 2
-				giorniComputo = Days.daysBetween(v.getData(), dtFineReport)
-						.getDays();
-
+				giorniComputo = Days.daysBetween(v.getData(), dtFineReport).getDays();
+				mesiComputo = Months.monthsBetween(v.getData(), dtFineReport).getMonths();
 			}
+
 			giorniComputo += 1;
 
 			double costoTotale = 0;
@@ -557,7 +557,8 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 			switch (v.getTipologia()) {
 			case "Canone":
 				// Applicare mesi computo
-				costoTotale = v.getImporto();
+				costoTotale = v.getImporto() * mesiComputo;
+				v.setOre(mesiComputo);
 				break;
 			case "Modulo":
 				costoTotale = giorniComputo * v.getOre() * v.getImporto();

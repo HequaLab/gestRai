@@ -20,6 +20,40 @@ Ext.define('Override.data.Proxy', {
 });
 */
 
+Ext.define('Ext.ux.form.MultiFile', {
+    extend: 'Ext.form.field.File',
+    alias: 'widget.multifilefield',
+ 
+    initComponent: function () {
+        var me = this;
+ 
+        me.on('render', function () {
+            me.fileInputEl.set({ multiple: true });
+        });
+ 
+        me.callParent(arguments);
+    },
+ 
+    onFileChange: function (button, e, value) {
+        this.duringFileSelect = true;
+ 
+        var me = this,
+            upload = me.fileInputEl.dom,
+            files = upload.files,
+            names = [];
+ 
+        if (files) {
+            for (var i = 0; i < files.length; i++)
+                names.push(files[i].name);
+            value = names.join(', ');
+        }
+ 
+        Ext.form.field.File.superclass.setValue.call(this, value);
+ 
+        delete this.duringFileSelect;
+    }
+});
+ 
 
 
 var daysBetween = function(timeStampA, timeStampB) {
@@ -32,14 +66,14 @@ var daysBetween = function(timeStampA, timeStampB) {
 
 
 function monthDiff(day1,day2){
-	var d1= day1,d2= day2;
-	if(day1<day2){
-		d1= day2;
-		d2= day1;
-	}
-	var m= (d1.getFullYear()-d2.getFullYear())*12+(d1.getMonth()-d2.getMonth());
-	if(d1.getDate()<d2.getDate()) --m;
-	return m;
+    var d1= day1,d2= day2;
+    if(day1<day2){
+        d1= day2;
+        d2= day1;
+    }
+    var m= (d1.getFullYear()-d2.getFullYear())*12+(d1.getMonth()-d2.getMonth());
+    if(d1.getDate()<d2.getDate()) --m;
+    return m;
 }
 
 

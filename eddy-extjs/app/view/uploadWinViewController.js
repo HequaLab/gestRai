@@ -19,6 +19,17 @@ Ext.define('Rai.view.uploadWinViewController', {
 
     onUploadWinShow: function(component, eOpts) {
 
+    },
+
+    onFileUploadChange: function(filefield, value, eOpts) {
+        debugger;
+    },
+
+    onUploadWinAfterRender: function(component, eOpts) {
+        component.storeLocale = Ext.create('Ext.data.Store',{
+            fields:["nomeFile","dimensione"]
+        });
+
     }
 
 });
