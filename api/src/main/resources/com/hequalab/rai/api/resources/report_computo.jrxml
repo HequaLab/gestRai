@@ -810,14 +810,14 @@
 				<text><![CDATA[www.fc4b.net]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="1020" y="0" width="80" height="15" uuid="c3346cdf-cacf-47cc-9a9c-fb76d77211f8"/>
+				<reportElement x="1020" y="24" width="80" height="15" uuid="c3346cdf-cacf-47cc-9a9c-fb76d77211f8"/>
 				<textElement textAlignment="Right">
 					<font fontName="Times New Roman"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" di"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="1100" y="0" width="40" height="15" uuid="d275c891-eb27-4bfb-9a4f-ae58e629b71a"/>
+				<reportElement x="1100" y="24" width="40" height="15" uuid="d275c891-eb27-4bfb-9a4f-ae58e629b71a"/>
 				<textElement>
 					<font fontName="Times New Roman"/>
 				</textElement>
