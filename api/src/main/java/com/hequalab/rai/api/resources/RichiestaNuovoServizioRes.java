@@ -140,34 +140,6 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 				aggSess().get(RichiestaNuovoServizio.class, id.get())
 						.approva(id.get(), usr, timeStamp));
 
-		// Genero il report
-
-		List<RichiestaNuovoServizioView> data1 = new ArrayList<RichiestaNuovoServizioView>();
-		data1.add(uv);
-		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(
-				data1);
-
-		InputStream inputStream = this.getClass()
-				.getResourceAsStream("report_richiesta.jrxml");
-
-		@SuppressWarnings("rawtypes")
-		Map parameters = new HashMap();
-
-		parameters.put("logo",
-				ImageIO.read(getClass().getResource("RAI_logo.png")));
-		parameters.put("idRichiesta", id.get().toString());
-
-		JasperDesign jasperDesign = JRXmlLoader.load(inputStream);
-		JasperReport jasperReport = JasperCompileManager
-				.compileReport(jasperDesign);
-
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
-				parameters, beanColDataSource);
-
-		String nomeFile = "report_" + id.get().toString() + "_approvato.pdf";
-		new java.io.File("static_assets/files/").mkdirs();
-		JasperExportManager.exportReportToPdfFile(jasperPrint,
-				"static_assets/files/" + nomeFile);
 
 		uv.setStato("Approvato");
 		uv.setUtenteApprovante(user.getFirstName() + " " + user.getLastName());
@@ -534,7 +506,6 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 		LocalDate dtInizioReport = new LocalDate(dataInizio);
 		LocalDate dtFineReport = new LocalDate(dataFine);
 
-
 		// Calcolo tutti i costi totali
 		for (RichiestaNuovoServizioView v : dnv) {
 			int giorniComputo = 0, mesiComputo = 0;
@@ -730,6 +701,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 				form.getStatoEsportazione(), form.getVoce(), form.getLuogoId(),
 				form.getIdProduzione(), form.getIdServizio(), user.getUserId(),
 				uriInfo.getBaseUri().toString());
+		
 		aggSess().save(user.getUserId().getUuid(), rec);
 
 		RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();

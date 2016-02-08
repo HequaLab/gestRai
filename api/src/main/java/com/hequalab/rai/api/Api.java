@@ -7,7 +7,8 @@ import com.bazaarvoice.dropwizard.redirect.RedirectBundle;
 import com.bazaarvoice.dropwizard.redirect.UriRedirect;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.hequalab.rai.api.action.mail.richiestanuovoservizio.RichiestaNuovoServizioMailSender;
+import com.hequalab.rai.api.actionMail.mail.richiestanuovoservizio.RichiestaNuovoServizioMailSender;
+import com.hequalab.rai.api.actionPdf.pdfManager.RichiestaNuovoServizioPdfCreator;
 import com.hequalab.rai.api.auth.AccessTokenDAO;
 import com.hequalab.rai.api.auth.SimpleAuthenticator;
 import com.hequalab.rai.api.read.views.filiali.FilialiViewWriter;
@@ -18,7 +19,6 @@ import com.hequalab.rai.api.read.views.luoghi.LuoghiViewWriter;
 import com.hequalab.rai.api.read.views.produzioni.ProduzioniViewWriter;
 import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioViewWriter;
 import com.hequalab.rai.api.read.views.servizi.ServiziViewWriter;
-import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.read.views.user.UserViewWriter;
 import com.hequalab.rai.api.resources.EventStoreRes;
 import com.hequalab.rai.api.resources.FilialiRes;
@@ -122,6 +122,9 @@ public class Api extends Application<ApiConf> {
 				mailClientConf, hibSessionFactory);
 		dispatcher.subscribe(richiestaNuovoServizioMailSender);
 
+		RichiestaNuovoServizioPdfCreator pdfCreator = new RichiestaNuovoServizioPdfCreator(hibSessionFactory);
+		dispatcher.subscribe(pdfCreator);
+
 		// #AnchorViewWriter
 		ProduzioniViewWriter produzioniViewSvc = new ProduzioniViewWriter(
 				hibSessionFactory);
@@ -190,7 +193,6 @@ public class Api extends Application<ApiConf> {
 		env.jersey()
 				.register(new FilialiRes(sessionFactory, hibSessionFactory));
 
-	
 		// Schedule manager
 		ScheduleReportManager se = new ScheduleReportManager(mailReiceiverConf, mailClientConf);
 		se.startAsync();
