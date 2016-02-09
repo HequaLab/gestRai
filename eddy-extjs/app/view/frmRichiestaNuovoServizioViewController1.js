@@ -15,9 +15,46 @@
 
 Ext.define('Rai.view.frmRichiestaNuovoServizioViewController1', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.frmrichiestaservizioadmin',
+    alias: 'controller.frmrichiestaservizioadminold',
 
     onFilialeSelect: function(combo, record, eOpts) {
+        var divisione = record.get('nome');
+
+        var store = Ext.StoreManager.lookup('storeLotti');
+        store.filter({
+            property: "divisione",
+            value: divisione,
+            operator: "streq"
+        });
+        store.load();
+
+        store = Ext.StoreManager.lookup('storeProduzioni');
+        store.filter({
+            property: "divisione",
+            value: divisione ,
+            operator: "streq"
+        });
+        store.load();
+
+        store = Ext.StoreManager.lookup('storeMatricole');
+        store.filter({
+            property: "divisione",
+            value: divisione ,
+            operator: "streq"
+        });
+        store.load();
+
+        store = Ext.StoreManager.lookup('storeLuoghi');
+        store.filter({
+            property: "divisione",
+            value: divisione ,
+            operator: "streq"
+        });
+        store.load();
+
+    },
+
+    onFilialeSelect1: function(combo, record, eOpts) {
         var divisione = record.get('nome');
 
         var store = Ext.StoreManager.lookup('storeLotti');

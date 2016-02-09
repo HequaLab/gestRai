@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userAlias": "frmrichiestaservizioadmin",
+        "designer|userAlias": "frmrichiestaservizioadminold",
         "designer|userClassName": "frmRichiestaNuovoServizioViewModel1"
     },
     "name": "frmRichiestaNuovoServizioViewModel1",

@@ -23,7 +23,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
         button.disable();
     },
 
-    onLottoChange: function(field, newValue, oldValue, eOpts) {
+    onLottoChange1: function(field, newValue, oldValue, eOpts) {
         var lotto = Ext.getCmp('lotto').getValue(),
             tipologia = Ext.getCmp('comboTipologia').getValue(),
             store = Ext.StoreManager.lookup('storeServizi');
@@ -342,6 +342,8 @@ Ext.define('Rai.view.frmRichiestaNuovoServizioViewController', {
             Ext.getCmp('rifiutaSubmit').setVisible(true);
 
         }
+
+
     },
 
     onToolClick: function(tool, e, owner, eOpts) {

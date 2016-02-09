@@ -7,20 +7,74 @@
     "codeClass": null,
     "userConfig": {
         "container|padding": 2,
-        "designer|userAlias": "frmRichiestaServizioAdmin",
+        "designer|userAlias": "frmRichiestaAdmin",
         "designer|userClassName": "frmRichiestaServizioAdmin",
         "height": 753,
         "id": "frmRichiestaServizioAdmin",
         "layout": "border",
         "padding": 0,
         "title": "Area servizi",
+        "titleAlign": "center",
         "width": 1278
     },
     "name": "frmRichiestaNuovoServizio1",
-    "designerId": "640025b7-c675-4b8c-8e61-3ff25c30a346",
-    "viewControllerInstanceId": "314e3775-9d5b-47d6-898e-59d034ee34d6",
-    "viewModelInstanceId": "f389ef58-ee50-4f74-b1e1-d60cf1c3ef55",
+    "designerId": "acec3ec5-977e-4529-9c80-2b5334cd1dc0",
+    "viewControllerInstanceId": "99ddb3dd-53e2-4a2e-a49b-b7f6b4f8ed84",
+    "viewModelInstanceId": "9178066f-bbbd-4ceb-a86f-c4249156cc8d",
     "cn": [
+        {
+            "type": "Ext.toolbar.Toolbar",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dock": "top"
+            },
+            "name": "MyToolbar",
+            "designerId": "5ed69aa9-c681-41a0-9943-4a7e25b5efc2",
+            "cn": [
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "hidden": true,
+                        "id": "popButton1",
+                        "layout|flex": null,
+                        "text": "Richiesta nuova tipologia servizio"
+                    },
+                    "name": "MyButton4",
+                    "designerId": "237e2c66-7ff5-4f32-9b45-f59cb9401b71",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onShowWin",
+                                "implHandler": [
+                                    "var panel = Ext.widget('winnuovatipologiaservizio');",
+                                    "panel.show();",
+                                    "button.disable();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "name": "onShowWin",
+                            "designerId": "fc95e288-087b-49e7-9a1c-b1461b4982a4"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "type": "Ext.panel.Panel",
             "reference": {
@@ -37,7 +91,7 @@
                 "title": ""
             },
             "name": "MyPanel4",
-            "designerId": "13208a3a-80af-438f-9e3c-0b7c69149a2b",
+            "designerId": "016b39da-b484-48f9-a3d9-05fe232618d9",
             "cn": [
                 {
                     "type": "Ext.grid.Panel",
@@ -48,12 +102,13 @@
                     "codeClass": null,
                     "userConfig": {
                         "bodyBorder": true,
+                        "id": "elencoServiziAdmin",
                         "padding": 5,
                         "store": "storeRichiesteServizi",
                         "title": "Elenco servizi"
                     },
                     "name": "MyGridPanel",
-                    "designerId": "72a6838a-1f50-4911-a65e-5e3238fa061f",
+                    "designerId": "a6493046-cc22-4ab8-ad5a-f74fa2229943",
                     "cn": [
                         {
                             "type": "Ext.grid.column.Column",
@@ -63,12 +118,24 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "nome",
-                                "flex": 0.8,
-                                "text": "Servizio"
+                                "dataIndex": "operatore",
+                                "flex": 1,
+                                "text": "Operatore"
                             },
                             "name": "MyColumn",
-                            "designerId": "0e9c8f7f-be1b-4287-a24a-b9aea2fdf1f9"
+                            "designerId": "0baa4ac6-368d-4dc0-a4fb-ecddbb039b8a",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter2",
+                                    "designerId": "43631d1d-112c-4b3a-8ae4-6902a6e03241"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -78,27 +145,49 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "fornitore",
-                                "flex": 0.8,
-                                "text": "Fornitore"
+                                "dataIndex": "utenteApprovante",
+                                "flex": 1,
+                                "text": "Utente approvante"
                             },
-                            "name": "MyColumn30",
-                            "designerId": "98d4fef3-6200-4a79-9981-e99f31ee9461",
+                            "name": "MyColumn11",
+                            "designerId": "13a8bcfc-4d79-4692-91b5-26d6999cef75",
                             "cn": [
                                 {
-                                    "type": "Ext.form.field.ComboBox",
+                                    "type": "Ext.grid.filters.filter.String",
                                     "reference": {
-                                        "name": "editor",
+                                        "name": "filter",
                                         "type": "object"
                                     },
                                     "codeClass": null,
-                                    "userConfig": {
-                                        "displayField": "ragioneSociale",
-                                        "store": "storeFornitori",
-                                        "valueField": "ragioneSociale"
+                                    "name": "MyStringFilter2",
+                                    "designerId": "a71339f2-b5c2-45da-9f95-5b1166aef465"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "nome",
+                                "flex": 1,
+                                "text": "Servizio"
+                            },
+                            "name": "MyColumn6",
+                            "designerId": "2f22184f-5a74-4505-a8a2-7be47e864112",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
                                     },
-                                    "name": "MyComboBox15",
-                                    "designerId": "bb0d740c-a5fa-497f-a5de-c0e103d920cf"
+                                    "codeClass": null,
+                                    "name": "MyStringFilter2",
+                                    "designerId": "685d3779-2f2f-467e-b058-d67cba64fd41"
                                 }
                             ]
                         },
@@ -111,11 +200,77 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "lotto",
-                                "flex": 0.8,
+                                "flex": 1,
                                 "text": "Lotto"
                             },
                             "name": "MyColumn5",
-                            "designerId": "91d302ef-d9e8-4900-8998-e941dedad888"
+                            "designerId": "4da221b4-e2e7-4fd6-bb1f-af7c4d149945",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter3",
+                                    "designerId": "65733ff0-4c0b-4165-b9ec-4fada3584713"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "tipologia",
+                                "flex": 1,
+                                "text": "Tipologia"
+                            },
+                            "name": "MyColumn8",
+                            "designerId": "fa9fe080-52fa-40a0-8de1-eaa4812fd21b",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter3",
+                                    "designerId": "0479b3f1-c023-4635-8625-394879b4334a"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "operatore",
+                                "flex": 1,
+                                "text": "Operatore"
+                            },
+                            "name": "MyColumn22",
+                            "designerId": "c3257c99-0fc0-4479-b30f-37a25bce1b5f",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter4",
+                                    "designerId": "502abb08-2d61-4a66-a811-5a0130e68549"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -126,11 +281,23 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "produzione",
-                                "flex": 0.8,
+                                "flex": 1,
                                 "text": "Produzione"
                             },
-                            "name": "MyColumn22",
-                            "designerId": "465a465d-a675-49c1-b510-42a9824bcb90"
+                            "name": "MyColumn54",
+                            "designerId": "3d4ac938-2d9c-4ed4-bdcd-087add69fea4",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter4",
+                                    "designerId": "2bebe11e-e539-4fe5-a229-db97191cc77a"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -141,11 +308,50 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "matricola",
-                                "flex": 0.8,
+                                "flex": 0.6,
                                 "text": "Matricola"
                             },
                             "name": "MyColumn25",
-                            "designerId": "b0894846-a13c-498e-8c50-fce3af981957"
+                            "designerId": "007a449d-641a-40e5-b76c-286cfcd6fd6f",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter5",
+                                    "designerId": "213cb51f-d3d6-4bc1-94f7-0da4b37ec6bd"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "uorg",
+                                "flex": 0.6,
+                                "text": "Uorg"
+                            },
+                            "name": "MyColumn45",
+                            "designerId": "ea8b7e4b-b992-46e3-8e24-c69cb6d01a86",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter5",
+                                    "designerId": "cb9e774b-2e5f-4981-a162-bf99b4e01c08"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -156,11 +362,23 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "luogo",
-                                "flex": 0.8,
+                                "flex": 1,
                                 "text": "Luogo"
                             },
                             "name": "MyColumn26",
-                            "designerId": "b6fb35c3-0079-4992-a687-ad8f8c52bb03"
+                            "designerId": "1fdc6b9c-b89f-4428-b3b0-88074d5a680c",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter6",
+                                    "designerId": "e46ac82a-77f1-45a1-9253-010925f46808"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Number",
@@ -175,7 +393,19 @@
                                 "text": "Ore"
                             },
                             "name": "MyNumberColumn",
-                            "designerId": "3bd931a6-b821-411a-b235-f42d39f04d1e"
+                            "designerId": "e0332588-f05f-480a-951a-1aef233d6784",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter7",
+                                    "designerId": "5ed841e4-4b2c-403b-bf6d-aa356dd25363"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Date",
@@ -186,12 +416,24 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "data",
-                                "flex": 0.7,
-                                "format": "d/M/ddd",
+                                "flex": 1,
+                                "format": "d-m-Y",
                                 "text": "Data"
                             },
                             "name": "MyDateColumn",
-                            "designerId": "01c673e3-e265-464e-af0e-d6b156bae44d"
+                            "designerId": "1ac46d11-4d89-474c-9906-43b552a77b62",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.Date",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyDateFilter",
+                                    "designerId": "cef54c16-7e8b-4374-ade7-fcb14d89cf4f"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Date",
@@ -202,11 +444,24 @@
                             "codeClass": null,
                             "userConfig": {
                                 "dataIndex": "dataFine",
-                                "flex": 0.7,
+                                "flex": 1,
+                                "format": "d-m-Y",
                                 "text": "Data fine"
                             },
-                            "name": "MyDateColumn5",
-                            "designerId": "3ef35e09-dd9c-48d3-9972-cd21c273567c"
+                            "name": "MyDateColumn3",
+                            "designerId": "11e46be2-5e64-4f74-b3b3-6d158789ac34",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.Date",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyDateFilter",
+                                    "designerId": "77361c45-0f42-41cc-9715-ab0426b29eda"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -221,7 +476,19 @@
                                 "text": "Ora"
                             },
                             "name": "MyColumn13",
-                            "designerId": "f00ebd53-fd3c-48d5-b117-9b6d1916e416"
+                            "designerId": "8a034dd0-35d9-4989-9bec-a093cdc124bd",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.filters.filter.String",
+                                    "reference": {
+                                        "name": "filter",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MyStringFilter8",
+                                    "designerId": "0c0ad561-42f3-42a8-9941-8763ee4752d3"
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -233,55 +500,20 @@
                             "userConfig": {
                                 "dataIndex": "stato",
                                 "flex": 0.7,
-                                "groupable": false,
                                 "text": "Stato"
                             },
                             "name": "MyColumn1",
-                            "designerId": "c7cda935-f6c4-4c41-b358-bc762ffe9db4",
+                            "designerId": "32a9ed97-c854-47ca-815d-0baf3210ba50",
                             "cn": [
                                 {
-                                    "type": "fixedfunction",
+                                    "type": "Ext.grid.filters.filter.String",
                                     "reference": {
-                                        "name": "items",
-                                        "type": "array"
+                                        "name": "filter",
+                                        "type": "object"
                                     },
                                     "codeClass": null,
-                                    "userConfig": {
-                                        "designer|params": [
-                                            "value",
-                                            "metaData",
-                                            "record",
-                                            "rowIndex",
-                                            "colIndex",
-                                            "store",
-                                            "view"
-                                        ],
-                                        "fn": "renderer",
-                                        "implHandler": [
-                                            "",
-                                            "",
-                                            "if (value === \"Approvato\"){",
-                                            "    return '<span style=\"color:' + \"#73b51e\" + ';\">' + \"<b>\"  + value + \"</b>\"+ '</span>';",
-                                            "}",
-                                            "else if ( value === \"Non approvato\"){",
-                                            "    return '<span style=\"color:' + \"#cf4c35\" + ';\">' + value + '</span>';",
-                                            "}",
-                                            "else if ( value === \"Erogato\"){",
-                                            "    return '<span style=\"color:' + \"#0277BD\" + ';\"><b>' + value + '</b></span>';",
-                                            "}",
-                                            "else if ( value === \"In lavorazione\"){",
-                                            "    return '<span style=\"color:' + \"#AFB42B\" + ';\"><b>' + value + '</b></span>';",
-                                            "}",
-                                            "else if ( value === \"Nessuno\"){",
-                                            "    return '<span style=\"color:' + \"#795548\" + ';\"><b>' + value + '</b></span>';",
-                                            "}",
-                                            "",
-                                            "",
-                                            "else return value;"
-                                        ]
-                                    },
-                                    "name": "renderer",
-                                    "designerId": "2f51d93e-15b3-4157-87df-fa30ad7a182f"
+                                    "name": "MyStringFilter9",
+                                    "designerId": "ed11a7cb-8ade-4acc-93fa-ea49952e0111"
                                 }
                             ]
                         },
@@ -295,12 +527,12 @@
                             "userConfig": {
                                 "align": "center",
                                 "dataIndex": "stato",
-                                "flex": 0.5,
-                                "id": "inLavorazioneSubmit",
+                                "flex": 0.8,
+                                "id": "approvaSubmit1",
                                 "text": "Azioni"
                             },
                             "name": "MyActionColumn",
-                            "designerId": "553f0035-1603-40e7-8eda-655135e7d347",
+                            "designerId": "d99a6830-ec89-40c9-ac6a-7e9bac4e5cbe",
                             "cn": [
                                 {
                                     "type": "actioncolumnitem",
@@ -313,8 +545,8 @@
                                         "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAGP0lEQVR4Xu1bS3biVhC9JeOkPYozSBpGoTcQoxUEr8B4BW2voDvDNM4JfQLJ0HgFISsIXkG7VyA5G2h7BCcZND3COXwqp54+fgiBHiBA+DRD+0l67+pW1a2PCAa/bxpOKQf6A0DJYPlaljDQ6lZL52nfnExuWKi7H0E4NFm7zjUMftut2rU0n5EIQP5Xp0wWvZOHMvOfINyluYHEezHOiOi7YB2Dz7tVu5V4neGCxQAY83H3Z/vG8N6pLMs3nBsC/aDfjFPcx04CAEZvSHz8b9V2V0V5NwFQ9ohef8gvejW7twoIuwuAd2q3P+DjVUDYdQDAjJvuRel4WRasBYDDmnP4LGedwKK77pvv3y+7ObkuzglG77eKRkgdACWamN5puqHdqZZOlwXBBADPJSynEVIHIN9wPxBQFM1AohyJjlaJ3aYA+CAsrBFSB6DQcBnMt50Lu/Ttb05lj+kvAaN7YZ8tw4JFAFAgLKgRUgcgX3fuRLmxxS8e/kPvYJ8+Mvh9t2qXNwHAohohfQAaTo1AvwTeWRixUQAW1AipAyAR4CCHG8/20SLgbOMA+BqhUy3ZSaxLHQAVun53ihjDJdBXvnNa3gTqTouIXiYdJO7/Jv5gLQDIZiQc7gGSyAgIrsnbiDuE0hT7eG0MAKMYALZVAHwRo/yBx4L1FDSiwEyk7wYRYW0MkI0V6k4bRCcM/uQzod0f8Pkq2j2JCZkCIBBF/QF/HTjGNBKYeSBkBgBxhDSmD4Eo0qODgMAWn3Z/slOvLmUHgIZzRqqQyledqq2cmJckoamcVIpFDZ0R2QHAD18j4tN/3tjtiU1qoW2VPCHOFLIDgJ8Uif3HOb18yBCJEFTrVo/eJjk4k/9nAoCo/c/auCRLFotaVFohlQiRDQBi7H8WCF79AC1fOt+NwKerFDuzAcAc+5+l9g5yCoQTcY5johoRTVd8aXSfFDmyAcAc+1eR4Iu9I2YuWYwig1W7jQiLpsttHvNVtE+xdQDi7P95/e8TC1wGsRxyZn9RFKNoBFkTJlLM99FulN4oiZbCtg+Ab/9SD5CNE6Oi9xWVLGbcMMEdE1xrhF70LfqiyTMJlUdMRwndgUrxJTCN7QMQl74yXzOhPQLcRRxcoe68ZoIkVCqjHILP9esLDacJ0Cs969saAD71LwFU1Ftjvieg2R+itUry46fVzYD2woaHwfhKnvFsnxxVgN02A5SoYboMqe4XRU2Ei+maCBseL2O+7lzYCnSVguvd7E2kw88bt68scFM9nflW4rmu/00PaLJOVZpGqIFQJMahmNXDAE2dYRsFILRB8d5jVMgiMYHSEGwvYusmhzddszEAgnAnXn0ElIlQVD2AFUrgpofMRD3gEWm+GgKtoB1mUodL46Cz7rE5BgTOhtF7jPOPuf86D5kJBsgmQh/gh7zOhe05wy3+NsaALZ5x7qM/A7BpHZA1JqyXAUALoNQruemCyEXpRypdlrYSTHej67/bZwDWxQBRe/77i06NluE1J8PR1uA9B9eQNEWAx9k+RlFp+8g0qM4PrVAylzbLTJQu1BsMnt6pluZeJ9khAElhVXtcfknX+F3gChhSD5wA0FReq/Ec7bc2E0g6jOwh0h5PBCDY90T3yP9jpgEQNcgsKTAwtvhK7wIFSjHKAMUQ9oYeCOQyj6+jZbFC3XG91FqNwE0MWHgMs6bMjMATo/QbYUB0iktPhfWYrLMm788RRex84luAiXg+DcDUBHmcc9gKAGD+McgJFgEgLm6HE2e7BIBenwvmBGNMIJwcmWBBZJ4w7xdYY0wgOwxQPkDq+IweM5q6LQcHMAZg+k17I3cGRRadbWHoXZcOMI0COZATFwbjfMAMZ7d7AEgY+3LfemkxS/Ey/NAqyQkqoCIVXm3GaCIKqBBLe6HG8C7lUlicDcLnJhgwEZKYy96A9PQXZiYARIclwsHrXXKCs7RqIgDMt/0hykGJ2/9WUZlQpp2g6TT3PADkgA8DVCbq+3X3XdAxfnoASINjiKJiSw530Z6/dIFAqsfguYanZgKzzMRLiOgyKGg8KQBmdYuUR2frSGYHogfPLACz3mDW/p5KLiCHyjecnp7bZ+2gsYkQ+FO3aid+8J1YEJGb65Ncu3B46VIPCWcmDdr/AVTvipsjYS5YAAAAAElFTkSuQmCC",
                                         "tooltip": "Visualizza report PDF"
                                     },
-                                    "name": "MyActionColumnItem3",
-                                    "designerId": "a56e33cc-517e-4f60-9ca1-da6bc7d78173",
+                                    "name": "MyActionColumnItem",
+                                    "designerId": "15b1fbae-2135-4214-a27f-1daae461b3ab",
                                     "cn": [
                                         {
                                             "type": "fixedfunction",
@@ -367,7 +599,7 @@
                                                 ]
                                             },
                                             "name": "handler",
-                                            "designerId": "74e0e27d-4585-453a-a3e0-5acc0fb5e975"
+                                            "designerId": "0ecc4c24-298c-4b6d-a4b0-8e281921e12e"
                                         }
                                     ]
                                 },
@@ -383,7 +615,7 @@
                                         "tooltip": "Imposta la richiesta in lavorazione"
                                     },
                                     "name": "MyActionColumnItem",
-                                    "designerId": "be90ab9d-59b1-4587-993b-a38a77178965",
+                                    "designerId": "2d8c919a-2e6f-4072-a2ab-a9c09713c02f",
                                     "cn": [
                                         {
                                             "type": "fixedfunction",
@@ -470,7 +702,7 @@
                                                 ]
                                             },
                                             "name": "handler",
-                                            "designerId": "619b3206-4b4e-4e2e-b77f-0ab976befd72"
+                                            "designerId": "3c008cc7-f547-4c99-9ef3-7f7ec4cdcd6b"
                                         }
                                     ]
                                 },
@@ -486,7 +718,7 @@
                                         "tooltip": "Imposta la richiesta come erogata"
                                     },
                                     "name": "MyActionColumnItem",
-                                    "designerId": "6717d065-5401-478c-87be-ee923d488260",
+                                    "designerId": "c0f9c2e0-c831-4c6c-9744-e36a7034e6c2",
                                     "cn": [
                                         {
                                             "type": "fixedfunction",
@@ -538,7 +770,7 @@
                                                 ]
                                             },
                                             "name": "handler",
-                                            "designerId": "f4c6326e-af9b-475a-a88f-ca3a62592a80"
+                                            "designerId": "a72c16f0-2670-497c-87e0-32ff3374c9ee"
                                         }
                                     ]
                                 }
@@ -552,7 +784,7 @@
                             },
                             "codeClass": null,
                             "name": "MyTable",
-                            "designerId": "71c33814-e1d4-4749-8dbc-510f43f514b0"
+                            "designerId": "d5476b66-a513-4c31-a2ce-a967791f6bc3"
                         },
                         {
                             "type": "Ext.toolbar.Paging",
@@ -568,56 +800,138 @@
                                 "width": 360
                             },
                             "name": "MyPagingToolbar",
-                            "designerId": "7b3aa20e-99e7-434f-8815-48bf026bd74b"
+                            "designerId": "96092928-b718-46c8-a134-4fb0f408a25a"
                         },
                         {
-                            "type": "Ext.grid.plugin.CellEditing",
+                            "type": "Ext.grid.filters.Filters",
                             "reference": {
                                 "name": "plugins",
                                 "type": "array"
                             },
                             "codeClass": null,
-                            "name": "MyCellEditingPlugin3",
-                            "designerId": "adb55d80-fc10-4eba-8bd6-6daa379a9290"
+                            "name": "MyGridFiltersPlugin1",
+                            "designerId": "214a32bf-7e52-4534-93c9-a1a1aa84570a"
                         },
                         {
-                            "type": "Ext.grid.feature.Grouping",
+                            "type": "Ext.toolbar.Toolbar",
                             "reference": {
-                                "name": "features",
+                                "name": "dockedItems",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "showSummaryRow": true
+                                "dock": "top"
                             },
-                            "name": "MyGroupingFeature1",
-                            "designerId": "7df5eaab-7230-4a5f-a183-71d735e17971",
+                            "name": "MyToolbar3",
+                            "designerId": "975d06f5-d31b-4dad-afb2-7e8cb1dbd06f",
                             "cn": [
                                 {
-                                    "type": "Ext.XTemplate",
+                                    "type": "Ext.button.Button",
                                     "reference": {
-                                        "name": "groupHeaderTpl",
-                                        "type": "object"
+                                        "name": "items",
+                                        "type": "array"
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "designer|displayName": "groupHeaderTpl",
-                                        "implHandler": [
-                                            "",
-                                            "",
-                                            "<tpl if=\"name=='Erogato'\" ><span style=\"color:#0277BD;\"><b>Ci sono {rows.length} richieste erogate</b><br></span></tpl>   ",
-                                            "<tpl if=\"name=='Nessuno'\" ><span style=\"color:#795548;\"><b>Ci sono {rows.length} richieste in attesa di approvazione</b><br></span></tpl>",
-                                            "<tpl if=\"name=='Non approvato'\" ><span style=\"color:#cf4c35;\"><b>Ci sono {rows.length} richieste non approvate</b><br></span></tpl>",
-                                            "<tpl if=\"name=='Approvato'\" ><span style=\"color:#73b51e;\"><b>Ci sono {rows.length} richieste approvate</b><br></span></tpl>",
-                                            "<tpl if=\"name=='In lavorazione'\" ><span style=\"color:#AFB42B;\"><b>Ci sono {rows.length} richieste in lavorazione</b><br></span></tpl>",
-                                            "",
-                                            ""
-                                        ]
+                                        "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqElEQVQ4T+2TwRHCIBREd9OAJWgBcjZHSzEFGK0lFqB24pGzNEA6SAWuE0cdQMcBvcqN+f8/dmEhklXv3BIX7UHO0lq0lzwqNnwBdM4DmH4cfhQl/w6grOF70++A0LNtDevOlSmoA8/fAp4n/gHAeAeL7jwQnGRmoU+eTQ1ID+GQkcYexCoCSBqIams382OmAhQHZ7QZwos929ZEv5S3KBd4tmtzChVcASYkZKSJGNhEAAAAAElFTkSuQmCC",
+                                        "layout|flex": null,
+                                        "text": "Duplica richiesta"
                                     },
-                                    "name": "groupHeaderTpl",
-                                    "designerId": "7a5d6bfe-dddd-473f-9130-def92847a184"
+                                    "name": "MyButton15",
+                                    "designerId": "4b20d5f1-544e-4f04-a16b-3c9f4c941b43",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    "if ( Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection() === undefined || Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection() === null )return;",
+                                                    "var record = Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection()[0];",
+                                                    "Ext.getCmp('lottoAdmin').setValue(record.get('lotto'));",
+                                                    "Ext.getCmp('comboTipologiaAdmin').setValue(record.get('tipologia'));",
+                                                    "Ext.getCmp('servizioComboAdmin').setValue(record.get('idServizio'));",
+                                                    "Ext.getCmp('codiciComboAdmin').setValue(record.get('idServizio'));",
+                                                    "Ext.getCmp('produzioneAdmin').setValue(record.get('idProduzione'));",
+                                                    "Ext.getCmp('matricolaAdmin').setValue(record.get('idProduzione'));",
+                                                    "Ext.getCmp('uorgAdmin').setValue(record.get('uorg'));",
+                                                    "Ext.getCmp('luogoAdmin').setValue(record.get('luogoId'));"
+                                                ]
+                                            },
+                                            "name": "handler",
+                                            "designerId": "da12ef73-9d04-4d41-8d84-fda7341ef0aa"
+                                        }
+                                    ]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "dockedItems",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "bodyPadding": 10,
+                        "collapsible": true,
+                        "dock": "top",
+                        "height": 160,
+                        "hidden": true,
+                        "padding": 1,
+                        "title": "Filtri"
+                    },
+                    "name": "MyPanel3",
+                    "designerId": "c827dc84-8bcd-4e08-a6e1-aaf79638349b",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Date",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Label"
+                            },
+                            "name": "MyDateField1",
+                            "designerId": "2a6805c9-2743-4aa3-8378-3fff62aedf90"
+                        },
+                        {
+                            "type": "Ext.form.field.ComboBox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Servizio"
+                            },
+                            "name": "MyComboBox2",
+                            "designerId": "86e1931a-1265-462e-a2eb-9d2fa2352760"
+                        },
+                        {
+                            "type": "Ext.form.field.ComboBox",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fieldLabel": "Stato"
+                            },
+                            "name": "MyComboBox3",
+                            "designerId": "5fc7f1d0-2b09-4a11-a242-d0578e1d40de"
                         }
                     ]
                 }
@@ -632,7 +946,6 @@
             "codeClass": null,
             "userConfig": {
                 "bodyPadding": 10,
-                "collapsed": false,
                 "collapsible": true,
                 "layout|region": "west",
                 "padding": 1,
@@ -640,7 +953,7 @@
                 "width": 310
             },
             "name": "MyPanel5",
-            "designerId": "002b6f8d-a062-4824-899d-6c45cbbc9fe8",
+            "designerId": "cfde6d92-8beb-44c1-8dfb-bc21c07a41c0",
             "cn": [
                 {
                     "type": "Ext.form.field.ComboBox",
@@ -653,12 +966,12 @@
                         "displayField": "nome",
                         "fieldLabel": "Divisione",
                         "forceSelection": true,
-                        "id": "filiale",
+                        "id": "divisioneAdmin",
                         "store": "storeFiliali",
                         "valueField": "nome"
                     },
-                    "name": "MyComboBox5",
-                    "designerId": "9d356b71-f67b-4274-8b73-16c4b793a095",
+                    "name": "MyComboBox28",
+                    "designerId": "47609428-47c9-401c-a31a-c3a4c97da443",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -668,48 +981,117 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "fn": "onFilialeSelect",
+                                "fn": "changeDivisione",
                                 "implHandler": [
-                                    "var divisione = record.get('nome');",
                                     "",
-                                    "var store = Ext.StoreManager.lookup('storeLotti');",
+                                    "var store = Ext.StoreManager.lookup('storeProduzioni');",
                                     "store.filter({",
                                     "    property: \"divisione\",",
-                                    "    value: divisione,",
+                                    "    value: newValue ,",
                                     "    operator: \"streq\"",
                                     "});",
-                                    "store.load();",
                                     "",
-                                    "store = Ext.StoreManager.lookup('storeProduzioni');",
+                                    "var store = Ext.StoreManager.lookup('storeUtenti');",
                                     "store.filter({",
                                     "    property: \"divisione\",",
-                                    "    value: divisione ,",
+                                    "    value: newValue ,",
                                     "    operator: \"streq\"",
                                     "});",
-                                    "store.load();",
-                                    "",
-                                    "store = Ext.StoreManager.lookup('storeMatricole');",
-                                    "store.filter({",
-                                    "    property: \"divisione\",",
-                                    "    value: divisione ,",
-                                    "    operator: \"streq\"",
-                                    "});",
-                                    "store.load();",
                                     "",
                                     "store = Ext.StoreManager.lookup('storeLuoghi');",
                                     "store.filter({",
                                     "    property: \"divisione\",",
-                                    "    value: divisione ,",
+                                    "    value: newValue ,",
                                     "    operator: \"streq\"",
                                     "});",
-                                    "store.load();",
-                                    ""
+                                    "",
+                                    "store = Ext.StoreManager.lookup('storeServizi');",
+                                    "store.load();"
                                 ],
-                                "name": "select",
+                                "name": "change",
                                 "scope": "me"
                             },
-                            "name": "onFilialeSelect",
-                            "designerId": "6d0f71c1-0fc5-4a67-9440-c4b7a0180639"
+                            "name": "changeDivisione",
+                            "designerId": "35e6e314-11fe-4c94-bb5a-53424624fdca"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "nameComplete",
+                        "fieldLabel": "Manager",
+                        "forceSelection": true,
+                        "id": "managerAdmin",
+                        "queryMode": "local",
+                        "store": "storeUtenti",
+                        "valueField": "userId"
+                    },
+                    "name": "MyComboBox30",
+                    "designerId": "bca54a76-97ba-446d-b20c-bee610d88371",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "changeManager",
+                                "implHandler": [
+                                    ""
+                                ],
+                                "name": "change",
+                                "scope": "me"
+                            },
+                            "name": "changeManager",
+                            "designerId": "66fc906f-abcc-44c0-89a0-aaafec8e29aa"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "displayField": "nameComplete",
+                        "fieldLabel": "Operatore",
+                        "forceSelection": true,
+                        "id": "operatoreAdmin",
+                        "queryMode": null,
+                        "store": "storeUtenti",
+                        "valueField": "userId"
+                    },
+                    "name": "MyComboBox29",
+                    "designerId": "7c8a223f-acfe-4712-afe5-eb723661ae02",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "changeOperatore",
+                                "implHandler": [
+                                    "",
+                                    ""
+                                ],
+                                "name": "change",
+                                "scope": "me"
+                            },
+                            "name": "changeOperatore",
+                            "designerId": "e09872f4-9807-4883-8142-38707ded8213"
                         }
                     ]
                 },
@@ -722,14 +1104,65 @@
                     "codeClass": null,
                     "userConfig": {
                         "displayField": "descrizione",
-                        "fieldLabel": "Tipologia",
+                        "fieldLabel": "Lotto",
                         "forceSelection": true,
-                        "id": "comboTipologia1",
+                        "id": "lottoAdmin",
                         "queryMode": "local",
                         "store": [
-                            "[\"Canone\",\"Modulo\",\"Richiesta\",\"Trasporto\",\"Extra Contratto\"]"
+                            "['Lotto 1', 'Lotto 2', 'Lotto 3', 'Lotto 5']"
                         ],
-                        "value": "Canone",
+                        "valueField": "descrizione"
+                    },
+                    "name": "MyComboBox5",
+                    "configAlternates": {
+                        "store": "array"
+                    },
+                    "designerId": "ebd3fa3a-c13e-4ad6-9efc-22ee1b9f2616",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onLottoChange",
+                                "implHandler": [
+                                    "var lotto = Ext.getCmp('lottoAdmin').getValue(),",
+                                    "    tipologia = Ext.getCmp('comboTipologiaAdmin').getValue(),",
+                                    "    store = Ext.StoreManager.lookup('storeServizi');",
+                                    "store.clearFilter();",
+                                    "store.filter('lotto',lotto);",
+                                    "if (tipologia !== undefined)store.filter('tipologia',tipologia);",
+                                    ""
+                                ],
+                                "name": "change",
+                                "scope": "me"
+                            },
+                            "name": "onLottoChange",
+                            "designerId": "feae5e5a-6697-41a9-96d9-994a304f7377"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.ComboBox",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "autoSelect": false,
+                        "displayField": "descrizione",
+                        "fieldLabel": "Tipologia",
+                        "forceSelection": true,
+                        "id": "comboTipologiaAdmin",
+                        "queryMode": "local",
+                        "store": [
+                            "[\"Canone\",\"Modulo\",\"Richiesta\",\"Trasporto\"]"
+                        ],
+                        "value": "",
                         "valueField": "descrizione"
                     },
                     "name": "MyComboBox4",
@@ -737,7 +1170,7 @@
                         "store": "array",
                         "value": "string"
                     },
-                    "designerId": "5dd00ec1-5c72-46c2-87a0-57b0e07da93b",
+                    "designerId": "4d76b0ad-1755-419b-9e82-477703be1379",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -749,29 +1182,37 @@
                             "userConfig": {
                                 "fn": "onServizioCombo1Select",
                                 "implHandler": [
+                                    "",
+                                    "var tipologia = Ext.getCmp('comboTipologiaAdmin').getValue();",
                                     "var store = Ext.StoreManager.lookup('storeServizi');",
                                     "store.clearFilter();",
-                                    "var tipologia = Ext.getCmp('comboTipologia1').getValue();",
-                                    "store.filter({",
-                                    "    property: \"tipologia\",",
-                                    "    value: tipologia ,",
-                                    "    operator: \"streq\"",
-                                    "});",
+                                    "store.filter('tipologia',tipologia);",
+                                    "store.filter('lotto',Ext.getCmp('lottoAdmin').getValue());",
                                     "",
-                                    "",
-                                    "Ext.getCmp('oreRichiesta').enable();",
+                                    "Ext.getCmp('oreRichiestaAdmin').labelEl.update('Ore');",
+                                    "Ext.getCmp('oreRichiestaAdmin').enable();",
                                     "",
                                     "// Disabilitare numero ore per servizi canone e modulo",
-                                    "if (tipologia == 'Canone' || tipologia == \"Modulo\"){",
-                                    "    Ext.getCmp('oreRichiesta').disable();",
+                                    "if (tipologia == 'Canone'){",
+                                    "    Ext.getCmp('oreRichiestaAdmin').disable();",
+                                    "}else if (tipologia == \"Modulo\"){",
+                                    "    Ext.getCmp('oreRichiestaAdmin').labelEl.update('Q.ta');",
+                                    "    Ext.getCmp('oreRichiestaAdmin').setValue(1);",
                                     "}",
+                                    "else if (tipologia == 'Richiesta'){",
+                                    "    Ext.getCmp('oreRichiestaAdmin').setValue(4);",
+                                    "}",
+                                    "else if (tipologia == 'Trasporto'){",
+                                    "    Ext.getCmp('oreRichiestaAdmin').setValue(1);",
+                                    "}",
+                                    "",
                                     ""
                                 ],
-                                "name": "select",
+                                "name": "change",
                                 "scope": "me"
                             },
                             "name": "onServizioCombo1Select",
-                            "designerId": "6dff8295-6fdd-409b-931c-af09bb6447b0"
+                            "designerId": "42f18e64-88ed-45c4-ba8b-fcf032b683a3"
                         }
                     ]
                 },
@@ -783,15 +1224,36 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "displayField": null,
-                        "fieldLabel": "Lotto",
+                        "displayField": "descrizione",
+                        "enableRegEx": true,
+                        "fieldLabel": "Produzione",
                         "forceSelection": true,
-                        "id": "lotto1",
-                        "store": null,
-                        "valueField": null
+                        "id": "produzioneAdmin",
+                        "store": "storeProduzioni",
+                        "valueField": "produzioniId"
                     },
-                    "name": "MyComboBox14",
-                    "designerId": "c69b114d-e86b-4abb-9e3f-b09e25a53d3c"
+                    "name": "MyComboBox8",
+                    "designerId": "e86cdc87-3ee7-4ec3-946e-5d88a0fa0464",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMatricolaSelect",
+                                "implHandler": [
+                                    "Ext.getCmp('matricolaAdmin').setValue(record);"
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onMatricolaSelect",
+                            "designerId": "45cf44d7-11a5-4fe3-b1ed-d24050e41fb6"
+                        }
+                    ]
                 },
                 {
                     "type": "Ext.form.field.ComboBox",
@@ -802,46 +1264,35 @@
                     "codeClass": null,
                     "userConfig": {
                         "displayField": "matricola",
-                        "fieldLabel": "Produzione",
-                        "forceSelection": true,
-                        "id": "produzione1",
-                        "store": "storeProduzioni",
-                        "valueField": "matricola"
-                    },
-                    "name": "MyComboBox10",
-                    "designerId": "dc1b98e5-9794-4243-b10e-77139a60f24b"
-                },
-                {
-                    "type": "Ext.form.field.ComboBox",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "displayField": null,
+                        "enableRegEx": true,
                         "fieldLabel": "Matricola",
                         "forceSelection": true,
-                        "id": "matricola1",
-                        "store": null,
-                        "valueField": null
+                        "id": "matricolaAdmin",
+                        "store": "storeProduzioni",
+                        "valueField": "produzioniId"
                     },
-                    "name": "MyComboBox8",
-                    "designerId": "ca85f1ae-faed-43da-862a-84554beb2b4a"
-                },
-                {
-                    "type": "Ext.form.field.Text",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "fieldLabel": "UORG",
-                        "id": "matricola2"
-                    },
-                    "name": "MyTextField",
-                    "designerId": "1a27c928-8a1b-46e6-aba1-73b971fe9bcc"
+                    "name": "MyComboBox23",
+                    "designerId": "7141bffa-fb89-445b-b2f3-13f6aa5b682a",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMatricolaSelect1",
+                                "implHandler": [
+                                    "Ext.getCmp('produzioneAdmin').setValue(record);"
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onMatricolaSelect1",
+                            "designerId": "d8875b66-0515-474e-87a2-53813595b80b"
+                        }
+                    ]
                 },
                 {
                     "type": "Ext.form.field.ComboBox",
@@ -852,14 +1303,16 @@
                     "codeClass": null,
                     "userConfig": {
                         "displayField": "descrizione",
+                        "enableRegEx": true,
                         "fieldLabel": "Servizio",
                         "forceSelection": true,
-                        "id": "servizioCombo1",
+                        "id": "servizioComboAdmin",
+                        "queryMode": "local",
                         "store": "storeServizi",
-                        "valueField": "descrizione"
+                        "valueField": "serviziId"
                     },
                     "name": "MyComboBox",
-                    "designerId": "38c0f6c6-b2dd-442b-acd9-4d21ba2375dd",
+                    "designerId": "8cd464b6-13e2-479a-8d81-930756b4262f",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -871,13 +1324,13 @@
                             "userConfig": {
                                 "fn": "onServizioComboSelect",
                                 "implHandler": [
-                                    "    Ext.getCmp('codiciCombo1').setValue(record);"
+                                    "    Ext.getCmp('codiciComboAdmin').setValue(record);"
                                 ],
                                 "name": "select",
                                 "scope": "me"
                             },
                             "name": "onServizioComboSelect",
-                            "designerId": "f8efb7aa-80ee-4141-b435-2197d5c2c9b1"
+                            "designerId": "65b53603-f747-46ce-90ce-08e5f5407a82"
                         }
                     ]
                 },
@@ -890,14 +1343,16 @@
                     "codeClass": null,
                     "userConfig": {
                         "displayField": "codice",
+                        "enableRegEx": true,
                         "fieldLabel": "Voce",
                         "forceSelection": true,
-                        "id": "codiciCombo1",
+                        "id": "codiciComboAdmin",
+                        "queryMode": "local",
                         "store": "storeServizi",
-                        "valueField": "descrizione"
+                        "valueField": "serviziId"
                     },
                     "name": "MyComboBox9",
-                    "designerId": "0b57631a-116c-4927-9179-b395baf23c3b",
+                    "designerId": "4d77a4d6-96be-448e-9263-4cb3e23fe4b9",
                     "cn": [
                         {
                             "type": "basiceventbinding",
@@ -909,13 +1364,13 @@
                             "userConfig": {
                                 "fn": "onCodiciComboSelect",
                                 "implHandler": [
-                                    "Ext.getCmp('servizioCombo1').setValue(record);"
+                                    "Ext.getCmp('servizioComboAdmin').setValue(record);"
                                 ],
                                 "name": "select",
                                 "scope": "me"
                             },
                             "name": "onCodiciComboSelect",
-                            "designerId": "3bc6cc07-ec26-46a8-a11f-5a97495e818b"
+                            "designerId": "0cb75424-284e-4ae7-8f02-98c874550a07"
                         }
                     ]
                 },
@@ -930,12 +1385,31 @@
                         "displayField": "descrizione",
                         "fieldLabel": "Luogo",
                         "forceSelection": true,
-                        "id": "luogo1",
+                        "id": "luogoAdmin",
                         "store": "storeLuoghi",
-                        "valueField": "descrizione"
+                        "valueField": "luoghiId"
                     },
                     "name": "MyComboBox11",
-                    "designerId": "87f7e6a3-566f-4077-9369-34a2686d0a81"
+                    "designerId": "a7cbc096-ca1d-4bbd-8a0e-f9ec39bc3190"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "uorg",
+                        "fieldLabel": "Uorg",
+                        "id": "uorgAdmin",
+                        "name": "uorg"
+                    },
+                    "name": "MyTextField25",
+                    "configAlternates": {
+                        "store": "array"
+                    },
+                    "designerId": "b413e819-c58d-42ef-be95-8c048d0e1f36"
                 },
                 {
                     "type": "Ext.form.field.Date",
@@ -947,40 +1421,30 @@
                     "userConfig": {
                         "fieldLabel": "Data",
                         "format": "d/m/Y",
-                        "id": "dataRichiesta1"
+                        "id": "dataRichiestaAdmin"
                     },
                     "name": "MyDateField",
-                    "designerId": "0c995fa7-d701-4491-a7fd-4bcd265bbafa"
-                },
-                {
-                    "type": "Ext.form.field.Time",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "fieldLabel": "Ora",
-                        "format": "H:i",
-                        "id": "oraRichiesta1"
-                    },
-                    "name": "MyTimeField",
-                    "designerId": "5467ffcf-5b8b-4cd3-85c3-930981ee0475"
-                },
-                {
-                    "type": "Ext.form.field.Text",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "disabled": true,
-                        "fieldLabel": "Ore",
-                        "id": "oreRichiesta1"
-                    },
-                    "name": "MyTextField1",
-                    "designerId": "4f43e4b8-d7a7-496c-aa56-0979f49190e3"
+                    "designerId": "518b963a-66aa-4f94-a995-b62795526884",
+                    "cn": [
+                        {
+                            "type": "viewcontrollereventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDataRichiestaSelect",
+                                "implHandler": [
+                                    "Ext.getCmp('dataFineAdmin').setValue(value);"
+                                ],
+                                "name": "select",
+                                "scope": "me"
+                            },
+                            "name": "onDataRichiestaSelect",
+                            "designerId": "2e131965-d510-492d-a774-d5382babccad"
+                        }
+                    ]
                 },
                 {
                     "type": "Ext.form.field.Date",
@@ -992,10 +1456,40 @@
                     "userConfig": {
                         "fieldLabel": "Data fine",
                         "format": "d/m/Y",
-                        "id": "dataFine1"
+                        "id": "dataFineAdmin"
                     },
                     "name": "MyDateField2",
-                    "designerId": "ab9fe08a-2c81-4cdf-ae6f-9815443a7dda"
+                    "designerId": "4f25aad6-d31e-4c77-8844-2bb170fb360e"
+                },
+                {
+                    "type": "Ext.form.field.Time",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fieldLabel": "Ora",
+                        "format": "H:i",
+                        "id": "oraRichiestaAdmin"
+                    },
+                    "name": "MyTimeField",
+                    "designerId": "52eabd8b-2c3b-4996-88e1-4670e33b2481"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "disabled": true,
+                        "fieldLabel": "Ore",
+                        "id": "oreRichiestaAdmin"
+                    },
+                    "name": "MyTextField1",
+                    "designerId": "92e44b3c-036c-431e-87e9-e75fcd5207f5"
                 },
                 {
                     "type": "Ext.form.field.TextArea",
@@ -1006,10 +1500,10 @@
                     "codeClass": null,
                     "userConfig": {
                         "fieldLabel": "Note",
-                        "id": "noteRichiesta1"
+                        "id": "noteRichiestaAdmin"
                     },
                     "name": "MyTextArea1",
-                    "designerId": "ce225b9f-ae28-4b22-a8c9-1c7c03a2a354"
+                    "designerId": "72a7868c-b07a-4d7c-b326-b982020119e2"
                 },
                 {
                     "type": "Ext.button.Button",
@@ -1023,7 +1517,7 @@
                         "width": 279
                     },
                     "name": "MyButton3",
-                    "designerId": "244db7fc-8a3a-4069-9e55-85d95cd14003",
+                    "designerId": "03ee87d4-543f-4a61-9a77-800c04471a44",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -1036,127 +1530,179 @@
                                 "fn": "onRichiediServizio",
                                 "implHandler": [
                                     "Ext.Msg.show({",
-                                    "    title:'Richiesta servizio',",
+                                    "    title: 'Richiesta servizio',",
                                     "    msg: 'Stai per richiedere un servizio, vuoi continuae?',",
                                     "    buttons: Ext.Msg.YESNO,",
                                     "    buttonText: {",
-                                    "        no:'No',",
-                                    "        yes:'Si'",
+                                    "        no: 'No',",
+                                    "        yes: 'Si'",
                                     "    },",
-                                    "    fn: function(btn){",
-                                    "        if (btn=='yes'){",
-                                    "",
-                                    "            var servizio = Ext.getCmp('servizioCombo1').getValue(),",
-                                    "                programmazione = Ext.getCmp('programmazioneCombo1').getValue(),",
-                                    "                data = Ext.getCmp('dataRichiesta1').getValue(),",
-                                    "                ora = Ext.getCmp('oraRichiesta1').getRawValue(),",
-                                    "                ore = Ext.getCmp('oreRichiesta1').getValue(),",
-                                    "                dataFine = Ext.getCmp('dataFine1').getValue(),",
-                                    "                note = Ext.getCmp('noteRichiesta1').getValue(),",
+                                    "    fn: function(btn) {",
+                                    "        if (btn == 'yes') {",
+                                    "            var servizio = Ext.getCmp('servizioComboAdmin').getValue(),",
+                                    "                uorg = Ext.getCmp('uorgAdmin').getValue(),",
+                                    "                data = Ext.getCmp('dataRichiestaAdmin').getValue(),",
+                                    "                ora = Ext.getCmp('oraRichiestaAdmin').getRawValue(),",
+                                    "                ore = Ext.getCmp('oreRichiestaAdmin').getValue(),",
+                                    "                dataFine = Ext.getCmp('dataFineAdmin').getValue(),",
+                                    "                note = Ext.getCmp('noteRichiestaAdmin').getValue(),",
                                     "                filiale = USER.divisione,",
                                     "                stato = \"Nessuno\",",
-                                    "                tipologia = Ext.getCmp('comboTipologia1').getValue(),",
-                                    "                lotto = Ext.getCmp('lotto1').getValue(),",
-                                    "                dataFine = Ext.getCmp('dataFine1').getValue(),",
-                                    "                matricola = Ext.getCmp('matricola1').getValue(),",
-                                    "                produzione = Ext.getCmp('produzione1').getValue(),",
-                                    "                luogo = Ext.getCmp('luogo1').getValue(),",
-                                    "                divisione = Ext.getCmp('filiale').getValue();",
+                                    "                tipologia = Ext.getCmp('comboTipologiaAdmin').getValue(),",
+                                    "                lotto = Ext.getCmp('lottoAdmin').getValue(),",
+                                    "                matricola = Ext.getCmp('matricolaAdmin').getRawValue(),",
+                                    "                produzione = Ext.getCmp('produzioneAdmin').getRawValue(),",
+                                    "                luogoId = Ext.getCmp('luogoAdmin').getValue(),",
+                                    "                index = (luogoId !== undefined ? Ext.StoreMgr.lookup(\"storeLuoghi\").findExact('luoghiId', luogoId) : undefined),",
+                                    "                rec = index !== undefined ? Ext.StoreMgr.lookup(\"storeLuoghi\").getAt(index) : undfined,",
+                                    "                luogo = rec !== null ? rec.get('descrizione') + \" ( \" + rec.get('indirizzo') + \" - \" + rec.get('cap') + \" )\" : \"Nessuno\",",
+                                    "                importo = Ext.StoreManager.lookup(\"storeServizi\").findRecord('serviziId', servizio).get('importo'),",
+                                    "                nomeServizio = Ext.StoreManager.lookup(\"storeServizi\").findRecord('serviziId', servizio).get('descrizione'),",
+                                    "                operatore = USER.firstName + \" \" + USER.lastName,",
+                                    "                voce = Ext.getCmp('codiciComboAdmin').getRawValue(),",
+                                    "                idProduzione = Ext.getCmp('produzioneAdmin').getValue(),",
+                                    "                idServizio = Ext.getCmp('servizioComboAdmin').getValue();",
                                     "",
-                                    "            if (servizio === undefined || servizio === \"\")",
-                                    "            {    Ext.Msg.show({",
-                                    "                title:'Errore',",
-                                    "                msg: \"Non hai selezionato il servizio\",",
-                                    "                buttons: Ext.Msg.Ok,",
-                                    "            });",
-                                    "             return;",
+                                    "            var costoTotale = 0;",
+                                    "            if (tipologia === 'Canone') costoTotale = importo;",
+                                    "            else if (tipologia === 'Modulo') costoTotale = importo * ore;",
+                                    "            else if (tipologia === 'Richiesta') costoTotale = importo * ore;",
+                                    "            else if (tipologia === 'Trasporto') costoTotale = importo * ore;",
+                                    "            if (servizio === undefined || servizio === \"\") {",
+                                    "                Ext.Msg.show({",
+                                    "                    title: 'Errore',",
+                                    "                    msg: \"Non hai selezionato il servizio\",",
+                                    "                    buttons: Ext.Msg.Ok,",
+                                    "                });",
+                                    "                return;",
                                     "            }",
-                                    "",
-                                    "            if (programmazione === undefined || programmazione === \"\")",
-                                    "            {    Ext.Msg.show({",
-                                    "                title:'Errore',",
-                                    "                msg: \"Non hai selezionato la programmazione!\",",
-                                    "                buttons: Ext.Msg.Ok,",
-                                    "            });",
-                                    "             return;",
+                                    "            if ((data === undefined || data === null)) {",
+                                    "                Ext.Msg.show({",
+                                    "                    title: 'Errore',",
+                                    "                    msg: \"Non hai selezionato una data!\",",
+                                    "                    buttons: Ext.Msg.Ok,",
+                                    "                });",
+                                    "                return;",
                                     "            }",
-                                    "",
-                                    "            if ((data === undefined || data === null))",
-                                    "            {    Ext.Msg.show({",
-                                    "                title:'Errore',",
-                                    "                msg: \"Non hai selezionato una data!\",",
-                                    "                buttons: Ext.Msg.Ok,",
-                                    "            });",
-                                    "             return;",
+                                    "            if (tipologia !== 'Canone') {",
+                                    "                if (ore === undefined || ore === null) {",
+                                    "                    Ext.Msg.show({",
+                                    "                        title: \" Errore inserimento dati\",",
+                                    "                        msg: \"Devi inserire un quantitativo di ore valido.\"",
+                                    "                    });",
+                                    "                    return;",
+                                    "                }",
+                                    "                if (tipologia === 'Modulo' && ore < 1) {",
+                                    "                    Ext.Msg.show({",
+                                    "                        title: \" Errore inserimento dati\",",
+                                    "                        msg: \"Per le richieste di tipo modulo devi richiedere almeno una unita'\"",
+                                    "                    });",
+                                    "                    return;",
+                                    "                }",
+                                    "                if (tipologia === 'Richiesta' && ore < 4) {",
+                                    "                    Ext.Msg.show({",
+                                    "                        title: \" Errore inserimento dati\",",
+                                    "                        msg: \"Per i servizi di tipo richiesta selezionare almeno  4 ore di lavoro\"",
+                                    "                    });",
+                                    "                    return;",
+                                    "                }",
+                                    "                if (tipologia === 'Trasporto' && ore < 1) {",
+                                    "                    Ext.Msg.show({",
+                                    "                        title: \" Errore inserimento dati\",",
+                                    "                        msg: \"Per i servizi di tipo trasporto selezionare almeno 1 ore di lavoro\"",
+                                    "                    });",
+                                    "                    return;",
+                                    "                }",
                                     "            }",
                                     "",
                                     "            var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
                                     "            var emptyApp = new Rai.model.richiestaServizio();",
-                                    "            emptyApp.set('nome',servizio);",
-                                    "            emptyApp.set('divisione',filiale);",
-                                    "            emptyApp.set('ora',ora);",
-                                    "            emptyApp.set('data',data);",
-                                    "            emptyApp.set('programmazione',programmazione);",
-                                    "            emptyApp.set('ore',ore);",
-                                    "            emptyApp.set('note',note);",
-                                    "            emptyApp.set('stato',stato);",
-                                    "            emptyApp.set('dataFine',dataFine);",
-                                    "            emptyApp.set('tipologia',tipologia);",
-                                    "            emptyApp.set('lotto',lotto);",
-                                    "            emptyApp.set('matricola',matricola);",
-                                    "            emptyApp.set('produzione',produzione);",
-                                    "            emptyApp.set('luogo',luogo);",
-                                    "            emptyApp.set('divisione',divisione);",
-                                    "            emptyApp.set('operatore','admin');",
-                                    "            store.add(emptyApp);",
-                                    "            var self = this;",
-                                    "            store.on('write', function() {",
-                                    "                store.load();",
+                                    "            emptyApp.set('nome', nomeServizio);",
+                                    "            emptyApp.set('importo', importo);",
+                                    "            emptyApp.set('divisione',Ext.getCmp('divisioneAdmin').getValue());",
+                                    "            emptyApp.set('ora', ora);",
+                                    "            emptyApp.set('data', data);",
+                                    "            emptyApp.set('uorg', uorg);",
+                                    "            emptyApp.set('ore', ore);",
+                                    "            emptyApp.set('note', note);",
+                                    "            emptyApp.set('stato', stato);",
+                                    "            emptyApp.set('dataFine', dataFine);",
+                                    "            emptyApp.set('tipologia', tipologia);",
+                                    "            emptyApp.set('lotto', lotto);",
+                                    "            emptyApp.set('matricola', matricola);",
+                                    "            emptyApp.set('produzione', produzione);",
+                                    "            emptyApp.set('luogo', luogo);",
+                                    "            emptyApp.set('operatore', operatore);",
+                                    "            emptyApp.set('voce', voce);",
+                                    "            emptyApp.set('luogoId', luogoId);",
+                                    "            emptyApp.set('idProduzione', idProduzione);",
+                                    "            emptyApp.set('idServizio', idServizio);",
+                                    "",
+                                    "            var oggJson = emptyApp.data;",
+                                    "            delete oggJson.richiestaNuovoServizioId;",
+                                    "            ",
+                                    "            oggJson.data = data.getTime() / 1000;",
+                                    "            oggJson.dataFine = dataFine.getTime() / 1000;",
+                                    "            oggJson.operatore = Ext.getCmp('operatoreAdmin').getValue();",
+                                    "            oggJson.utenteApprovante = Ext.getCmp('managerAdmin').getValue();",
+                                    "",
+                                    "",
+                                    "            // Approvo la richiesta",
+                                    "            Ext.MessageBox.wait('Inserisco la richiesta..');",
+                                    "            Ext.Ajax.request({",
+                                    "                url: '/richiestaNuovoServizio/servizioUrgente',",
+                                    "                headers: {",
+                                    "                    'Authorization': 'Bearer ' + ACCESS_TOKEN,",
+                                    "                },",
+                                    "                jsonData:oggJson,",
+                                    "                method:'POST',",
+                                    "                success: function (response, options) {",
+                                    "                    Ext.StoreManager.lookup('storeRichiesteServizi').load();",
+                                    "                    Ext.MessageBox.updateProgress(1);",
+                                    "                    Ext.MessageBox.hide();",
+                                    "                    Ext.Msg.show({",
+                                    "                        title:'Richiesta inserita',",
+                                    "                        msg: \"Richiesta inserita con successo.\",",
+                                    "                        buttons: Ext.Msg.Ok,",
+                                    "                    });},",
+                                    "                failure: function (response, options) {",
+                                    "                    Ext.MessageBox.updateProgress(1);",
+                                    "                    Ext.MessageBox.hide();",
+                                    "                    Ext.Msg.show({",
+                                    "                        title:'Errore con il server',",
+                                    "                        msg: \"C'è stato un errore durante l'approvazione della richiesta. Errore: \" + response.status,",
+                                    "                        buttons: Ext.Msg.Ok,",
+                                    "                    });",
+                                    "                }",
                                     "            });",
                                     "",
                                     "",
-                                    "            Ext.getCmp('comboTipologia1').setValue('Canone');",
-                                    "            var store = Ext.StoreManager.lookup('storeServizi');",
-                                    "            store.clearFilter();",
-                                    "            store.filter({",
-                                    "                property: \"tipologia\",",
-                                    "                value: 'Canone' ,",
-                                    "                operator: \"streq\"",
-                                    "            });",
-                                    "",
-                                    "",
-                                    "            Ext.getCmp('oreRichiesta1').disable();",
-                                    "            Ext.getCmp('servizioCombo1').setValue(null);",
-                                    "            Ext.getCmp('programmazioneCombo1').setValue(null);",
-                                    "            Ext.getCmp('dataRichiesta1').setValue(null);",
-                                    "            Ext.getCmp('oraRichiesta1').setValue(null);",
-                                    "            Ext.getCmp('oreRichiesta1').setValue(null);",
-                                    "            Ext.getCmp('dataFine1').setValue(null);",
-                                    "            Ext.getCmp('noteRichiesta1').setValue(null);",
-                                    "            Ext.getCmp('comboTipologia1').setValue(null);",
-                                    "            Ext.getCmp('lotto1').setValue(null);",
-                                    "            Ext.getCmp('dataFine1').setValue(null);",
-                                    "            Ext.getCmp('codiciCombo1').setValue(null);",
-                                    "            Ext.getCmp('matricola1').setValue(null);",
-                                    "            Ext.getCmp('luogo1').setValue(null);",
-                                    "            Ext.getCmp('produzione1').setValue(null);",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
+                                    "            Ext.getCmp('oreRichiestaAdmin').disable();",
+                                    "            Ext.getCmp('oreRichiestaAdmin').labelEl.update('Q.ta');",
+                                    "            Ext.getCmp('servizioComboAdmin').setValue(null);",
+                                    "            Ext.getCmp('uorgAdmin').setValue(null);",
+                                    "            Ext.getCmp('dataRichiestaAdmin').setValue(null);",
+                                    "            Ext.getCmp('oraRichiestaAdmin').setValue(null);",
+                                    "            Ext.getCmp('oreRichiestaAdmin').setValue(null);",
+                                    "            Ext.getCmp('dataFineAdmin').setValue(null);",
+                                    "            Ext.getCmp('noteRichiestaAdmin').setValue(null);",
+                                    "            Ext.getCmp('comboTipologiaAdmin').setValue(null);",
+                                    "            Ext.getCmp('lottoAdmin').setValue(null);",
+                                    "            Ext.getCmp('dataFineAdmin').setValue(null);",
+                                    "            Ext.getCmp('codiciComboAdmin').setValue(null);",
+                                    "            Ext.getCmp('matricolaAdmin').setValue(null);",
+                                    "            Ext.getCmp('lottoAdmin').setValue(null);",
+                                    "            Ext.getCmp('luogoAdmin').setValue(null);",
+                                    "            Ext.getCmp('produzioneAdmin').setValue(null);",
                                     "        }",
-                                    "    },",
-                                    "    animEl: 'elId'",
-                                    "});",
-                                    "",
-                                    "",
-                                    ""
+                                    "    }, animEl: 'elId'",
+                                    "});"
                                 ],
                                 "name": "click",
                                 "scope": "me"
                             },
                             "name": "onRichiediServizio",
-                            "designerId": "adc59639-872c-483f-8fdb-2b1c715204f1"
+                            "designerId": "43b38825-7508-408f-9afd-410f5f25b635"
                         }
                     ]
                 },
@@ -1174,7 +1720,7 @@
                         "width": 279
                     },
                     "name": "MyButton17",
-                    "designerId": "155532db-4be4-4c2e-89d4-7573bbd2a9ec",
+                    "designerId": "9955311d-7d12-4d7a-99ae-3f2126efa6d6",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -1186,27 +1732,33 @@
                             "userConfig": {
                                 "fn": "onClear",
                                 "implHandler": [
-                                    "Ext.getCmp('oreRichiesta1').disable();",
-                                    "Ext.getCmp('servizioCombo1').setValue(null);",
-                                    "Ext.getCmp('programmazioneCombo1').setValue(null);",
-                                    "Ext.getCmp('dataRichiesta1').setValue(null);",
-                                    "Ext.getCmp('oraRichiesta1').setValue(null);",
-                                    "Ext.getCmp('oreRichiesta1').setValue(null);",
-                                    "Ext.getCmp('dataFine1').setValue(null);",
-                                    "Ext.getCmp('noteRichiesta1').setValue(null);",
-                                    "Ext.getCmp('comboTipologia1').setValue(null);",
-                                    "Ext.getCmp('lotto1').setValue(null);",
-                                    "Ext.getCmp('dataFine1').setValue(null);",
-                                    "Ext.getCmp('codiciCombo1').setValue(null);",
-                                    "Ext.getCmp('matricola1').setValue(null);",
-                                    "Ext.getCmp('luogo1').setValue(null);",
-                                    "Ext.getCmp('produzione1').setValue(null);"
+                                    "Ext.getCmp('divisioneAdmin').setValue(null);",
+                                    "Ext.getCmp('operatoreAdmin').setValue(null);",
+                                    "Ext.getCmp('managerAdmin').setValue(null);",
+                                    "",
+                                    "",
+                                    "",
+                                    "Ext.getCmp('servizioComboAdmin').setValue(null);",
+                                    "Ext.getCmp('dataRichiestaAdmin').setValue(null);",
+                                    "Ext.getCmp('oraRichiestaAdmin').setValue(null);",
+                                    "Ext.getCmp('oreRichiestaAdmin').setValue(null);",
+                                    "Ext.getCmp('dataFineAdmin').setValue(null);",
+                                    "Ext.getCmp('noteRichiestaAdmin').setValue(null);",
+                                    "Ext.getCmp('comboTipologiaAdmin').setValue(null);",
+                                    "Ext.getCmp('lottoAdmin').setValue(null);",
+                                    "Ext.getCmp('dataFineAdmin').setValue(null);",
+                                    "Ext.getCmp('codiciComboAdmin').setValue(null);",
+                                    "Ext.getCmp('matricolaAdmin').setValue(null);",
+                                    "Ext.getCmp('lottoAdmin').setValue(null);",
+                                    "Ext.getCmp('luogoAdmin').setValue(null);",
+                                    "Ext.getCmp('produzioneAdmin').setValue(null);",
+                                    "Ext.getCmp('uorgAdmin').setValue(null);"
                                 ],
                                 "name": "click",
                                 "scope": "me"
                             },
                             "name": "onClear",
-                            "designerId": "825017ec-175a-4fa4-b151-3d8ad3d67a95"
+                            "designerId": "779efb49-1248-4d4a-9236-7ccd14cc38bd"
                         }
                     ]
                 }
@@ -1222,15 +1774,70 @@
             "userConfig": {
                 "fn": "onFrmrichiestanuovoservizioAfterRender",
                 "implHandler": [
+                    "",
                     "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
-                    "store.clearFilter(true);",
+                    "store.sort({",
+                    "    property: \"timeStamp\",",
+                    "    direction: \"ASC\"",
+                    "});",
+                    "",
+                    "store.load();",
+                    "",
+                    "store = Ext.StoreManager.lookup('storeServizi');",
                     "store.load();"
                 ],
                 "name": "afterrender",
                 "scope": "me"
             },
             "name": "onFrmrichiestanuovoservizioAfterRender",
-            "designerId": "ae08a201-3a51-4cd7-ae82-4292be462f8d"
+            "designerId": "95d920e3-caf6-48b3-8dd5-773f7e6a9589"
+        },
+        {
+            "type": "Ext.panel.Tool",
+            "reference": {
+                "name": "tools",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "type": "help"
+            },
+            "name": "MyTool",
+            "designerId": "f4f2bab1-266d-4c1b-bdc3-be37a24c9e18",
+            "cn": [
+                {
+                    "type": "viewcontrollereventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onToolClick",
+                        "implHandler": [
+                            "return ;",
+                            "var win = Ext.create('Ext.window.Window', {",
+                            "    height: 634,",
+                            "    width: 780,",
+                            "    layout: 'border',",
+                            "    title: 'Report servizio',",
+                            "    titleAlign: 'center',",
+                            "    maximizable: true,",
+                            "    closeAction: 'hide',",
+                            "    items: [{",
+                            "        xtype: 'component',",
+                            "        html : '<iframe src=\"'+ \"http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1\" + '\" width=\"100%\" height=\"100%\"></iframe>',",
+                            "    }]",
+                            "});",
+                            "win.show();"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "name": "onToolClick",
+                    "designerId": "c7208e56-6695-4089-9a4e-ef77d7c5f3bf"
+                }
+            ]
         }
     ]
 }

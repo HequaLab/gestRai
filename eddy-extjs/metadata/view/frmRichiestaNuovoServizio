@@ -1011,10 +1011,7 @@
                                                     "Ext.getCmp('produzione').setValue(record.get('idProduzione'));",
                                                     "Ext.getCmp('matricola').setValue(record.get('idProduzione'));",
                                                     "Ext.getCmp('uorg').setValue(record.get('uorg'));",
-                                                    "Ext.getCmp('luogo').setValue(record.get('luogoId'));",
-                                                    "",
-                                                    "",
-                                                    ""
+                                                    "Ext.getCmp('luogo').setValue(record.get('luogoId'));"
                                                 ]
                                             },
                                             "name": "handler",
@@ -1124,11 +1121,11 @@
                         ],
                         "valueField": "descrizione"
                     },
-                    "name": "MyComboBox5",
+                    "name": "MyComboBox25",
                     "configAlternates": {
                         "store": "array"
                     },
-                    "designerId": "b915aa57-cb0e-46c6-b038-74e377a5d486",
+                    "designerId": "0e2f2a4f-2205-4e29-b993-c1383fc86bad",
                     "cn": [
                         {
                             "type": "viewcontrollereventbinding",
@@ -1138,7 +1135,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "fn": "onLottoChange",
+                                "fn": "onLottoChange1",
                                 "implHandler": [
                                     "var lotto = Ext.getCmp('lotto').getValue(),",
                                     "    tipologia = Ext.getCmp('comboTipologia').getValue(),",
@@ -1151,8 +1148,8 @@
                                 "name": "change",
                                 "scope": "me"
                             },
-                            "name": "onLottoChange",
-                            "designerId": "76dc3275-d02b-4fae-bb6a-10311923907f"
+                            "name": "onLottoChange1",
+                            "designerId": "0175d45f-7457-404c-9789-472a3d884c1c"
                         }
                     ]
                 },
@@ -1853,7 +1850,9 @@
                     "    Ext.getCmp('approvaSubmit').setVisible(true);",
                     "    Ext.getCmp('rifiutaSubmit').setVisible(true);",
                     "",
-                    "}"
+                    "}",
+                    "",
+                    ""
                 ],
                 "name": "afterrender",
                 "scope": "me"

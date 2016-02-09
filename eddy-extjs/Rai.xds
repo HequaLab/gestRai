@@ -2,7 +2,7 @@
     "name": "Rai",
     "settings": {
         "cmd": {
-            "license": "",
+            "license": "commercial",
             "cmdVersion": "",
             "frameworkVersion": ""
         },
@@ -25,7 +25,11 @@
         "generateArchitectVersion": true,
         "projectHasEnabledWebServer": false,
         "lockUrlPrefix": false,
-        "installStatus": "Not Installed"
+        "installStatus": "Not Installed",
+        "lastBuildSelection": {
+            "value": "webBuild",
+            "display": "Build web app"
+        }
     },
     "xdsVersion": "3.2.0",
     "xdsBuild": 339,
@@ -53,6 +57,7 @@
             "3b68ab4e-6245-4899-b042-92d50806b1ca",
             "984aa3ea-509a-4c18-a9d6-c3d46c797905",
             "5820a53d-5ece-4c98-a074-7110f989994e",
+            "9178066f-bbbd-4ceb-a86f-c4249156cc8d",
             "f389ef58-ee50-4f74-b1e1-d60cf1c3ef55",
             "66b7c168-1437-4ff0-be61-c9dd2ecb9cac",
             "6573bd26-1e12-4b2e-af8d-4284f336f9af",
@@ -64,6 +69,7 @@
             "5c4f3cdb-ae0c-44bb-b91b-f291363d516a",
             "67adf30a-3de1-4c2e-801e-a7ec82b9b3f4",
             "fb0cb773-66f2-4504-ab70-8eb4c7589b24",
+            "99ddb3dd-53e2-4a2e-a49b-b7f6b4f8ed84",
             "314e3775-9d5b-47d6-898e-59d034ee34d6",
             "be7823ed-2f3d-42f7-8929-513b7068b7ac",
             "6f190b6f-69a6-496f-909c-b3b2ac83c5a5",
@@ -96,6 +102,7 @@
             "33205bde-de25-4d2a-83b7-3b3a66b50325",
             "cc1e728e-623f-4a8f-9a39-fdf29c59bd81",
             "a38e1f14-8d6f-474d-9885-fb0b9a30b9e1",
+            "acec3ec5-977e-4529-9c80-2b5334cd1dc0",
             "d8622665-a7c8-4c28-acd2-f87f3596908a",
             "b3d9e2ea-dd17-45a4-9c3f-605152daf1d3",
             "1ffd3392-ec1c-4b2c-85d9-17de4dcb6517",

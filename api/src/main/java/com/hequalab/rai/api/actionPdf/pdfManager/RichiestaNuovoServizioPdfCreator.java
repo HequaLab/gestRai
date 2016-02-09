@@ -55,7 +55,7 @@ public class RichiestaNuovoServizioPdfCreator {
 
 		@SuppressWarnings("rawtypes")
 		Map parameters = new HashMap();
-
+		
 		parameters.put("logo",
 				ImageIO.read(getClass().getResource("RAI_logo.png")));
 		parameters.put("idRichiesta", event.getId().toString());

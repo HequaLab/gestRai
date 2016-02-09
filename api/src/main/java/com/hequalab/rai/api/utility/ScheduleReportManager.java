@@ -127,8 +127,9 @@ public class ScheduleReportManager extends AbstractScheduledService {
 	protected void startUp() throws MessagingException, IOException {
 		// Init
 		sess = getSessionFactory().openSession();
-	}
-
+	}	
+	
+	
 	@Override
 	protected void shutDown() {
 		// Stop dello schedule

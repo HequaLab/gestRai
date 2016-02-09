@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_computo" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f8b515e-ea9e-46cb-bcfa-602450cabbfa">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="1022"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="263"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -543,7 +543,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["  Ticket richiesta:  " + $F{richiestaNuovoServizioId}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["  Ticket richiesta:  " + $F{richiestaNuovoServizioId}  + "    Note:  " + $F{note}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="table_TH" x="0" y="22" width="62" height="21" forecolor="#3B3B3B" uuid="dcaec9d4-d704-422b-b506-b6dbc6573994"/>
@@ -741,7 +741,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ore}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="€ #,##0.00" isBlankWhenNull="false">
 				<reportElement style="table_TH" x="982" y="22" width="60" height="21" forecolor="#3B3B3B" uuid="a94b6773-952b-4af9-983e-f75cbc9f856e"/>
 				<box>
 					<pen lineWidth="0.0"/>
@@ -755,7 +755,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{importo}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="€ #,##0.00">
 				<reportElement mode="Opaque" x="1042" y="22" width="108" height="21" forecolor="#FFFFFF" backcolor="#00539F" uuid="e0b4e17d-ccae-4183-8c90-6c0d0d9fa4ce"/>
 				<box>
 					<pen lineWidth="0.0"/>
@@ -827,7 +827,7 @@
 	</pageFooter>
 	<summary>
 		<band height="42">
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="€ #,##0.00">
 				<reportElement style="table_TH" x="1043" y="0" width="107" height="20" forecolor="#FFFFFF" backcolor="#00539F" uuid="ac7dd25f-01d9-45a4-bdba-3c896812f530"/>
 				<box>
 					<pen lineWidth="0.0"/>

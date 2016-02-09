@@ -567,9 +567,6 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
                                         Ext.getCmp('matricola').setValue(record.get('idProduzione'));
                                         Ext.getCmp('uorg').setValue(record.get('uorg'));
                                         Ext.getCmp('luogo').setValue(record.get('luogoId'));
-
-
-
                                     },
                                     icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqElEQVQ4T+2TwRHCIBREd9OAJWgBcjZHSzEFGK0lFqB24pGzNEA6SAWuE0cdQMcBvcqN+f8/dmEhklXv3BIX7UHO0lq0lzwqNnwBdM4DmH4cfhQl/w6grOF70++A0LNtDevOlSmoA8/fAp4n/gHAeAeL7jwQnGRmoU+eTQ1ID+GQkcYexCoCSBqIams382OmAhQHZ7QZwos929ZEv5S3KBd4tmtzChVcASYkZKSJGNhEAAAAAElFTkSuQmCC',
                                     text: 'Duplica richiesta'
@@ -636,7 +633,7 @@ Ext.define('Rai.view.frmRichiestaNuovoServizio', {
                     valueField: 'descrizione',
                     listeners: {
                         change: {
-                            fn: 'onLottoChange',
+                            fn: 'onLottoChange1',
                             scope: 'controller'
                         }
                     }

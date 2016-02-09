@@ -15,27 +15,28 @@
 
 Ext.define('Rai.view.frmRichiestaServizioAdmin', {
     extend: 'Ext.panel.Panel',
-    alias: 'widget.frmRichiestaServizioAdmin',
+    alias: 'widget.frmRichiestaAdmin',
 
     requires: [
-        'Rai.view.frmRichiestaNuovoServizioViewModel1',
-        'Rai.view.frmRichiestaNuovoServizioViewController1',
+        'Rai.view.frmRichiestaNuovoServizioViewModel2',
+        'Rai.view.frmRichiestaNuovoServizioAdmin',
+        'Ext.button.Button',
         'Ext.grid.Panel',
+        'Ext.grid.filters.filter.String',
         'Ext.grid.column.Number',
         'Ext.grid.column.Date',
+        'Ext.grid.filters.filter.Date',
         'Ext.grid.column.Action',
         'Ext.view.Table',
         'Ext.toolbar.Paging',
-        'Ext.grid.plugin.CellEditing',
-        'Ext.grid.feature.Grouping',
-        'Ext.XTemplate',
+        'Ext.grid.filters.Filters',
         'Ext.form.field.Date',
         'Ext.form.field.Time',
         'Ext.form.field.TextArea',
-        'Ext.button.Button'
+        'Ext.panel.Tool'
     ],
 
-    controller: 'frmrichiestaservizioadmin',
+    controller: 'frmRichiestaNuovoServizioAdmin',
     viewModel: {
         type: 'frmrichiestaservizioadmin'
     },
@@ -44,12 +45,33 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
     padding: 0,
     width: 1278,
     title: 'Area servizi',
+    titleAlign: 'center',
     defaultListenerScope: true,
 
     layout: {
         type: 'border',
         padding: 2
     },
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    hidden: true,
+                    id: 'popButton1',
+                    text: 'Richiesta nuova tipologia servizio',
+                    listeners: {
+                        click: {
+                            fn: 'onShowWin',
+                            scope: 'controller'
+                        }
+                    }
+                }
+            ]
+        }
+    ],
     items: [
         {
             xtype: 'panel',
@@ -62,6 +84,7 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
             items: [
                 {
                     xtype: 'gridpanel',
+                    id: 'elencoServiziAdmin',
                     padding: 5,
                     bodyBorder: true,
                     title: 'Elenco servizi',
@@ -69,107 +92,148 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                     columns: [
                         {
                             xtype: 'gridcolumn',
-                            dataIndex: 'nome',
-                            text: 'Servizio',
-                            flex: 0.8
+                            dataIndex: 'operatore',
+                            text: 'Operatore',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
-                            dataIndex: 'fornitore',
-                            text: 'Fornitore',
-                            flex: 0.8,
-                            editor: {
-                                xtype: 'combobox',
-                                displayField: 'ragioneSociale',
-                                store: 'storeFornitori',
-                                valueField: 'ragioneSociale'
+                            dataIndex: 'utenteApprovante',
+                            text: 'Utente approvante',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'nome',
+                            text: 'Servizio',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
                             }
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'lotto',
                             text: 'Lotto',
-                            flex: 0.8
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'tipologia',
+                            text: 'Tipologia',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'operatore',
+                            text: 'Operatore',
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'produzione',
                             text: 'Produzione',
-                            flex: 0.8
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'matricola',
                             text: 'Matricola',
-                            flex: 0.8
+                            flex: 0.6,
+                            filter: {
+                                type: 'string'
+                            }
+                        },
+                        {
+                            xtype: 'gridcolumn',
+                            dataIndex: 'uorg',
+                            text: 'Uorg',
+                            flex: 0.6,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'luogo',
                             text: 'Luogo',
-                            flex: 0.8
+                            flex: 1,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'numbercolumn',
                             dataIndex: 'ore',
                             text: 'Ore',
-                            flex: 0.4
+                            flex: 0.4,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'datecolumn',
                             dataIndex: 'data',
                             text: 'Data',
-                            flex: 0.7,
-                            format: 'd/M/ddd'
+                            flex: 1,
+                            format: 'd-m-Y',
+                            filter: {
+                                type: 'date'
+                            }
                         },
                         {
                             xtype: 'datecolumn',
                             dataIndex: 'dataFine',
                             text: 'Data fine',
-                            flex: 0.7
+                            flex: 1,
+                            format: 'd-m-Y',
+                            filter: {
+                                type: 'date'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
                             dataIndex: 'ora',
                             text: 'Ora',
-                            flex: 0.5
+                            flex: 0.5,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'gridcolumn',
-                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
-
-
-                                if (value === "Approvato"){
-                                    return '<span style="color:' + "#73b51e" + ';">' + "<b>"  + value + "</b>"+ '</span>';
-                                }
-                                else if ( value === "Non approvato"){
-                                    return '<span style="color:' + "#cf4c35" + ';">' + value + '</span>';
-                                }
-                                else if ( value === "Erogato"){
-                                    return '<span style="color:' + "#0277BD" + ';"><b>' + value + '</b></span>';
-                                }
-                                else if ( value === "In lavorazione"){
-                                    return '<span style="color:' + "#AFB42B" + ';"><b>' + value + '</b></span>';
-                                }
-                                else if ( value === "Nessuno"){
-                                    return '<span style="color:' + "#795548" + ';"><b>' + value + '</b></span>';
-                                }
-
-
-                                else return value;
-                            },
                             dataIndex: 'stato',
-                            groupable: false,
                             text: 'Stato',
-                            flex: 0.7
+                            flex: 0.7,
+                            filter: {
+                                type: 'string'
+                            }
                         },
                         {
                             xtype: 'actioncolumn',
-                            id: 'inLavorazioneSubmit',
+                            id: 'approvaSubmit1',
                             align: 'center',
                             dataIndex: 'stato',
                             text: 'Azioni',
-                            flex: 0.5,
+                            flex: 0.8,
                             items: [
                                 {
                                     handler: function(view, rowIndex, colIndex, item, e, record, row) {
@@ -319,28 +383,60 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                             width: 360,
                             displayInfo: true,
                             store: 'storeRichiesteServizi'
+                        },
+                        {
+                            xtype: 'toolbar',
+                            dock: 'top',
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    handler: function(button, e) {
+                                        if ( Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection() === undefined || Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection() === null )return;
+                                        var record = Ext.getCmp('elencoServiziAdmin').getSelectionModel().getSelection()[0];
+                                        Ext.getCmp('lottoAdmin').setValue(record.get('lotto'));
+                                        Ext.getCmp('comboTipologiaAdmin').setValue(record.get('tipologia'));
+                                        Ext.getCmp('servizioComboAdmin').setValue(record.get('idServizio'));
+                                        Ext.getCmp('codiciComboAdmin').setValue(record.get('idServizio'));
+                                        Ext.getCmp('produzioneAdmin').setValue(record.get('idProduzione'));
+                                        Ext.getCmp('matricolaAdmin').setValue(record.get('idProduzione'));
+                                        Ext.getCmp('uorgAdmin').setValue(record.get('uorg'));
+                                        Ext.getCmp('luogoAdmin').setValue(record.get('luogoId'));
+                                    },
+                                    icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAqElEQVQ4T+2TwRHCIBREd9OAJWgBcjZHSzEFGK0lFqB24pGzNEA6SAWuE0cdQMcBvcqN+f8/dmEhklXv3BIX7UHO0lq0lzwqNnwBdM4DmH4cfhQl/w6grOF70++A0LNtDevOlSmoA8/fAp4n/gHAeAeL7jwQnGRmoU+eTQ1ID+GQkcYexCoCSBqIams382OmAhQHZ7QZwos929ZEv5S3KBd4tmtzChVcASYkZKSJGNhEAAAAAElFTkSuQmCC',
+                                    text: 'Duplica richiesta'
+                                }
+                            ]
                         }
                     ],
                     plugins: [
                         {
-                            ptype: 'cellediting'
+                            ptype: 'gridfilters'
                         }
-                    ],
-                    features: [
+                    ]
+                }
+            ],
+            dockedItems: [
+                {
+                    xtype: 'panel',
+                    dock: 'top',
+                    height: 160,
+                    hidden: true,
+                    padding: 1,
+                    bodyPadding: 10,
+                    collapsible: true,
+                    title: 'Filtri',
+                    items: [
                         {
-                            ftype: 'grouping',
-                            showSummaryRow: true,
-                            groupHeaderTpl: [
-                                '',
-                                '',
-                                '<tpl if="name==\'Erogato\'" ><span style="color:#0277BD;"><b>Ci sono {rows.length} richieste erogate</b><br></span></tpl>   ',
-                                '<tpl if="name==\'Nessuno\'" ><span style="color:#795548;"><b>Ci sono {rows.length} richieste in attesa di approvazione</b><br></span></tpl>',
-                                '<tpl if="name==\'Non approvato\'" ><span style="color:#cf4c35;"><b>Ci sono {rows.length} richieste non approvate</b><br></span></tpl>',
-                                '<tpl if="name==\'Approvato\'" ><span style="color:#73b51e;"><b>Ci sono {rows.length} richieste approvate</b><br></span></tpl>',
-                                '<tpl if="name==\'In lavorazione\'" ><span style="color:#AFB42B;"><b>Ci sono {rows.length} richieste in lavorazione</b><br></span></tpl>',
-                                '',
-                                ''
-                            ]
+                            xtype: 'datefield',
+                            fieldLabel: 'Label'
+                        },
+                        {
+                            xtype: 'combobox',
+                            fieldLabel: 'Servizio'
+                        },
+                        {
+                            xtype: 'combobox',
+                            fieldLabel: 'Stato'
                         }
                     ]
                 }
@@ -352,30 +448,82 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
             padding: 1,
             width: 310,
             bodyPadding: 10,
-            collapsed: false,
             collapsible: true,
             title: 'Richiesta nuovo servizio',
             items: [
                 {
                     xtype: 'combobox',
-                    id: 'filiale',
+                    id: 'divisioneAdmin',
                     fieldLabel: 'Divisione',
                     displayField: 'nome',
                     forceSelection: true,
                     store: 'storeFiliali',
                     valueField: 'nome',
                     listeners: {
-                        select: {
-                            fn: 'onFilialeSelect',
+                        change: {
+                            fn: 'changeDivisione',
                             scope: 'controller'
                         }
                     }
                 },
                 {
                     xtype: 'combobox',
-                    id: 'comboTipologia1',
+                    id: 'managerAdmin',
+                    fieldLabel: 'Manager',
+                    displayField: 'nameComplete',
+                    forceSelection: true,
+                    queryMode: 'local',
+                    store: 'storeUtenti',
+                    valueField: 'userId',
+                    listeners: {
+                        change: {
+                            fn: 'changeManager',
+                            scope: 'controller'
+                        }
+                    }
+                },
+                {
+                    xtype: 'combobox',
+                    id: 'operatoreAdmin',
+                    fieldLabel: 'Operatore',
+                    displayField: 'nameComplete',
+                    forceSelection: true,
+                    store: 'storeUtenti',
+                    valueField: 'userId',
+                    listeners: {
+                        change: {
+                            fn: 'changeOperatore',
+                            scope: 'controller'
+                        }
+                    }
+                },
+                {
+                    xtype: 'combobox',
+                    id: 'lottoAdmin',
+                    fieldLabel: 'Lotto',
+                    displayField: 'descrizione',
+                    forceSelection: true,
+                    queryMode: 'local',
+                    store: [
+                        'Lotto 1',
+                        'Lotto 2',
+                        'Lotto 3',
+                        'Lotto 5'
+                    ],
+                    valueField: 'descrizione',
+                    listeners: {
+                        change: {
+                            fn: 'onLottoChange',
+                            scope: 'controller'
+                        }
+                    }
+                },
+                {
+                    xtype: 'combobox',
+                    id: 'comboTipologiaAdmin',
                     fieldLabel: 'Tipologia',
-                    value: 'Canone',
+                    value: '',
+                    autoSelect: false,
                     displayField: 'descrizione',
                     forceSelection: true,
                     queryMode: 'local',
@@ -383,12 +531,11 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                         'Canone',
                         'Modulo',
                         'Richiesta',
-                        'Trasporto',
-                        'Extra Contratto'
+                        'Trasporto'
                     ],
                     valueField: 'descrizione',
                     listeners: {
-                        select: {
+                        change: {
                             fn: 'onServizioCombo1Select',
                             scope: 'controller'
                         }
@@ -396,38 +543,46 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                 },
                 {
                     xtype: 'combobox',
-                    id: 'lotto1',
-                    fieldLabel: 'Lotto',
-                    forceSelection: true
-                },
-                {
-                    xtype: 'combobox',
-                    id: 'produzione1',
+                    id: 'produzioneAdmin',
                     fieldLabel: 'Produzione',
-                    displayField: 'matricola',
+                    displayField: 'descrizione',
+                    enableRegEx: true,
                     forceSelection: true,
                     store: 'storeProduzioni',
-                    valueField: 'matricola'
+                    valueField: 'produzioniId',
+                    listeners: {
+                        select: {
+                            fn: 'onMatricolaSelect',
+                            scope: 'controller'
+                        }
+                    }
                 },
                 {
                     xtype: 'combobox',
-                    id: 'matricola1',
+                    id: 'matricolaAdmin',
                     fieldLabel: 'Matricola',
-                    forceSelection: true
-                },
-                {
-                    xtype: 'textfield',
-                    id: 'matricola2',
-                    fieldLabel: 'UORG'
+                    displayField: 'matricola',
+                    enableRegEx: true,
+                    forceSelection: true,
+                    store: 'storeProduzioni',
+                    valueField: 'produzioniId',
+                    listeners: {
+                        select: {
+                            fn: 'onMatricolaSelect1',
+                            scope: 'controller'
+                        }
+                    }
                 },
                 {
                     xtype: 'combobox',
-                    id: 'servizioCombo1',
+                    id: 'servizioComboAdmin',
                     fieldLabel: 'Servizio',
                     displayField: 'descrizione',
+                    enableRegEx: true,
                     forceSelection: true,
+                    queryMode: 'local',
                     store: 'storeServizi',
-                    valueField: 'descrizione',
+                    valueField: 'serviziId',
                     listeners: {
                         select: {
                             fn: 'onServizioComboSelect',
@@ -437,52 +592,66 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                 },
                 {
                     xtype: 'combobox',
-                    id: 'codiciCombo1',
+                    id: 'codiciComboAdmin',
                     fieldLabel: 'Voce',
                     displayField: 'codice',
+                    enableRegEx: true,
                     forceSelection: true,
+                    queryMode: 'local',
                     store: 'storeServizi',
-                    valueField: 'descrizione',
+                    valueField: 'serviziId',
                     listeners: {
                         select: 'onCodiciComboSelect'
                     }
                 },
                 {
                     xtype: 'combobox',
-                    id: 'luogo1',
+                    id: 'luogoAdmin',
                     fieldLabel: 'Luogo',
                     displayField: 'descrizione',
                     forceSelection: true,
                     store: 'storeLuoghi',
-                    valueField: 'descrizione'
+                    valueField: 'luoghiId'
+                },
+                {
+                    xtype: 'textfield',
+                    id: 'uorgAdmin',
+                    fieldLabel: 'Uorg',
+                    name: 'uorg'
                 },
                 {
                     xtype: 'datefield',
-                    id: 'dataRichiesta1',
+                    id: 'dataRichiestaAdmin',
                     fieldLabel: 'Data',
+                    format: 'd/m/Y',
+                    listeners: {
+                        select: {
+                            fn: 'onDataRichiestaSelect',
+                            scope: 'controller'
+                        }
+                    }
+                },
+                {
+                    xtype: 'datefield',
+                    id: 'dataFineAdmin',
+                    fieldLabel: 'Data fine',
                     format: 'd/m/Y'
                 },
                 {
                     xtype: 'timefield',
-                    id: 'oraRichiesta1',
+                    id: 'oraRichiestaAdmin',
                     fieldLabel: 'Ora',
                     format: 'H:i'
                 },
                 {
                     xtype: 'textfield',
                     disabled: true,
-                    id: 'oreRichiesta1',
+                    id: 'oreRichiestaAdmin',
                     fieldLabel: 'Ore'
                 },
                 {
-                    xtype: 'datefield',
-                    id: 'dataFine1',
-                    fieldLabel: 'Data fine',
-                    format: 'd/m/Y'
-                },
-                {
                     xtype: 'textareafield',
-                    id: 'noteRichiesta1',
+                    id: 'noteRichiestaAdmin',
                     fieldLabel: 'Note'
                 },
                 {
@@ -518,9 +687,21 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
             scope: 'controller'
         }
     },
+    tools: [
+        {
+            xtype: 'tool',
+            type: 'help',
+            listeners: {
+                click: {
+                    fn: 'onToolClick',
+                    scope: 'controller'
+                }
+            }
+        }
+    ],
 
     onCodiciComboSelect: function(combo, record, eOpts) {
-        Ext.getCmp('servizioCombo1').setValue(record);
+        Ext.getCmp('servizioComboAdmin').setValue(record);
     }
 
 });

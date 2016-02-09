@@ -58,12 +58,13 @@ Ext.application({
         'frmMatricole',
         'frmProduzioni',
         'frmLuoghi',
-        'frmRichiestaServizioAdmin',
+        'frmRichiestaServizioAdminOld',
         'uploadWin',
         'frmReportManager',
         'frmServiziManager',
         'nuovaProduzione',
-        'creaLuogo'
+        'creaLuogo',
+        'frmRichiestaServizioAdmin'
     ],
     name: 'Rai',
 

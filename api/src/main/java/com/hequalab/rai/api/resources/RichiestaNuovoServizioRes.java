@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
@@ -114,7 +115,6 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	}
 
 	// Api per approvazione da extjs
-	@SuppressWarnings("unchecked")
 	@POST
 	@Path("approvaRichiesta/{id}")
 	@UnitOfWork
@@ -183,7 +183,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 	public RichiestaNuovoServizioView erogaRichiesta(@Auth UserView user, PdfCreator pdf,
 			@PathParam("id") RichiestaNuovoServizioIdParam id)
 					throws IOException, JRException {
-		
+
 		RichiestaNuovoServizioView uv = (RichiestaNuovoServizioView) hibSess()
 				.createQuery(
 						"from RichiestaNuovoServizioView where richiestanuovoservizioId = :id")
@@ -876,6 +876,57 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 						produzione, luogo, utenteApprovante, importo,
 						costoTotale, statoEsportazione, voce, luogoId,
 						idProduzione, idServizio));
+
+		return uv;
+	}
+
+	@POST
+	@Path("servizioUrgente")
+	@UnitOfWork
+	@Timed
+	@CacheControl(noCache = true)
+	public RichiestaNuovoServizioView richiestaUrgente(@Auth UserView user,
+			RichiestaNuovoServizioCreate form)
+					throws IOException, JRException {
+
+		RichiestaNuovoServizioId id = new RichiestaNuovoServizioId();
+
+		RichiestaNuovoServizio rec = new RichiestaNuovoServizio(id,
+				form.getData(), form.getDataFine(), form.getDivisione(),
+				form.getFornitore(), form.getNome(), form.getNote(),
+				form.getOra(), form.getOre(), form.getUorg(), form.getStato(),
+				form.getLotto(), form.getOperatore(), form.getTipologia(),
+				form.getMatricola(), form.getProduzione(), form.getLuogo(),
+				org.joda.time.LocalDateTime.now(), form.getUtenteApprovante(),
+				form.getImporto(), form.getCostoTotale(),
+				form.getStatoEsportazione(), form.getVoce(), form.getLuogoId(),
+				form.getIdProduzione(), form.getIdServizio());
+
+		aggSess().save(user.getUserId().getUuid(), rec.approva(id, new UserId(form.getUtenteApprovante()), LocalDateTime.now()));
+			
+		RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();
+		uv.setRichiestaNuovoServizioId(id);
+		uv.setData(form.getData());
+		uv.setDataFine(form.getDataFine());
+		uv.setDivisione(form.getDivisione());
+		uv.setFornitore(form.getFornitore());
+		uv.setNome(form.getNome());
+		uv.setNote(form.getNote());
+		uv.setOra(form.getOra());
+		uv.setUorg(form.getUorg());
+		uv.setStato(form.getStato());
+		uv.setLotto(form.getLotto());
+		uv.setOperatore(form.getOperatore());
+		uv.setTipologia(form.getTipologia());
+		uv.setMatricola(form.getMatricola());
+		uv.setProduzione(form.getProduzione());
+		uv.setLuogo(form.getLuogo());
+		uv.setCostoTotale(form.getCostoTotale());
+		uv.setVoce(form.getVoce());
+		uv.setStatoEsportazione(form.getStatoEsportazione());
+		uv.setLuogoId(form.getLuogoId());
+		uv.setIdProduzione(form.getIdProduzione());
+		uv.setIdServizio(form.getIdServizio());
 
 		return uv;
 	}

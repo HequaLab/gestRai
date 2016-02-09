@@ -15,6 +15,6 @@
 
 Ext.define('Rai.view.frmRichiestaNuovoServizioViewModel1', {
     extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.frmrichiestaservizioadmin'
+    alias: 'viewmodel.frmrichiestaservizioadminold'
 
 });

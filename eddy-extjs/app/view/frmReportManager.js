@@ -552,7 +552,7 @@ Ext.define('Rai.view.frmReportManager', {
                                         Ext.getCmp('fineReport').setValue(dataFine);
 
                                         var store = Ext.StoreManager.lookup('storeRichiesteServizi');
-                                        store.clearFilter();
+                                        store.clearFilter(true);
 
 
                                         store.filter(
@@ -562,7 +562,6 @@ Ext.define('Rai.view.frmReportManager', {
                                             operator: 'in'
                                         });
 
-
                                         store.filter(
                                         {
                                             id:"inizioData",
@@ -570,6 +569,7 @@ Ext.define('Rai.view.frmReportManager', {
                                             value: "'" + dataInizio.toString("yyyy-M-d") + "'",
                                             operator: 'gt'
                                         });
+
                                         store.filter(
                                         {
                                             id:"fineData",
@@ -577,7 +577,6 @@ Ext.define('Rai.view.frmReportManager', {
                                             value:"'" + dataFine.toString("yyyy-M-d") + "'",
                                             operator: 'lt'
                                         });
-
 
 
                                         Ext.getCmp('filtroLotto').setValue(null);
