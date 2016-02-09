@@ -50,6 +50,7 @@ import com.hequalab.rai.api.read.views.mailToken.MailTokenView;
 import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioView;
 import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.utility.ForbiddenException;
+import com.hequalab.rai.api.utility.PdfCreator;
 import com.hequalab.rai.dddd.AggregateSessionFactory;
 import com.hequalab.rai.domain.produzioni.ProduzioniId;
 import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizio;
@@ -140,11 +141,71 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 				aggSess().get(RichiestaNuovoServizio.class, id.get())
 						.approva(id.get(), usr, timeStamp));
 
-
 		uv.setStato("Approvato");
 		uv.setUtenteApprovante(user.getFirstName() + " " + user.getLastName());
 		return uv;
 
+	}
+
+	@POST
+	@Path("inLavorazione/{id}")
+	@UnitOfWork
+	@Timed
+	@CacheControl(noCache = true)
+	public RichiestaNuovoServizioView lavoraRichiesta(@Auth UserView user,
+			@PathParam("id") RichiestaNuovoServizioIdParam id)
+					throws IOException, JRException {
+
+		RichiestaNuovoServizioView uv = (RichiestaNuovoServizioView) hibSess()
+				.createQuery(
+						"from RichiestaNuovoServizioView where richiestanuovoservizioId = :id")
+				.setParameter("id", id.get()).uniqueResult();
+
+		if (!uv.getStato().toLowerCase().equals("approvato"))
+			throw new ForbiddenException("Il servizio è " + uv.getStato()
+					+ ", non sono permesse modifiche.");
+
+		LocalDateTime timeStamp = LocalDateTime.now();
+		UserId usr = user.getUserId();
+		aggSess().save(user.getUserId().getUuid(),
+				aggSess().get(RichiestaNuovoServizio.class, id.get())
+						.inLavorazione(id.get(), usr, timeStamp));
+
+		uv.setStato("In lavorazione");
+		return uv;
+	}
+
+	@POST
+	@Path("eroga/{id}")
+	@UnitOfWork
+	@Timed
+	@CacheControl(noCache = true)
+	public RichiestaNuovoServizioView erogaRichiesta(@Auth UserView user, PdfCreator pdf,
+			@PathParam("id") RichiestaNuovoServizioIdParam id)
+					throws IOException, JRException {
+		
+		RichiestaNuovoServizioView uv = (RichiestaNuovoServizioView) hibSess()
+				.createQuery(
+						"from RichiestaNuovoServizioView where richiestanuovoservizioId = :id")
+				.setParameter("id", id.get()).uniqueResult();
+
+		if (!uv.getStato().toLowerCase().equals("in lavorazione"))
+			throw new ForbiddenException("Il servizio è " + uv.getStato()
+					+ ", non sono permesse modifiche.");
+
+		new com.hequalab.rai.api.utility.File(pdf.getData(),
+				"report_" + id.toString() + "_erogato.pdf");
+
+		String urlAllegato = "report_" + id.toString() + "_erogato.pdf";
+
+		LocalDateTime timeStamp = LocalDateTime.now();
+		UserId usr = user.getUserId();
+		aggSess().save(user.getUserId().getUuid(),
+				aggSess().get(RichiestaNuovoServizio.class, id.get())
+						.eroga(id.get(), usr, timeStamp, urlAllegato));
+
+		uv.setStato("Erogato");
+		return uv;
 	}
 
 	// API PER APPROVAZIONE TRAMITE MAIL
@@ -701,7 +762,7 @@ public class RichiestaNuovoServizioRes extends AbstractRes {
 				form.getStatoEsportazione(), form.getVoce(), form.getLuogoId(),
 				form.getIdProduzione(), form.getIdServizio(), user.getUserId(),
 				uriInfo.getBaseUri().toString());
-		
+
 		aggSess().save(user.getUserId().getUuid(), rec);
 
 		RichiestaNuovoServizioView uv = new RichiestaNuovoServizioView();

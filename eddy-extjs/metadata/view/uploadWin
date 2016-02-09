@@ -13,15 +13,16 @@
         "designer|uiInterfaceName": "default",
         "designer|userAlias": "uploadWin",
         "designer|userClassName": "uploadWin",
-        "height": 242,
+        "height": 134,
         "id": "uploadWin",
         "layout": "absolute",
+        "recordRicevuto": "",
         "storeLocale": [
             "{descr:\"ok\"};"
         ],
-        "title": "Upload file",
+        "title": "Selezione report",
         "titleAlign": "center",
-        "width": 656
+        "width": 317
     },
     "configAlternates": {
         "storeLocale": "object"
@@ -31,6 +32,11 @@
         {
             "group": "(Custom Properties)",
             "name": "storeLocale",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "recordRicevuto",
             "type": "string"
         }
     ],
@@ -45,11 +51,11 @@
             },
             "codeClass": null,
             "userConfig": {
-                "height": 30,
-                "layout|x": 110,
-                "layout|y": 170,
-                "text": "Invia file",
-                "width": 420
+                "height": 20,
+                "layout|x": 30,
+                "layout|y": 60,
+                "text": "Procedi",
+                "width": 260
             },
             "name": "MyButton19",
             "designerId": "ecd42af3-0cdd-4b9c-819e-c07931f6118d",
@@ -68,49 +74,48 @@
                         ],
                         "fn": "handler",
                         "implHandler": [
-                            "",
-                            "",
                             "var filefield = Ext.getCmp('fileUpload');",
-                            "var file = filefield.getEl().down('input[type=file]').dom.files;",
-                            "debugger;",
+                            "var file = filefield.getEl().down('input[type=file]').dom.files[0];",
                             "var reader = new FileReader();",
-                            "var idRichiesta = this.up('window').idRichiesta;",
+                            "var recordRicevuto = this.up('window').recordRicevuto;",
                             "",
                             "reader.onload = (function(theFile) {",
                             "    return function(e) {",
-                            "        var encodedFile = Ext.util.base64.encode(e.target.result);",
-                            "",
+                            "        var encodedFile =e.target.result.split(',')[1];",
+                            "        Ext.MessageBox.wait('Operazione in corso..');",
                             "        Ext.Ajax.request({",
-                            "            method : 'POST',",
-                            "            url: '/richiestaNuovoServizio/report',",
+                            "            url: '/richiestaNuovoServizio/eroga/' + recordRicevuto.get('richiestaNuovoServizioId'),",
                             "            headers: {",
                             "                'Authorization': 'Bearer ' + ACCESS_TOKEN,",
-                            "                'Content-Type': 'application/json'",
                             "            },",
-                            "            jsonData: {",
-                            "                id : idRichiesta,",
-                            "                data : encodedFile",
-                            "            },",
+                            "            method:'POST',",
+                            "            jsonData: {data:encodedFile},",
                             "            success: function (response, options) {",
+                            "                Ext.StoreManager.lookup('storeRichiesteServizi').load();",
+                            "                Ext.MessageBox.updateProgress(1);",
+                            "                Ext.MessageBox.hide();",
                             "                Ext.Msg.show({",
-                            "                    title:'Benvenuto',",
-                            "                    msg: \"Risultato: \" + response.responseText,",
+                            "                    title:'Richiesta erogata',",
+                            "                    msg: \"Richiesta erogata.\",",
                             "                    buttons: Ext.Msg.Ok,",
                             "                });},",
-                            "            failure: function (response, options) { Ext.Msg.show({",
-                            "                title:'Errore con il server',",
-                            "                msg: \"Risposta: \" + response,",
-                            "                buttons: Ext.Msg.Ok,",
-                            "            });",
-                            "                                                  }",
+                            "            failure: function (response, options) {",
+                            "                Ext.MessageBox.updateProgress(1);",
+                            "                Ext.MessageBox.hide();",
+                            "                Ext.Msg.show({",
+                            "                    title:'Errore con il server',                    msg: \"C'è stato un errore durante l'operazione. Errore: \" + response.status,",
+                            "                    buttons: Ext.Msg.Ok,",
+                            "                });",
+                            "            }",
+                            "",
+                            "",
                             "        });",
-                            "",
-                            "",
                             "",
                             "    };",
                             "})(file);",
+                            "",
                             "// start upload",
-                            "reader.readAsBinaryString(file);"
+                            "reader.readAsDataURL(file);"
                         ]
                     },
                     "name": "handler",
@@ -137,141 +142,6 @@
             "designerId": "3c42e001-9743-462c-bc91-5aa77dc07bc8"
         },
         {
-            "type": "Ext.grid.Panel",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "header": false,
-                "id": "fileGrid",
-                "layout|x": -4,
-                "layout|y": 0,
-                "title": "My Grid Panel"
-            },
-            "name": "MyGridPanel2",
-            "designerId": "9ce8c6c7-05c9-4779-a771-6c1228724215",
-            "cn": [
-                {
-                    "type": "Ext.grid.column.Column",
-                    "reference": {
-                        "name": "columns",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "dataIndex": "string",
-                        "flex": 2,
-                        "text": "Nome file"
-                    },
-                    "name": "MyColumn11",
-                    "designerId": "f9d1fade-a610-4212-8652-5ee773e4f5dd"
-                },
-                {
-                    "type": "Ext.grid.column.Number",
-                    "reference": {
-                        "name": "columns",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "dataIndex": "number",
-                        "flex": 1,
-                        "text": "Dimensioni"
-                    },
-                    "name": "MyNumberColumn1",
-                    "designerId": "a6459dc4-1b98-42d5-8022-03164c872739"
-                },
-                {
-                    "type": "Ext.view.Table",
-                    "reference": {
-                        "name": "viewConfig",
-                        "type": "object"
-                    },
-                    "codeClass": null,
-                    "name": "MyTable1",
-                    "designerId": "107b57d0-e397-474b-b116-2e3ebd330da0"
-                },
-                {
-                    "type": "Ext.toolbar.Toolbar",
-                    "reference": {
-                        "name": "dockedItems",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "dock": "top"
-                    },
-                    "name": "MyToolbar8",
-                    "designerId": "cc3dda15-146d-4541-8fe5-3fb13bd9d566",
-                    "cn": [
-                        {
-                            "type": "Ext.form.field.File",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "buttonMargin": 0,
-                                "buttonOnly": true,
-                                "buttonText": "Aggiungi",
-                                "fieldLabel": "",
-                                "hideEmptyLabel": false,
-                                "hideLabel": true,
-                                "id": "fileUpload",
-                                "labelWidth": 0,
-                                "layout|flex": null,
-                                "width": 71
-                            },
-                            "name": "MyFileUpload",
-                            "designerId": "aebf2e9e-d136-437e-8275-d24628dc7d1f",
-                            "viewControllerInstanceId": "54094082-08a7-4a79-a523-7d3b9def08bd",
-                            "viewModelInstanceId": "eaf62a8e-e407-4712-b09b-28e824485e66",
-                            "cn": [
-                                {
-                                    "type": "viewcontrollereventbinding",
-                                    "reference": {
-                                        "name": "listeners",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "fn": "onFileUploadChange",
-                                        "implHandler": [
-                                            "debugger;"
-                                        ],
-                                        "name": "change",
-                                        "scope": "me"
-                                    },
-                                    "name": "onFileUploadChange",
-                                    "designerId": "b2fcab1e-1a58-41c3-af27-2aefcac2cd3d"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Ext.button.Button",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "layout|flex": null,
-                                "style": [
-                                    "\"color:white;background-color:#EF9A9A;\""
-                                ],
-                                "text": "Rimuovi"
-                            },
-                            "name": "MyButton34",
-                            "designerId": "acc3b05a-685b-4944-a947-1a53e494e213"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "type": "viewcontrollereventbinding",
             "reference": {
                 "name": "listeners",
@@ -281,9 +151,6 @@
             "userConfig": {
                 "fn": "onUploadWinAfterRender",
                 "implHandler": [
-                    "component.storeLocale = Ext.create('Ext.data.Store',{",
-                    "    fields:[\"nomeFile\",\"dimensione\"]",
-                    "});",
                     ""
                 ],
                 "name": "afterrender",
@@ -291,6 +158,23 @@
             },
             "name": "onUploadWinAfterRender",
             "designerId": "5ddaaa57-be79-48de-8653-14b4c04e2eef"
+        },
+        {
+            "type": "Ext.form.field.File",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "buttonText": "...",
+                "fieldLabel": "Selezionare pdf",
+                "id": "fileUpload",
+                "layout|x": 20,
+                "layout|y": 20
+            },
+            "name": "MyFileUpload",
+            "designerId": "a68c908f-b3e0-420a-a9c3-1e571cb0293d"
         }
     ]
 }

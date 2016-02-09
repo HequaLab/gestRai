@@ -21,132 +21,86 @@ Ext.define('Rai.view.uploadWin', {
         'Rai.view.uploadWinViewModel',
         'Rai.view.uploadWinViewController',
         'Ext.button.Button',
-        'Ext.grid.Panel',
-        'Ext.grid.column.Number',
-        'Ext.view.Table',
-        'Ext.toolbar.Toolbar',
         'Ext.form.field.File'
     ],
 
     config: {
-        storeLocale: '{descr:"ok"};'
+        storeLocale: '{descr:"ok"};',
+        recordRicevuto: ''
     },
 
     controller: 'uploadwin',
     viewModel: {
         type: 'uploadwin'
     },
-    height: 242,
+    height: 134,
     id: 'uploadWin',
-    width: 656,
+    width: 317,
     layout: 'absolute',
     bodyStyle: 'color:white;',
-    title: 'Upload file',
+    title: 'Selezione report',
     titleAlign: 'center',
 
     items: [
         {
             xtype: 'button',
             handler: function(button, e) {
-
-
                 var filefield = Ext.getCmp('fileUpload');
-                var file = filefield.getEl().down('input[type=file]').dom.files;
-                debugger;
+                var file = filefield.getEl().down('input[type=file]').dom.files[0];
                 var reader = new FileReader();
-                var idRichiesta = this.up('window').idRichiesta;
+                var recordRicevuto = this.up('window').recordRicevuto;
 
                 reader.onload = (function(theFile) {
                     return function(e) {
-                        var encodedFile = Ext.util.base64.encode(e.target.result);
-
+                        var encodedFile =e.target.result.split(',')[1];
+                        Ext.MessageBox.wait('Operazione in corso..');
                         Ext.Ajax.request({
-                            method : 'POST',
-                            url: '/richiestaNuovoServizio/report',
+                            url: '/richiestaNuovoServizio/eroga/' + recordRicevuto.get('richiestaNuovoServizioId'),
                             headers: {
                                 'Authorization': 'Bearer ' + ACCESS_TOKEN,
-                                'Content-Type': 'application/json'
                             },
-                            jsonData: {
-                                id : idRichiesta,
-                                data : encodedFile
-                            },
+                            method:'POST',
+                            jsonData: {data:encodedFile},
                             success: function (response, options) {
+                                Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                Ext.MessageBox.updateProgress(1);
+                                Ext.MessageBox.hide();
                                 Ext.Msg.show({
-                                    title:'Benvenuto',
-                                    msg: "Risultato: " + response.responseText,
+                                    title:'Richiesta erogata',
+                                    msg: "Richiesta erogata.",
                                     buttons: Ext.Msg.Ok,
                                 });},
-                                failure: function (response, options) { Ext.Msg.show({
-                                    title:'Errore con il server',
-                                    msg: "Risposta: " + response,
-                                    buttons: Ext.Msg.Ok,
-                                });
-                            }
-                        });
+                                failure: function (response, options) {
+                                    Ext.MessageBox.updateProgress(1);
+                                    Ext.MessageBox.hide();
+                                    Ext.Msg.show({
+                                        title:'Errore con il server',                    msg: "C'è stato un errore durante l'operazione. Errore: " + response.status,
+                                        buttons: Ext.Msg.Ok,
+                                    });
+                                }
 
 
+                            });
 
-                    };
-                })(file);
-                // start upload
-                reader.readAsBinaryString(file);
+                        };
+                    })(file);
+
+                    // start upload
+                    reader.readAsDataURL(file);
             },
-            x: 110,
-            y: 170,
-            height: 30,
-            width: 420,
-            text: 'Invia file'
+            x: 30,
+            y: 60,
+            height: 20,
+            width: 260,
+            text: 'Procedi'
         },
         {
-            xtype: 'gridpanel',
-            x: -4,
-            y: 0,
-            id: 'fileGrid',
-            header: false,
-            title: 'My Grid Panel',
-            columns: [
-                {
-                    xtype: 'gridcolumn',
-                    dataIndex: 'string',
-                    text: 'Nome file',
-                    flex: 2
-                },
-                {
-                    xtype: 'numbercolumn',
-                    dataIndex: 'number',
-                    text: 'Dimensioni',
-                    flex: 1
-                }
-            ],
-            dockedItems: [
-                {
-                    xtype: 'toolbar',
-                    dock: 'top',
-                    items: [
-                        {
-                            xtype: 'filefield',
-                            id: 'fileUpload',
-                            width: 71,
-                            fieldLabel: '',
-                            hideEmptyLabel: false,
-                            hideLabel: true,
-                            labelWidth: 0,
-                            buttonMargin: 0,
-                            buttonOnly: true,
-                            buttonText: 'Aggiungi',
-                            listeners: {
-                                change: 'onFileUploadChange'
-                            }
-                        },
-                        {
-                            xtype: 'button',
-                            style: 'color:white;background-color:#EF9A9A;',
-                            text: 'Rimuovi'
-                        }
-                    ]
-                }
-            ]
+            xtype: 'filefield',
+            x: 20,
+            y: 20,
+            id: 'fileUpload',
+            fieldLabel: 'Selezionare pdf',
+            buttonText: '...'
         }
     ],
     listeners: {

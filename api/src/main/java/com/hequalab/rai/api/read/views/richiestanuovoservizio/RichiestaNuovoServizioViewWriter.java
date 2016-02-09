@@ -5,6 +5,7 @@ package com.hequalab.rai.api.read.views.richiestanuovoservizio;
  */
 
 import org.hibernate.SessionFactory;
+
 import com.hequalab.rai.api.read.views.AbstractViewWriter;
 import com.hequalab.rai.api.read.views.user.UserView;
 import com.hequalab.rai.api.write.ApiContext;
@@ -15,20 +16,22 @@ import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServi
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioUpdated;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioApprovata;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioEliminata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioErogata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioInLavorazione;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioRifiutata;
 import com.hequalab.rai.domain.user.UserId;
 
 public class RichiestaNuovoServizioViewWriter
-	extends AbstractViewWriter<RichiestaNuovoServizioView> {
+		extends AbstractViewWriter<RichiestaNuovoServizioView> {
 
-    public RichiestaNuovoServizioViewWriter(SessionFactory sessionFactory) {
-	super(sessionFactory, RichiestaNuovoServizioView.class,
-		"richiestanuovoservizioId");
-    }
-    
-    @EventListener
-    public void apply(RichiestaNuovoServizioCreated event,
-	    EventStream<ApiContext> stream) {
+	public RichiestaNuovoServizioViewWriter(SessionFactory sessionFactory) {
+		super(sessionFactory, RichiestaNuovoServizioView.class,
+				"richiestanuovoservizioId");	
+}
+
+@EventListener
+public void apply(RichiestaNuovoServizioCreated event,
+		EventStream<ApiContext> stream) {
 	RichiestaNuovoServizioView u = new RichiestaNuovoServizioView();
 	u.setRichiestaNuovoServizioId(event.getId());
 	u.setData(event.getData());
@@ -57,11 +60,11 @@ public class RichiestaNuovoServizioViewWriter
 	u.setIdProduzione(event.getIdProduzione());
 	u.setIdServizio(event.getIdServizio());
 	session().save(u);
-    }
+}
 
-    @EventListener
-    public void apply(RichiestaNuovoServizioUpdated event,
-	    EventStream<ApiContext> stream) {
+@EventListener
+public void apply(RichiestaNuovoServizioUpdated event,
+		EventStream<ApiContext> stream) {
 	RichiestaNuovoServizioView u = find(event.getId());
 	u.setData(event.getData());
 	u.setDataFine(event.getDataFine());
@@ -85,45 +88,67 @@ public class RichiestaNuovoServizioViewWriter
 	u.setVoce(event.getVoce());
 	u.setLuogoId(event.getLuogoId());
 	session().update(u);
-    }
+}
 
-    @EventListener
-    public void apply(RichiestaNuovoServizioDeleted event,
-	    EventStream<ApiContext> stream) {
+@EventListener
+public void apply(RichiestaNuovoServizioDeleted event,
+		EventStream<ApiContext> stream) {
 	session().delete(find(event.getId()));
-    }
+}
 
-    @EventListener
-    public void apply(RichiestaServizioApprovata event,
-	    EventStream<ApiContext> stream) {
+@EventListener
+public void apply(RichiestaServizioApprovata event,
+		EventStream<ApiContext> stream) {
 	RichiestaNuovoServizioView u = find(event.getId());
 	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", event.getUser()).uniqueResult();
 	u.setStato("Approvato");
 	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
 	session().update(u);
 
-    }
+}
 
-    @EventListener
-    public void apply(RichiestaServizioRifiutata event,
-	    EventStream<ApiContext> stream) {
+@EventListener
+public void apply(RichiestaServizioRifiutata event,
+		EventStream<ApiContext> stream) {
 	RichiestaNuovoServizioView u = find(event.getId());
 	UserId id = event.getUser();
 	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
 	u.setStato("Non approvato");
 	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
 	session().update(u);
-    }
-    
-    @EventListener
-    public void apply(RichiestaServizioEliminata event,
-	    EventStream<ApiContext> stream) {
+}
+
+@EventListener
+public void apply(RichiestaServizioEliminata event,
+		EventStream<ApiContext> stream) {
 	RichiestaNuovoServizioView u = find(event.getId());
 	UserId id = event.getUser();
 	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
 	u.setStato("Eliminato");
 	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
 	session().update(u);
-    }
-    
+}
+
+@EventListener
+public void apply(RichiestaServizioInLavorazione event,
+		EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	UserId id = event.getUser();
+	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
+	u.setStato("In lavorazione");
+	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
+	session().update(u);
+}
+
+@EventListener
+public void apply(RichiestaServizioErogata event,
+		EventStream<ApiContext> stream) {
+	RichiestaNuovoServizioView u = find(event.getId());
+	UserId id = event.getUser();
+	UserView v = (UserView) session().createQuery("from UserView where userId = :id").setParameter("id", id).uniqueResult();
+	u.setStato("Erogata");
+	u.setUtenteApprovante(v.getFirstName() + " " + v.getLastName());
+		session().update(u);
+	}
+
 }

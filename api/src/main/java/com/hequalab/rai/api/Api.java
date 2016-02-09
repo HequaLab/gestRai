@@ -193,9 +193,10 @@ public class Api extends Application<ApiConf> {
 		env.jersey()
 				.register(new FilialiRes(sessionFactory, hibSessionFactory));
 
-		// Schedule manager
-		ScheduleReportManager se = new ScheduleReportManager(mailReiceiverConf, mailClientConf);
-		se.startAsync();
+		
+		// Schedule mail
+		env.jersey()
+				.register(new ScheduleReportManager(hibSessionFactory, mailReiceiverConf, mailClientConf));
 
 	}
 

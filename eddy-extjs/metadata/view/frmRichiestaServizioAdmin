@@ -437,7 +437,36 @@
                                                     "    return;",
                                                     "}",
                                                     "",
-                                                    "record.set('stato',\"In lavorazione\");"
+                                                    "",
+                                                    "Ext.MessageBox.wait('Approvazione della richiesta in corso..');",
+                                                    "Ext.Ajax.request({",
+                                                    "    url: '/richiestaNuovoServizio/inLavorazione/' + record.get('richiestaNuovoServizioId'),",
+                                                    "    headers: {",
+                                                    "        'Authorization': 'Bearer ' + ACCESS_TOKEN,",
+                                                    "    },",
+                                                    "    method:'POST',",
+                                                    "    success: function (response, options) {",
+                                                    "        Ext.StoreManager.lookup('storeRichiesteServizi').load();",
+                                                    "        Ext.MessageBox.updateProgress(1);",
+                                                    "        Ext.MessageBox.hide();",
+                                                    "        Ext.Msg.show({",
+                                                    "            title:'Richiesta modificata',",
+                                                    "            msg: \"Richiesta messa in lavorazione.\",",
+                                                    "            buttons: Ext.Msg.Ok,",
+                                                    "        });},",
+                                                    "    failure: function (response, options) {",
+                                                    "        Ext.MessageBox.updateProgress(1);",
+                                                    "        Ext.MessageBox.hide();",
+                                                    "        Ext.Msg.show({",
+                                                    "            title:'Errore con il server',",
+                                                    "            msg: \"C'è stato un errore durante l'operazione. Errore: \" + response.status,",
+                                                    "            buttons: Ext.Msg.Ok,",
+                                                    "        });",
+                                                    "    }",
+                                                    "",
+                                                    "",
+                                                    "});",
+                                                    ""
                                                 ]
                                             },
                                             "name": "handler",
@@ -478,10 +507,6 @@
                                                 ],
                                                 "fn": "handler",
                                                 "implHandler": [
-                                                    "var uploadWidg = Ext.widget('uploadWin');",
-                                                    "uploadWidg.idRichiesta = record.get('richiestaNuovoServizioId');",
-                                                    "uploadWidg.show();",
-                                                    "",
                                                     "if (record.get('stato') === \"Non approvato\"){",
                                                     "    Ext.Msg.show({",
                                                     "        title:'Operazione non permessa',",
@@ -507,7 +532,9 @@
                                                     "    return;",
                                                     "}",
                                                     "",
-                                                    "record.set('stato',\"Erogato\");"
+                                                    "var uploadWidg = Ext.widget('uploadWin');",
+                                                    "uploadWidg.recordRicevuto = record;",
+                                                    "uploadWidg.show();"
                                                 ]
                                             },
                                             "name": "handler",
@@ -1195,16 +1222,9 @@
             "userConfig": {
                 "fn": "onFrmrichiestanuovoservizioAfterRender",
                 "implHandler": [
-                    "/*",
                     "var store = Ext.StoreManager.lookup('storeRichiesteServizi');",
-                    "store.filter(",
-                    "    {",
-                    "        property: \"stato\",",
-                    "        value: \"Approvato\",",
-                    "        operator: \"streq\"",
-                    "    });",
-                    "store.load();",
-                    "*/"
+                    "store.clearFilter(true);",
+                    "store.load();"
                 ],
                 "name": "afterrender",
                 "scope": "me"

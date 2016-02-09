@@ -2,60 +2,6 @@ var ACCESS_TOKEN = null,
     USER = null;
 
 
-/*
-// Funzione di utilità: 
-Ext.define('Override.data.Proxy', {
-    override : 'Ext.data.Proxy',
-    listeners: {
-        exception : function() {
-            Ext.Msg.show({
-                title: 'Errore inaspettato',
-                msg: "C'è stato un errore durante il caricamento dei dati. Riprovare. \n Se l'errore persiste contattare l'assistenza.",
-                width: 300,
-                buttons: Ext.Msg.OK,
-                icon: Ext.MessageBox.ERROR
-            });
-        }
-    }
-});
-*/
-
-Ext.define('Ext.ux.form.MultiFile', {
-    extend: 'Ext.form.field.File',
-    alias: 'widget.multifilefield',
- 
-    initComponent: function () {
-        var me = this;
- 
-        me.on('render', function () {
-            me.fileInputEl.set({ multiple: true });
-        });
- 
-        me.callParent(arguments);
-    },
- 
-    onFileChange: function (button, e, value) {
-        this.duringFileSelect = true;
- 
-        var me = this,
-            upload = me.fileInputEl.dom,
-            files = upload.files,
-            names = [];
- 
-        if (files) {
-            for (var i = 0; i < files.length; i++)
-                names.push(files[i].name);
-            value = names.join(', ');
-        }
- 
-        Ext.form.field.File.superclass.setValue.call(this, value);
- 
-        delete this.duringFileSelect;
-    }
-});
- 
-
-
 var daysBetween = function(timeStampA, timeStampB) {
     var oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
     var firstDate = new Date(timeStampA * 1000);
@@ -151,7 +97,6 @@ download.removeNode = function(node) {
     node.onload = null;
     node.parentNode.removeChild(node);
 };
-
 
 
 Ext.util.base64 = {

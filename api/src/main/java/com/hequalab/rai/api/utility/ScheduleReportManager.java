@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.mail.Flags;
@@ -28,17 +29,42 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.joda.time.LocalDateTime;
 
 import com.google.common.util.concurrent.AbstractScheduledService;
+import com.hequalab.rai.api.ApiContextHolder;
+import com.hequalab.rai.api.read.views.richiestanuovoservizio.RichiestaNuovoServizioView;
+import com.hequalab.rai.api.write.ApiContext;
+import com.hequalab.rai.api.write.eventstore.ApiEventStoreDao;
+import com.hequalab.rai.dddd.AggregateSession;
+import com.hequalab.rai.dddd.AggregateSessionFactory;
+import com.hequalab.rai.dddd.DefaultAggregateSessionFactory;
+import com.hequalab.rai.dddd.DefaultEventBus;
+import com.hequalab.rai.dddd.DefaultEventStore;
+import com.hequalab.rai.dddd.EventDispatcher;
+import com.hequalab.rai.dddd.EventPublisher;
+import com.hequalab.rai.dddd.EventStore;
+import com.hequalab.rai.dddd.EventStoreDao;
+import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizio;
+import com.hequalab.rai.domain.richiestanuovoservizio.RichiestaNuovoServizioId;
+import com.hequalab.rai.domain.user.UserId;
 
 public class ScheduleReportManager extends AbstractScheduledService {
 
+	private final SessionFactory sessionFactory;
+
 	final MailReceiverConf mf;
 	static MailClientConf mc = null;
+	org.hibernate.Session sess;
 
-	public ScheduleReportManager(MailReceiverConf mf, MailClientConf mc) {
+	public ScheduleReportManager(SessionFactory ff, MailReceiverConf mf, MailClientConf mc) {
+
 		this.mf = mf;
 		ScheduleReportManager.mc = mc;
+		this.sessionFactory = ff;
+		this.startAsync();
 	}
 
 	@Override
@@ -67,14 +93,13 @@ public class ScheduleReportManager extends AbstractScheduledService {
 			folder.open(Folder.READ_WRITE);
 			Message messages[] = folder
 					.search(new FlagTerm(new Flags(Flag.SEEN), false));
-			System.out.println("SCHEDULE: CI SONO " + messages.length + " MESSAGGI DA LEGGERE");
 			for (int i = 0; i < messages.length; ++i) {
 				Message msg = messages[i];
 
 				String from = "nessuno";
-				System.out.println("Ricevuto da:" + ((InternetAddress)msg.getFrom()[0]).getAddress());
-				from = ((InternetAddress)msg.getFrom()[0]).getAddress();
-				
+				System.out.println("Nuovo messaggio ricevuto da:" + ((InternetAddress) msg.getFrom()[0]).getAddress());
+				from = ((InternetAddress) msg.getFrom()[0]).getAddress();
+
 				String subject = msg.getSubject();
 
 				new java.io.File("email/test/").mkdirs();
@@ -101,15 +126,16 @@ public class ScheduleReportManager extends AbstractScheduledService {
 	@Override
 	protected void startUp() throws MessagingException, IOException {
 		// Init
-
+		sess = getSessionFactory().openSession();
 	}
 
 	@Override
 	protected void shutDown() {
 		// Stop dello schedule
+		sess.close();
 	}
 
-	public static void saveParts(String from, Object content, String filename)
+	public void saveParts(String from, Object content, String filename)
 			throws MessagingException, IOException {
 		OutputStream out = null;
 		InputStream in = null;
@@ -172,7 +198,7 @@ public class ScheduleReportManager extends AbstractScheduledService {
 	}
 
 	// Ricevo l'input stream con il pdf
-	static void parsePdf(InputStream in, String from) {
+	void parsePdf(InputStream in, String from) {
 		System.out.println("PARTITO SPLIT PDF");
 		PDDocument document;
 		try {
@@ -210,12 +236,41 @@ public class ScheduleReportManager extends AbstractScheduledService {
 							if (qrCode == null)
 								continue;
 
+							// System.out.println("Trovato QR CODE: " + qrCode);
+
+							// Controllo che quell'id richiesta non sia gia
+							// stato erogato ( per non sovrascrivere il report )
+							RichiestaNuovoServizioView uv = (RichiestaNuovoServizioView) sess.createQuery("from RichiestaNuovoServizioView where richiestanuovoservizioId = :id").setParameter("id", new RichiestaNuovoServizioId(qrCode)).uniqueResult();
+
+							if (!uv.getStato().toLowerCase().equals("in lavorazione"))
+								continue;
+
 							// Salvo il file
 							PDDocument doc = new PDDocument();
-							document.addPage(page);
-							document.save("static_assets/files/report_" + qrCode + "_erogato.pdf");
-							document.close();
+							doc.addPage(page);
+							doc.save("static_assets/files/report_" + qrCode + "_erogato.pdf");
+							doc.close();
 							salvati.add(qrCode);
+
+							Transaction tx = sess.beginTransaction();
+							uv.setStato("Erogato");
+							sess.save(uv);
+							tx.commit();
+
+							// Modifico la view in "Erogato"
+							/*
+							 * // Richiamo l'evento LocalDateTime timeStamp =
+							 * LocalDateTime.now();
+							 * 
+							 * aggSess().save(UUID.fromString(
+							 * "e53fc14d-2b46-440b-ba75-ddf5ad508af7"),
+							 * aggSess().get(RichiestaNuovoServizio.class, new
+							 * RichiestaNuovoServizioId(qrCode)) .eroga(new
+							 * RichiestaNuovoServizioId(qrCode), new
+							 * UserId("e53fc14d-2b46-440b-ba75-ddf5ad508af7"),
+							 * timeStamp, "static_assets/files/report_" + qrCode
+							 * + "_erogato.pdf"));
+							 */
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -230,28 +285,28 @@ public class ScheduleReportManager extends AbstractScheduledService {
 			}
 		}
 
-		System.out.println("SALVATI: " + salvati.size());
 		if (salvati.size() > 0) {
-		
+
 			String messaggio = "Sono stati inseriti i report dei seguenti ticket:<br>";
-			for (String s : salvati){
+			for (String s : salvati) {
 				messaggio += "Caricato report con ticket: " + s + "<br>";
 			}
-			messaggio += "<br><b>Nota bene: In base alla qualità dei file ricevuti alcuni report potrebbero non essere riconosciuti</b>.";
+			messaggio += "<br><b>Nota bene: In base alla qualit&#225; dei file ricevuti alcuni report potrebbero non essere riconosciuti</b>.";
 
 			try {
-				System.out.println("Inizio..");
-				System.out.println("Rispondo a:" + from);
 				ClientMail cf = new ClientMail(mc);
-				
+
 				cf.sendEmail(from, "Ricevuta email", messaggio);
 			} catch (EmailException e) {
-				System.out.println("... errore email");
 				e.printStackTrace();
 			}
 
 		}
 
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 
 }

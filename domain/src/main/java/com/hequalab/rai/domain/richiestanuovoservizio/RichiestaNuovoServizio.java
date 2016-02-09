@@ -15,6 +15,8 @@ import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServi
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaNuovoServizioUpdated;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioApprovata;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioEliminata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioErogata;
+import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioInLavorazione;
 import com.hequalab.rai.domain.richiestanuovoservizio.events.RichiestaServizioRifiutata;
 import com.hequalab.rai.domain.servizi.ServiziId;
 import com.hequalab.rai.domain.user.UserId;
@@ -72,6 +74,18 @@ public class RichiestaNuovoServizio extends
 	public RichiestaNuovoServizio elimina(RichiestaNuovoServizioId id,
 			UserId user, LocalDateTime timeStamp) {
 		applyChange(new RichiestaServizioEliminata(id, user, timeStamp));
+		return this;
+	}
+
+	public RichiestaNuovoServizio inLavorazione(RichiestaNuovoServizioId id,
+			UserId user, LocalDateTime timeStamp) {
+		applyChange(new RichiestaServizioInLavorazione(id, user, timeStamp));
+		return this;
+	}
+
+	public RichiestaNuovoServizio eroga(RichiestaNuovoServizioId id,
+			UserId user, LocalDateTime timeStamp, String allegato) {
+		applyChange(new RichiestaServizioErogata(id, user, timeStamp, allegato));
 		return this;
 	}
 
