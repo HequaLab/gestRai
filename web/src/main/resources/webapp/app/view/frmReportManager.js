@@ -489,6 +489,7 @@ Ext.define('Rai.view.frmReportManager', {
                                     xtype: 'textfield',
                                     flex: 1,
                                     tabIndex: 9,
+                                    id: 'filtroUorg',
                                     fieldLabel: 'Uorg',
                                     labelWidth: 40,
                                     listeners: {

@@ -20,83 +20,92 @@ Ext.define('Rai.view.uploadWin', {
     requires: [
         'Rai.view.uploadWinViewModel',
         'Rai.view.uploadWinViewController',
-        'Ext.form.field.File',
-        'Ext.button.Button'
+        'Ext.button.Button',
+        'Ext.form.field.File'
     ],
+
+    config: {
+        storeLocale: '{descr:"ok"};',
+        recordRicevuto: ''
+    },
 
     controller: 'uploadwin',
     viewModel: {
         type: 'uploadwin'
     },
-    height: 123,
+    height: 134,
     id: 'uploadWin',
-    width: 400,
-    title: 'Upload file',
+    width: 317,
+    layout: 'absolute',
+    bodyStyle: 'color:white;',
+    title: 'Selezione report',
     titleAlign: 'center',
 
-    layout: {
-        type: 'vbox',
-        align: 'center',
-        padding: 20
-    },
     items: [
-        {
-            xtype: 'filefield',
-            cls: 'upload-icon',
-            id: 'inputField',
-            fieldLabel: 'Label'
-        },
         {
             xtype: 'button',
             handler: function(button, e) {
-
-
-                var filefield = Ext.getCmp('inputField');
+                var filefield = Ext.getCmp('fileUpload');
                 var file = filefield.getEl().down('input[type=file]').dom.files[0];
                 var reader = new FileReader();
-                var idRichiesta = this.up('window').idRichiesta;
+                var recordRicevuto = this.up('window').recordRicevuto;
+
                 reader.onload = (function(theFile) {
                     return function(e) {
-                        var encodedFile = Ext.util.base64.encode(e.target.result);
-
+                        var encodedFile =e.target.result.split(',')[1];
+                        Ext.MessageBox.wait('Operazione in corso..');
                         Ext.Ajax.request({
-                            method : 'POST',
-                            url: '/richiestaNuovoServizio/report',
+                            url: '/richiestaNuovoServizio/eroga/' + recordRicevuto.get('richiestaNuovoServizioId'),
                             headers: {
                                 'Authorization': 'Bearer ' + ACCESS_TOKEN,
-                                'Content-Type': 'application/json'
                             },
-                            jsonData: {
-                                id : idRichiesta,
-                                data : encodedFile
-                            },
+                            method:'POST',
+                            jsonData: {data:encodedFile},
                             success: function (response, options) {
+                                Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                Ext.MessageBox.updateProgress(1);
+                                Ext.MessageBox.hide();
                                 Ext.Msg.show({
-                                    title:'Benvenuto',
-                                    msg: "Risultato: " + response.responseText,
+                                    title:'Richiesta erogata',
+                                    msg: "Richiesta erogata.",
                                     buttons: Ext.Msg.Ok,
                                 });},
-                                failure: function (response, options) { Ext.Msg.show({
-                                    title:'Errore con il server',
-                                    msg: "Risposta: " + response,
-                                    buttons: Ext.Msg.Ok,
-                                });
-                            }
-                        });
+                                failure: function (response, options) {
+                                    Ext.MessageBox.updateProgress(1);
+                                    Ext.MessageBox.hide();
+                                    Ext.Msg.show({
+                                        title:'Errore con il server',                    msg: "C'è stato un errore durante l'operazione. Errore: " + response.status,
+                                        buttons: Ext.Msg.Ok,
+                                    });
+                                }
 
 
+                            });
 
-                    };
-                })(file);
-                // start upload
-                reader.readAsBinaryString(file);
+                        };
+                    })(file);
+
+                    // start upload
+                    reader.readAsDataURL(file);
             },
-            width: 275,
-            text: 'MyButton'
+            x: 30,
+            y: 60,
+            height: 20,
+            width: 260,
+            text: 'Procedi'
+        },
+        {
+            xtype: 'filefield',
+            x: 20,
+            y: 20,
+            id: 'fileUpload',
+            fieldLabel: 'Selezionare pdf',
+            buttonText: '...'
         }
     ],
     listeners: {
-        show: 'onUploadWinShow'
+        show: 'onUploadWinShow',
+        afterrender: 'onUploadWinAfterRender'
     }
 
 });

@@ -216,16 +216,9 @@ animEl: 'elId'
     },
 
     onFrmrichiestanuovoservizioAfterRender: function(component, eOpts) {
-        /*
         var store = Ext.StoreManager.lookup('storeRichiesteServizi');
-        store.filter(
-        {
-        property: "stato",
-        value: "Approvato",
-        operator: "streq"
-        });
+        store.clearFilter(true);
         store.load();
-        */
     }
 
 });

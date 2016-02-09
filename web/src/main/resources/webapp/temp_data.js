@@ -2,26 +2,6 @@ var ACCESS_TOKEN = null,
     USER = null;
 
 
-/*
-// Funzione di utilità: 
-Ext.define('Override.data.Proxy', {
-    override : 'Ext.data.Proxy',
-    listeners: {
-        exception : function() {
-            Ext.Msg.show({
-                title: 'Errore inaspettato',
-                msg: "C'è stato un errore durante il caricamento dei dati. Riprovare. \n Se l'errore persiste contattare l'assistenza.",
-                width: 300,
-                buttons: Ext.Msg.OK,
-                icon: Ext.MessageBox.ERROR
-            });
-        }
-    }
-});
-*/
-
-
-
 var daysBetween = function(timeStampA, timeStampB) {
     var oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
     var firstDate = new Date(timeStampA * 1000);
@@ -32,14 +12,14 @@ var daysBetween = function(timeStampA, timeStampB) {
 
 
 function monthDiff(day1,day2){
-	var d1= day1,d2= day2;
-	if(day1<day2){
-		d1= day2;
-		d2= day1;
-	}
-	var m= (d1.getFullYear()-d2.getFullYear())*12+(d1.getMonth()-d2.getMonth());
-	if(d1.getDate()<d2.getDate()) --m;
-	return m;
+    var d1= day1,d2= day2;
+    if(day1<day2){
+        d1= day2;
+        d2= day1;
+    }
+    var m= (d1.getFullYear()-d2.getFullYear())*12+(d1.getMonth()-d2.getMonth());
+    if(d1.getDate()<d2.getDate()) --m;
+    return m;
 }
 
 
@@ -117,7 +97,6 @@ download.removeNode = function(node) {
     node.onload = null;
     node.parentNode.removeChild(node);
 };
-
 
 
 Ext.util.base64 = {

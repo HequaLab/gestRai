@@ -241,17 +241,42 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                                             return;
                                         }
 
-                                        record.set('stato',"In lavorazione");
+
+                                        Ext.MessageBox.wait('Approvazione della richiesta in corso..');
+                                        Ext.Ajax.request({
+                                            url: '/richiestaNuovoServizio/inLavorazione/' + record.get('richiestaNuovoServizioId'),
+                                            headers: {
+                                                'Authorization': 'Bearer ' + ACCESS_TOKEN,
+                                            },
+                                            method:'POST',
+                                            success: function (response, options) {
+                                                Ext.StoreManager.lookup('storeRichiesteServizi').load();
+                                                Ext.MessageBox.updateProgress(1);
+                                                Ext.MessageBox.hide();
+                                                Ext.Msg.show({
+                                                    title:'Richiesta modificata',
+                                                    msg: "Richiesta messa in lavorazione.",
+                                                    buttons: Ext.Msg.Ok,
+                                                });},
+                                                failure: function (response, options) {
+                                                    Ext.MessageBox.updateProgress(1);
+                                                    Ext.MessageBox.hide();
+                                                    Ext.Msg.show({
+                                                        title:'Errore con il server',
+                                                        msg: "C'è stato un errore durante l'operazione. Errore: " + response.status,
+                                                        buttons: Ext.Msg.Ok,
+                                                    });
+                                                }
+
+
+                                            });
+
                                     },
                                     icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADJUlEQVRYR+1XQVITURB9PZgqWREXWmElnIDMCSA7d8ABLOPCNbC0BopQGlkS1i6IR7A8gOEEE05gXGUsF8QVSGCe1TPzk5/JBCZqdEOqKKqSnv9fv379ukcwg0+x5hcfFuRIiA0IiiRaIA+CPbeVvk5mcD9Kdb8lkNWRs4ke5+gGr92O/X0mgMd1v6xB3z23/TsAF+ttZj1H8GXguc1bAZTe+k0ReaFBIWRbgCIYLge7bjUPGKV/viDnEwAcBJ5bmwig9MZfgwP9a+IGNQVC8PSyj41eze3lAaAxpbrfE8hCOp4hK2kdzEoDNYHsj2qAZ91dNyrtGANZtGnmgeeu5c06HadsEnwmjlwyxM9ve+5h1lkRAxosjny2A/4EQFxKORGiCPAUkFWKNAJv5SCTgWwA6AReeXlaBhbrfgOQLYI/hKhRFATWkrZsX/RZsfU0kQG9uOuVp9KI3UEkP0DQCgU9hygLnQVK6ILCYLdcMYn9NQAm8wFj5MeLa1RNtqbDVJy2H8QA6n5VICdpuvMyoMb1AOLr8wn1armt7q7bMGcmALQ7VolheQ2A8bZJleDJO3/j6gotu34KXJ2tVPcHzxNoqnkx5LHd81FMNBtkJQKaeMKtAGzjSC5Zp8NN4+dquXqhKj2LQZA7yoLJHkTHuCzA467nqtNGJchkIAPAPojetbCic2Lo+TyOqZatlPnEAOp+DUQVgqb+F5Gnps2nBxAXukfhzkjWlMb5xU3j0bxsQuQIQBvkVwraQpQhsk7wAMSSYUE1FgOwBtCIGVnePYml0YzR61/fPC8U5j6Z7yNNmL1AAShPiU3T4bJhYHx+xydokeMhJFgSYOkuYwpv+MqZk/dZcREDOuhCRGP+sh+dGWlgEoC77hv7XXWTtvUBGwmjOntMN/0XADbqmQNQtZv1bOI+MGmBmJr/xGDsEuQCMLLDkWckthPhac9G61neT1oDUwOw94BcrZdCdg9gagbsURq77HAX/CclKB36Swhh7/wd8/IwWNPzKlDjHDQllC9DK87RhtOcnyfW7qpcXZDn0Gli7gFYq7mOX30b1t2wnfWi8wvFRFU8abj8MgAAAABJRU5ErkJggg==',
                                     tooltip: 'Imposta la richiesta in lavorazione'
                                 },
                                 {
                                     handler: function(view, rowIndex, colIndex, item, e, record, row) {
-                                        var uploadWidg = Ext.widget('uploadWin');
-                                        uploadWidg.idRichiesta = record.get('richiestaNuovoServizioId');
-                                        uploadWidg.show();
-
                                         if (record.get('stato') === "Non approvato"){
                                             Ext.Msg.show({
                                                 title:'Operazione non permessa',
@@ -277,7 +302,9 @@ Ext.define('Rai.view.frmRichiestaServizioAdmin', {
                                             return;
                                         }
 
-                                        record.set('stato',"Erogato");
+                                        var uploadWidg = Ext.widget('uploadWin');
+                                        uploadWidg.recordRicevuto = record;
+                                        uploadWidg.show();
                                     },
                                     icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACeElEQVRYR91XQW7TQBR9z0kFrMgGlOxyg3hO0HCChhO0nIBkCQ4iEgksSU9AcoKUExBOYPcGsLIpG7OiUht/NE4muKmNJnKiqszKsv7Mf/P+/2/+JwA0hv4ZyCP9vY8lkBeRpyZ5Z7P+zm/T4Zd9OM6eGXou7wcAEZmC+LYDRtoED8051gxIIs+iN2peFkB95A8Ivr2/AOof/CYTfgTQsWJDEAOchP1WT9uXZqAx8scAX1o5zxiZEJYHMPS7YMrAVusaon56KigNYCVQXSFqtggSIrh4rc52EgJbp0V2pRmoDfzagwPnmCJWSUgiXlCmO2Ogcdc5cOdVoEPwqIrJNklIIAg91f0/klDf4snIdytwrPoEAWI6yefolUofstJVUB/5JwQ/bVWOglgqojSI0gD2mYQ6vx5WnaOo35re6oiMli/px5zgY2sWRM5/X6MdD1ScZUAgvyJPpYqqz60umXW1r0IA1k4LDA0AEfm+IDrp+6DbP3IGoiaQr5Gn2vsFIOgYRrLCphm5vEJTM1UKwCpPDiWR3mYXpanWt04rYuhPSB4bshaU50aydwEg7RkEmFxeSU/fyjhKxewg7bjdv5GSUyNW+l8pACu1nINspQ4EcUIOfnit02USc0aguXYuch72VQZMSQCZrPY3cjGAoKmTzfzXcYcD1wiV+Z83mASS9ncWizLVE8+m6OTtLJqOyk1GN5VPa8Z6DsiC0LNG1FcnecC4EoZNCi2uvzYJQs9VuotGguCWcGXEKRfA6uHQ6HIR2iBJiLEuq6fv/U5FOMvGfQG0TTkWArBxYmtzo+ZFemFfjf+1N3ditXWWZ2dKU4CgKO7ZfX8A9MAi6cIss+8AAAAASUVORK5CYII=',
                                     tooltip: 'Imposta la richiesta come erogata'
